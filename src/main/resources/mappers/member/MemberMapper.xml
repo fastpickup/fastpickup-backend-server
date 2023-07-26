@@ -4,5 +4,112 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- MemberMapper Xml -->
-<mapper namespace="com.project.fastpickup.member.mappers.MemberMapper">
+<mapper namespace="com.project.fastpickup.admin.member.mappers.MemberMapper">
+
+ <resultMap id="memberMap" type="com.project.fastpickup.admin.member.dto.MemberReadDTO">
+      <id property ="email" column ="email"/>
+      <result property="memberName" column="memberName"/>
+      <result property="memberPw" column="memberPw"/>
+      <collection property="rolenames" resultMap="authMap"/>
+  </resultMap>
+
+  <resultMap type="string" id="authMap">
+      <result column ="rolename"/>
+  </resultMap>
+
+<!-- MemberMapper id = "selectOne" -->
+<select id="selectOne" resultMap="memberMap"> 
+  SELECT * FROM 
+  tbl_member 
+  tm INNER JOIN tbl_member_role tmr ON tmr.email = tm.email 
+  WHERE tm.email = #{email}
+</select>
+
+<!-- MemberMapper id = "joinMember" -->
+<insert id="joinMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
+  INSERT INTO tbl_member
+  (email,memberPw,memberName,memberPhone)
+  VALUES(#{email}, #{memberPw}, #{memberName}, #{memberPhone})
+</insert>
+
+<!-- MemberMapper id = "joinStoreMember" -->
+<insert id="joinStoreMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
+  INSERT INTO tbl_member
+  (email,memberPw,memberName,memberPhone,store)
+  VALUES(#{email}, #{memberPw}, #{memberName}, #{memberPhone}, "s")
+</insert>
+
+<!-- MemberMapper id = "deleteMember" -->
+<delete id="deleteMember" parameterType="java.lang.String">
+  DELETE FROM tbl_member
+  WHERE email = #{email}
+</delete>
+
+<!-- MemberMapper id = "deleteMemberRole" -->
+<delete id="deleteMemberRole" parameterType="java.lang.String">
+  DELETE FROM tbl_member_role
+  WHERE email = #{email}
+</delete>
+
+<!-- MemberMapper id = "updateMember" -->
+<update id="updateMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
+  UPDATE tbl_member
+  SET memberPw = #{memberPw}, memberName = #{memberName}, memberPhone = #{memberPhone}
+  WHERE email = #{email}
+</update>
+
+<!-- MemberMapper id = "readMember" -->
+<select id="readMember" parameterType="java.lang.String">
+  SELECT * FROM 
+  tbl_member
+  WHERE email = #{email}
+</select>
+
+<!-- MemberMapper id = "listMember" -->
+<select id="listMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
+  SELECT * FROM tbl_member
+  <if test="keyword != null and types != null">
+      <trim prefix="and (" prefixOverrides="or" suffix=")">
+      <foreach collection="types" item="searchType" separator=" OR ">
+        <if test='searchType == "e"'>
+          email like concat('%', #{keyword}, '%')
+        </if>
+        <if test='searchType == "n"'>
+          memberName like concat('%', #{keyword}, '%')
+        </if>
+        <if test='searchType == "p"'>
+          memberPhone like concat('%', #{keyword}, '%')
+        </if>
+      </foreach>
+    </trim>
+  </if>
+  ORDER BY joinDate DESC
+  LIMIT #{skip}, #{size}
+</select>
+
+<!-- MemberMapper id = "total" -->
+<select id="total" resultType="int">
+  SELECT COUNT(*)
+  FROM (
+    SELECT * 
+    FROM tbl_member
+    <if test="keyword != null and types != null">
+      <trim prefix="WHERE (" prefixOverrides="OR" suffix=")">
+        <foreach collection="types" item="searchType" separator=" OR ">
+         <if test='searchType == "e"'>
+            email like concat('%', #{keyword}, '%')
+          </if>
+          <if test='searchType == "n"'>
+            memberName like concat('%', #{keyword}, '%')
+          </if>
+          <if test='searchType == "p"'>
+            memberPhone like concat('%', #{keyword}, '%')
+          </if>
+        </foreach>
+      </trim>
+    </if>
+    LIMIT #{countEnd} 
+  ) as tbl_member_alias
+</select>
+
 </mapper>
