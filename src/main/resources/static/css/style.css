@@ -1,8 +1,8 @@
 /********** Template CSS **********/
 :root {
-    --primary: #C21010;
+    --primary: #990000;
     --light: #F3F6F9;
-    --dark: #191C24;
+    --dark: #000000;
 }
 
 .back-to-top {
@@ -74,7 +74,7 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: #FFCDA3;
+    background: #990000;
     transition: 0.5s;
     z-index: 999;
 }
@@ -124,7 +124,7 @@
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
-    color: var(--dark);
+    color: #ffffff;
     font-weight: 500;
     border-left: 3px solid var(--light);
     border-radius: 0 30px 30px 0;
@@ -146,6 +146,7 @@
     justify-content: center;
     background: #FFFFFF;
     border-radius: 40px;
+    color:#990000;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
@@ -176,13 +177,13 @@
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--dark);
+    color: #ffffff;
     outline: none;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: #fff;
 }
 
 .content .navbar .sidebar-toggler,
@@ -195,6 +196,7 @@
     background: #FFFFFF;
     border-radius: 40px;
 }
+.content .navbar .sidebar-toggler:hover {color:#000;}
 
 .content .navbar .dropdown-toggle::after {
     margin-left: 6px;
@@ -311,3 +313,9 @@ li {
 .uploadWrap .uploadUL li p {margin-top: 5px;}
 .uploadWrap .uploadUL li button {position: absolute;right: 12px;top: -15px;padding: 1px 4px;}
 .ellipsis {overflow:hidden;text-overflow:ellipsis;display:inline-block;white-space: nowrap;max-width: 90%;padding: 0 10px;box-sizing: border-box;vertical-align: middle;}
+
+.footer_wrap {color:#fff;}
+.footer_wrap a {color:#fff;}
+
+.dropdown-item:hover,
+.dropdown-item:focus {background: #fff;color: #000;}
