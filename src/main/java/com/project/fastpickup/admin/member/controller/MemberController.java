@@ -86,7 +86,7 @@ public class MemberController {
 
     // POST : Join Member
     @PostMapping("create")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public String postCreateMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Join");
         int joinMember = memberService.joinMember(memberConvertDTO);
@@ -96,7 +96,7 @@ public class MemberController {
 
     // POST : Join Store Member
     @PostMapping("createStore")
-    @PreAuthorize("hasAnyRole('User')")
+    @PreAuthorize("permitAll")
     public String postCreateStoreMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Member Join");
         int joinStoreMember = memberService.joinStoreMember(memberConvertDTO);
