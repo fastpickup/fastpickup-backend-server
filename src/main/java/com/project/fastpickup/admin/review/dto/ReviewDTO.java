@@ -1,4 +1,4 @@
-package com.project.fastpickup.review.dto;
+package com.project.fastpickup.admin.review.dto;
 
 public class ReviewDTO {
     

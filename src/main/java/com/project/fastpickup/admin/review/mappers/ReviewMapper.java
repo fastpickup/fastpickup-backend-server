@@ -1,4 +1,4 @@
-package com.project.fastpickup.review.mappers;
+package com.project.fastpickup.admin.review.mappers;
 
 public class ReviewMapper {
     

@@ -1,4 +1,4 @@
-package com.project.fastpickup.review.restcontroller;
+package com.project.fastpickup.admin.review.restcontroller;
 
 public class ReviewRestController {
     

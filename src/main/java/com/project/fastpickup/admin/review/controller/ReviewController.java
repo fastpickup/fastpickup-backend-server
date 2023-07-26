@@ -1,4 +1,4 @@
-package com.project.fastpickup.review.controller;
+package com.project.fastpickup.admin.review.controller;
 
 public class ReviewController {
     
