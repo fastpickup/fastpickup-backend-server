@@ -4,5 +4,5 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- StoreMapper Xml -->
-<mapper namespace="com.project.fastpickup.member.mappers.StoreMapper">
+<mapper namespace="com.project.fastpickup.admin.member.mappers">
 </mapper>

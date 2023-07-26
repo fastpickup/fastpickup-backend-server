@@ -11,5 +11,4 @@ public class FastpickupApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FastpickupApplication.class, args);
 	}
-
 }
