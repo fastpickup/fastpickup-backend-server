@@ -3,6 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- MemberMapper Xml -->
-<mapper namespace="com.project.fastpickup.member.mappers.MemberMapper">
+<!-- ReviewMapper Xml -->
+<mapper namespace="com.project.fastpickup.member.mappers.ReviewMapper">
 </mapper>
