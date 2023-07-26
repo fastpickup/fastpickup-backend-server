@@ -42,6 +42,6 @@ public class CustomOAuthSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
         // DB email 컬럼에 소셜로그인 이메일이 존재할 시 myPage
-        response.sendRedirect("/admin/member/mypage/" + dto.getEmail());
+        response.sendRedirect("/admin/member/read/" + dto.getEmail());
     }
 }

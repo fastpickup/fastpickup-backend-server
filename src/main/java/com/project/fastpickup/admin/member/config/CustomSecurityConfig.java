@@ -57,7 +57,7 @@ public class CustomSecurityConfig {
 
         // 커스텀 로그인 페이지 경로 지정
         http.formLogin(config -> {
-            config.loginPage("/admin/member/signin");
+            config.loginPage("/admin/index");
             config.successHandler(customOAuthSuccessHandler());
         });
 
@@ -79,7 +79,7 @@ public class CustomSecurityConfig {
 
         // social 로그인 signin페이지에 설정 (카카오)
         http.oauth2Login(config -> {
-            config.loginPage("/admin/member/signin");
+            config.loginPage("/admin/index");
             config.successHandler(customOAuthSuccessHandler());
 
         });
@@ -88,7 +88,7 @@ public class CustomSecurityConfig {
         http.logout(config -> {
             config.logoutUrl("/admin/member/logout")
                     .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/admin/member/signin");
+                    .logoutSuccessUrl("/admin/index");
         });
 
         return http.build();
