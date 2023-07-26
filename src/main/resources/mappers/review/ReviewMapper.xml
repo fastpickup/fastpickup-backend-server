@@ -4,5 +4,5 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- ReviewMapper Xml -->
-<mapper namespace="com.project.fastpickup.admin.member.mappers">
+<mapper namespace="com.project.fastpickup.admin.review.mappers.ReviewMapper">
 </mapper>
