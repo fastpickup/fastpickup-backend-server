@@ -7,6 +7,8 @@ package com.project.fastpickup.admin.member.security.handler;
  */
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,13 +28,16 @@ public class CustomOAuthSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-
-        log.info(authentication.getPrincipal());
+        log.info("CustomOAuthSuccessHandler IS Running");
+        log.info("authentication.getPrincipal" + authentication.getPrincipal());
 
         MemberDTO dto = (MemberDTO) authentication.getPrincipal();
 
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put("email", dto.getEmail());
+
+        // Encode the email for safe use in URL
+        String encodedEmail = URLEncoder.encode(dto.getEmail(), StandardCharsets.UTF_8.toString());
 
         // MemberDTO를 사용 소셜 로그인에 성공했을 시(mpw가 "" 일때) 수정페이지로 가기
         if (dto.getMemberPw() == null || dto.getMemberPw().equals("")) {
@@ -41,7 +46,6 @@ public class CustomOAuthSuccessHandler implements AuthenticationSuccessHandler {
             response.sendRedirect("/admin/member/update/" + dto.getEmail());
             return;
         }
-        // DB email 컬럼에 소셜로그인 이메일이 존재할 시 myPage
         response.sendRedirect("/admin/member/read/" + dto.getEmail());
     }
 }
