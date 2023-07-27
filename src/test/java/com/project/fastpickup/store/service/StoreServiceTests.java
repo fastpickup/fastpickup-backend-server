@@ -1,24 +1,26 @@
 package com.project.fastpickup.store.service;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 /*
  * Date   : 2023.07.27
  * Author : 권성준
  * E-mail : thistrik@naver.com
  */
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
+import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.service.StoreService;
+import com.project.fastpickup.admin.util.PageRequestDTO;
+import com.project.fastpickup.admin.util.PageResponseDTO;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -84,9 +86,9 @@ public class StoreServiceTests {
     public void readStoreServiceTest() {
         // GIVEN
         log.info("=== Start Read Store Service Test ===");
-        // WHEN 
+        // WHEN
         StoreDTO readStore = storeService.readStore(TEST_SNO);
-        // THEN 
+        // THEN
         Assertions.assertNotNull(readStore, "readStore Should Be Not Null");
         log.info("=== End Read Store Service Test ===");
     }
@@ -96,8 +98,29 @@ public class StoreServiceTests {
     @Transactional
     @DisplayName("가맹점 삭제 테스트 서비스")
     public void deleteStoreServiceTest() {
+        // GIVEN
         log.info("=== Start Delete Store Service Test ===");
+        // WHEN
+        storeService.deleteStore(TEST_SNO);
+        // THEN
+        StoreDTO deletedStore = storeService.readStore(TEST_SNO);
+        Assertions.assertNull(deletedStore, "deletedStore Should Be Null");
+        log.info("=== End Delete Store Service Test ===");
+    }
 
-        log.info("=== End ");
+    // List Store Service
+    @Test
+    @Transactional
+    @DisplayName("가맹점 리스트 테스트 서비스")
+    public void listStoreServiceTest() {
+        // GIVEN
+        log.info("=== Start List Store Service Test ===");
+        // WHEN
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
+        PageResponseDTO<StoreListDTO> listStore = storeService.listStore(pageRequestDTO);
+        // THEN
+        log.info(listStore.getList());
+        Assertions.assertNotNull(listStore, "listStore Should Be Not Null");
+        log.info("=== End List Store Service Test ===");
     }
 }

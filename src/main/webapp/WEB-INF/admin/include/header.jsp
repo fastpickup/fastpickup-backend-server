@@ -48,11 +48,11 @@
       <div class="d-flex align-items-center ms-4 mb-4">
       </div>
       <div class="navbar-nav w-100">
-        <a href="/member/list" class="nav-item nav-link active"><i class="fa fa-file-alt me-2"></i>Member</a>
-        <a href="/product/list" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
-        <a href="/store/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Store</a>
-        <a href="/qna/list" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
-        <a href="/review/list" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Review</a>
+        <a href="/admin/member/list" class="nav-item nav-link active"><i class="fa fa-file-alt me-2"></i>Member</a>
+        <a href="/admin/product/list" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
+        <a href="/admin/store/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Store</a>
+        <a href="/admin/qna/list" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
+        <a href="/admin/review/list" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Review</a>
       </div>
     </nav>
   </div>

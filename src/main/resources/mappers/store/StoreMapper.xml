@@ -44,7 +44,7 @@
   SELECT * FROM tbl_store
   WHERE sno > 0
    <if test="keyword != null and type != null">
-      <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
+      <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
           storeName like concat('%', #{keyword}, '%')
@@ -65,8 +65,9 @@
   FROM (
     SELECT * FROM 
     tbl_store
+    WHERE sno > 0
     <if test="keyword != null and type != null">
-      <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
+      <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
           storeName like concat('%', #{keyword}, '%')
