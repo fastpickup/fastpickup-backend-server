@@ -54,6 +54,16 @@ create table tbl_product (
 )
 ;
 
+##상품 이미지 테이블 생성
+CREATE TABLE tbl_product_image (
+	uuid varchar(50) PRIMARY KEY,
+	file_name varchar(200) not null,
+	bno int not null,
+	ord int default 0 not null,
+	FOREIGN KEY (bno) REFERENCES tbl_board(bno) ON DELETE CASCADE
+)
+;
+
 ##회원
 alter table tbl_member add `joinDate` timestamp default now() after `store`;
 

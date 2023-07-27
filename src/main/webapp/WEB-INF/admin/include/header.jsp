@@ -58,7 +58,7 @@
   </div>
   <!-- Sidebar End -->
   <!-- Content Start -->
-  <div class="content">
+  <div class="content content_wrap">
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
       <a href="/board/list" class="navbar-brand d-flex d-lg-none me-4">
@@ -81,4 +81,4 @@
       </div>
     </nav>
     <!-- Navbar End -->
-    <div class="container-fluid pt-4 px-4">
+    <div class="container-fluid pt-4 px-4 container_wrap">
