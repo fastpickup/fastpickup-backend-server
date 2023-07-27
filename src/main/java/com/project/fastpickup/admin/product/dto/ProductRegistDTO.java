@@ -18,6 +18,7 @@ import java.util.List;
 @ToString
 public class ProductRegistDTO {
   //변수
+  private Long pno;                     //PK
   private String productName;           //상품명
   private String productContent;        //상품상세
   private int productPrice;             //상품가격

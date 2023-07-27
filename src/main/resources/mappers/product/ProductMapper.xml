@@ -15,6 +15,18 @@
     </selectKey>
   </insert>
 
+  <!-- List Product ProductMapper id = "getList" -->
+  <select id="getList" resultType="ProductListDTO">
+    select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct
+    from (select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
+                 tp.likeCount, tp.isRecommend, tp.isDeletedProduct
+          from tbl_product tp
+          where tp.pno > 0 and tp.isDeletedProduct = true
+          order by tp.pno desc
+          limit #{skip}, #{size}
+        ) as prdt
+  </select>
 
   <!-- Read Product ProductMapper id = "selectOne" -->
   <select id="selectOne" resultType="ProductDTO">
@@ -23,5 +35,22 @@
     from tbl_product tp
     where tp.pno = #{pno}
   </select>
+
+  <!-- Delete Product ProductMapper id = "deleteProduct" -->
+  <update id="deleteProduct">
+    update tbl_product tp
+    set
+      tp.productName = '', tp.productContent = '', tp.productPrice = 0, tp.registDate = null, tp.updateDate = now(),
+      tp.viewCount = 0, tp.viewCount = 0, tp.isRecommend = 0, tp.isDeletedProduct = false
+    where tp.pno = #{pno}
+  </update>
+
+  <!-- Update Product ProductMapper id = "updateProduct" -->
+  <update id="updateProduct">
+    update tbl_product tp
+    set
+      tp.productName = #{productName}, tp.productContent = #{productContent}, tp.productPrice = #{productPrice}, tp.updateDate = now(), tp.isRecommend = #{isRecommend}
+    where tp.pno = #{pno}
+  </update>
 
 </mapper>

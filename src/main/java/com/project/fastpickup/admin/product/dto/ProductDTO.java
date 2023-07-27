@@ -9,6 +9,7 @@ package com.project.fastpickup.admin.product.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +29,5 @@ public class ProductDTO {
   private int likeCount;                //상품 좋아요
   private int isRecommend;              //추천상품여부
   private boolean isDeletedProduct;     //상품삭제여부
+  private List<String> fileNames;       //파일명
 }
