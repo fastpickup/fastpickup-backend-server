@@ -10,6 +10,18 @@
     <select id="listQna" resultType="com.project.fastpickup.admin.qna.dto.QnaListDTO">
         select * from tbl_qna
         where qno > 0
+        <if test="keyword != null and type != null">
+            <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+                <foreach collection="types" item="type" separator=" OR ">
+                    <if test='type == "e"'>
+                        email like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='type == "t"'>
+                        qnaTitle like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </trim>
+        </if>
         order by qno desc
         limit #{skip}, #{size}
     </select>
@@ -20,7 +32,19 @@
         (select qno
         from tbl_qna
         where qno > 0
-        limit #{countEnd}) qna
+        <if test="keyword != null and type != null">
+            <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+                <foreach collection="types" item="type" separator=" OR ">
+                    <if test='type == "e"'>
+                        email like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='type == "t"'>
+                        qnaTitle like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </trim>
+        </if>
+        limit #{countEnd}) as qna
     </select>
 
     <!--  create  -->
