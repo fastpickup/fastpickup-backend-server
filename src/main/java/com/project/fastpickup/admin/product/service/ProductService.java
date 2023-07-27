@@ -1,4 +1,4 @@
-package com.project.fastpickup.admin.product.mappers;
+package com.project.fastpickup.admin.product.service;
 
 /*
  * Date   : 2023.07.27
@@ -10,15 +10,17 @@ import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
+import com.project.fastpickup.admin.util.PageResponseDTO;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
-public interface ProductMapper {
+@Transactional
+public interface ProductService {
   //Create Product
-  int createProduct(ProductRegistDTO productRegistDTO);
+  void createProduct(ProductRegistDTO productRegistDTO);
 
   //List Product
-  List<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
+  PageResponseDTO<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
   //List count
   long listCount(PageRequestDTO pageRequestDTO);
   // /List Product
@@ -27,10 +29,10 @@ public interface ProductMapper {
   ProductDTO selectOne(Long pno);
 
   //Delete Product
-  int deleteProduct(Long pno);
+  void deleteProduct(Long pno);
 
   //Update Product
-  int updateProduct(ProductDTO productDTO);
+  void updateProduct(ProductDTO productDTO);
 
   //Update ViewCount
   int viewCount(Long pno);

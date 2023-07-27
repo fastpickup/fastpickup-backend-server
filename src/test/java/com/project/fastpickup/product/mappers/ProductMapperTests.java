@@ -32,7 +32,7 @@ public class ProductMapperTests {
 
   //Test 시작시 메모리에 private static final 로 먼저 올려놓는다
   private static final Long TEST_PNO = 8L;
-  private static final String TEST_PRODUCT_NAME = "Junit Product Name Mapper Test2";
+  private static final String TEST_PRODUCT_NAME = "Junit Product Name Mapper Test";
   private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Mapper Test";
   private static final int TEST_PRODUCT_PRICE = 5000;
   private static final int TEST_PRODUCT_VIEWCOUNT = 0;
@@ -62,6 +62,7 @@ public class ProductMapperTests {
 
     //상품 수정
     productDTO = ProductDTO.builder()
+      .pno(TEST_PNO)
       .productName(TEST_PRODUCT_NAME)
       .productContent(TEST_PRODUCT_CONTENT)
       .productPrice(TEST_PRODUCT_PRICE)
@@ -133,7 +134,7 @@ public class ProductMapperTests {
 
   //Update Product Mapper Test
   @Test
-  //@Transactional
+  @Transactional
   @DisplayName("상품 수정 매퍼 테스트")
   public void testUpdateProduct(){
     //GIVEN
@@ -142,10 +143,25 @@ public class ProductMapperTests {
     int updateCount = productMapper.updateProduct(productDTO);
     //THEN
     ProductDTO dto = productMapper.selectOne(TEST_PNO);
-    //Assertions.assertEquals(1, updateCount, "Product Update Not Success");
-    //Assertions.assertNotNull(dto, "Product Update is Null");
-    Assertions.assertEquals(TEST_PRODUCT_NAME, "Junit Product Name Mapper Test2");
+    Assertions.assertEquals(1, updateCount, "Product Update Not Success");
+    Assertions.assertNotNull(dto, "Product Update is Null");
+    //Assertions.assertEquals(TEST_PRODUCT_NAME, "Junit Product Name Mapper Test2");
     log.info("=== End Update Product Test Mapper ===");
+  }
+
+  //List Product Mapper Test
+  @Test
+  @Transactional
+  @DisplayName("상품 리스트 토탈 매퍼 테스트")
+  public void testListCountProduct(){
+    //GIVEN
+    log.info("=== Start List Count Product Test Mapper ===");
+    //WHEN
+    long listTotal = productMapper.listCount(pageRequestDTO);
+    //THEN
+    log.info(listTotal);
+    Assertions.assertNotNull(listTotal, "Product List is Null");
+    log.info("=== End List Count Product Test Mapper ===");
   }
 
 }

@@ -7,8 +7,8 @@
 <mapper namespace="com.project.fastpickup.admin.product.mappers.ProductMapper">
   <!-- Create Product ProductMapper id = "createProduct" -->
   <insert id="createProduct">
-    insert into tbl_product
-    (productName, productContent, productPrice, isRecommend)
+    insert into tbl_product tp
+    (tp.productName, tp.productContent, tp.productPrice, tp.isRecommend)
     values (#{productName}, #{productContent}, #{productPrice}, #{isRecommend})
     <selectKey resultType="long" keyProperty="pno" order="AFTER">
       select last_insert_id()
@@ -26,6 +26,15 @@
           order by tp.pno desc
           limit #{skip}, #{size}
         ) as prdt
+  </select>
+
+  <!-- List Total Count Product ProductMapper id = "listCount" -->
+  <select id="listCount">
+    select count(*)
+    from
+    (select tp.pno from tbl_product tp
+    where tp.pno > 0 and tp.isDeletedProduct = true
+    limit #{countEnd}) prdt
   </select>
 
   <!-- Read Product ProductMapper id = "selectOne" -->
