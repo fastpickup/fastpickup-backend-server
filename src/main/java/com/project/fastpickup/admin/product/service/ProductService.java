@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ProductService {
   //Create Product
-  void createProduct(ProductRegistDTO productRegistDTO);
+  int createProduct(ProductRegistDTO productRegistDTO);
 
   //List Product
   PageResponseDTO<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
@@ -29,10 +29,10 @@ public interface ProductService {
   ProductDTO selectOne(Long pno);
 
   //Delete Product
-  void deleteProduct(Long pno);
+  int deleteProduct(Long pno);
 
   //Update Product
-  void updateProduct(ProductDTO productDTO);
+  int updateProduct(ProductDTO productDTO);
 
   //Update ViewCount
   int viewCount(Long pno);

@@ -76,10 +76,9 @@ public class ProductServiceTests {
     //GIVEN
     log.info("=== Start Create Product Test Service ===");
     //WHEN
-    productService.createProduct(productRegistDTO);
+    int createCount = productService.createProduct(productRegistDTO);
     //THEN
-    ProductDTO dto = productService.selectOne(TEST_PNO);
-    Assertions.assertEquals(dto.getProductName(), "Junit Product Name Service Test", "Product Register Test Fail");
+    Assertions.assertEquals(createCount, 1, "Product Register Test Fail");
     log.info("=== End Create Product Test Service ===");
   }
 

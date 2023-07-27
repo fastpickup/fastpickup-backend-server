@@ -27,4 +27,5 @@ public class ProductListDTO {
   private int likeCount;                //상품 좋아요
   private int isRecommend;              //추천상품여부
   private boolean isDeletedProduct;     //상품삭제여부
+  private String fileName;              //파일명
 }

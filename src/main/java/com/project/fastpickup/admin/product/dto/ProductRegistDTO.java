@@ -8,6 +8,7 @@ package com.project.fastpickup.admin.product.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,10 +19,11 @@ import java.util.List;
 @ToString
 public class ProductRegistDTO {
   //변수
-  private Long pno;                     //PK
-  private String productName;           //상품명
-  private String productContent;        //상품상세
-  private int productPrice;             //상품가격
-  private int isRecommend;              //추천상품여부
-  private List<String> fileNames;       //파일명
+  private Long pno;                                         //PK
+  private String productName;                               //상품명
+  private String productContent;                            //상품상세
+  private int productPrice;                                 //상품가격
+  private int isRecommend;                                  //추천상품여부
+  @Builder.Default
+  private List<String> fileNames = new ArrayList<>();       //파일명
 }

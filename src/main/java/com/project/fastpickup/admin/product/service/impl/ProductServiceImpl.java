@@ -26,9 +26,9 @@ public class ProductServiceImpl implements ProductService {
   private final ProductMapper productMapper;
 
   @Override
-  public void createProduct(ProductRegistDTO productRegistDTO) {
+  public int createProduct(ProductRegistDTO productRegistDTO) {
     log.info("============ Product Create Service ============");
-    int count = productMapper.createProduct(productRegistDTO);
+    return productMapper.createProduct(productRegistDTO);
   }
 
   @Override
@@ -47,13 +47,13 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public void deleteProduct(Long pno) {
-
+  public int deleteProduct(Long pno) {
+    return 0;
   }
 
   @Override
-  public void updateProduct(ProductDTO productDTO) {
-
+  public int updateProduct(ProductDTO productDTO) {
+    return 0;
   }
 
   @Override

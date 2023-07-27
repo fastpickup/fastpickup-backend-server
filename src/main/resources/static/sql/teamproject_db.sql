@@ -53,13 +53,23 @@ create table tbl_product (
 	isDeletedProduct tinyint not null default true
 )
 ;
+delete from tbl_product;
 
 ##상품 이미지 테이블 생성
 CREATE TABLE tbl_product_image (
 	uuid varchar(50) PRIMARY KEY,
-	file_name varchar(200) not null,
+	fileName varchar(200) not null,
 	pno bigint not null,
 	ord int default 0 not null,
+	FOREIGN KEY (pno) REFERENCES tbl_product(pno) ON DELETE CASCADE
+)
+;
+
+##상품 카테고리 테이블 생성
+create table tbl_product_category (
+	cno bigint auto_increment primary key,
+	categoryName varchar(100) not null,
+	pno bigint not null,
 	FOREIGN KEY (pno) REFERENCES tbl_product(pno) ON DELETE CASCADE
 )
 ;
@@ -86,7 +96,32 @@ create table tbl_store (
 	FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE CASCADE
 )
 ;
+drop table tbl_store;
 
+##주문 테이블 생성
+create table tbl_order (
+	ono bigint auto_increment primary key,
+	registDate timestamp default now(),
+	orderCount int default 1 not null,
+	email varchar(100) not null,
+	sno bigint not null,
+	pno bigint not null,
+	FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE cascade,
+	FOREIGN KEY (pno) REFERENCES tbl_product(pno),
+	FOREIGN KEY (sno) REFERENCES tbl_store(sno)
+)
+;
+drop table tbl_order;
+
+##주문 처리이력 테이블 생성
+create table tbl_order_history (
+	orderHistory bigint auto_increment primary key,
+	orderStatus varchar(50) default '접수' not null,
+	ono bigint not null,
+	FOREIGN KEY (ono) REFERENCES tbl_order(ono)
+)
+;
+drop table tbl_order_history;
 
 ##회원
 alter table tbl_member add `joinDate` timestamp default now() after `store`;
@@ -112,6 +147,7 @@ delete from tbl_member where memberName = '이범수';
 ##상품
 select * from tbl_product;
 select * from tbl_product_image;
+select * from tbl_product_category;
 
 insert into tbl_product
     (productName, productContent, productPrice, isRecommend)
@@ -133,6 +169,7 @@ update tbl_product tp
 set
   tp.productName = '테스트', tp.productContent = '테스트', tp.productPrice = 6000, tp.updateDate = now(), tp.isRecommend = '99'
 where tp.pno = 6
+;
 
 
 ##/상품

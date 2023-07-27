@@ -6,9 +6,11 @@ package com.project.fastpickup.product.mappers;
  * E-mail : jo_sh_1028@naver.com
  */
 
+import com.project.fastpickup.admin.product.dto.ProductCategoryDTO;
 import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
+import com.project.fastpickup.admin.product.mappers.FileMapper;
 import com.project.fastpickup.admin.product.mappers.ProductMapper;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +23,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 //Product Mapper Test Class
 @SpringBootTest
@@ -30,21 +36,24 @@ public class ProductMapperTests {
   @Autowired(required = false)
   private ProductMapper productMapper;
 
+  @Autowired(required = false)
+  private FileMapper fileMapper;
+
   //Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-  private static final Long TEST_PNO = 8L;
+  private static final Long TEST_PNO = 10L;
   private static final String TEST_PRODUCT_NAME = "Junit Product Name Mapper Test";
   private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Mapper Test";
   private static final int TEST_PRODUCT_PRICE = 5000;
-  private static final int TEST_PRODUCT_VIEWCOUNT = 0;
-  private static final int TEST_PRODUCT_LIKECOUNT = 0;
   private static final int TEST_PRODUCT_RECOMMEND = 0;
-  private static final boolean TEST_PRODUCT_DELETED = true;
+  private static final String TEST_UUID = UUID.randomUUID().toString();
+  private static final String TEST_FILE_NAME = "Junit.jpg";
+  private static final String TEST_CATEGORY_NAME = "Junit Category Name Mapper Test";
 
   //DTO 정의
   private ProductDTO productDTO;
-  private ProductListDTO productListDTO;
   private ProductRegistDTO productRegistDTO;
   private PageRequestDTO pageRequestDTO;
+  private ProductCategoryDTO productCategoryDTO;
 
   //@BeforeEach 사용을 위한 셋팅
   @BeforeEach
@@ -55,6 +64,13 @@ public class ProductMapperTests {
       .productContent(TEST_PRODUCT_CONTENT)
       .productPrice(TEST_PRODUCT_PRICE)
       .isRecommend(TEST_PRODUCT_RECOMMEND)
+      .fileNames(List.of(TEST_UUID + TEST_FILE_NAME, TEST_UUID + TEST_FILE_NAME))
+      .build();
+
+    //상품 등록시 카테고리 등록
+    productCategoryDTO = ProductCategoryDTO.builder()
+      .categoryName(TEST_CATEGORY_NAME)
+      .pno(productRegistDTO.getPno())
       .build();
 
     //상품 리스트
@@ -79,6 +95,35 @@ public class ProductMapperTests {
     log.info("=== Start Create Product Test Mapper ===");
     //WHEN
     int registCount = productMapper.createProduct(productRegistDTO);
+    //등록한 pno 가져오기
+    Long pno = productRegistDTO.getPno();
+    log.info("등록한 PNO: " + pno);
+
+
+//    //파일이름 List로 가져오기
+//    List<String> fileNames = productRegistDTO.getFileNames();
+//    //게시판 등록
+//    int registCount = productMapper.createProduct(productRegistDTO);
+//    //게시판 등록 성공과 파일이 등록되었다면 실행
+//    if(registCount > 0 && productRegistDTO.getFileNames() != null && !productRegistDTO.getFileNames().isEmpty()) {
+//      //pno 가져오기
+//      Long pno = productRegistDTO.getPno();
+//      AtomicInteger index = new AtomicInteger();
+//      //등록된 파일 fileNames에서 추출
+//      List<Map<String, String>> list = fileNames.stream().map(str -> {
+//        //_ 기준으로 문자열 자르기
+//        String[] splitStr = str.split("_");
+//        //uuid 가져오기
+//        String uuid = splitStr[0];
+//        //실제 파일명 가져오기
+//        String fileName = splitStr[1];
+//        //return map에 담기
+//        return Map.of("uuid", uuid, "file_name", fileName, "bno", "" + pno, "ord", "" + index.getAndIncrement());
+//      }).collect(Collectors.toList());
+//      log.info(list);
+//      //파일 등록 실행
+//      fileMapper.createImage(list);
+//    }
     //THEN
     //ProductDTO dto = productMapper.selectOne(TEST_PNO);
     Assertions.assertEquals(1, registCount, "Product Register Test Fail");

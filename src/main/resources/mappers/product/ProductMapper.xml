@@ -7,8 +7,8 @@
 <mapper namespace="com.project.fastpickup.admin.product.mappers.ProductMapper">
   <!-- Create Product ProductMapper id = "createProduct" -->
   <insert id="createProduct">
-    insert into tbl_product tp
-    (tp.productName, tp.productContent, tp.productPrice, tp.isRecommend)
+    insert into tbl_product
+    (productName, productContent, productPrice, isRecommend)
     values (#{productName}, #{productContent}, #{productPrice}, #{isRecommend})
     <selectKey resultType="long" keyProperty="pno" order="AFTER">
       select last_insert_id()
