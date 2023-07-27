@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreDTO {
+public class StoreCreateDTO {
     // tbl_store
     private Long sno;
     private String storeName;

@@ -1,4 +1,4 @@
-package com.project.fastpickup.admin.store.mappers;
+package com.project.fastpickup.admin.store.service;
 
 /*
  * Date   : 2023.07.27
@@ -6,20 +6,16 @@ package com.project.fastpickup.admin.store.mappers;
  * E-mail : thistrik@naver.com
  */
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
+import com.project.fastpickup.admin.util.PageResponseDTO;
 
-// Store Mapper Interface
-@Mapper
-public interface StoreMapper {
-    
+// Store Service Interface 
+public interface StoreService {
+
     // Create Store
     int createStore(StoreCreateDTO storeCreateDTO);
 
@@ -29,12 +25,9 @@ public interface StoreMapper {
     // Update Store
     int updateStore(StoreUpdateDTO storeUpdateDTO);
 
-    // Delete store 
+    // Delete Store
     int deleteStore(Long sno);
 
     // List Store
-    List<StoreListDTO> listStore(PageRequestDTO pageRequestDTO);
-
-    // Total Store
-    int total(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<StoreListDTO> listStore(PageRequestDTO pageRequestDTO);
 }
