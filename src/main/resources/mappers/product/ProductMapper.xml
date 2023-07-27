@@ -5,5 +5,23 @@
 
 <!-- ProductMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.product.mappers.ProductMapper">
-<!--  -->
+  <!-- Create Product ProductMapper id = "createProduct" -->
+  <insert id="createProduct">
+    insert into tbl_product
+    (productName, productContent, productPrice, isRecommend)
+    values (#{productName}, #{productContent}, #{productPrice}, #{isRecommend})
+    <selectKey resultType="long" keyProperty="pno" order="AFTER">
+      select last_insert_id()
+    </selectKey>
+  </insert>
+
+
+  <!-- Read Product ProductMapper id = "selectOne" -->
+  <select id="selectOne" resultType="ProductDTO">
+    select tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
+        tp.updateDate, tp.viewCount, tp.likeCount, tp.isRecommend, tp.isDeletedProduct
+    from tbl_product tp
+    where tp.pno = #{pno}
+  </select>
+
 </mapper>

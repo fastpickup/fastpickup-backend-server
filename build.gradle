@@ -38,8 +38,10 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-taglibs'
 
 	//jsp
+	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	implementation 'javax.servlet:jstl:1.2'
 
 	//thumbnail
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.19'

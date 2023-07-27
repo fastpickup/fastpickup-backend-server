@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 </div>
 <!-- Footer Start -->
-<div class="container-fluid pt-4 px-4 footer_wrap">
-  <div class="bg-light rounded-top p-4">
+<div class="container-fluid py-3 px-4 footer_wrap">
+  <div class="rounded-top pt-4">
     <div class="row">
       <div class="col-12 col-sm-6 text-center text-sm-start">
         &copy; 2023 by <a href="#">FastPickup</a>, All Right Reserved.
