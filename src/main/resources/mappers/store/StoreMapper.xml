@@ -5,4 +5,80 @@
 
 <!-- StoreMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.store.mappers.StoreMapper">
+
+<!-- StoreMapper id = "createStore" -->
+<insert id="createStore" parameterType="com.project.fastpickup.admin.store.dto.StoreCreateDTO">
+  INSERT INTO tbl_store 
+  (storeName, storeNumber, storeAddress, email)
+  VALUES
+  (#{storeName}, #{storeNumber}, #{storeAddress}, #{email})
+  <selectKey resultType="long" keyProperty="sno" order="AFTER">
+      select last_insert_id()
+    </selectKey>
+</insert>
+
+<!-- StoreMapper id = "readStore" -->
+<select id="readStore" parameterType="long">
+  SELECT * FROM 
+  tbl_store
+  WHERE sno = #{sno}
+</select>
+
+<!-- StoreMapper id = "updateStore" -->
+<update id="updateStore" parameterType="com.project.fastpickup.admin.store.dto.StoreUpdateDTO">
+  UPDATE tbl_store
+  SET 
+  storeName = #{storeName}, storeNumber = #{storeNumber}, storeAddress = #{storeAddress}, email = #{email}
+  where sno = #{sno}
+</update>
+
+<!-- StoreMapper id = "deleteStore" -->
+<delete id="deleteStore" parameterType="long">
+  DELETE FROM 
+  tbl_store
+  WHERE sno = #{sno}
+</delete>
+
+<!-- StoreMapper id = "listStore" -->
+<select id="listStore" parameterType="com.project.fastpickup.admin.store.dto.StoreListDTO">
+  SELECT * FROM tbl_store
+  WHERE sno > 0
+   <if test="keyword != null and type != null">
+      <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
+      <foreach collection="types" item="type" separator=" OR ">
+        <if test='type == "s"'>
+          storeName like concat('%', #{keyword}, '%')
+        </if>
+        <if test='type == "e"'>
+          email like concat('%', #{keyword}, '%')
+        </if>
+      </foreach>
+    </trim>
+  </if>
+  ORDER BY sno DESC 
+  LIMIT #{skip}, #{size}
+</select>
+
+<!-- StoreMapper id = "total" -->
+<select id="total" resultType="int">
+  SELECT COUNT(*)
+  FROM (
+    SELECT * FROM 
+    tbl_store
+    <if test="keyword != null and type != null">
+      <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
+      <foreach collection="types" item="type" separator=" OR ">
+        <if test='type == "s"'>
+          storeName like concat('%', #{keyword}, '%')
+        </if>
+        <if test='type == "e"'>
+          email like concat('%', #{keyword}, '%')
+        </if>
+      </foreach>
+    </trim>
+  </if>
+  LIMIT #{countEnd}
+  ) as tbl_store
+</select>
+
 </mapper>

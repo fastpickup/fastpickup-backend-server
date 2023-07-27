@@ -1,3 +1,11 @@
+<!-- 
+/*
+ * Date   : 2023.07.27
+ * Author : 권성준
+ * E-mail : thistrik@naver.com
+ */
+ -->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!DOCTYPE html>
@@ -55,6 +63,7 @@
                       <td>#</td>
                       <td>${member.memberName}</td>
                       <td>${member.email}</td>
+                      <td><a href="/admin/member/read/${member.email}">${member.email}</a></td>
                       <td>${member.memberPhone}</td>
                       <td>${member.joinDate}</td>
                       <td>${member.store}</td>

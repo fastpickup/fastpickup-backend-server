@@ -45,7 +45,8 @@ public class MemberServiceImpl implements MemberService {
     public int joinMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinMember ServiceImpl");
         String rolename = "USER";
-        passwordEncoder.encode(memberConvertDTO.getMemberPw());
+        String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
+        memberConvertDTO.setMemberPw(encodedPassword);
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);
         return memberMapper.joinMember(memberConvertDTO);
     }
@@ -56,7 +57,8 @@ public class MemberServiceImpl implements MemberService {
     public int joinStoreMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinStoreMember ServiceImpl");
         String rolename = "USER";
-        passwordEncoder.encode(memberConvertDTO.getMemberPw());
+        String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
+        memberConvertDTO.setMemberPw(encodedPassword);  
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);
         return memberMapper.joinStoreMember(memberConvertDTO);
     }
