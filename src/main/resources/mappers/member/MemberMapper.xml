@@ -68,17 +68,20 @@
 <!-- MemberMapper id = "listMember" -->
 <select id="listMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
   SELECT * FROM tbl_member
-  <if test="keyword != null and types != null">
-      <trim prefix="and (" prefixOverrides="or" suffix=")">
-      <foreach collection="types" item="searchType" separator=" OR ">
-        <if test='searchType == "e"'>
+  <if test="keyword != null and type != null">
+      <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
+      <foreach collection="types" item="type" separator=" OR ">
+        <if test='type == "e"'>
           email like concat('%', #{keyword}, '%')
         </if>
-        <if test='searchType == "n"'>
+        <if test='type == "n"'>
           memberName like concat('%', #{keyword}, '%')
         </if>
-        <if test='searchType == "p"'>
+        <if test='type == "p"'>
           memberPhone like concat('%', #{keyword}, '%')
+        </if>
+        <if test='type == "s"'>
+          store like concat('%', #{keyword}, '%')
         </if>
       </foreach>
     </trim>
@@ -93,17 +96,20 @@
   FROM (
     SELECT * 
     FROM tbl_member
-    <if test="keyword != null and types != null">
+    <if test="keyword != null and type != null">
       <trim prefix="WHERE (" prefixOverrides="OR" suffix=")">
-        <foreach collection="types" item="searchType" separator=" OR ">
-         <if test='searchType == "e"'>
+        <foreach collection="types" item="type" separator=" OR ">
+         <if test='type == "e"'>
             email like concat('%', #{keyword}, '%')
           </if>
-          <if test='searchType == "n"'>
+          <if test='type == "n"'>
             memberName like concat('%', #{keyword}, '%')
           </if>
-          <if test='searchType == "p"'>
+          <if test='type == "p"'>
             memberPhone like concat('%', #{keyword}, '%')
+          </if>
+           <if test='type == "s"'>
+          store like concat('%', #{keyword}, '%')
           </if>
         </foreach>
       </trim>
