@@ -28,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 // Member Controller Class
 @Log4j2
 @Controller
-@RequestMapping("/admin/member/")
+@RequestMapping("admin/member/")
 public class MemberController {
 
     // 의존성 주입
@@ -51,7 +51,7 @@ public class MemberController {
         String email = userDetails.getUsername();
         model.addAttribute("listMember", listMember);
         model.addAttribute("email", email);
-        return "/admin/member/list";
+        return "admin/member/list";
     }
 
     // GET : Read Member
@@ -61,7 +61,7 @@ public class MemberController {
         log.info("GET | Admin Member Read");
         MemberConvertDTO listMember = memberService.readMember(email);
         model.addAttribute("listMember", listMember);
-        return "/admin/member/read";
+        return "admin/member/read";
     }
 
     // GET : Update Member
@@ -71,17 +71,34 @@ public class MemberController {
         log.info("GET | Admin Member Update");
         MemberConvertDTO listMember = memberService.readMember(email);
         model.addAttribute("listMember", listMember);
-        return "/admin/member/update";
+        return "admin/member/update";
     }
 
+    // GET : Join Member
+    @GetMapping("create")
+    @PreAuthorize("permitAll")
+    public String getCreateMember() {
+        log.info("GET | Admin Member Create");
+        return "admin/member/create";
+    }
+
+    // GET : Create Store 
+    @GetMapping("createstore")
+    @PreAuthorize("permitAll")
+    public String getCreateStoreMember() {
+        log.info("GET | Admin Store Member Create");
+        return "admin/member/createstore";
+    }
+
+
     // POST : Update Member
-    @PostMapping("update/{email}")
+    @PostMapping("update")
     @PreAuthorize("hasAnyRole('USER')")
     public String postUpdateMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Update");
         int updateMember = memberService.updateMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "회원 업데이트 완료");
-        return "redirect:/admin/member/read" + memberConvertDTO.getEmail();
+        return "redirect:/admin/member/read/" + memberConvertDTO.getEmail();
     }
 
     // POST : Join Member
@@ -95,7 +112,7 @@ public class MemberController {
     }
 
     // POST : Join Store Member
-    @PostMapping("createStore")
+    @PostMapping("createstore")
     @PreAuthorize("permitAll")
     public String postCreateStoreMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Member Join");
