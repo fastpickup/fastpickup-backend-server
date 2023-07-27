@@ -4,5 +4,52 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- QnaMapper Xml -->
-<mapper namespace="com.project.fastpickup.qna.mappers.QnaMapper">
+<mapper namespace="com.project.fastpickup.admin.qna.mappers.QnaMapper">
+
+    <!--  list  -->
+    <select id="listQna" resultType="com.project.fastpickup.admin.qna.dto.QnaListDTO">
+        select * from tbl_qna
+        where qno > 0
+        order by qno desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!--  listCount  -->
+    <select id="listCount">
+        select count(*) from
+        (select qno
+        from tbl_qna
+        where qno > 0
+        limit #{countEnd}) qna
+    </select>
+
+    <!--  create  -->
+    <insert id="createQna" parameterType="com.project.fastpickup.admin.qna.dto.QnaRegistDTO">
+        insert into tbl_qna
+        (qnaTitle, qnaContent, email)
+        values (#{qnaTitle}, #{qnaContent}, #{email})
+        <selectKey resultType="long" keyProperty="qno" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--  read  -->
+    <select id="readQna" resultType="com.project.fastpickup.admin.qna.dto.QnaDTO">
+        select * from tbl_qna
+        where qno = #{qno}
+    </select>
+
+    <!--  update  -->
+    <update id="updateQna" parameterType="com.project.fastpickup.admin.qna.dto.QnaRegistDTO">
+        update tbl_qna
+        set qnaTitle = #{qnaTitle}, qnaContent = #{qnaContent}, updateDate = now()
+        where qno = #{qno}
+    </update>
+
+    <!--  delete  -->
+    <delete id="deleteQna">
+        delete from tbl_qna
+        where qno = #{qno}
+    </delete>
+
 </mapper>
