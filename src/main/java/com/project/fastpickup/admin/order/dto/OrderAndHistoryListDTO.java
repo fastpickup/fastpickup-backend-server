@@ -1,4 +1,4 @@
-package com.project.fastpickup.admin.order.dto.order;
+package com.project.fastpickup.admin.order.dto;
 
 /*
  * Date   : 2023.07.28
@@ -21,7 +21,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderUpdateDTO {
+public class OrderAndHistoryListDTO {
+
     private Long ono; // 주문 번호
     private LocalDateTime registDate; // 등록 일자
     @Builder.Default
@@ -29,4 +30,17 @@ public class OrderUpdateDTO {
     private String email; // 사용자 이메일
     private Long sno; // 가맹정 번호
     private Long pno; // 상품 번호
+
+    // tbl_order_history
+    private Long orderHistory; // 주문 이력 번호
+    @Builder.Default
+    private String orderStatus = "접수";
+
+    // tbl_product
+    private String productName; // 상품명
+    private int productPrice; // 상품가격
+    private String fileName; // 파일명
+
+    // tbl_store 
+    private String storeName;
 }
