@@ -24,6 +24,7 @@ public class ProductRegistDTO {
   private String productContent;                            //상품상세
   private int productPrice;                                 //상품가격
   private int isRecommend;                                  //추천상품여부
+  private long sno;                                         //가맹점 번호
   @Builder.Default
   private List<String> fileNames = new ArrayList<>();       //파일명
 }

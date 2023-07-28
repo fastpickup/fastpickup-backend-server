@@ -6,6 +6,7 @@ package com.project.fastpickup.admin.product.service;
  * E-mail : jo_sh_1028@naver.com
  */
 
+import com.project.fastpickup.admin.product.dto.ProductCategoryDTO;
 import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
@@ -17,13 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ProductService {
   //Create Product
-  int createProduct(ProductRegistDTO productRegistDTO);
+  int createProduct(ProductRegistDTO productRegistDTO, ProductCategoryDTO productCategoryDTO);
 
   //List Product
   PageResponseDTO<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
-  //List count
-  long listCount(PageRequestDTO pageRequestDTO);
-  // /List Product
 
   //Read Product
   ProductDTO selectOne(Long pno);

@@ -6,6 +6,7 @@ package com.project.fastpickup.product.service;
  * E-mail : jo_sh_1028@naver.com
  */
 
+import com.project.fastpickup.admin.product.dto.ProductCategoryDTO;
 import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
@@ -21,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.UUID;
+
 @SpringBootTest
 @Log4j2
 public class ProductServiceTests {
@@ -29,20 +33,21 @@ public class ProductServiceTests {
   private ProductService productService;
 
   //Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-  private static final Long TEST_PNO = 8L;
+  private static final Long TEST_PNO = 22L;
   private static final String TEST_PRODUCT_NAME = "Junit Product Name Service Test";
-  private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Mapper Test";
+  private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Service Test";
   private static final int TEST_PRODUCT_PRICE = 4000;
-  private static final int TEST_PRODUCT_VIEWCOUNT = 0;
-  private static final int TEST_PRODUCT_LIKECOUNT = 0;
   private static final int TEST_PRODUCT_RECOMMEND = 0;
-  private static final boolean TEST_PRODUCT_DELETED = true;
+  private static final long TEST_PRODUCT_STORE = 2L;
+  private static final String TEST_FILE_NAME = "_Junit1.jpg";
+  private static final String TEST_CATEGORY_NAME = "Junit Category Service Test";
 
   //DTO 정의
   private ProductDTO productDTO;
   private ProductListDTO productListDTO;
   private ProductRegistDTO productRegistDTO;
   private PageRequestDTO pageRequestDTO;
+  private ProductCategoryDTO productCategoryDTO;
 
   //@BeforeEach 사용을 위한 셋팅
   @BeforeEach
@@ -53,6 +58,16 @@ public class ProductServiceTests {
       .productContent(TEST_PRODUCT_CONTENT)
       .productPrice(TEST_PRODUCT_PRICE)
       .isRecommend(TEST_PRODUCT_RECOMMEND)
+      .sno(TEST_PRODUCT_STORE)
+      .fileNames(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
+      .build();
+
+    Long pno = productRegistDTO.getPno();
+
+    //상품 등록시 카테고리 등록
+    productCategoryDTO = ProductCategoryDTO.builder()
+      .categoryName(TEST_CATEGORY_NAME)
+      .pno(pno)
       .build();
 
     //상품 리스트
@@ -76,7 +91,8 @@ public class ProductServiceTests {
     //GIVEN
     log.info("=== Start Create Product Test Service ===");
     //WHEN
-    int createCount = productService.createProduct(productRegistDTO);
+    int createCount = productService.createProduct(productRegistDTO, productCategoryDTO);
+    //상품 등록한 pno가져오기 위함
     //THEN
     Assertions.assertEquals(createCount, 1, "Product Register Test Fail");
     log.info("=== End Create Product Test Service ===");
