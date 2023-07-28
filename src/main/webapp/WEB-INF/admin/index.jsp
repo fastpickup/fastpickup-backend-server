@@ -22,7 +22,7 @@
             <div class="col-sm-12 col-xl-12">
                 <h3>Member Signin Page</h3>
                 <div class="bg-light rounded h-100 p-4">
-                    <form action="/admin/index/" method="post">
+                    <form action="/admin/index" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="username" name="username"

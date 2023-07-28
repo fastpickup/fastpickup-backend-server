@@ -1,5 +1,8 @@
 package com.project.fastpickup.admin.store.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /*
  * Date   : 2023.07.27
  * Author : 권성준
@@ -21,9 +24,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class StoreCreateDTO {
     // tbl_store
+    @NotNull
     private Long sno;
+    @NotBlank
     private String storeName;
+    @NotBlank
     private String storeNumber;
+    @NotBlank
     private String storeAddress;
+    @NotBlank
     private String email;
 }

@@ -56,6 +56,23 @@
                                 </div>
                             </div>
                             <!-- Update Complete Message End -->
+                            <!-- Delete Confrim Message Modal -->
+                            <div class="modal deleteModal" tabindex="-1" role="dialog">
+                                <form method="post" class="actionForm">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">정말 삭제 하시겠습니까?</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary btnDeleteModal"
+                                                    data-bs-dismiss="modal">Confirm</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Delete Confrim Message Modal -->
                         </div>
                     </div>
                 </div>
@@ -65,14 +82,21 @@
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
             <script>
-                function confirmDelete() {
-                    if (confirm("정말로 탈퇴하시겠습니까?")) {
-                        var email = document.querySelector('div.email').textContent;
-                        var form = document.querySelector('form[action="/admin/member/delete"]');
-                        form.action = '/admin/member/delete/' + encodeURIComponent(email);
-                        form.submit();
-                    }
-                }
+                // '삭제' 버튼 클릭 시 모달 띄우기
+                document.querySelector('.btn-danger').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    // 모달 보이기
+                    $('.deleteModal').modal('show');
+                });
+
+                // '확인' 버튼 클릭 시 폼 제출하기
+                document.querySelector('.btnDeleteModal').addEventListener('click', function () {
+                    var email = document.querySelector('.email').textContent;
+                    var form = document.querySelector('form[action="/admin/member/delete"]');
+                    form.action = '/admin/member/delete/' + encodeURIComponent(email);
+                    form.submit();
+                });
+                
                 const alertModal = new bootstrap.Modal(document.querySelector(".alertModal"))
                 let message = "${message}";
                 if (message !== "") {

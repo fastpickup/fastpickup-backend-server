@@ -2,6 +2,9 @@ package com.project.fastpickup.admin.member.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /*
  * Date   : 2023.07.26
  * Author : 권성준
@@ -23,10 +26,16 @@ import lombok.ToString;
 @AllArgsConstructor
 public class MemberConvertDTO {
     // tbl_member
+    @NotBlank
     private String email;
+    @NotBlank
     private String memberPw;
+    @NotBlank
     private String memberName;
+    @NotBlank
     private String memberPhone;
+    @NotBlank
     private String store;
+    @NotNull
     private LocalDateTime joinDate;
 }

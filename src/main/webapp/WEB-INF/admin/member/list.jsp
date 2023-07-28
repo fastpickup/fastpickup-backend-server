@@ -62,7 +62,6 @@
                     <tr>
                       <td>#</td>
                       <td>${member.memberName}</td>
-                      <td>${member.email}</td>
                       <td><a href="/admin/member/read/${member.email}">${member.email}</a></td>
                       <td>${member.memberPhone}</td>
                       <td>${member.joinDate}</td>

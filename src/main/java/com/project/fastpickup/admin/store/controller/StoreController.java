@@ -26,6 +26,7 @@ import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 // Store Controller Class
@@ -85,7 +86,7 @@ public class StoreController {
     // POST : Update Store
     @PostMapping("update")
     @PreAuthorize("hasAnyRole('USER')")
-    public String postUpdateStore(StoreUpdateDTO storeUpdateDTO, RedirectAttributes redirectAttributes) {
+    public String postUpdateStore(@Valid StoreUpdateDTO storeUpdateDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Update");
         int updateStore = storeService.updateStore(storeUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 업데이트 완료");
@@ -95,7 +96,7 @@ public class StoreController {
     // POST : Create Store
     @PostMapping("create")
     @PreAuthorize("hasAnyRole('USER')")
-    public String postCreateStore(StoreCreateDTO storeCreateDTO, Authentication authentication, RedirectAttributes redirectAttributes) {
+    public String postCreateStore(@Valid StoreCreateDTO storeCreateDTO, Authentication authentication, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Create");
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();

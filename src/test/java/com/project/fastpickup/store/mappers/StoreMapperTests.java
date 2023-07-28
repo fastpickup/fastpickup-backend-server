@@ -39,7 +39,7 @@ public class StoreMapperTests {
     private static final String TEST_STORE_NUMBER = "12342-23423-2342";
     private static final String TEST_STORE_ADDRESS = "경기도 성남시";
     private static final String TEST_EMAIL = "thistrik@naver.com";
-    private static final Long TEST_SNO = 3L;
+    private static final Long TEST_SNO = 1L;
 
     // DTO 정의
     private StoreDTO storeDTO;

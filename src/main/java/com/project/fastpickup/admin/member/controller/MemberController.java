@@ -23,6 +23,7 @@ import com.project.fastpickup.admin.member.service.MemberService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 // Member Controller Class
@@ -94,7 +95,7 @@ public class MemberController {
     // POST : Update Member
     @PostMapping("update")
     @PreAuthorize("hasAnyRole('USER')")
-    public String postUpdateMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
+    public String postUpdateMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Update");
         int updateMember = memberService.updateMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "회원 업데이트 완료");
@@ -104,7 +105,7 @@ public class MemberController {
     // POST : Join Member
     @PostMapping("create")
     @PreAuthorize("permitAll")
-    public String postCreateMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
+    public String postCreateMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Join");
         int joinMember = memberService.joinMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "회원 가입 완료");
@@ -114,7 +115,7 @@ public class MemberController {
     // POST : Join Store Member
     @PostMapping("createstore")
     @PreAuthorize("permitAll")
-    public String postCreateStoreMember(MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
+    public String postCreateStoreMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Member Join");
         int joinStoreMember = memberService.joinStoreMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 회원 가입 완료");
