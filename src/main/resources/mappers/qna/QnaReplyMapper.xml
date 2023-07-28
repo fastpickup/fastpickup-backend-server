@@ -14,8 +14,8 @@
     </insert>
 
     <!--  read  -->
-    <select id="readQnaReply" parameterType="long">
-        select email, reply, replyDate
+    <select id="readQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyReadDTO">
+        select rno, email, reply, replyDate
         from tbl_qna_reply
         where rno = #{rno}
     </select>
@@ -23,7 +23,7 @@
     <!--  update  -->
     <update id="updateQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyUpdateDTO">
         update tbl_qna_reply
-        set reply = #{reply}
+        set rno = #{rno}, qno = #{qno}, reply = #{reply}
         where rno = #{rno}
     </update>
 

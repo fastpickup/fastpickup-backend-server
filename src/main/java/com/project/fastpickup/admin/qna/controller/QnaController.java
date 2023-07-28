@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Log4j2
-@RequestMapping("/admin/qna/")
+@RequestMapping("admin/qna/")
 @RequiredArgsConstructor
 public class QnaController {
 
