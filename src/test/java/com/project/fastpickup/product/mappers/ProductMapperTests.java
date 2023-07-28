@@ -11,6 +11,7 @@ import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.product.mappers.FileMapper;
+import com.project.fastpickup.admin.product.mappers.ProductCategoryMapper;
 import com.project.fastpickup.admin.product.mappers.ProductMapper;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import lombok.extern.log4j.Log4j2;
@@ -39,14 +40,17 @@ public class ProductMapperTests {
   @Autowired(required = false)
   private FileMapper fileMapper;
 
+  @Autowired(required = false)
+  private ProductCategoryMapper categoryMapper;
+
   //Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-  private static final Long TEST_PNO = 10L;
+  private static final Long TEST_PNO = 22L;
   private static final String TEST_PRODUCT_NAME = "Junit Product Name Mapper Test";
   private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Mapper Test";
   private static final int TEST_PRODUCT_PRICE = 5000;
   private static final int TEST_PRODUCT_RECOMMEND = 0;
-  private static final String TEST_UUID = UUID.randomUUID().toString();
-  private static final String TEST_FILE_NAME = "Junit.jpg";
+  private static final long TEST_PRODUCT_STORE = 2L;
+  private static final String TEST_FILE_NAME = "_Junit.jpg";
   private static final String TEST_CATEGORY_NAME = "Junit Category Name Mapper Test";
 
   //DTO 정의
@@ -64,13 +68,8 @@ public class ProductMapperTests {
       .productContent(TEST_PRODUCT_CONTENT)
       .productPrice(TEST_PRODUCT_PRICE)
       .isRecommend(TEST_PRODUCT_RECOMMEND)
-      .fileNames(List.of(TEST_UUID + TEST_FILE_NAME, TEST_UUID + TEST_FILE_NAME))
-      .build();
-
-    //상품 등록시 카테고리 등록
-    productCategoryDTO = ProductCategoryDTO.builder()
-      .categoryName(TEST_CATEGORY_NAME)
-      .pno(productRegistDTO.getPno())
+      .sno(TEST_PRODUCT_STORE)
+      .fileNames(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
       .build();
 
     //상품 리스트
@@ -88,45 +87,54 @@ public class ProductMapperTests {
 
   //Create Product Mapper Test
   @Test
-  @Transactional
+  //@Transactional
   @DisplayName("상품 등록 매퍼 테스트")
   public void testCreateProduct(){
     //GIVEN
     log.info("=== Start Create Product Test Mapper ===");
     //WHEN
     int registCount = productMapper.createProduct(productRegistDTO);
-    //등록한 pno 가져오기
+    //상품 등록한 pno가져오기 위함
     Long pno = productRegistDTO.getPno();
-    log.info("등록한 PNO: " + pno);
+    log.info("등록한 상품번호: " + pno);
 
+    //상품 등록시 카테고리 등록
+    productCategoryDTO = ProductCategoryDTO.builder()
+      .categoryName(TEST_CATEGORY_NAME)
+      .pno(pno)
+      .build();
 
-//    //파일이름 List로 가져오기
-//    List<String> fileNames = productRegistDTO.getFileNames();
-//    //게시판 등록
-//    int registCount = productMapper.createProduct(productRegistDTO);
-//    //게시판 등록 성공과 파일이 등록되었다면 실행
-//    if(registCount > 0 && productRegistDTO.getFileNames() != null && !productRegistDTO.getFileNames().isEmpty()) {
-//      //pno 가져오기
-//      Long pno = productRegistDTO.getPno();
-//      AtomicInteger index = new AtomicInteger();
-//      //등록된 파일 fileNames에서 추출
-//      List<Map<String, String>> list = fileNames.stream().map(str -> {
-//        //_ 기준으로 문자열 자르기
-//        String[] splitStr = str.split("_");
-//        //uuid 가져오기
-//        String uuid = splitStr[0];
-//        //실제 파일명 가져오기
-//        String fileName = splitStr[1];
-//        //return map에 담기
-//        return Map.of("uuid", uuid, "file_name", fileName, "bno", "" + pno, "ord", "" + index.getAndIncrement());
-//      }).collect(Collectors.toList());
-//      log.info(list);
-//      //파일 등록 실행
-//      fileMapper.createImage(list);
-//    }
+    int categoryCount = categoryMapper.createCategory(productCategoryDTO);
+    long categoryPno = productCategoryDTO.getPno();
+    Long cno = productCategoryDTO.getCno();
+    log.info("등록한 카테고리 상품번호: " + categoryPno);
+    log.info("등록한 카테고리 번호: " + cno);
+
+    //파일이름 List로 가져오기
+    List<String> fileNames = productRegistDTO.getFileNames();
+
+    //상품 등록 성공과 파일이 등록되었다면 실행
+    if(registCount > 0 && productRegistDTO.getFileNames() != null && !productRegistDTO.getFileNames().isEmpty()) {
+      AtomicInteger index = new AtomicInteger();
+      //등록된 파일 fileNames에서 추출
+      List<Map<String, String>> list = fileNames.stream().map(str -> {
+        //_ 기준으로 문자열 자르기
+        String[] splitStr = str.split("_");
+        //uuid 가져오기
+        String uuid = splitStr[0];
+        //실제 파일명 가져오기
+        String fileName = splitStr[1];
+        //return map에 담기
+        return Map.of("uuid", uuid, "fileName", fileName, "pno", "" + pno, "ord", "" + index.getAndIncrement());
+      }).collect(Collectors.toList());
+      log.info(list);
+      //파일 등록 실행
+      fileMapper.createImage(list);
+    }
     //THEN
     //ProductDTO dto = productMapper.selectOne(TEST_PNO);
     Assertions.assertEquals(1, registCount, "Product Register Test Fail");
+    Assertions.assertEquals(1, categoryCount, "Product Category Register Test Fail");
     log.info("=== End Create Product Test Mapper ===");
   }
 

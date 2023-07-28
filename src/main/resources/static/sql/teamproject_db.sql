@@ -86,6 +86,19 @@ create table tbl_qna (
 )
 ;
 
+##문의 테이블 댓글 생성
+create table tbl_qna_reply (
+	rno bigint auto_increment primary key,
+	qno bigint not null,
+	email varchar(100) not null,
+	reply varchar(1000) not null,
+	replyDate timestamp default now(),
+	foreign key (qno) references tbl_qna(qno),
+	foreign key (email) references tbl_member(email)
+)
+;
+select * from tbl_qna_reply;
+
 ##가맹점 테이블 생성
 create table tbl_store (
 	sno bigint auto_increment primary key,
@@ -149,22 +162,65 @@ select * from tbl_product;
 select * from tbl_product_image;
 select * from tbl_product_category;
 
+delete from tbl_product;
+delete from tbl_product_category;
+
+delete from tbl_product where pno = 12;
+
+##등록
 insert into tbl_product
     (productName, productContent, productPrice, isRecommend)
     values ('상품테스트', '상품테스트', 5000, 0)
 ;
 
+##리스트
 select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
-       prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct
-from (select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
-             tp.likeCount, tp.isRecommend, tp.isDeletedProduct
-      from tbl_product tp
-      where tp.pno > 0 and tp.isDeletedProduct = true
-      order by tp.pno desc
-      limit 0, 10
-    ) as prdt
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.categoryName,
+           concat(tpi.uuid,'_',tpi.fileName) as fileName
+    from (
+            select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
+                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, tpc.categoryName
+            from tbl_product tp
+              left outer join tbl_store ts on ts.sno = tp.sno
+              left outer join tbl_product_category tpc on tpc.pno = tp.pno
+            where tp.pno > 0 and tp.isDeletedProduct = true
+            order by tp.pno desc
+            limit 0, 10
+        ) as prdt
+    left outer join tbl_product_image tpi
+    on tpi.pno = prdt.pno
+    and (tpi.ord = 0 or tpi.ord is null)
+    order by prdt.pno desc
 ;
 
+##조회
+select prdt.pno, prdt.productName, prdt.productContent, prdt.productPrice, prdt.registDate,
+    prdt.updateDate, prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct,
+    prdt.storeName, prdt.categoryName, prdt.fileNames
+from (
+	select tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
+    tp.updateDate, tp.likeCount, tp.isRecommend, tp.isDeletedProduct,
+    ts.storeName, tpc.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileNames
+	from tbl_product tp
+	left outer join tbl_store ts on ts.sno = tp.sno
+	left outer join tbl_product_category tpc on tpc.pno = tp.pno
+	left outer join tbl_product_image tpi on tpi.pno = tp.pno
+	where tp.pno = 22
+	group by tp.pno
+) as prdt
+;
+
+SELECT tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
+    tp.updateDate, tp.likeCount, tp.isRecommend, tp.isDeletedProduct,
+    ts.storeName, tpc.categoryName, CONCAT(tpi.uuid, '_', tpi.fileName) as fileNames
+FROM tbl_product tp
+LEFT OUTER JOIN tbl_store ts ON ts.sno = tp.sno
+LEFT OUTER JOIN tbl_product_category tpc ON tpc.pno = tp.pno
+LEFT OUTER JOIN tbl_product_image tpi ON tpi.pno = tp.pno
+WHERE tp.pno = 22
+;
+
+##업데이트
 update tbl_product tp
 set
   tp.productName = '테스트', tp.productContent = '테스트', tp.productPrice = 6000, tp.updateDate = now(), tp.isRecommend = '99'
@@ -176,8 +232,15 @@ where tp.pno = 6
 
 ##문의
 select * from tbl_qna;
+select * from tbl_qna_reply;
 ##/문의
 
 ##가맹점
 select * from tbl_store;
 ##/가맹점
+
+##주문
+select * from tbl_order;
+select * from tbl_order_history;
+
+##/주문

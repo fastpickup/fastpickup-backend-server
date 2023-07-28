@@ -5,11 +5,36 @@
 
 <!-- ProductMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.product.mappers.ProductMapper">
+  <!-- Read Product File (resultMap) -->
+  <resultMap id="fileListMap" type="ProductDTO">
+    <id property="pno" column="pno"/>
+    <result property="productName" column="productName"/>
+    <result property="productContent" column="productContent"/>
+    <result property="productPrice" column="productPrice"/>
+    <result property="registDate" column="registDate"/>
+    <result property="updateDate" column="updateDate"/>
+    <result property="viewCount" column="viewCount"/>
+    <result property="likeCount" column="likeCount"/>
+    <result property="isRecommend" column="isRecommend"/>
+    <result property="isDeletedProduct" column="isDeletedProduct"/>
+    <result property="sno" column="sno"/>
+    <result property="storeName" column="storeName"/>
+    <result property="cno" column="cno"/>
+    <result property="categoryName" column="categoryName"/>
+    <collection property="fileNames" resultMap="fileMap"/>
+  </resultMap>
+
+  <resultMap id="fileMap" type="string">
+    <result property="fileNames" column="fileNames"/>
+  </resultMap>
+  <!-- //Read Product File (resultMap) -->
+
+
   <!-- Create Product ProductMapper id = "createProduct" -->
   <insert id="createProduct">
     insert into tbl_product
-    (productName, productContent, productPrice, isRecommend)
-    values (#{productName}, #{productContent}, #{productPrice}, #{isRecommend})
+    (productName, productContent, productPrice, isRecommend, sno)
+    values (#{productName}, #{productContent}, #{productPrice}, #{isRecommend}, #{sno})
     <selectKey resultType="long" keyProperty="pno" order="AFTER">
       select last_insert_id()
     </selectKey>
@@ -18,30 +43,75 @@
   <!-- List Product ProductMapper id = "getList" -->
   <select id="getList" resultType="ProductListDTO">
     select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
-           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct
-    from (select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
-                 tp.likeCount, tp.isRecommend, tp.isDeletedProduct
-          from tbl_product tp
-          where tp.pno > 0 and tp.isDeletedProduct = true
-          order by tp.pno desc
-          limit #{skip}, #{size}
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.categoryName,
+           concat(tpi.uuid,'_',tpi.fileName) as fileName
+    from (
+            select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
+                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, tpc.categoryName
+            from tbl_product tp
+              left outer join tbl_store ts on ts.sno = tp.sno
+              left outer join tbl_product_category tpc on tpc.pno = tp.pno
+            where tp.pno > 0 and tp.isDeletedProduct = true
+            <if test="keyword != null and types != null">
+              <trim prefix="and (" prefixOverrides="or" suffix=")">
+                <foreach collection="types" item="type" separator=" or ">
+                  <if test='type == "p"'>
+                    tp.productName like concat('%', #{keyword}, '%')
+                  </if>
+                  <if test='type == "s"'>
+                    ts.storeName like concat('%', #{keyword}, '%')
+                  </if>
+                  <if test='type == "c"'>
+                    tpc.categoryName like concat('%', #{keyword}, '%')
+                  </if>
+                </foreach>
+              </trim>
+            </if>
+            order by tp.pno desc
+            limit #{skip}, #{size}
         ) as prdt
+    left outer join tbl_product_image tpi
+    on tpi.pno = prdt.pno
+    and (tpi.ord = 0 or tpi.ord is null)
+    order by prdt.pno desc
   </select>
 
   <!-- List Total Count Product ProductMapper id = "listCount" -->
   <select id="listCount">
     select count(*)
     from
-    (select tp.pno from tbl_product tp
-    where tp.pno > 0 and tp.isDeletedProduct = true
-    limit #{countEnd}) prdt
+    (select tp.pno
+      from tbl_product tp
+      left outer join tbl_store ts on ts.sno = tp.sno
+      left outer join tbl_product_category tpc on tpc.pno = tp.pno
+      where tp.pno > 0 and tp.isDeletedProduct = true
+      <if test="keyword != null and types != null">
+        <trim prefix="and (" prefixOverrides="or" suffix=")">
+          <foreach collection="types" item="type" separator=" or ">
+            <if test='type == "p"'>
+              tp.productName like concat('%', #{keyword}, '%')
+            </if>
+            <if test='type == "s"'>
+              ts.storeName like concat('%', #{keyword}, '%')
+            </if>
+            <if test='type == "c"'>
+              tpc.categoryName like concat('%', #{keyword}, '%')
+            </if>
+          </foreach>
+        </trim>
+      </if>
+      limit #{countEnd}) prdt
   </select>
 
   <!-- Read Product ProductMapper id = "selectOne" -->
-  <select id="selectOne" resultType="ProductDTO">
+  <select id="selectOne" resultMap="fileListMap">
     select tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
-        tp.updateDate, tp.viewCount, tp.likeCount, tp.isRecommend, tp.isDeletedProduct
+        tp.updateDate, tp.likeCount, tp.isRecommend, tp.isDeletedProduct,
+        ts.storeName, tpc.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileNames
     from tbl_product tp
+    left outer join tbl_store ts on ts.sno = tp.sno
+    left outer join tbl_product_category tpc on tpc.pno = tp.pno
+    left outer join tbl_product_image tpi on tpi.pno = tp.pno
     where tp.pno = #{pno}
   </select>
 
