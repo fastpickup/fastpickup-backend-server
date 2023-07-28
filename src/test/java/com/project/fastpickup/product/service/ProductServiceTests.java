@@ -1,7 +1,7 @@
 package com.project.fastpickup.product.service;
 
 /*
- * Date   : 2023.07.27
+ * Date   : 2023.07.28
  * Author : 조상희
  * E-mail : jo_sh_1028@naver.com
  */
@@ -13,6 +13,7 @@ import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.product.mappers.ProductMapper;
 import com.project.fastpickup.admin.product.service.ProductService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
+import com.project.fastpickup.admin.util.PageResponseDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,12 +63,10 @@ public class ProductServiceTests {
       .fileNames(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
       .build();
 
-    Long pno = productRegistDTO.getPno();
-
     //상품 등록시 카테고리 등록
     productCategoryDTO = ProductCategoryDTO.builder()
       .categoryName(TEST_CATEGORY_NAME)
-      .pno(pno)
+      .pno(TEST_PNO)
       .build();
 
     //상품 리스트
@@ -92,10 +91,73 @@ public class ProductServiceTests {
     log.info("=== Start Create Product Test Service ===");
     //WHEN
     int createCount = productService.createProduct(productRegistDTO, productCategoryDTO);
-    //상품 등록한 pno가져오기 위함
     //THEN
     Assertions.assertEquals(createCount, 1, "Product Register Test Fail");
     log.info("=== End Create Product Test Service ===");
+  }
+
+  //List Product Service Test
+  @Test
+  @Transactional
+  @DisplayName("상품 리스트 서비스 테스트")
+  public void testListProduct(){
+    //GIVEN
+    log.info("=== Start List Product Test Service ===");
+    //WHEN
+    PageResponseDTO<ProductListDTO> list = productService.getList(pageRequestDTO);
+    //THEN
+    log.info(list);
+    Assertions.assertNotNull(list, "Product List is Null");
+    log.info("=== End List Product Test Service ===");
+  }
+
+  //Read Product Service Test
+  @Test
+  @Transactional
+  @DisplayName("상품 조회 서비스 테스트")
+  public void testReadProduct(){
+    //GIVEN
+    log.info("=== Start Read Product Test Service ===");
+    //WHEN
+    ProductDTO dto = productService.selectOne(TEST_PNO);
+    //THEN
+    log.info(dto);
+    Assertions.assertNotNull(dto, "Product Read is Null");
+    log.info("=== End Read Product Test Service ===");
+  }
+
+  //Delete Product Service Test
+  @Test
+  @Transactional
+  @DisplayName("상품 삭제 서비스 테스트")
+  public void testDeleteProduct(){
+    //GIVEN
+    log.info("=== Start Delete Product Test Service ===");
+    //WHEN
+    int deleteCount = productService.deleteProduct(TEST_PNO);
+    //THEN
+    ProductDTO dto = productService.selectOne(TEST_PNO);
+    Assertions.assertEquals(1, deleteCount, "Product Delete Not Success");
+    Assertions.assertNotNull(dto, "Product Delete is Null");
+    Assertions.assertFalse(dto.isDeletedProduct(), "Product Delete is Not False");
+    log.info("=== End Delete Product Test Service ===");
+  }
+
+  //Update Product Service Test
+  @Test
+  @Transactional
+  @DisplayName("상품 수정 서비스 테스트")
+  public void testUpdateProduct(){
+    //GIVEN
+    log.info("=== Start Update Product Test Service ===");
+    //WHEN
+    int updateCount = productService.updateProduct(productDTO);
+    //THEN
+    ProductDTO dto = productService.selectOne(TEST_PNO);
+    Assertions.assertEquals(1, updateCount, "Product Update Not Success");
+    Assertions.assertNotNull(dto, "Product Update is Null");
+    //Assertions.assertEquals(TEST_PRODUCT_NAME, "Junit Product Name Mapper Test2");
+    log.info("=== End Update Product Test Service ===");
   }
 
 }
