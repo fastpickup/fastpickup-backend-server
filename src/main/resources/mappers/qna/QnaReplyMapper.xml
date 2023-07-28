@@ -7,29 +7,28 @@
 <mapper namespace="com.project.fastpickup.admin.qna.mappers.QnaReplyMapper">
 
     <!--  create  -->
-    <insert id="createQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyRegistDTO">
+    <insert id="createQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyRegistDTO">
         insert into tbl_qna_reply
-        (reply, email)
-        values (#{reply}, #{email})
-        <selectKey resultType="long" keyProperty="rno" order="AFTER">
-            select last_insert_id()
-        </selectKey>
+        (qno, reply, email)
+        values (#{qno}, #{reply}, #{email})
     </insert>
 
     <!--  read  -->
-    <select id="readQnaReply" resultType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyReadDTO">
-        select * from tbl_qna_reply r left join tbl_member m on r.email = m.email where r.email = #{email}
+    <select id="readQnaReply" parameterType="long">
+        select email, reply, replyDate
+        from tbl_qna_reply
+        where rno = #{rno}
     </select>
 
     <!--  update  -->
-    <update id="updateQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyUpdateDTO">
+    <update id="updateQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyUpdateDTO">
         update tbl_qna_reply
         set reply = #{reply}
         where rno = #{rno}
     </update>
 
     <!--  delete  -->
-    <delete id="deleteQnaReply">
+    <delete id="deleteQnaReply" parameterType="long">
         delete from tbl_qna_reply
         where rno = #{rno}
     </delete>

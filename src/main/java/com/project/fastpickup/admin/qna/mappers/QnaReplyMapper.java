@@ -1,9 +1,6 @@
 package com.project.fastpickup.admin.qna.mappers;
 
-import com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyDTO;
-import com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyReadDTO;
-import com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyRegistDTO;
-import com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyUpdateDTO;
+import com.project.fastpickup.admin.qna.dto.reply.*;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
