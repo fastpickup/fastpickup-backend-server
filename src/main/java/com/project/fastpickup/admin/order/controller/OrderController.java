@@ -1,5 +1,11 @@
 package com.project.fastpickup.admin.order.controller;
 
+/*
+ * Date   : 2023.07.28
+ * Author : 권성준
+ * E-mail : thistrik@naver.com
+ */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -101,6 +107,6 @@ public class OrderController {
         log.info("POST | Admin Update Order History");
         Long updateOrderHistory = orderService.updateHistory(orderHistoryUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "주문 상태 이력 업데이트 완료");
-        return "redirect:/admin/order/readhistory/" + orderHistoryUpdateDTO.getOno();
+        return "redirect:/admin/order/read/" + orderHistoryUpdateDTO.getOno();
     }
 }

@@ -43,7 +43,7 @@
 <select id="listStore" parameterType="com.project.fastpickup.admin.store.dto.StoreListDTO">
   SELECT * FROM tbl_store
   WHERE sno > 0
-   <if test="keyword != null and type != null">
+   <if test="keyword != null and types != null">
       <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
@@ -66,7 +66,7 @@
     SELECT * FROM 
     tbl_store
     WHERE sno > 0
-    <if test="keyword != null and type != null">
+    <if test="keyword != null and types != null">
       <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
