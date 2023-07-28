@@ -81,6 +81,7 @@
         SELECT 
         o.ono, 
         o.email,
+        o.registDate,
         s.storeName,
         o.orderCount, 
         h.orderStatus, 
@@ -100,12 +101,18 @@
                         o.email like concat('%', #{keyword}, '%')
                     </if>
                     <if test='type == "o"'>
-                        ono like concat('%', #{keyword}, '%')
+                        o.ono like concat('%', #{keyword}, '%')
                     </if>
                     <if test='type == "s"'>
-                        sno like concat('%', #{keyword}, '%')
+                        s.storeName like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
+                <if test="startDate != null">
+                    AND o.registDate >= #{startDate}
+                </if>
+                <if test="endDate != null">
+                    AND o.registDate &lt;= #{endDate}
+                </if>
             </trim>
         </if>
         ORDER BY o.ono DESC, h.orderHistory DESC
@@ -116,21 +123,30 @@
     <select id="total" resultType="int">
         SELECT COUNT(*)
         FROM(
-            SELECT * FROM tbl_order
-            WHERE ono > 0
+            SELECT 
+            o.ono
+            FROM tbl_order o
+            LEFT OUTER JOIN tbl_store s ON o.sno = s.sno
+            WHERE o.ono > 0
             <if test="keyword != null and types != null">
             <trim prefix="AND (" prefixOverrides="OR" suffix=")">
                 <foreach collection="types" item="type" separator=" OR ">
                 <if test='type == "e"'>
-                    email like concat('%', #{keyword}, '%')
+                    o.email like concat('%', #{keyword}, '%')
                 </if>
                 <if test='type == "o"'>
-                    ono like concat('%', #{keyword}, '%')
+                    o.ono like concat('%', #{keyword}, '%')
                 </if>
                 <if test='type == "s"'>
-                    sno like concat('%', #{keyword}, '%')
+                    s.storeName like concat('%', #{keyword}, '%')
                 </if>
                 </foreach>
+                <if test="startDate != null">
+                    AND o.registDate >= #{startDate}
+                </if>
+                <if test="endDate != null">
+                    AND o.registDate &lt;= #{endDate}
+                </if>
             </trim>
             </if>
         LIMIT #{countEnd}
