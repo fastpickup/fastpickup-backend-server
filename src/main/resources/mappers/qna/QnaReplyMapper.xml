@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- QnaMapper Xml -->
+<mapper namespace="com.project.fastpickup.admin.qna.mappers.QnaReplyMapper">
+
+    <!--  create  -->
+    <insert id="createQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyRegistDTO">
+        insert into tbl_qna_reply
+        (reply, email)
+        values (#{reply}, #{email})
+        <selectKey resultType="long" keyProperty="rno" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--  read  -->
+    <select id="readQnaReply" resultType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyReadDTO">
+        select * from tbl_qna_reply r left join tbl_member m on r.email = m.email where r.email = #{email}
+    </select>
+
+    <!--  update  -->
+    <update id="updateQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.qnaReply.QnaReplyUpdateDTO">
+        update tbl_qna_reply
+        set reply = #{reply}
+        where rno = #{rno}
+    </update>
+
+    <!--  delete  -->
+    <delete id="deleteQnaReply">
+        delete from tbl_qna_reply
+        where rno = #{rno}
+    </delete>
+
+</mapper>
