@@ -1,6 +1,5 @@
 package com.project.fastpickup.admin.order.dto.orderhistory;
 
-<<<<<<< HEAD
 /*
  * Date   : 2023.07.28
  * Author : 권성준
@@ -26,8 +25,4 @@ public class OrderHistoryCreateDTO {
   @Builder.Default
   private String orderStatus = "접수";
   private Long ono; // order 주문 번호
-=======
-public class OrderHistoryCreateDTO {
-    
->>>>>>> 74e3ea78dbf304c3e1b463c362a797e031a075b8
 }
