@@ -68,7 +68,7 @@
 <!-- MemberMapper id = "listMember" -->
 <select id="listMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
   SELECT * FROM tbl_member
-  <if test="keyword != null and type != null">
+  <if test="keyword != null and types != null">
       <trim prefix="WHERE (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "e"'>
@@ -96,7 +96,7 @@
   FROM (
     SELECT * 
     FROM tbl_member
-    <if test="keyword != null and type != null">
+    <if test="keyword != null and types != null">
       <trim prefix="WHERE (" prefixOverrides="OR" suffix=")">
         <foreach collection="types" item="type" separator=" OR ">
          <if test='type == "e"'>

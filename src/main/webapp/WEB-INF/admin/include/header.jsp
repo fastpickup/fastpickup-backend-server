@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -48,6 +49,7 @@
       <div class="d-flex align-items-center ms-4 mb-4">
       </div>
       <div class="navbar-nav w-100">
+        <a href="/admin/order/list" class="nav-item nav-link"><i class="fa fa-file-alt me-2"></i>Order</a>
         <a href="/admin/member/list" class="nav-item nav-link active"><i class="fa fa-file-alt me-2"></i>Member</a>
         <a href="/admin/product/list" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
         <a href="/admin/store/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Store</a>
@@ -70,13 +72,24 @@
       <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <span class="d-none d-lg-inline-flex">Member Name</span>
+            
+            <div>
+              <!-- Security -->
+            <sec:authorize access="isAuthenticated()">
+              <p>Logged in as: <sec:authentication property="principal.username" /></p>
+             </sec:authorize>
+            </div>
+            
+
           </a>
+          <!-- Security -->
           <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-            <a href="/member/signin" class="dropdown-item">Sign In</a>
-            <a href="/member/mypage" class="dropdown-item">My Pgae</a>
-            <a href="/member/signout" class="dropdown-item">Sign Out</a>
+            <sec:authorize access="isAuthenticated()">
+              <a href="/admin/member/read/<sec:authentication property='principal.email' />" class="dropdown-item">My Page</a>
+              <a href="/admin/member/logout" class="dropdown-item">Sign Out</a>
+            </sec:authorize>          
           </div>
+          <!-- Security -->
         </div>
       </div>
     </nav>
