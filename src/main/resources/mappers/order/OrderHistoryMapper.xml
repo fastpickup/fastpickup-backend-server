@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- OrderHistoryMapper Xml -->
+<mapper namespace="com.project.fastpickup.admin.order.mappers.OrderHistoryMapper">
+
+<!-- OrderHistoryMapper id = "createHistory" -->
+<insert id="createHistory" parameterType="com.project.fastpickup.admin.order.dto.orderhistory.OrderHistoryCreateDTO">
+    INSERT INTO 
+    tbl_order_history
+    (orderStatus, ono)
+    VALUES
+    (#{orderStatus}, #{ono})
+    <selectKey resultType="long" keyProperty="orderHistory" order="AFTER">
+        select last_insert_id()
+    </selectKey>
+</insert>
+
+<!-- OrderHistoryMapper id = "updateHistory" -->
+<update id="updateHistory" parameterType="com.project.fastpickup.admin.order.dto.orderhistory.OrderHistoryUpdateDTO">
+    UPDATE 
+    tbl_order_history
+    SET
+    orderStatus = #{orderStatus} 
+    WHERE orderHistory = #{orderHistory}
+</update>
+
+<!-- OrderHistoryMapper id = "readHistory" -->
+<select id="readHistory" parameterType="long">
+    SELECT * FROM
+    tbl_order_history
+    WHERE orderHistory = #{orderHistory}
+</select>
+
+</mapper>

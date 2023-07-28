@@ -19,10 +19,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderHistoryDTO {
-    // tbl_order_history
-    private Long orderHistory; // 주문 이력 번호
-    @Builder.Default
-    private String orderStatus = "접수";
-    private Long ono; // order 주문 번호
+public class OrderHistoryCreateDTO {
+  // tbl_order_history
+  private Long orderHistory; // 주문 이력 번호
+  @Builder.Default
+  private String orderStatus = "접수";
+  private Long ono; // order 주문 번호
 }
