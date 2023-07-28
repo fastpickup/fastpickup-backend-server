@@ -1,9 +1,9 @@
-package com.project.fastpickup.qna.mappers;
+package com.project.fastpickup.qna.service;
 
 import com.project.fastpickup.admin.qna.dto.reply.QnaReplyReadDTO;
 import com.project.fastpickup.admin.qna.dto.reply.QnaReplyRegistDTO;
 import com.project.fastpickup.admin.qna.dto.reply.QnaReplyUpdateDTO;
-import com.project.fastpickup.admin.qna.mappers.QnaReplyMapper;
+import com.project.fastpickup.admin.qna.service.QnaReplyService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @SpringBootTest
 @Log4j2
-public class QnaReplyMapperTests {
+public class QnaReplyServiceTests {
 
     // 의존성 주입
-    @Autowired(required = false)
-    private QnaReplyMapper qnaReplyMapper;
+    @Autowired
+    private QnaReplyService qnaReplyService;
 
     // Test 시작시 메모리에 priavte static final 로 먼저 올려놓는다.
     private static final String TEST_EMAIL = "thistrik@naver.com";
@@ -51,60 +50,59 @@ public class QnaReplyMapperTests {
     }
 
     /*  TEST  */
-    // createQnaReply test
-//    @Test
-//    @Transactional
-//    @DisplayName("문의 답글 등록")
-//    public void createQnaReplyTestMapper() {
-//        // GIVEN
-//        log.info("=== Start Create Qna Reply Test Mapper ===");
-//        // WHEN
-//        qnaReplyMapper.createQnaReply(qnaReplyRegistDTO);
-//        // THEN
-//        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
-//        log.info("=== End Create Qna Reply Test Mapper ===");
-//    }
+    // create
+    @Test
+    //@Transactional
+    @DisplayName("문의 답글 등록")
+    public void createQnaReplyTestService() {
+        // GIVEN
+        log.info("=== Start Create Qna Reply Test Service ===");
+        // WHEN
+        qnaReplyService.createQnaReply(qnaReplyRegistDTO);
+        // THEN
+        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
+        log.info("=== End Create Qna Reply Test Service ===");
+    }
 
-    // readQnaReply test
+    // read
     @Test
     @Transactional
     @DisplayName("문의 답글 조회")
-    public void readQnaReplyTestMapper() {
+    public void readQnaReplyTestService() {
         // GIVEN
-        log.info("=== Start Read Qna Test Mapper ===");
+        log.info("=== Start Read Qna Reply Test Service ===");
         // WHEN
-        QnaReplyReadDTO readQnaReply = qnaReplyMapper.readQnaReply(4L);
+        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(4L);
         // THEN
-        Assertions.assertNotNull(readQnaReply, "Qna Reply Read is Null");
-        log.info("=== End Read Qna Test Mapper ===");
+        Assertions.assertEquals(replyReadDTO.getRno(), 4L);
+        log.info("=== End Read Qna Reply Test Service ===");
     }
 
-    // updateQnaReply test
+    // update
     @Test
     @Transactional
     @DisplayName("문의 답글 수정")
-    public void updateQnaTestMapper() {
+    public void updateQnaReplyTestService() {
         // GIVEN
-        log.info("=== Start Update Qna Reply Test Mapper ===");
+        log.info("=== Start Update Qna Reply Test Service ===");
         // WHEN
-        int result = qnaReplyMapper.updateQnaReply(qnaReplyUpdateDTO);
+        int result = qnaReplyService.updateQnaReply(qnaReplyUpdateDTO);
         // THEN
         Assertions.assertEquals(result, 1);
-        log.info("=== End Update Qna Reply Test Mapper ===");
+        log.info("=== End Update Qna Reply Test Service ===");
     }
 
-    // deleteQnaReply test
+    // delete
     @Test
     @Transactional
     @DisplayName("문의 답글 삭제")
-    public void deleteQnaReplyTestMapper() {
+    public void deleteQnaReplyTestService() {
         // GIVEN
-        log.info("=== Start Delete Qna Reply Test Mapper ===");
+        log.info("=== Start Delete Qna Reply Test Service ===");
         // WHEN
-        int result = qnaReplyMapper.deleteQnaReply(4L);
+        int result = qnaReplyService.deleteQnaReply(4L);
         // THEN
         Assertions.assertEquals(result, 1);
-        log.info("=== End Delete Qna Reply Test Mapper ===");
+        log.info("=== End Delete Qna Reply Test Service ===");
     }
-
 }
