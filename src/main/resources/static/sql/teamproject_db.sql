@@ -50,7 +50,9 @@ create table tbl_product (
 	viewCount int default 0,
 	likeCount int default 0,
 	isRecommend int,
-	isDeletedProduct tinyint not null default true
+	isDeletedProduct tinyint not null default true,
+	sno bigint not null,
+	FOREIGN KEY (sno) REFERENCES tbl_store(sno) ON DELETE CASCADE
 )
 ;
 delete from tbl_product;
@@ -93,8 +95,8 @@ create table tbl_qna_reply (
 	email varchar(100) not null,
 	reply varchar(1000) not null,
 	replyDate timestamp default now(),
-	foreign key (qno) references tbl_qna(qno),
-	foreign key (email) references tbl_member(email)
+	foreign key (qno) references tbl_qna(qno) ON DELETE CASCADE,
+	foreign key (email) references tbl_member(email) ON DELETE CASCADE
 )
 ;
 select * from tbl_qna_reply;
@@ -120,8 +122,8 @@ create table tbl_order (
 	sno bigint not null,
 	pno bigint not null,
 	FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE cascade,
-	FOREIGN KEY (pno) REFERENCES tbl_product(pno),
-	FOREIGN KEY (sno) REFERENCES tbl_store(sno)
+	FOREIGN KEY (pno) REFERENCES tbl_product(pno) ON DELETE CASCADE,
+	FOREIGN KEY (sno) REFERENCES tbl_store(sno) ON DELETE CASCADE
 )
 ;
 drop table tbl_order;
@@ -131,7 +133,7 @@ create table tbl_order_history (
 	orderHistory bigint auto_increment primary key,
 	orderStatus varchar(50) default '접수' not null,
 	ono bigint not null,
-	FOREIGN KEY (ono) REFERENCES tbl_order(ono)
+	FOREIGN KEY (ono) REFERENCES tbl_order(ono) ON DELETE CASCADE
 )
 ;
 drop table tbl_order_history;
@@ -194,22 +196,6 @@ select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.view
 ;
 
 ##조회
-select prdt.pno, prdt.productName, prdt.productContent, prdt.productPrice, prdt.registDate,
-    prdt.updateDate, prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct,
-    prdt.storeName, prdt.categoryName, prdt.fileNames
-from (
-	select tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
-    tp.updateDate, tp.likeCount, tp.isRecommend, tp.isDeletedProduct,
-    ts.storeName, tpc.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileNames
-	from tbl_product tp
-	left outer join tbl_store ts on ts.sno = tp.sno
-	left outer join tbl_product_category tpc on tpc.pno = tp.pno
-	left outer join tbl_product_image tpi on tpi.pno = tp.pno
-	where tp.pno = 22
-	group by tp.pno
-) as prdt
-;
-
 SELECT tp.pno, tp.productName, tp.productContent, tp.productPrice, tp.registDate,
     tp.updateDate, tp.likeCount, tp.isRecommend, tp.isDeletedProduct,
     ts.storeName, tpc.categoryName, CONCAT(tpi.uuid, '_', tpi.fileName) as fileNames
@@ -244,3 +230,18 @@ select * from tbl_order;
 select * from tbl_order_history;
 
 ##/주문
+
+SELECT o.ono, o.email, o.registDate, s.storeName, o.orderCount, h.orderStatus, p.productName, p.productPrice, 
+CONCAT(pi.uuid, '_', pi.fileName) as fileName 
+FROM tbl_order o 
+	LEFT OUTER JOIN tbl_order_history h ON o.ono = h.ono 
+	LEFT OUTER JOIN tbl_product p ON o.pno = p.pno 
+	LEFT OUTER JOIN tbl_product_image pi ON pi.pno = p.pno AND pi.ord = 0
+	LEFT OUTER JOIN tbl_store s ON o.sno = s.sno
+WHERE o.ono > 0 AND h.ono > 0 
+AND ( s.storename like concat('%', '교촌', '%') 
+AND o.registDate >= '2023-07-19' AND o.registDate <= '2023-07-31' ) 
+ ORDER BY o.ono DESC, h.orderHistory DESC LIMIT 0, 10
+;
+
+

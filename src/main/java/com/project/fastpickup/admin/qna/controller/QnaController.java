@@ -23,6 +23,12 @@ public class QnaController {
 
     private final QnaService qnaService;
 
+    //페이지 체크
+    @ModelAttribute("pageName")
+    public String pageName(){
+        return "qna";
+    }
+
     // list
     @GetMapping("list")
 //    @PreAuthorize("hasAnyRole('USER')")

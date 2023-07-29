@@ -1,5 +1,13 @@
+<!--
+/*
+* Date   : 2023.07.29
+* Author : 조상희
+* E-mail : jo_sh_1028@naver.com
+*/
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -43,18 +51,19 @@
   <!-- Sidebar Start -->
   <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
-      <a href="/board/list" class="navbar-brand mx-4 mb-3">
-        <h3 class="text-primary">Fast Pickup</h3>
-      </a>
-      <div class="d-flex align-items-center ms-4 mb-4">
-      </div>
+      <h1 class="header-logo">
+        <a href="/board/list" class="navbar-brand">
+        <%--<h3 class="text-primary">Fast Pickup</h3>--%>
+          <img src="/imgs/logo.png" alt="factpickup">
+        </a>
+      </h1>
       <div class="navbar-nav w-100">
-        <a href="/admin/order/list" class="nav-item nav-link"><i class="fa fa-file-alt me-2"></i>Order</a>
-        <a href="/admin/member/list" class="nav-item nav-link active"><i class="fa fa-file-alt me-2"></i>Member</a>
-        <a href="/admin/product/list" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
-        <a href="/admin/store/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Store</a>
-        <a href="/admin/qna/list" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
-        <a href="/admin/review/list" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Review</a>
+        <a href="/admin/order/list" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-file-alt me-2"></i>Order</a>
+        <a href="/admin/member/list" class="nav-item nav-link <c:if test="${pageName == 'member'}">active</c:if>"><i class="fa fa-file-alt me-2"></i>Member</a>
+        <a href="/admin/product/list" class="nav-item nav-link <c:if test="${pageName == 'product'}">active</c:if>"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
+        <a href="/admin/store/list" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>
+        <a href="/admin/qna/list" class="nav-item nav-link <c:if test="${pageName == 'qna'}">active</c:if>"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
+        <a href="/admin/review/list" class="nav-item nav-link <c:if test="${pageName == 'review'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>Review</a>
       </div>
     </nav>
   </div>
@@ -72,13 +81,11 @@
       <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            
-            <div>
-              <!-- Security -->
+
+            <!-- Security -->
             <sec:authorize access="isAuthenticated()">
-              <p>Logged in as: <sec:authentication property="principal.username" /></p>
-             </sec:authorize>
-            </div>
+              User: <sec:authentication property="principal.username" />
+            </sec:authorize>
             
 
           </a>
