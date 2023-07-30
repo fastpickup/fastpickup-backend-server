@@ -58,7 +58,7 @@
         </a>
       </h1>
       <div class="navbar-nav w-100">
-        <a href="/admin/order/list" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-file-alt me-2"></i>Order</a>
+        <a href="/admin/order/list" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-chart-bar me-2"></i>Order</a>
         <a href="/admin/member/list" class="nav-item nav-link <c:if test="${pageName == 'member'}">active</c:if>"><i class="fa fa-file-alt me-2"></i>Member</a>
         <a href="/admin/product/list" class="nav-item nav-link <c:if test="${pageName == 'product'}">active</c:if>"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
         <a href="/admin/store/list" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>
@@ -81,13 +81,10 @@
       <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-
             <!-- Security -->
             <sec:authorize access="isAuthenticated()">
               User: <sec:authentication property="principal.username" />
             </sec:authorize>
-            
-
           </a>
           <!-- Security -->
           <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">

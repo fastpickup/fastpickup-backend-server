@@ -1,4 +1,7 @@
 /********** Template CSS **********/
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
+* {font-family: 'IBM Plex Sans KR', sans-serif !important;}
+.fa, .far, .fas {font-family: "Font Awesome 5 Free" !important;}
 :root {
     --primary: #ae2d33;
     --light: #F3F6F9;
@@ -278,6 +281,10 @@
     border-color: var(--primary);
 }
 
+/***************************************************** re *****************************************************/
+.bg-body {background: #eee !important;}
+h3 {margin: 20px 0 30px;}
+
 .button_wrap {
     display:flex;
     justify-content:flex-end;
@@ -286,19 +293,24 @@
     margin-left:10px;
 }
 
+.btn.btn-group.active,
 .btn.btn-primary.active {
-    background-color: #26abff;
-    border-color: #1aa6ff
+    color: #fff;
+    background-color: #ae2d33;
+    border-color: #ae2d33;
 }
 
+.paging .active .btn.btn-group,
 .paging .active .btn.btn-primary {
-    background-color: #26abff;
-    border-color: #1aa6ff
+    color: #fff;
+    background-color: #ae2d33;
+    border-color: #ae2d33;
 }
 
+.paging li .btn.btn-group,
 .paging li .btn.btn-primary {border-radius:0;}
-.paging li:first-child .btn.btn-primary {border-radius:4px 0 0 4px;}
-.paging li:last-child .btn.btn-primary {border-radius:0 4px 4px 0;}
+.paging li:first-child .btn.btn-prev {border-radius:4px 0 0 4px;}
+.paging li:last-child .btn.btn-next {border-radius:0 4px 4px 0;}
 
 li {
     list-style: none;
@@ -324,6 +336,17 @@ li {
 .dropdown-item:hover,
 .dropdown-item:focus {background: #fff;color: #000;}
 
+.sigin_wrap {display: flex;height: 100vh;justify-content: center;align-items: center;}
+.sigin_wrap h1 {text-align: center;margin-bottom: 30px;}
+.sigin_wrap h1 img {height: 105px;}
+.sigin_wrap .sigin_content .form-control {height:50px;}
+.sigin_wrap .sigin_content .button_wrap {display: flex;justify-content: space-between;margin: 2% 0;}
+.sigin_wrap .sigin_content .button_wrap2 {border-top: 1px solid #ccc;padding-top: 2%;}
+.sigin_wrap .sigin_content .btn {width:48%;margin: 0;}
+.sigin_wrap .sigin_content .btn.btn-kakao {background: #FEE500;}
+.sigin_wrap .sigin_content .btn.btn-kakao img {width: 25px;margin-right: 5px;}
+
+
 .content_wrap {position: relative;}
 
 .content_wrap .navbar {height: 80px;}
@@ -332,3 +355,41 @@ li {
 
 .container_wrap {min-height: calc(100vh - 170px)}
 .container_wrap .bg-light {background: #fff !important;}
+
+.container_wrap .table thead tr th {text-align:center;color:#000;font-weight:500;}
+.container_wrap .table tbody tr td {vertical-align: middle;text-align: center;color:#000;}
+.container_wrap .table tbody tr td a {color:#000;}
+
+.container_wrap .search_wrap {padding:20px;border-radius: 5px;}
+.container_wrap .search_wrap .search_box {display: flex;justify-content: space-between;height:38px;}
+.container_wrap .search_wrap .search_box > div {width: calc(100% /2);}
+.container_wrap .search_wrap .search_box .form-select {max-width: 150px;}
+.container_wrap .search_wrap .search_box .search-input {max-width: 80%;}
+.container_wrap .search_wrap .search_box .input-date-group {justify-content: end;}
+.container_wrap .search_wrap .search_box .input-date-group .search-input {height:38px;max-width: 25%;}
+.container_wrap .search_wrap .search_box .input-date-group .btn {height:38px;}
+
+.container_wrap .detail_content {display: flex;flex-wrap: wrap;font-size: 1.3rem;}
+.container_wrap .detail_content dt {width: 150px;padding: 10px 0 15px;font-weight:500;border-bottom: 1px solid #ccc;}
+.container_wrap .detail_content dd {width: calc(100% - 150px);margin: 0;padding: 10px 0 15px;font-weight: 600;color: #000;border-bottom: 1px solid #ccc;}
+
+.container_wrap .form_content {font-size: 1.1rem;}
+.container_wrap .form_content .form-control {padding: 0.575em 1em; font-size: 1.1rem;}
+
+.container_wrap .order_wrap {margin-bottom: 20px;}
+.container_wrap .order_wrap .order_title {display: flex;border-bottom: 1px solid #ccc;align-items: center;}
+.container_wrap .order_wrap .order_title h3 {width:115px;}
+.container_wrap .order_wrap .order_title .order_state {display: flex;width: calc(100% - 125px);justify-content: space-between;align-items: center;}
+.container_wrap .order_wrap .order_title .order_state p {font-size: 1.25rem;font-weight: 600;}
+.container_wrap .order_wrap .order_store {padding-top: 20px;padding-bottom: 5px;border-bottom: 1px solid #ccc;}
+.container_wrap .order_wrap .order_store h5 {padding-bottom: 10px;}
+.container_wrap .order_wrap .order_store ul {padding: 0;}
+.container_wrap .order_wrap .order_store ul li {font-size: 1.1rem;line-height: 1.6;}
+.container_wrap .order_wrap .order_store ul li span {display: inline-block;width: 120px;}
+
+.container_wrap .order_wrap .order_store2 {padding-top: 15px;}
+.container_wrap .order_wrap .order_store2 dl {display: flex;}
+.container_wrap .order_wrap .order_store2 dl dt {width: 280px;}
+.container_wrap .order_wrap .order_store2 dl dd {width: calc(100% - 200px);}
+.container_wrap .order_wrap .order_store2 dl dd ul li {padding-bottom: 10px;}
+.container_wrap .order_wrap .order_store2 dl dd ul li span {width: 150px;}
