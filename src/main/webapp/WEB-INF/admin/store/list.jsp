@@ -25,11 +25,10 @@
 						<option value="">선택해주세요</option>
 						<option value="e" ${pageRequestDTO.type=='e' ? 'selected="selected"' : '' }>Email</option>
 						<option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점 이름</option>
-						<option value="sw" ${pageRequestDTO.type=='sw' ? 'selected="selected"' : '' }>통합 검색</option>
+						<option value="sw" ${pageRequestDTO.type=='es' ? 'selected="selected"' : '' }>통합 검색</option>
 					</select>
-					<input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요."
-					       value="${pageRequestDTO.keyword}">
-					<button type="submit" class="btn btn-primary btnSearch">검색</button>
+					<input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요." value="${pageRequestDTO.keyword}">
+					<button type="button" class="btn btn-primary btnSearch">검색</button>
 				</div>
 			</div>
 		</form>
@@ -135,14 +134,20 @@
   })
 
   //검색 버튼
-  btnSearch.addEventListener("click", e => {
+  btnSearch.addEventListener("click", (e) => {
     //이벤트 막기
     e.preventDefault()
     e.stopPropagation()
 
     //검색타입, 키워드 입력 안되었을 시 return
-    if (typeObj.options[typeObj.selectedIndex].value === "" && keywordObj.value !== "") {
+    if (typeObj.options[typeObj.selectedIndex].value === "") {
       alert("검색 조건을 선택해주세요")
+	    typeObj.focus()
+      return
+    }
+    if (keywordObj.value === "") {
+      alert("검색어를 입력해주세요")
+	    keywordObj.focus()
       return
     }
 

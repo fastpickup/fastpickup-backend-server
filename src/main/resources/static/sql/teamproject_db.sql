@@ -229,6 +229,8 @@ select * from tbl_store;
 select * from tbl_order;
 select * from tbl_order_history;
 
+select * from tbl_order where registDate <= '2023-07-28';
+
 ##/주문
 
 SELECT o.ono, o.email, o.registDate, s.storeName, o.orderCount, h.orderStatus, p.productName, p.productPrice, 

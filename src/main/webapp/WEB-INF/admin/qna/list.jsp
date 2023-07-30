@@ -137,8 +137,14 @@
     e.stopPropagation()
 
     //검색타입, 키워드 입력 안되었을 시 return
-    if (typeObj.options[typeObj.selectedIndex].value === "" && keywordObj.value !== "") {
+    if (typeObj.options[typeObj.selectedIndex].value === "") {
       alert("검색 조건을 선택해주세요")
+      typeObj.focus()
+      return
+    }
+    if (keywordObj.value === "") {
+      alert("검색어를 입력해주세요")
+      keywordObj.focus()
       return
     }
 

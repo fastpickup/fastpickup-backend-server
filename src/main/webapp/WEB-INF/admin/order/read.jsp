@@ -55,7 +55,7 @@
 	<div class="order_store order_store2">
 		<h5>주문 정보 (No: ${listOrder.ono})</h5>
 		<dl>
-			<dt><img src="http://192.168.0.4/${listOrder.fileName[0]}" width="250"/></dt>
+			<dt><img src="http://192.168.0.64/${listOrder.fileName[0]}" width="250"/></dt>
 			<dd>
 				<ul>
 					<li><span>주문자 전화번호</span> <%--${listOrder.phone}--%></li>

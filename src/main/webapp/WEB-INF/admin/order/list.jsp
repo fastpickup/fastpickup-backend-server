@@ -63,7 +63,7 @@
 						<td>
 							<a href="/admin/order/read/${order.ono}">
 								<c:if test="${order.fileName}">
-								</c:if><img src="http://192.168.0.4/s_${order.fileName}"/>
+								</c:if><img src="http://192.168.0.64/s_${order.fileName}"/>
 								${order.productName}
 							</a>
 						</td>
@@ -156,10 +156,10 @@
     e.stopPropagation()
 
     //검색타입, 키워드 입력 안되었을 시 return
-    if (typeObj.options[typeObj.selectedIndex].value === "" && keywordObj.value !== "") {
-      alert("검색 조건을 선택해주세요")
-      return
-    }
+    // if (typeObj.options[typeObj.selectedIndex].value === "" && keywordObj.value !== "") {
+    //   alert("검색 조건을 선택해주세요")
+    //   return
+    // }
 
     //검색 하고나면 page는 무조건 1페이지
     pageInput.value = 1

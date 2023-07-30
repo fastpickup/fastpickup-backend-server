@@ -107,13 +107,13 @@
                         s.storeName like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
-                <if test="startDate != null">
-                    AND o.registDate >= #{startDate}
-                </if>
-                <if test="endDate != null">
-                    AND o.registDate &lt;= #{endDate}
-                </if>
             </trim>
+        </if>
+        <if test="startDate != null">
+            AND o.registDate >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            OR o.registDate &lt;= #{endDate}
         </if>
         ORDER BY o.ono DESC, h.orderHistory DESC
         LIMIT #{skip}, #{size}
@@ -141,13 +141,13 @@
                     s.storeName like concat('%', #{keyword}, '%')
                 </if>
                 </foreach>
-                <if test="startDate != null">
-                    AND o.registDate >= #{startDate}
-                </if>
-                <if test="endDate != null">
-                    AND o.registDate &lt;= #{endDate}
-                </if>
             </trim>
+            </if>
+            <if test="startDate != null">
+                AND o.registDate >= #{startDate}
+            </if>
+            <if test="endDate != null">
+                OR o.registDate &lt;= #{endDate}
             </if>
         LIMIT #{countEnd}
         ) as tbl_order
