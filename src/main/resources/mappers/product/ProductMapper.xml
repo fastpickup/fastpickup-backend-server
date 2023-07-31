@@ -43,11 +43,12 @@
   <!-- List Product ProductMapper id = "getList" -->
   <select id="getList" resultType="ProductListDTO">
     select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
-           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.categoryName,
-           concat(tpi.uuid,'_',tpi.fileName) as fileName
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.sno
+           prdt.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileName
     from (
             select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
-                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, tpc.categoryName
+                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, ts.sno,
+                   tpc.categoryName
             from tbl_product tp
               left outer join tbl_store ts on ts.sno = tp.sno
               left outer join tbl_product_category tpc on tpc.pno = tp.pno
