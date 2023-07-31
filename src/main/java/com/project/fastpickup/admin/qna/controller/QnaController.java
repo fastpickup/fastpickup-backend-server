@@ -4,6 +4,8 @@ import com.project.fastpickup.admin.qna.dto.QnaDTO;
 import com.project.fastpickup.admin.qna.dto.QnaListDTO;
 import com.project.fastpickup.admin.qna.dto.QnaRegistDTO;
 import com.project.fastpickup.admin.qna.dto.QnaUpdateDTO;
+import com.project.fastpickup.admin.qna.dto.reply.QnaReplyReadDTO;
+import com.project.fastpickup.admin.qna.service.QnaReplyService;
 import com.project.fastpickup.admin.qna.service.QnaService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class QnaController {
 
     private final QnaService qnaService;
+
+    private final QnaReplyService qnaReplyService;
 
     //페이지 체크
     @ModelAttribute("pageName")
@@ -44,7 +48,9 @@ public class QnaController {
     // get
     @GetMapping("create")
     @PreAuthorize("permitAll")
-    public void getCreate() {
+    public void getCreate(Model model) {
+
+
 
         log.info("GET | Admin Qna Create");
     }
@@ -52,7 +58,7 @@ public class QnaController {
     // post
     @PostMapping("create")
     @PreAuthorize("permitAll")
-    public String postCreate(@RequestBody QnaRegistDTO qnaRegistDTO) {
+    public String postCreate(QnaRegistDTO qnaRegistDTO) {
 
         log.info("POST | Admin Qna Create");
         qnaService.createQna(qnaRegistDTO);
@@ -67,10 +73,13 @@ public class QnaController {
 
         log.info("GET | Admin Qna Read");
 
-        QnaDTO read = qnaService.readQna(qno);
-        model.addAttribute("readQna", read);
+        QnaDTO listQna = qnaService.readQna(qno);
+        model.addAttribute("listQna", listQna);
 
-        return "/admin/qna/read";
+        QnaReplyReadDTO replyRead = qnaReplyService.readQnaReply(qno);
+        model.addAttribute("replyRead", replyRead);
+
+        return "admin/qna/read";
     }
 
     // update
@@ -81,10 +90,10 @@ public class QnaController {
 
         log.info("GET | Admin Qna Update");
 
-        QnaDTO update = qnaService.readQna(qno);
-        model.addAttribute("updateQna", update);
+        QnaDTO listQna = qnaService.readQna(qno);
+        model.addAttribute("listQna", listQna);
 
-        return "/admin/qna/update";
+        return "admin/qna/update";
     }
 
     // post

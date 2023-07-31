@@ -17,7 +17,7 @@
     <select id="readQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyReadDTO">
         select rno, email, reply, replyDate
         from tbl_qna_reply
-        where rno = #{rno}
+        where qno = #{qno}
     </select>
 
     <!--  update  -->

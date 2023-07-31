@@ -24,8 +24,8 @@ public class QnaReplyServiceImpl implements QnaReplyService {
 
     // read
     @Override
-    public QnaReplyReadDTO readQnaReply(Long rno) {
-        return qnaReplyMapper.readQnaReply(rno);
+    public QnaReplyReadDTO readQnaReply(Long qno) {
+        return qnaReplyMapper.readQnaReply(qno);
     }
 
     // update
