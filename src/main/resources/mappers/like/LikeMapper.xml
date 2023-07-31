@@ -15,7 +15,7 @@
 
 <!-- LikeMapper id = "deleteLike" -->
 <delete id="deleteLike" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
-    DELET FROM tbl_like
+    DELETE FROM tbl_like
     WHERE pno = #{pno} AND email = #{email}
 </delete>
 
@@ -24,7 +24,7 @@
     SELECT COUNT(*)
     FROM tbl_like
     WHERE pno = #{pno}
-<select>
+</select>
 
 <!-- LikeMapper id = "checkLikeByMemberAndPost" -->
 <select id="checkLikeByMemberAndPost" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
