@@ -89,18 +89,18 @@ public class QnaMapperTests {
 
 
     // createQna test
-//    @Test
-//    @Transactional
-//    @DisplayName("문의 등록")
-//    public void createQnaTestMapper() {
-//        // GIVEN
-//        log.info("=== Start Create Qna Test Mapper ===");
-//        // WHEN
-//        qnaMapper.createQna(qnaRegistDTO);
-//        // THEN
-//        Assertions.assertEquals(qnaRegistDTO.getEmail(), "thistrik@naver.com");
-//        log.info("=== End Create Qna Test Mapper ===");
-//    }
+    @Test
+    //@Transactional
+    @DisplayName("문의 등록")
+    public void createQnaTestMapper() {
+        // GIVEN
+        log.info("=== Start Create Qna Test Mapper ===");
+        // WHEN
+        qnaMapper.createQna(qnaRegistDTO);
+        // THEN
+        Assertions.assertEquals(qnaRegistDTO.getEmail(), "thistrik@naver.com");
+        log.info("=== End Create Qna Test Mapper ===");
+    }
 
     // readQna test
     @Test
