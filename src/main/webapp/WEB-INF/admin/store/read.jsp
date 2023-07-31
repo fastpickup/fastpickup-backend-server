@@ -34,6 +34,8 @@
 							<dd>${listStore.storeNumber}</dd>
 							<dt>가맹점 주소</dt>
 							<dd>${listStore.storeAddress}</dd>
+							<dt>가맹점 전화번호</dt>
+							<dd>${listStore.storePhone}</dd>
 						</dl>
 					</form>
 				</div>

@@ -47,9 +47,8 @@
 	<div class="order_store">
 		<h5>${listOrder.storeName} <span style="font-size:1rem;font-weight:400;">가맹점 번호: [${listOrder.sno}]</span></h5>
 		<ul>
-			<li><span>Email</span> ${listOrder.email}</li>
-			<li><span>전화번호</span> <%--${listOrder.phone}--%></li>
-			<li><span>주소</span> ${listOrder.storeAddress}</li>
+			<li><span>가맹점 주소</span> ${listOrder.storeAddress}</li>
+			<li><span>가맹점 전화번호</span> ${listOrder.storePhone}</li>
 		</ul>
 	</div>
 	<div class="order_store order_store2">
@@ -58,7 +57,7 @@
 			<dt><img src="http://192.168.0.64/${listOrder.fileName[0]}" width="250"/></dt>
 			<dd>
 				<ul>
-					<li><span>주문자 전화번호</span> <%--${listOrder.phone}--%></li>
+					<li><span>주문자 전화번호</span> ${listOrder.memberPhone}</li>
 					<li><span>상품 번호</span> ${listOrder.pno}</li>
 					<li><span>상품명</span> <strong>${listOrder.productName}</strong></li>
 					<li><span>주문 수량</span> ${listOrder.orderCount}</li>

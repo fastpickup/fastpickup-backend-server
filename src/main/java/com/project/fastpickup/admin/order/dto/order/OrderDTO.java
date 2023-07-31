@@ -47,4 +47,9 @@ public class OrderDTO {
     // tbl_store
     private String storeName;
     private String storeAddress;
+    private String storePhone;
+
+    // tbl_member
+    private String memberPhone;
+    
 }

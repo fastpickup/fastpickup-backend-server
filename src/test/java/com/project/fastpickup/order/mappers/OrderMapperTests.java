@@ -47,6 +47,8 @@ public class OrderMapperTests {
     // tbl_member
     private static final String TEST_EMAIL = "thistrik@naver.com";
 
+    private static final String TEST_EMAIL_VERSION_2 = "whtkdgml3627@naver.com";
+
     // tbl_store
     private static final Long TEST_SNO = 1L;
 
@@ -63,12 +65,23 @@ public class OrderMapperTests {
 
     // DTO 정의
     private OrderCreateDTO orderCreateDTO;
+
+    private OrderCreateDTO orderMemberCreateOrderDTO;
+
     private OrderUpdateDTO orderUpdateDTO;
     private OrderHistoryCreateDTO orderHistoryCreateDTO;
     private OrderHistoryUpdateDTO orderHistoryUpdateDTO;
 
     @BeforeEach
     public void setUp() {
+
+        orderMemberCreateOrderDTO = OrderCreateDTO.builder()
+                .orderCount(TEST_ORDER_COUNT)
+                .email(TEST_EMAIL_VERSION_2)
+                .sno(TEST_SNO)
+                .pno(TEST_PNO)
+                .build();
+
         orderCreateDTO = OrderCreateDTO.builder()
                 .orderCount(TEST_ORDER_COUNT)
                 .email(TEST_EMAIL)
@@ -153,6 +166,21 @@ public class OrderMapperTests {
         Assertions.assertEquals(TEST_SNO, 1L);
         Assertions.assertEquals(TEST_PNO, 22L);
         log.info("=== End Create Order & History Mapper ===");
+    }
+
+    // Create Order And Order History
+    @Test
+    @Transactional
+    @DisplayName("주문과 주문이력 다른 멤버 생성 테스트")
+    public void createOrderAndOrderHistoryOtherMember() {
+        log.info("=== Start Create Order & History Other Mapper ===");
+        Long createOrder = orderMapper.createOrder(orderMemberCreateOrderDTO);
+
+        Long ono = orderMemberCreateOrderDTO.getOno();
+        orderHistoryCreateDTO.setOno(ono);
+        Long createOrderHistory = orderHistoryMapper.createHistory(orderHistoryCreateDTO);
+
+        log.info("=== End Create Order & History Other Mapper ===");
     }
 
     // List Order And Order History And Product And Product Image

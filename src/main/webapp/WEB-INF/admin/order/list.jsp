@@ -1,3 +1,10 @@
+<!--
+/*
+* Date : 2023.07.28
+* Author : 권성준
+* E-mail : thistrik@naver.com
+*/
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -51,6 +58,7 @@
 					<th scope="col">상품 주문 날짜</th>
 					<th scope="col">가맹점 이메일</th>
 					<th scope="col">가맹점 이름</th>
+					<th scope="col">가맹점 전화번호</th>
 					<th scope="col">주문 개수</th>
 					<th scope="col">주문 이력 상태</th>
 					<th scope="col">상품 가격</th>
@@ -70,6 +78,7 @@
 						<td>${order.registDate}</td>
 						<td>${order.email}</td>
 						<td>${order.storeName}</td>
+						<td>${order.storePhone}</td>
 						<td>${order.orderCount}</td>
 						<td>${order.orderStatus}</td>
 						<td>${order.productPrice}</td>

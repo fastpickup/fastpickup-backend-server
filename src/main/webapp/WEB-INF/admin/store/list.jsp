@@ -1,3 +1,11 @@
+<!--
+/*
+* Date : 2023.07.27
+* Author : 권성준
+* E-mail : thistrik@naver.com
+*/
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -44,6 +52,7 @@
 					<th scope="col">가맹점 사업자 번호</th>
 					<th scope="col">가맹점 주소</th>
 					<th scope="col">가맹점 이메일</th>
+					<th scope="col">가맹점 전화번호</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -54,6 +63,7 @@
 						<td>${store.storeNumber}</td>
 						<td>${store.storeAddress}</td>
 						<td>${store.email}</td>
+						<td>${store.storePhone}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

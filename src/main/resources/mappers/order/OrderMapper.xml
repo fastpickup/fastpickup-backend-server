@@ -29,6 +29,8 @@
         o.orderCount, 
         o.registDate,
         o.email, 
+        m.email,
+        m.memberPhone,
         o.sno, 
         o.pno, 
         h.orderHistory,
@@ -37,12 +39,14 @@
         p.productPrice,
         CONCAT(pi.uuid, '_' ,pi.fileName) AS fileName,
         s.storeName,
-        s.storeAddress
+        s.storeAddress,
+        s.storePhone
         FROM tbl_order o
         LEFT OUTER JOIN tbl_order_history h  ON h.ono = o.ono
         LEFT OUTER JOIN tbl_product       p  ON p.pno = o.pno
         LEFT OUTER JOIN tbl_product_image pi ON p.pno = pi.pno
         LEFT OUTER JOIN tbl_store         s  ON s.sno = o.sno 
+        LEFT OUTER JOIN tbl_member        m ON m.email = o.email
         WHERE o.ono = #{ono}
     </select>
     <resultMap id="OrderResultMap" type="com.project.fastpickup.admin.order.dto.order.OrderDTO">
@@ -58,6 +62,8 @@
         <result property="productPrice" column="productPrice"/>
         <result property="storeName" column="storeName"/>
         <result property="storeAddress" column="storeAddress"/>
+        <result property="memberPhone" column="memberPhone"/>
+        <result property="storePhone" column="storePhone"/>
         <collection property="fileName" ofType="java.lang.String" resultMap="FileNameResultMap"/>
     </resultMap>
 
@@ -83,6 +89,7 @@
         o.email,
         o.registDate,
         s.storeName,
+        s.storePhone,
         o.orderCount, 
         h.orderStatus, 
         p.productName,

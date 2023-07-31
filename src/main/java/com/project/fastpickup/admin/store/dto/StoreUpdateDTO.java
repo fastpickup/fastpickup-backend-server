@@ -34,4 +34,6 @@ public class StoreUpdateDTO {
     private String storeAddress;
     @NotBlank
     private String email;
+    @NotBlank  
+    private String storePhone;
 }

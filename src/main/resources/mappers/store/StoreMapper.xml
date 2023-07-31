@@ -9,9 +9,9 @@
 <!-- StoreMapper id = "createStore" -->
 <insert id="createStore" parameterType="com.project.fastpickup.admin.store.dto.StoreCreateDTO">
   INSERT INTO tbl_store 
-  (storeName, storeNumber, storeAddress, email)
+  (storeName, storeNumber, storeAddress, email, storePhone)
   VALUES
-  (#{storeName}, #{storeNumber}, #{storeAddress}, #{email})
+  (#{storeName}, #{storeNumber}, #{storeAddress}, #{email}, #{storePhone})
   <selectKey resultType="long" keyProperty="sno" order="AFTER">
       select last_insert_id()
     </selectKey>
@@ -28,7 +28,7 @@
 <update id="updateStore" parameterType="com.project.fastpickup.admin.store.dto.StoreUpdateDTO">
   UPDATE tbl_store
   SET 
-  storeName = #{storeName}, storeNumber = #{storeNumber}, storeAddress = #{storeAddress}, email = #{email}
+  storeName = #{storeName}, storeNumber = #{storeNumber}, storeAddress = #{storeAddress}, email = #{email}, storePhone = #{storePhone}
   where sno = #{sno}
 </update>
 

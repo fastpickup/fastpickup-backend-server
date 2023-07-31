@@ -34,4 +34,6 @@ public class StoreListDTO {
     private String storeAddress;
     @NotBlank
     private String email;
+    @NotBlank  
+    private String storePhone;
 }

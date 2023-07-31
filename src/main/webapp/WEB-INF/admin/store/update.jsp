@@ -41,6 +41,10 @@
 			<label for="storeAddress" class="form-label">가맹점 주소</label>
 			<input type="text" name="storeAddress" class="form-control" id="storeAddress" value="${listStore.storeAddress}">
 		</div>
+		<div class="bg-light rounded h-100 p-4">
+			<label for="storePhone" class="form-label">가맹점 전화번호</label>
+			<input type="text" name="storePhone" class="form-control" id="storePhone" value="${listStore.storePhone}">
+		</div>
 	</div>
 	<div class="button_wrap p-4">
 		<a href="/admin/store/read/${listStore.sno}" class="btn btn-outline-dark">조회 페이지</a>

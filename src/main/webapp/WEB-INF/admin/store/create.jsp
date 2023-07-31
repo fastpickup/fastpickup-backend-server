@@ -33,6 +33,10 @@
 			<label for="storeAddress" class="form-label">주소</label>
 			<input type="text" id="storeAddress" name="storeAddress" class="form-control" required>
 		</div>
+		<div class="bg-light rounded h-100 p-4">
+			<label for="storePhone" class="form-label">가맹점 전화번호</label>
+			<input type="text" id="storePhone" name="storePhone" class="form-control" required placeholder="EX : 010-xxxx-xxxx">
+		</div>
 	</div>
 	<div class="button_wrap p-4">
 		<a href="/admin/store/list" class="btn btn-outline-dark btnSignin">목록으로</a>
