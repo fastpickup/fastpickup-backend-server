@@ -11,6 +11,8 @@ import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.product.service.ProductService;
+import com.project.fastpickup.admin.store.dto.StoreDTO;
+import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductController {
   //의존성 주입
   private final ProductService productService;
+  private final StoreService storeService;
 
   //페이지 체크
   @ModelAttribute("pageName")
@@ -80,8 +83,10 @@ public class ProductController {
     log.info("GET | Product Read =================");
 
     ProductDTO productDTO = productService.selectOne(pno);
+    StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
 
     model.addAttribute("productRead", productDTO);
+    model.addAttribute("productStore", storeDTO);
     return "admin/product/read";
   }
 

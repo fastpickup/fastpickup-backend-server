@@ -89,6 +89,24 @@ public class ProductServiceImpl implements ProductService {
       .build();
   }
 
+  //List Store Product
+  @Override
+  public PageResponseDTO<ProductListDTO> getStoreList(PageRequestDTO pageRequestDTO, Long sno) {
+    log.info("============ Product List Store Service ============");
+    //리스트 선언
+    List<ProductListDTO> list = productMapper.getStoreList(pageRequestDTO, sno);
+    //Total 선언
+    long total = productMapper.listStoreCount(pageRequestDTO, sno);
+
+    log.info("============ //Product List Store Service ============");
+    //PageResponseDTO 타입으로 반환
+    return PageResponseDTO.<ProductListDTO>withAll()
+      .list(list)
+      .total(total)
+      .pageRequestDTO(pageRequestDTO)
+      .build();
+  }
+
   //Read Product
   @Override
   public ProductDTO selectOne(Long pno) {

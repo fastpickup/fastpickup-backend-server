@@ -23,6 +23,9 @@ public interface ProductService {
   //List Product
   PageResponseDTO<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
 
+  //List Store Product
+  PageResponseDTO<ProductListDTO> getStoreList(PageRequestDTO pageRequestDTO, Long sno);
+
   //Read Product
   ProductDTO selectOne(Long pno);
 

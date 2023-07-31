@@ -6,6 +6,8 @@ package com.project.fastpickup.admin.store.controller;
  * E-mail : thistrik@naver.com
  */
 
+import com.project.fastpickup.admin.product.dto.ProductListDTO;
+import com.project.fastpickup.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -34,12 +36,14 @@ public class StoreController {
 
     // 의존성 주입
     private final StoreService storeService;
+    private final ProductService productService;
 
     // Autowired 명시적 표시
     @Autowired
-    public StoreController(StoreService storeService) {
+    public StoreController(StoreService storeService, ProductService productService) {
         log.info("Constructor Called, Service Injected.");
         this.storeService = storeService;
+        this.productService = productService;
     }
 
     //페이지 체크
@@ -69,10 +73,12 @@ public class StoreController {
     // GET : Read Store
     @GetMapping("read/{sno}")
     @PreAuthorize("hasAnyRole('USER')")
-    public String getReadStore(@PathVariable("sno") Long sno, Model model) {
+    public String getReadStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Store Read");
         StoreDTO listStore = storeService.readStore(sno);
+        PageResponseDTO<ProductListDTO> listProduct = productService.getStoreList(pageRequestDTO, sno);
         model.addAttribute("listStore", listStore);
+        model.addAttribute("listProduct", listProduct);
         return "admin/store/read";
     }
 

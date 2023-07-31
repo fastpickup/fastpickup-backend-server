@@ -10,6 +10,7 @@ import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,6 +23,12 @@ public interface ProductMapper {
   //List count
   long listCount(PageRequestDTO pageRequestDTO);
   // /List Product
+
+  //Store List Product
+  List<ProductListDTO> getStoreList(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
+  //List count
+  long listStoreCount(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
+  // /Store List Product
 
   //Read Product
   ProductDTO selectOne(Long pno);

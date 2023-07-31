@@ -39,7 +39,7 @@ public class ProductServiceTests {
   private static final String TEST_PRODUCT_CONTENT = "Junit Product Content Service Test";
   private static final int TEST_PRODUCT_PRICE = 4000;
   private static final int TEST_PRODUCT_RECOMMEND = 0;
-  private static final long TEST_PRODUCT_STORE = 2L;
+  private static final long TEST_PRODUCT_STORE = 1L;
   private static final String TEST_FILE_NAME = "_Junit1.jpg";
   private static final String TEST_CATEGORY_NAME = "Junit Category Service Test";
 
@@ -109,6 +109,21 @@ public class ProductServiceTests {
     log.info(list);
     Assertions.assertNotNull(list, "Product List is Null");
     log.info("=== End List Product Test Service ===");
+  }
+
+  //List Store Product Service Test
+  @Test
+  @Transactional
+  @DisplayName("상품 가맹점 리스트 서비스 테스트")
+  public void testListStoreProduct(){
+    //GIVEN
+    log.info("=== Start List Store Product Test Service ===");
+    //WHEN
+    PageResponseDTO<ProductListDTO> list = productService.getStoreList(pageRequestDTO, TEST_PRODUCT_STORE);
+    //THEN
+    log.info(list);
+    Assertions.assertNotNull(list, "Product List Store is Null");
+    log.info("=== End List Store Product Test Service ===");
   }
 
   //Read Product Service Test
