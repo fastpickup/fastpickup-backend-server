@@ -56,16 +56,16 @@
 					<th scope="col">상품 등록일</th>
 					<th scope="col">조회수</th>
 					<th scope="col">좋아요</th>
-					<th scope="col">추천상품</th>
+					<th scope="col">추천상품 여부</th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${productList.list}" var="product" varStatus="status">
-					<tr>
+					<tr<c:if test="${product.recStatus == 1}"> class="product_list_active"</c:if>>
 						<td><a href="/admin/store/read/${product.sno}">${product.pno}</a></td>
 						<td>
 							<a href="/admin/store/read/${product.sno}">
-								<img src="192.168.0.64/s_${product.fileName}">
+								<img src="http://192.168.0.64/s_${product.fileName}">
 								${product.productName}
 							</a>
 						</td>
@@ -78,7 +78,9 @@
 						</td>
 						<td>${product.viewCount}</td>
 						<td>${product.likeCount}</td>
-						<td>${product.isRecommend}</td>
+						<td>
+							<c:if test="${product.recStatus == 1}">추천</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

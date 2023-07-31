@@ -44,7 +44,7 @@
   <select id="getList" resultType="ProductListDTO">
     select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
            prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.sno,
-           prdt.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileName
+           prdt.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileName, if(prdt.isRecommend = 999999999, 1, 0) as recStatus
     from (
             select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
                    tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, ts.sno,
@@ -74,14 +74,14 @@
     left outer join tbl_product_image tpi
     on tpi.pno = prdt.pno
     and (tpi.ord = 0 or tpi.ord is null)
-    order by prdt.pno desc
+    order by prdt.pno desc, prdt.isRecommend desc
   </select>
 
   <!-- Store List Product ProductMapper id = "getStoreList" -->
   <select id="getStoreList" resultType="ProductListDTO">
     select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
            prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.sno, prdt.categoryName,
-           concat(tpi.uuid,'_',tpi.fileName) as fileName
+           concat(tpi.uuid,'_',tpi.fileName) as fileName, if(prdt.isRecommend = 999999999, 1, 0) as recStatus
     from (
            select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct,ts.sno, tpc.categoryName
@@ -95,7 +95,7 @@
      left outer join tbl_product_image tpi
      on tpi.pno = prdt.pno
      and (tpi.ord = 0 or tpi.ord is null)
-    order by prdt.pno desc
+    order by prdt.pno desc, prdt.isRecommend desc
   </select>
 
   <!-- List Total Count Product ProductMapper id = "listCount" -->
