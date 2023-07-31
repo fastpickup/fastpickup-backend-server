@@ -13,11 +13,25 @@
     VALUES(#{pno} , #{email})
 </insert>
 
+<!-- LikeMapper id = "incrementLikeCount" -->
+<update id="incrementLikeCount" parameterType="long">
+    UPDATE tbl_product
+    SET likeCount = likeCount + 1
+    WHERE pno = #{pno}
+</update>
+
 <!-- LikeMapper id = "deleteLike" -->
 <delete id="deleteLike" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
     DELETE FROM tbl_like
     WHERE pno = #{pno} AND email = #{email}
 </delete>
+
+<!-- LikeMapper id = "decrementLikeCount" -->
+<update id="decrementLikeCount" parameterType="long">
+    UPDATE tbl_product
+    SET likeCount = likeCount - 1
+    WHERE pno = #{pno}
+</update>
 
 <!-- LikeMapper id = countLikes"" -->
 <select id="countLikes" parameterType="long">
@@ -30,7 +44,7 @@
 <select id="checkLikeByMemberAndPost" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
     SELECT * FROM 
     tbl_like
-    WHERE pno = #{pno} , AND email = #{email}
+    WHERE pno = #{pno} AND email = #{email}
 </select>
 
 </mapper>

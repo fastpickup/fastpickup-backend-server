@@ -7,6 +7,7 @@
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -16,6 +17,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<title>FastPickup</title>
 </head>
 
@@ -80,6 +83,50 @@
 		</div>
 		<!-- Delete Confrim Message Modal -->
 	</div>
+</div>
+<%--<div class="table-responsive">--%>
+<%--	<table class="table">--%>
+<%--		<thead>--%>
+<%--		<tr>--%>
+<%--			<th scope="col">일별 매출 통계</th>--%>
+<%--			<th scope="col">상품 이름</th>--%>
+<%--			<th scope="col">총 판매액</th>--%>
+<%--		</tr>--%>
+<%--		</thead>--%>
+<%--		<tbody>--%>
+<%--		<c:forEach var="sales" items="${salesDay}">--%>
+<%--			<tr>--%>
+<%--				<td>${sales.registDate}</td>--%>
+<%--				<td>${sales.productName}</td>--%>
+<%--				<td>${sales.totalSales}</td>--%>
+<%--			</tr>--%>
+<%--		</c:forEach>--%>
+<%--		</tbody>--%>
+<%--	</table>--%>
+<%--</div>--%>
+<%--<div class="table-responsive">--%>
+<%--	<table class="table">--%>
+<%--		<thead>--%>
+<%--		<tr>--%>
+<%--			<th scope="col">월별 매출 통계</th>--%>
+<%--			<th scope="col">상품 이름</th>--%>
+<%--			<th scope="col">총 판매액</th>--%>
+<%--		</tr>--%>
+<%--		</thead>--%>
+<%--		<tbody>--%>
+<%--		<c:forEach var="sales" items="${salesMonth}">--%>
+<%--			<tr>--%>
+<%--				<td>${sales.registMonth}</td>--%>
+<%--				<td>${sales.productName}</td>--%>
+<%--				<td>${sales.totalSales}</td>--%>
+<%--			</tr>--%>
+<%--		</c:forEach>--%>
+<%--		</tbody>--%>
+<%--	</table>--%>
+<%--</div>--%>
+<div style="display: flex;">
+	<div id="curve_chart" style="width: 900px; height: 500px"></div>
+	<div id="column_chart_month" style="width: 900px; height: 500px;"></div>
 </div>
 <div class="col-12">
 <%--	${listProduct}--%>
@@ -208,6 +255,51 @@
   setTimeout(function () {
     alertModal.hide();
   }, 1500);
+
+  // Goggle Chart Start
+  google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.setOnLoadCallback(drawChartDay);
+
+  function drawChartDay() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '매출');
+    <c:forEach var="sales" items="${salesDay}">
+    data.addRow(['${sales.registDate}', ${sales.totalSales}]);
+    </c:forEach>
+
+    var options = {
+      title: '일별 매출 통계',
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+    chart.draw(data, options);
+  }
+  // Goggle Chart Start
+  google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.setOnLoadCallback(drawChartMonth);
+
+
+
+  function drawChartMonth() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '월');
+    data.addColumn('number', '매출');
+    <c:forEach var="sales" items="${salesMonth}">
+    data.addRow(['${sales.registMonth}', ${sales.totalSales}]);
+    </c:forEach>
+
+    var options = {
+      title: '월별 매출 통계',
+      bars: 'vertical', // 막대 방향 (가로: 'horizontal', 세로: 'vertical')
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('column_chart_month'));
+    chart.draw(data, options);
+  }
 </script>
 
 </body>

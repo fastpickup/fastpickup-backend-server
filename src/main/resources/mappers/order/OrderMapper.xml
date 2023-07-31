@@ -46,7 +46,7 @@
         LEFT OUTER JOIN tbl_product       p  ON p.pno = o.pno
         LEFT OUTER JOIN tbl_product_image pi ON p.pno = pi.pno
         LEFT OUTER JOIN tbl_store         s  ON s.sno = o.sno 
-        LEFT OUTER JOIN tbl_member        m ON m.email = o.email
+        LEFT OUTER JOIN tbl_member        m  ON m.email = o.email
         WHERE o.ono = #{ono}
     </select>
     <resultMap id="OrderResultMap" type="com.project.fastpickup.admin.order.dto.order.OrderDTO">

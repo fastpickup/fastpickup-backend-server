@@ -1,5 +1,11 @@
 package com.project.fastpickup.admin.like.dto;
 
+/*
+ * Date   : 2023.07.31
+ * Author : 권성준
+ * E-mail : thistrik@naver.com
+ */
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

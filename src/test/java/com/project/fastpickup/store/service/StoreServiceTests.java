@@ -1,5 +1,7 @@
 package com.project.fastpickup.store.service;
 
+import java.util.List;
+
 /*
  * Date   : 2023.07.27
  * Author : 권성준
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
+import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -38,6 +41,7 @@ public class StoreServiceTests {
     private static final String TEST_STORE_ADDRESS = "경기도 성남시";
     private static final String TEST_EMAIL = "thistrik@naver.com";
     private static final Long TEST_SNO = 1L;
+    private static final String TEST_STORE_PHONE = "2342-323-423";
 
     // DTO 정의
     private StoreDTO storeDTO;
@@ -51,6 +55,7 @@ public class StoreServiceTests {
                 .storeName(TEST_STORE_NAME)
                 .storeNumber(TEST_STORE_NUMBER)
                 .storeAddress(TEST_STORE_ADDRESS)
+                .storePhone(TEST_STORE_PHONE)
                 .email(TEST_EMAIL)
                 .build();
 
@@ -59,6 +64,7 @@ public class StoreServiceTests {
                 .storeName(TEST_STORE_NAME)
                 .storeNumber(TEST_STORE_NUMBER)
                 .storeAddress(TEST_STORE_ADDRESS)
+                .storePhone(TEST_STORE_PHONE)
                 .email(TEST_EMAIL)
                 .build();
     }
@@ -122,5 +128,33 @@ public class StoreServiceTests {
         log.info(listStore.getList());
         Assertions.assertNotNull(listStore, "listStore Should Be Not Null");
         log.info("=== End List Store Service Test ===");
+    }
+
+    // Sales Month Service
+    @Test
+    @Transactional
+    @DisplayName("Service: 가맹점 월별 매출 통계")
+    public void salesMonthStoreService() {
+        // GIVEN
+        log.info("=== Start Sales Month Service ===");
+        // WHEN
+        List<StoreSalesDTO> storeSalesDTO = storeService.salesMonth(TEST_SNO);
+        log.info(storeSalesDTO);
+        Assertions.assertNotNull(storeSalesDTO, "storeSalesDTO Should Be Not Null");
+        log.info("=== End Sales Month Service ===");
+    }
+
+    // Sales Day Service
+    @Test
+    @Transactional
+    @DisplayName("Service: 가맹점 일별 매출 통계")
+    public void salesDayStoreService() {
+        // GIVEN
+        log.info("=== Start Sales Day Service ===");
+        // WHEN
+        List<StoreSalesDTO> storeSalesDTO = storeService.salesDate(TEST_SNO);
+        log.info(storeSalesDTO);
+        Assertions.assertNotNull(storeSalesDTO, "storeSalesDTO Should Be Not Null");
+        log.info("=== End Sales Day Service ===");
     }
 }

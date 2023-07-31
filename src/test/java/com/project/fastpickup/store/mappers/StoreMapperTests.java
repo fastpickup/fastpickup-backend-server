@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
+import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.mappers.StoreMapper;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -128,14 +129,14 @@ public class StoreMapperTests {
         log.info("=== End Update Store Mapper Test ===");
     }
 
-    // List Store Mapper Test 
+    // List Store Mapper Test
     @Test
     @Transactional
     @DisplayName("가맹점 리스트 테스트")
     public void listStoreMapperTest() {
-        // GIVEN 
+        // GIVEN
         log.info("=== Start List Store Mapper Test ===");
-        // WHEN 
+        // WHEN
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
         List<StoreListDTO> listStore = storeMapper.listStore(pageRequestDTO);
         log.info(listStore);
@@ -148,14 +149,39 @@ public class StoreMapperTests {
     @Transactional
     @DisplayName("가맹점 토탈 테스트")
     public void totalStoreMapperTest() {
-        // GIVEN 
+        // GIVEN
         log.info("=== Start Total Store Mapper Test ===");
-        // WHEN 
+        // WHEN
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
         int totalCount = storeMapper.total(pageRequestDTO);
         // THEN
         log.info(totalCount);
         Assertions.assertNotNull(totalCount, "totalCount Should Be Not Null");
         log.info("=== End Total Store Mapper Test ===");
+    }
+
+    // Sales Month
+    @Test
+    @Transactional
+    @DisplayName("가맹점 월별 매출")
+    public void salesMonthStoreMapperTest() {
+        log.info("=== Start Sales Month Mapper Test ===");
+        List<StoreSalesDTO> storeSalesDTO = storeMapper.salesMonth(TEST_SNO);
+        log.info(storeSalesDTO);
+        Assertions.assertNotNull(storeSalesDTO);
+        Assertions.assertNotNull(storeSalesDTO, "storeSalesDTO Should Be Not Null");
+        log.info("=== End Sales Month Mapper Test ===");
+    }
+
+    // Sales Day
+    @Test
+    @Transactional
+    @DisplayName("가맹점 일별 매출")
+    public void salesDayStoreMapperTest() {
+        log.info("=== Start Sales Day Mapper Test ===");
+        List<StoreSalesDTO> storeSalesDTO = storeMapper.salesDate(TEST_SNO);
+        log.info(storeSalesDTO);
+        Assertions.assertNotNull(storeSalesDTO, "storeSalesDTO Should Be Not Null");
+        log.info("=== End Sales Day Mapper Test ===");
     }
 }
