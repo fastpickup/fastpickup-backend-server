@@ -85,8 +85,8 @@
         s.storeName,
         o.orderCount, 
         h.orderStatus, 
-        p.productName, 
-        p.productPrice, 
+        p.productName,
+        p.productPrice,
         CONCAT(pi.uuid, '_', pi.fileName) as fileName
         FROM tbl_order o 
         LEFT OUTER JOIN tbl_order_history   h ON o.ono = h.ono
