@@ -35,7 +35,7 @@
 		</div>
 		<div class="bg-light rounded h-100 p-4">
 			<label for="memberPhone" class="form-label">전화번호</label>
-			<input type="number" id="memberPhone" name="memberPhone" class="form-control" required placeholder="010-xxxx-xxxx">
+			<input type="text" id="memberPhone" name="memberPhone" class="form-control" required placeholder="010-xxxx-xxxx">
 		</div>
 	</div>
 	<div class="button_wrap p-4">

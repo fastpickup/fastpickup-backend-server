@@ -40,6 +40,7 @@ public class StoreMapperTests {
     private static final String TEST_STORE_NUMBER = "12342-23423-2342";
     private static final String TEST_STORE_ADDRESS = "경기도 성남시";
     private static final String TEST_EMAIL = "thistrik@naver.com";
+    private static final String TEST_STORE_PHONE = "12321-23423-523532";
     private static final Long TEST_SNO = 1L;
 
     // DTO 정의
@@ -55,6 +56,7 @@ public class StoreMapperTests {
                 .storeNumber(TEST_STORE_NUMBER)
                 .storeAddress(TEST_STORE_ADDRESS)
                 .email(TEST_EMAIL)
+                .storePhone(TEST_STORE_PHONE)
                 .build();
 
         storeUpdateDTO = StoreUpdateDTO.builder()
@@ -63,6 +65,7 @@ public class StoreMapperTests {
                 .storeNumber(TEST_STORE_NUMBER)
                 .storeAddress(TEST_STORE_ADDRESS)
                 .email(TEST_EMAIL)
+                .storePhone(TEST_STORE_PHONE)
                 .build();
     }
 

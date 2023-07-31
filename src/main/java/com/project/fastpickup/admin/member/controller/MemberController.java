@@ -39,9 +39,9 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    //페이지 체크
+    // 페이지 체크
     @ModelAttribute("pageName")
-    public String pageName(){
+    public String pageName() {
         return "member";
     }
 
@@ -86,14 +86,13 @@ public class MemberController {
         return "admin/member/create";
     }
 
-    // GET : Create Store 
+    // GET : Create Store
     @GetMapping("createstore")
     @PreAuthorize("permitAll")
     public String getCreateStoreMember() {
         log.info("GET | Admin Store Member Create");
         return "admin/member/createstore";
     }
-
 
     // POST : Update Member
     @PostMapping("update")
@@ -118,7 +117,8 @@ public class MemberController {
     // POST : Join Store Member
     @PostMapping("createstore")
     @PreAuthorize("permitAll")
-    public String postCreateStoreMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
+    public String postCreateStoreMember(@Valid MemberConvertDTO memberConvertDTO,
+            RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Member Join");
         int joinStoreMember = memberService.joinStoreMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 회원 가입 완료");

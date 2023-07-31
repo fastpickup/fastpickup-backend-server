@@ -65,7 +65,7 @@
         <a href="/admin/store/list" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>
         <a href="/admin/qna/list" class="nav-item nav-link <c:if test="${pageName == 'qna'}">active</c:if>"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
         <a href="/admin/review/list" class="nav-item nav-link <c:if test="${pageName == 'review'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>Review</a>
-        <a href="/admin/stats/list" class="nav-item nav-link <c:if test="${pageName == 'review'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>stats</a>
+        <a href="/admin/stats/list" class="nav-item nav-link <c:if test="${pageName == 'stats'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>stats</a>
       </div>
     </nav>
   </div>

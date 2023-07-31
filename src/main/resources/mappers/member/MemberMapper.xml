@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- Date   : 2023.07.26, Author : 권성준, E-mail : thistrik@naver.com -->
 <!-- MemberMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.member.mappers.MemberMapper">
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Date   : 2023.07.31, Author : 권성준, E-mail : thistrik@naver.com -->
+<!-- StoreMapper Xml -->
+<mapper namespace="com.project.fastpickup.admin.stats.mappers.StatsMapper">
+
+<!-- StatsMapper id = "storeMonthEntryData" -->
+<select id="storeMonthEntryData" resultMap="storeEntryDataResult">
+  SELECT
+  DATE_FORMAT(registDate, '%Y-%m') AS registMonth,
+  COUNT(s.sno) AS storeCount
+  FROM
+  tbl_store s
+  GROUP BY
+  registMonth
+  ORDER BY
+  registMonth
+</select>
+<resultMap id="storeEntryDataResult" type="com.project.fastpickup.admin.stats.dto.StoreEntryDataDTO">
+    <result column="registMonth" property="registMonth"/>
+    <result column="storeCount" property="storeCount"/>
+</resultMap>
+
+<!-- StatsMapper id = "storeDayEntryData" -->
+<select id="storeDayEntryData" resultMap="storeDayEntryDataResult">
+  SELECT
+  DATE_FORMAT(registDate, '%Y-%m-%d') AS registDate,
+  COUNT(s.sno) AS storeCount
+  FROM
+  tbl_store s
+  GROUP BY
+  registDate
+  ORDER BY
+  registDate;
+</select>
+<resultMap id="storeDayEntryDataResult" type="com.project.fastpickup.admin.stats.dto.StoreEntryDataDTO">
+    <result column="registDate" property="registDate"/>
+    <result column="storeName" property="storeName"/>
+    <result column="storeCount" property="storeCount"/>
+</resultMap>
+
+<!-- StatsMapper id = "memberMonthEntryData" -->
+<select id="memberMonthEntryData" resultMap="memberEntryDataResult">
+  SELECT
+  DATE_FORMAT(joinDate, '%Y-%m') AS registMonth,
+  COUNT(*) AS signUpCount
+  FROM
+  tbl_member
+  GROUP BY
+  registMonth
+  ORDER BY
+  registMonth
+</select>
+<resultMap id="memberEntryDataResult" type="com.project.fastpickup.admin.stats.dto.MemberEntryDataDTO">
+    <result column="registMonth" property="registMonth"/>
+    <result column="signUpCount" property="signUpCount"/>
+</resultMap>
+
+<!-- StatsMapper id = "memberDayEntryData" -->
+<select id="memberDayEntryData" resultMap="memberDayEntryDataResult">
+  SELECT
+  DATE_FORMAT(joinDate, '%Y-%m-%d') AS registDate,
+  COUNT(*) AS signUpCount
+  FROM
+  tbl_member
+  GROUP BY
+  registDate
+  ORDER BY
+  registDate;
+</select>
+<resultMap id="memberDayEntryDataResult" type="com.project.fastpickup.admin.stats.dto.MemberEntryDataDTO">
+    <result column="registDate" property="registDate"/>
+    <result column="signUpCount" property="signUpCount"/>
+</resultMap>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.project.fastpickup.admin.stats.dto;
 
+import java.time.LocalDate;
+
 /*
  * Date   : 2023.07.31
  * Author : 권성준
@@ -11,18 +13,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreEntryDataDTO {
-    private Long sno;
-    private String storeName;
+public class MemberEntryDataDTO {
     private String registMonth;
-    private Long storeCount;
+    private Long signUpCount;
     private String registDate;
 }

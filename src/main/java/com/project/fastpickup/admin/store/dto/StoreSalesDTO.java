@@ -1,7 +1,12 @@
 package com.project.fastpickup.admin.store.dto;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
+
+/*
+ * Date   : 2023.07.27
+ * Author : 권성준
+ * E-mail : thistrik@naver.com
+ */
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
