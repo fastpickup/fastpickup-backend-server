@@ -39,6 +39,17 @@ create table persistent_logins (
 )
 ;
 
+##좋아요 테이블 생성
+CREATE TABLE tbl_like (
+    pno BIGINT NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    createDate TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (pno, email),
+    FOREIGN KEY (pno) REFERENCES tbl_product(pno) ON DELETE CASCADE,
+    FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE CASCADE
+)
+;
+
 ##상품 테이블 생성
 create table tbl_product (
 	pno bigint auto_increment primary key,
@@ -138,6 +149,35 @@ create table tbl_order_history (
 ;
 drop table tbl_order_history;
 
+## 리뷰 테이블 생성
+create table tbl_review (
+   rno bigint auto_increment primary key,
+   reviewContent varchar(1000) not null,
+   reviewDate timestamp default now(),
+   reviewUpdateDate timestamp default now(),
+   gno int not null,
+   email varchar(100) not null,
+   sno bigint not null,
+   ono bigint not null,
+   isDeleted tinyint defalut 0 not null,
+   FOREIGN KEY (sno) REFERENCES tbl_store(sno) ON DELETE cascade,
+   FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE cascade,
+   FOREIGN KEY (ono) REFERENCES tbl_order(ono) ON DELETE CASCADE
+)
+;
+alter table tbl_review add `isDeleted` tinyint default 0 not null after `ono`;
+
+## 리뷰 이미지 테이블 생성
+create table tbl_review_img(
+   uuid varchar(500) primary key,
+   fileName varchar(500) not null,
+   ord int not null default 0,
+   rno bigint not null,
+   FOREIGN KEY (rno) REFERENCES tbl_review(rno) ON DELETE cascade
+)
+;
+
+
 ##회원
 alter table tbl_member add `joinDate` timestamp default now() after `store`;
 
@@ -223,6 +263,14 @@ select * from tbl_qna_reply;
 
 ##가맹점
 select * from tbl_store;
+
+update tbl_store
+set
+	storeNumber = '332-11-88752'
+where sno = 2
+;
+
+alter table tbl_store add `storePhone` varchar(20) not null after `storeAddress`;
 ##/가맹점
 
 ##주문
@@ -246,4 +294,7 @@ AND o.registDate >= '2023-07-19' AND o.registDate <= '2023-07-31' )
  ORDER BY o.ono DESC, h.orderHistory DESC LIMIT 0, 10
 ;
 
+##좋아요
+select * from tbl_like;
+##/좋아요
 

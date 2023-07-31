@@ -128,6 +128,5 @@ public class ProductController {
 
     return "admin/product/read/" + productDTO.getPno();
   }
-
   // /Update Page
 }
