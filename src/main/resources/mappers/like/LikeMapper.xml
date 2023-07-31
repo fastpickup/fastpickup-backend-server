@@ -7,20 +7,30 @@
 <mapper namespace="com.project.fastpickup.admin.like.mappers.LikeMapper">
 
 <!-- LikeMapper id = "createLike" -->
-<insert id="createLike">
+<insert id="createLike" parameterType="com.project.fastpickup.admin.like.dto.LikeCreateDTO">
     INSERT INTO tbl_like
     (pno, email)
     VALUES(#{pno} , #{email})
 </insert>
 
 <!-- LikeMapper id = "deleteLike" -->
-<delete id="deleteLike" parameterType="">
+<delete id="deleteLike" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
     DELET FROM tbl_like
-    WHERE pno = #{pno} , email = #{email}
+    WHERE pno = #{pno} AND email = #{email}
 </delete>
 
 <!-- LikeMapper id = countLikes"" -->
-
+<select id="countLikes" parameterType="long">
+    SELECT COUNT(*)
+    FROM tbl_like
+    WHERE pno = #{pno}
+<select>
 
 <!-- LikeMapper id = "checkLikeByMemberAndPost" -->
+<select id="checkLikeByMemberAndPost" parameterType="com.project.fastpickup.admin.like.dto.LikeDTO">
+    SELECT * FROM 
+    tbl_like
+    WHERE pno = #{pno} , AND email = #{email}
+</select>
+
 </mapper>
