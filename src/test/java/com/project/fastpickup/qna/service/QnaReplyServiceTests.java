@@ -43,7 +43,7 @@ public class QnaReplyServiceTests {
 
         // 문의 답글 수정
         qnaReplyUpdateDTO = QnaReplyUpdateDTO.builder()
-                .rno(4L)
+                .rno(8L)
                 .qno(4L)
                 .reply(TEST_QNA_REPIY2)
                 .build();
@@ -74,7 +74,7 @@ public class QnaReplyServiceTests {
         // WHEN
         QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(4L);
         // THEN
-        Assertions.assertEquals(replyReadDTO.getRno(), 4L);
+        Assertions.assertNotNull(replyReadDTO, "Qna Reply Read is Null");
         log.info("=== End Read Qna Reply Test Service ===");
     }
 
@@ -100,7 +100,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Service ===");
         // WHEN
-        int result = qnaReplyService.deleteQnaReply(4L);
+        int result = qnaReplyService.deleteQnaReply(8L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Reply Test Service ===");

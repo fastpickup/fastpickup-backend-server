@@ -16,7 +16,7 @@ public interface QnaReplyService {
     int createQnaReply(QnaReplyRegistDTO qnaReplyRegistDTO);
 
     // read
-    QnaReplyReadDTO readQnaReply(Long rno);
+    QnaReplyReadDTO readQnaReply(Long qno);
 
     // Update
     int updateQnaReply(QnaReplyUpdateDTO qnaReplyUpdateDTO);

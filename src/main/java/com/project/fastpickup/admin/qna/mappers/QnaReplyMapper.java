@@ -1,7 +1,10 @@
 package com.project.fastpickup.admin.qna.mappers;
 
 import com.project.fastpickup.admin.qna.dto.reply.*;
+import com.project.fastpickup.admin.util.PageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface QnaReplyMapper {
@@ -10,7 +13,7 @@ public interface QnaReplyMapper {
     int createQnaReply(QnaReplyRegistDTO qnaReplyRegistDTO);
 
     // read
-    QnaReplyReadDTO readQnaReply(Long rno);
+    QnaReplyReadDTO readQnaReply(Long qno);
 
     // Update
     int updateQnaReply(QnaReplyUpdateDTO qnaReplyUpdateDTO);

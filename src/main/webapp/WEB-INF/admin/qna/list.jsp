@@ -44,6 +44,7 @@
 					<th scope="col">문의 제목</th>
 					<th scope="col">문의 등록일자</th>
 					<th scope="col">문의자</th>
+					<th scope="col">답변 상태</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -58,7 +59,9 @@
 				</tbody>
 			</table>
 		</div>
-<%--		<a href="/admin/qna/create" class="btn btn-primary text-white">QnA Regist</a>--%>
+		<div class="button_wrap">
+		<a href="/admin/qna/create" class="btn btn-dark text-white">문의 등록</a>
+		</div>
 	</div>
 
 	<!-- Paging Start -->
