@@ -59,7 +59,7 @@
 				<c:forEach items="${listStore.list}" var="store" varStatus="status">
 					<tr>
 						<td>${store.sno}</td>
-						<td><a href="/admin/store/read/${store.sno}">${store.storeName}</a></td>
+						<td><a href="/admin/store/read2/${store.sno}">${store.storeName}</a></td>
 						<td>${store.storeNumber}</td>
 						<td>${store.storeAddress}</td>
 						<td>${store.email}</td>

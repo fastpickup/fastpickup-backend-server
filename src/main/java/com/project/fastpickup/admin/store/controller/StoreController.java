@@ -1,5 +1,7 @@
 package com.project.fastpickup.admin.store.controller;
 
+import java.util.List;
+
 /*
  * Date   : 2023.07.27
  * Author : 권성준
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
+import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -67,13 +70,17 @@ public class StoreController {
     }
 
     // GET : Read Store
-    @GetMapping("read/{sno}")
+    @GetMapping("read2/{sno}")
     @PreAuthorize("hasAnyRole('USER')")
     public String getReadStore(@PathVariable("sno") Long sno, Model model) {
         log.info("GET | Admin Store Read");
         StoreDTO listStore = storeService.readStore(sno);
+        List<StoreSalesDTO> salesDay = storeService.salesDate(sno);
+        List<StoreSalesDTO> salesMonth = storeService.salesMonth(sno);
         model.addAttribute("listStore", listStore);
-        return "admin/store/read";
+        model.addAttribute("salesDay", salesDay);
+        model.addAttribute("salesMonth", salesMonth);
+        return "admin/store/read2";
     }
 
     // GET : Update Store

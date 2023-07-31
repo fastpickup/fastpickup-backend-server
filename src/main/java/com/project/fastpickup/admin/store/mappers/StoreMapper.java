@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
+import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 
@@ -37,4 +38,10 @@ public interface StoreMapper {
 
     // Total Store
     int total(PageRequestDTO pageRequestDTO);
+
+    // Sales Date
+    List<StoreSalesDTO> salesDate(Long sno);
+
+    // Sales Month 
+    List<StoreSalesDTO> salesMonth(Long sno);
 }

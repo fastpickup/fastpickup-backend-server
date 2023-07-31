@@ -9,12 +9,12 @@ package com.project.fastpickup.admin.store.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
+import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.mappers.StoreMapper;
 import com.project.fastpickup.admin.store.service.StoreService;
@@ -62,7 +62,7 @@ public class StoreServiceImpl implements StoreService {
         return storeMapper.updateStore(storeUpdateDTO);
     }
 
-    // Delete Store ServiceImpl 
+    // Delete Store ServiceImpl
     @Override
     @Transactional
     public int deleteStore(Long sno) {
@@ -82,5 +82,21 @@ public class StoreServiceImpl implements StoreService {
                 .total(total)
                 .pageRequestDTO(pageRequestDTO)
                 .build();
+    }
+
+    // Sales Date ServiceImpl
+    @Override
+    @Transactional(readOnly = true)
+    public List<StoreSalesDTO> salesDate(Long sno) {
+        log.info("Is Running Sales Date ServiceImpl");
+        return storeMapper.salesDate(sno);
+    }
+
+    // Sales Month ServiceImpl
+    @Override
+    @Transactional(readOnly = true)
+    public List<StoreSalesDTO> salesMonth(Long sno) {
+        log.info("Is Running Sales Month ServiceImpl");
+        return storeMapper.salesMonth(sno);
     }
 }
