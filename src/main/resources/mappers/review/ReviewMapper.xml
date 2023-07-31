@@ -5,4 +5,73 @@
 
 <!-- ReviewMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.review.mappers.ReviewMapper">
+  
+    <!-- 댓글 -->
+    <insert id="registReview">
+
+        insert into tbl_review(sno, email, reviewContent, ono) values(#{sno}, #{email}, #{reviewContent}, #{ono})
+
+        <selectKey resultType="long" keyProperty="rno" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+    </insert>
+
+    <!-- 순수 댓글은 gno = rno -->
+    <update id="updateGno">
+        update tbl_review set gno = #{rno} where rno = #{rno}
+    </update>
+    <!-- 댓글 -->
+
+
+    <!-- 답글 -->
+    <insert id ="registChildReview">
+        insert into tbl_review(sno, email, reviewContent, ono, gno) values(#{sno}, #{email}, #{reviewContent},#{ono}, #{gno})
+        
+        <selectKey resultType="long" keyProperty="rno" order="AFTER">
+                SELECT LAST_INSERT_ID()
+         </selectKey>
+    </insert>
+    <!-- 답글 -->
+
+
+    <!-- 
+        리뷰 List
+        리뷰 하나 당 여러개의 이미지
+        => ResultMap사용
+    -->
+    <resultMap id="reviewMap" type="com.project.fastpickup.admin.review.dto.ReviewListDTO">
+        <id property="rno" column="rno"/>
+        <result property="email" column="email"/>
+        <result property="reviewContent" column="reviewContent"/>
+        <result property="reviewDate" column="reviewDate"/>
+        <result property="reviewUpdateDate" column="reviewUpdateDate"/>
+        <result property="gno" column="gno"/>
+        <result property="isDeleted" column="isDeleted"/>
+        <collection property="fileNames" resultMap="reviewFileMap"/>
+    </resultMap>
+
+    <resultMap type="string" id="reviewFileMap">
+        <result column="fileNames"/>
+    </resultMap>
+
+    <select id="getReviewList" resultMap="reviewMap">
+    
+        select 
+            r.rno, r.email, r.reviewContent, r.reviewDate,
+            r.reviewUpdateDate, r.gno, r.isDeleted, concat(i.uuid,'_',i.fileName) as fileNames
+        from tbl_review r left outer join tbl_review_img i on r.rno = i.rno
+        where r.sno = #{sno} and r.isDeleted = false
+        order by r.rno desc
+        limit #{pr.skip}, #{pr.size}
+
+    </select>
+    <!-- 리뷰 List END -->
+
+    <select id="reviewListCount" resultType="long">
+        select count(*) from 
+        (select rno from tbl_review
+        where rno > 0 limit #{countEnd}) review
+    </select>
+
 </mapper>
