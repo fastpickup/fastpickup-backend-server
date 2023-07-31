@@ -359,6 +359,7 @@ li {
 .container_wrap .table thead tr th {text-align:center;color:#000;font-weight:500;}
 .container_wrap .table tbody tr td {vertical-align: middle;text-align: center;color:#000;}
 .container_wrap .table tbody tr td a {color:#000;}
+.container_wrap .table tbody tr.product_list_active td {background: #f6f6f6;}
 
 .container_wrap .search_wrap {padding:20px;border-radius: 5px;}
 .container_wrap .search_wrap .search_box {display: flex;justify-content: space-between;height:38px;}
@@ -395,8 +396,15 @@ li {
 .container_wrap .order_wrap .order_store2 dl dd ul li span {width: 150px;}
 
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dt {width: 500px;margin-right: 30px;}
-.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .view_image {margin-bottom: 20px;}
+.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .view_image {display: flex;align-items: center;height: 350px;overflow: hidden;margin-bottom: 20px;}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .image_list {display: flex;flex-wrap: wrap;gap: 10px;padding: 0 30px;box-sizing: border-box;}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .image_list li {display: flex;height: 80px;align-items: center;background: #eee;}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dd {width: calc(100% - 560px);}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dd ul li h4 {display: inline-block;}
+
+.uploadWrap .uploadUL {display: flex;margin: 0;padding: 0;}
+.uploadWrap .uploadUL li {position: relative;padding: 0 15px;box-sizing: border-box;}
+.uploadWrap .uploadUL li:first-child {padding-left: 0;}
+.uploadWrap .uploadUL li a {display: block; height: 80px;text-align: center;}
+.uploadWrap .uploadUL li p {margin-top: 5px;}
+.uploadWrap .uploadUL li button {position: absolute;right: 12px;top: -15px;padding: 1px 4px;}

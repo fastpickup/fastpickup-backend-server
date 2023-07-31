@@ -32,4 +32,5 @@ public class ProductListDTO {
   private long cno;                     //카테고리번호
   private String categoryName;          //카테고리명
   private String fileName;              //파일명
+  private int recStatus;                //추천상품 여부
 }

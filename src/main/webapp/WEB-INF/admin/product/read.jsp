@@ -25,8 +25,8 @@
 	<div class="order_title">
 		<h3>상품 상세</h3>
 	</div>
-<%--	${productStore}--%>
-	${productRead}
+	<%--{productStore}
+	${productRead}--%>
 	<div class="order_store">
 		<h5>${productStore.storeName} <span style="font-size:1rem;font-weight:400;">가맹점 번호: [${productStore.sno}]</span></h5>
 		<ul>
@@ -113,10 +113,10 @@
     //이미지명 추출
     const src = e.target.getAttribute("src")
 	  const imageName = src.split("/s_")
-	  console.log(${imageName[1]})
+	  //console.log(imageName[1])
 
-	  viewImage.setAttribute("src", `${imageName[0]}`)
-
+	  //이미지 경로 수정
+	  viewImage.setAttribute("src", "http://192.168.0.64/" + imageName[1])
   })
 
 </script>

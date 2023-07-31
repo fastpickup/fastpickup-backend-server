@@ -125,8 +125,8 @@
 <%--	</table>--%>
 <%--</div>--%>
 <div style="display: flex;">
-	<div id="curve_chart" style="width: 900px; height: 500px"></div>
-	<div id="column_chart_month" style="width: 900px; height: 500px;"></div>
+	<div id="curve_chart" style="width: 50%; height: 500px"></div>
+	<div id="column_chart_month" style="width: 50%; height: 500px;"></div>
 </div>
 <div class="col-12">
 <%--	${listProduct}--%>
@@ -149,11 +149,11 @@
 				</thead>
 				<tbody>
 				<c:forEach items="${listProduct.list}" var="product" varStatus="status">
-					<tr>
+					<tr<c:if test="${product.recStatus == 1}"> class="product_list_active"</c:if>>
 						<td><a href="/admin/product/read/${product.pno}">${product.pno}</a></td>
 						<td>
 							<a href="/admin/product/read/${product.pno}">
-								<img src="192.168.0.64/s_${product.fileName}">
+								<img src="http://192.168.0.64/s_${product.fileName}">
 									${product.productName}
 							</a>
 						</td>
@@ -165,14 +165,16 @@
 						</td>
 						<td>${product.viewCount}</td>
 						<td>${product.likeCount}</td>
-						<td>${product.isRecommend}</td>
+						<td>
+							<c:if test="${product.recStatus == 1}">추천</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
 		</div>
 		<div class="button_wrap">
-			<a href="/admin/product/create" class="btn btn-dark">상품 등록</a>
+			<a href="/admin/product/create/${listStore.sno}" class="btn btn-dark">상품 등록</a>
 		</div>
 	</div>
 	<!-- Paging Start -->

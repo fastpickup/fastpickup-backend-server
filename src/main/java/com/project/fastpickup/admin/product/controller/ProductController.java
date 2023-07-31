@@ -52,10 +52,14 @@ public class ProductController {
 
   //Create Page
   //Get
-  @GetMapping("create")
+  @GetMapping("create/{sno}")
   @PreAuthorize("hasAnyRole('USER')")
-  public void getCreate(){
+  public String getCreate(@PathVariable("sno") Long sno, Model model){
     log.info("GET | Product Create =================");
+
+    StoreDTO storeDTO = storeService.readStore(sno);
+    model.addAttribute("createSno", storeDTO);
+    return "admin/product/create";
   }
 
   //Post

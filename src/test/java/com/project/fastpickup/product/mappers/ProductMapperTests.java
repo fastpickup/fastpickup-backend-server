@@ -67,7 +67,7 @@ public class ProductMapperTests {
       .productName(TEST_PRODUCT_NAME)
       .productContent(TEST_PRODUCT_CONTENT)
       .productPrice(TEST_PRODUCT_PRICE)
-      .isRecommend(TEST_PRODUCT_RECOMMEND)
+      //.isRecommend(TEST_PRODUCT_RECOMMEND)
       .sno(TEST_PRODUCT_STORE)
       .fileNames(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
       .build();
