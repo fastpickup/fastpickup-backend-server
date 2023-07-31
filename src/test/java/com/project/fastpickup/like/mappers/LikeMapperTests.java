@@ -20,7 +20,7 @@ public class LikeMapperTests {
     private LikeMapper likeMapper;
 
     private static final String TEST_EMAIL = "thistrik@naver.com";
-    private static final Long TEST_PROUDCT_NUMBEr = 22L; 
+    private static final Long TEST_PROUDCT_NUMBER = 22L; 
 
     // BeforeEach 사용을 위한 DTO 정의 
     private LikeDTO likeDTO;
@@ -31,9 +31,12 @@ public class LikeMapperTests {
     public void setUp() {
         likeCreateDTO = LikeCreateDTO.builder()
         .email(TEST_EMAIL)
-        .pno(TEST_PROUDCT_NUMBEr)
+        .pno(TEST_PROUDCT_NUMBER)
         .build();
 
-        likeDTO = LikeDTO.builder().build();
+        likeDTO = LikeDTO.builder()
+        .email(TEST_EMAIL)
+        .pno(TEST_PROUDCT_NUMBER)
+        .build();
     }
 }
