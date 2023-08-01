@@ -211,17 +211,22 @@ delete from tbl_product where pno = 12;
 
 ##등록
 insert into tbl_product
-    (productName, productContent, productPrice, isRecommend)
-    values ('상품테스트', '상품테스트', 5000, 0)
+    (productName, productContent, productPrice, isRecommend, sno)
+    values ('허니콤보', '허니콤보, 순살, 오리지날', 20000, 0, 1)
+;
+insert into tbl_product_category
+	(categoryName, pno)
+	values ('치킨', 38)
 ;
 
 ##리스트
 select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
-           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.categoryName,
-           concat(tpi.uuid,'_',tpi.fileName) as fileName
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.sno,
+           prdt.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileName
     from (
             select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
-                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, tpc.categoryName
+                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, ts.sno,
+                   tpc.categoryName
             from tbl_product tp
               left outer join tbl_store ts on ts.sno = tp.sno
               left outer join tbl_product_category tpc on tpc.pno = tp.pno
@@ -232,6 +237,28 @@ select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.view
     left outer join tbl_product_image tpi
     on tpi.pno = prdt.pno
     and (tpi.ord = 0 or tpi.ord is null)
+    order by prdt.pno desc
+;
+
+##가맹점 상품 리스트
+select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.viewCount,
+           prdt.likeCount, prdt.isRecommend, prdt.isDeletedProduct, prdt.storeName, prdt.sno,
+           prdt.categoryName, concat(tpi.uuid,'_',tpi.fileName) as fileName
+    from (
+            select tp.pno, tp.productName, tp.productPrice, tp.registDate, tp.viewCount,
+                   tp.likeCount, tp.isRecommend, tp.isDeletedProduct, ts.storeName, ts.sno,
+                   tpc.categoryName
+            from tbl_product tp
+              left outer join tbl_store ts on ts.sno = tp.sno
+              left outer join tbl_product_category tpc on tpc.pno = tp.pno
+            where tp.pno > 0 and tp.isDeletedProduct = true
+            order by tp.pno desc
+            limit 0, 10
+        ) as prdt
+    left outer join tbl_product_image tpi
+    on tpi.pno = prdt.pno
+    and (tpi.ord = 0 or tpi.ord is null)
+    where prdt.sno = 1
     order by prdt.pno desc
 ;
 
@@ -259,6 +286,7 @@ where tp.pno = 6
 ##문의
 select * from tbl_qna;
 select * from tbl_qna_reply;
+delete from tbl_qna_reply;
 ##/문의
 
 ##가맹점
@@ -270,7 +298,7 @@ set
 where sno = 2
 ;
 
-alter table tbl_store add `storePhone` varchar(20) not null after `storeAddress`;
+alter table tbl_store add `registDate` timestamp default now() after `storePhone`;
 ##/가맹점
 
 ##주문
