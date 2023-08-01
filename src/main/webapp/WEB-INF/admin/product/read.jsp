@@ -17,6 +17,20 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon">
 	<title>FastPickup</title>
+	<style>
+	.actionLike {
+      color: gray;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .actionLike.liked {
+      color: red;
+    }
+	</style>
 </head>
 
 <body>
@@ -63,7 +77,14 @@
 						<fmt:parseDate value="${productRead.registDate}" pattern="yyyy-MM-dd'T'HH:mm" var="productUpdateDate" type="both" />
 						<fmt:formatDate value="${productUpdateDate}" pattern="yyyy-MM-dd HH:mm" />
 					</li>
-					<li><span>좋아요</span> ${productRead.likeCount}</li>
+					 <!-- Like Button Start -->
+					 <button class="actionLike"><i class="fas fa-heart"></i></button>
+					 <!-- Like Count Start -->
+					 <span class="likeCount" style="font-size: larger;"></span>
+					 <!-- Axios -->
+					 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+					 <!-- Like JavaScript Code -->
+					 <script src="/js/likecreatebykwon.js"></script>
 					<li>
 						<span>추천상품 여부</span>
 						<c:choose>
