@@ -57,7 +57,7 @@ public class StoreController {
 
     // GET : List Store
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getListStore(PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Store List");
         PageResponseDTO<StoreListDTO> listStore = storeService.listStore(pageRequestDTO);
@@ -67,7 +67,7 @@ public class StoreController {
 
     // GET : Create Store
     @GetMapping("create")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getCreateStore() {
         log.info("GET | Admin Store Create");
         return "admin/store/create";
@@ -75,7 +75,7 @@ public class StoreController {
 
     // GET : Read Store
     @GetMapping("read/{sno}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Store Read");
         StoreDTO listStore = storeService.readStore(sno);
@@ -91,7 +91,7 @@ public class StoreController {
 
     // GET : Update Store
     @GetMapping("update/{sno}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdateStore(@PathVariable("sno") Long sno, Model model) {
         log.info("GET | Admin Store Update");
         StoreDTO listStore = storeService.readStore(sno);
@@ -101,7 +101,7 @@ public class StoreController {
 
     // POST : Update Store
     @PostMapping("update")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postUpdateStore(@Valid StoreUpdateDTO storeUpdateDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Update");
         int updateStore = storeService.updateStore(storeUpdateDTO);
@@ -111,7 +111,7 @@ public class StoreController {
 
     // POST : Create Store
     @PostMapping("create")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postCreateStore(@Valid StoreCreateDTO storeCreateDTO, Authentication authentication, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Create");
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -124,7 +124,7 @@ public class StoreController {
 
     // POST : Delete Store
     @PostMapping("delete/{sno}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDeleteStore(@PathVariable("sno") Long sno, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Delete");
         int deleteStore = storeService.deleteStore(sno);

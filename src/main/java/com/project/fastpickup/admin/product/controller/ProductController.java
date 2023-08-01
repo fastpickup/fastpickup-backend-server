@@ -44,7 +44,7 @@ public class ProductController {
 
   //List Page
   @GetMapping("list")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public void getList(
     PageRequestDTO pageRequestDTO, Model model
   ){
@@ -57,7 +57,7 @@ public class ProductController {
   //Create Page
   //Get
   @GetMapping("create/{sno}")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public String getCreate(@PathVariable("sno") Long sno, Model model){
     log.info("GET | Product Create =================");
 
@@ -68,7 +68,7 @@ public class ProductController {
 
   //Post
   @PostMapping("create")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public String postCreate(
     ProductRegistDTO productRegistDTO, ProductCategoryDTO productCategoryDTO, RedirectAttributes rttr
   ){
@@ -84,7 +84,7 @@ public class ProductController {
 
   //Read Page
   @GetMapping("read/{pno}")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
   public String getRead(
     PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, HttpServletRequest request, HttpServletResponse response, Model model
   ){
@@ -107,7 +107,7 @@ public class ProductController {
 
   //Delete Page
   @PostMapping("delete/{pno}")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public String postDelete(
     @PathVariable("pno") Long pno, RedirectAttributes rttr
   ){
@@ -123,7 +123,7 @@ public class ProductController {
 
   //Update Page
   @GetMapping("update/{pno}")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public String getUpdate(
     PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, Model model
   ){
@@ -138,7 +138,7 @@ public class ProductController {
   }
 
   @PostMapping("update/{pno}")
-  @PreAuthorize("hasAnyRole('USER')")
+  @PreAuthorize("hasAnyRole('ADMIN')")
   public String postUpdate(
     ProductDTO productDTO, ProductCategoryDTO productCategoryDTO, RedirectAttributes rttr
   ){

@@ -43,7 +43,7 @@ public class StatsController {
     }
 
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getStatsEntryData(Model model) {
         log.info("GET | Admin Store Entry Data");
         List<StoreEntryDataDTO> listStoreEntry = statsService.storeMonthEntryData();

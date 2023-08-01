@@ -46,7 +46,7 @@ public class OrderController {
 
     // GET : Create Order
     @GetMapping("create")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getCreateOrder() {
         log.info("GET | Admin Create Order");
         return "admin/order/create";
@@ -54,7 +54,7 @@ public class OrderController {
 
     // GET : List Order
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getListOrder(PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin List Order");
         PageResponseDTO<OrderAndHistoryListDTO> listOrder = orderService.listOrderAndHistory(pageRequestDTO);
@@ -64,7 +64,7 @@ public class OrderController {
 
     // GET : Read Order
     @GetMapping("read/{ono}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadOrder(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Read Order");
         OrderDTO listOrder = orderService.readOrder(ono);
@@ -74,7 +74,7 @@ public class OrderController {
 
     // GET : Update Order
     @GetMapping("update/{ono}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateOrder(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Update Order");
         OrderDTO listOrder = orderService.readOrder(ono);
@@ -84,7 +84,7 @@ public class OrderController {
 
     // GET : Read OrderHistory
     @GetMapping("readhistory/{ono}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadOrderHistory(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Read Order History");
         OrderHistoryDTO listOrder = orderService.readHistory(ono);
@@ -94,7 +94,7 @@ public class OrderController {
 
     // GET : Update Order History
     @GetMapping("updatehistory/{ono}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateOrderHistory(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Update Order History");
         OrderHistoryDTO listOrder = orderService.readHistory(ono);
@@ -104,7 +104,7 @@ public class OrderController {
 
     // POST : Update Order History
     @PostMapping("updatehistory")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String postUpdateOrderHistory(OrderHistoryUpdateDTO orderHistoryUpdateDTO,
             RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Update Order History");

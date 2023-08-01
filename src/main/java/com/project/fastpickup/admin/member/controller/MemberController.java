@@ -47,7 +47,7 @@ public class MemberController {
 
     // GET : Member List
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getListMember(PageRequestDTO pageRequestDTO, Authentication authentication, Model model) {
         log.info("GET | Admin Member List");
         PageResponseDTO<MemberConvertDTO> listMember = memberService.listMember(pageRequestDTO);
@@ -60,7 +60,7 @@ public class MemberController {
 
     // GET : Read Member
     @GetMapping("read/{email}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN', 'STORE')")
     public String getReadMember(@PathVariable("email") String email, Model model) {
         log.info("GET | Admin Member Read");
         MemberConvertDTO listMember = memberService.readMember(email);
@@ -70,7 +70,7 @@ public class MemberController {
 
     // GET : Update Member
     @GetMapping("update/{email}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdateMember(@PathVariable("email") String email, Model model) {
         log.info("GET | Admin Member Update");
         MemberConvertDTO listMember = memberService.readMember(email);
@@ -96,7 +96,7 @@ public class MemberController {
 
     // POST : Update Member
     @PostMapping("update")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postUpdateMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Update");
         int updateMember = memberService.updateMember(memberConvertDTO);
@@ -127,6 +127,7 @@ public class MemberController {
 
     // POST : Delete Member
     @PostMapping("delete/{email}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDeleteMember(@PathVariable("email") String email, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Delete");
         int deletedMember = memberService.deleteMember(email);
