@@ -49,7 +49,7 @@ public class QnaMapperTests {
 
         // 문의 수정
         qnaUpdateDTO = QnaUpdateDTO.builder()
-                .qno(4L)
+                .qno(21L)
                 .qnaTitle(TEST_QNA_TITLE2)
                 .qnaContent(TEST_QNA_CONTENT2)
                 .build();
@@ -90,7 +90,7 @@ public class QnaMapperTests {
 
     // createQna test
     @Test
-    //@Transactional
+    @Transactional
     @DisplayName("문의 등록")
     public void createQnaTestMapper() {
         // GIVEN
@@ -110,9 +110,9 @@ public class QnaMapperTests {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
         // WHEN
-        QnaDTO readQna = qnaMapper.readQna(4L);
+        QnaDTO readQna = qnaMapper.readQna(21L);
         // THEN
-        Assertions.assertEquals(readQna.getQno(), 4L);
+        Assertions.assertEquals(readQna.getQno(), 21L);
         log.info("=== End Read Qna Test Mapper ===");
     }
 
@@ -139,7 +139,7 @@ public class QnaMapperTests {
         // GIVEN
         log.info("=== Start Delete Qna Test Mapper ===");
         // WHEN
-        int result = qnaMapper.deleteQna(4L);
+        int result = qnaMapper.deleteQna(21L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Test Mapper ===");
