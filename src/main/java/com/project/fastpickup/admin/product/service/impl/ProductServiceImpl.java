@@ -166,6 +166,6 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public int viewCount(Long pno) {
-    return 0;
+    return productMapper.viewCount(pno);
   }
 }

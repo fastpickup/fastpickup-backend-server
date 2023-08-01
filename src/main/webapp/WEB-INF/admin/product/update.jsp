@@ -67,7 +67,7 @@
 	</ul>
 </div>
 <div class="button_wrap p-4">
-	<a href="/admin/product/read/${productRead.pno}" class="btn btn-outline-dark">목록으로</a>
+	<a href="/admin/product/read/${productRead.pno}" class="btn btn-outline-dark">상품 상세로</a>
 	<button type="button" class="btn btn-dark btnAdd">상품 수정</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

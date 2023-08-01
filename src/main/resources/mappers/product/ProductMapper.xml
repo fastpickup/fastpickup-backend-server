@@ -166,4 +166,12 @@
     where tp.pno = #{pno}
   </update>
 
+  <!-- Update Product Views ProductMapper id = "viewCount" -->
+  <update id="viewCount">
+    update tbl_product tp
+    set
+      tp.viewCount = tp.viewCount + 1
+    where tp.pno = #{pno}
+  </update>
+
 </mapper>

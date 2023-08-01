@@ -10,7 +10,6 @@ import com.project.fastpickup.admin.product.dto.ProductCategoryDTO;
 import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
-import com.project.fastpickup.admin.product.mappers.ProductMapper;
 import com.project.fastpickup.admin.product.service.ProductService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
@@ -166,7 +165,7 @@ public class ProductServiceTests {
     //GIVEN
     log.info("=== Start Update Product Test Service ===");
     //WHEN
-    int updateCount = productService.updateProduct(productDTO);
+    int updateCount = productService.updateProduct(productDTO, productCategoryDTO);
     //THEN
     ProductDTO dto = productService.selectOne(TEST_PNO);
     Assertions.assertEquals(1, updateCount, "Product Update Not Success");

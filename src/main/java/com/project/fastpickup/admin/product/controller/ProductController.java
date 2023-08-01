@@ -13,8 +13,11 @@ import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.product.service.ProductService;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.service.StoreService;
+import com.project.fastpickup.admin.util.ManegementCookie;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +34,7 @@ public class ProductController {
   //의존성 주입
   private final ProductService productService;
   private final StoreService storeService;
+  private final ManegementCookie manegementCookie;
 
   //페이지 체크
   @ModelAttribute("pageName")
@@ -82,12 +86,19 @@ public class ProductController {
   @GetMapping("read/{pno}")
   @PreAuthorize("hasAnyRole('USER')")
   public String getRead(
-    PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, Model model
+    PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, HttpServletRequest request, HttpServletResponse response, Model model
   ){
     log.info("GET | Product Read =================");
 
     ProductDTO productDTO = productService.selectOne(pno);
     StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
+
+    //조회수 체크
+    if(manegementCookie.createCookie(request, response, pno)){
+      productService.viewCount(pno);
+      log.info("Cookie Check");
+    }
+
     
     model.addAttribute("productRead", productDTO);
     model.addAttribute("productStore", storeDTO);

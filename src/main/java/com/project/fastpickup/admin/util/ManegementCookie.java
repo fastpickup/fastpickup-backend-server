@@ -16,8 +16,8 @@ public class ManegementCookie {
   private static final String COOKIE_NAME = "read_board_";
 
   // Board 조회수를 위한 쿠키 생성
-  public boolean createCookie(HttpServletRequest request, HttpServletResponse response, Integer bno) {
-    String cookieName = COOKIE_NAME + bno;
+  public boolean createCookie(HttpServletRequest request, HttpServletResponse response, Long pno) {
+    String cookieName = COOKIE_NAME + pno;
 
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
