@@ -15,9 +15,16 @@ public interface QnaReplyMapper {
     // read
     QnaReplyReadDTO readQnaReply(Long qno);
 
+    // update read
+    QnaReplyReadDTO readQnaReplyRno(Long rno);
+
     // Update
     int updateQnaReply(QnaReplyUpdateDTO qnaReplyUpdateDTO);
 
     // Delete
     int deleteQnaReply(Long rno);
+
+    // reply count
+    int replyCount(Long qno);
+
 }

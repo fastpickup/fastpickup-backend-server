@@ -54,6 +54,7 @@
             <td><a href="/admin/qna/read/${qna.qno}">${qna.qnaTitle}</a></td>
 						<td>${qna.registDate}</td>
 						<td>${qna.email}</td>
+						<td></td>
 					</tr>
 				</c:forEach>
 				</tbody>

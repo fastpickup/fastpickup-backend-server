@@ -20,6 +20,13 @@
         where qno = #{qno}
     </select>
 
+    <!--  update read  -->
+    <select id="readQnaReplyRno" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyReadDTO">
+        select qno, rno, email, reply, replyDate
+        from tbl_qna_reply
+        where rno = #{rno}
+    </select>
+
     <!--  update  -->
     <update id="updateQnaReply" parameterType="com.project.fastpickup.admin.qna.dto.reply.QnaReplyUpdateDTO">
         update tbl_qna_reply
@@ -32,5 +39,11 @@
         delete from tbl_qna_reply
         where rno = #{rno}
     </delete>
+
+    <!-- reply count   -->
+    <select id="replyCount">
+        select count(rno) from tbl_qna_reply
+        where qno = #{qno}
+    </select>
 
 </mapper>

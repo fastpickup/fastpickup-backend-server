@@ -58,11 +58,13 @@ public class QnaReplyController {
     // GET
     @GetMapping("update/{rno}")
     @PreAuthorize("permitAll")
-    public String getUpdate(@PathVariable("rno") Long rno){
+    public String getUpdate(@PathVariable("rno") Long rno , Model model){
 
         log.info("GET | update");
 
-        qnaReplyService.readQnaReply(rno);
+        QnaReplyReadDTO read = qnaReplyService.readQnaReplyRno(rno);
+
+        model.addAttribute("readReply", read);
 
         return "admin/qna/replies/update";
 
