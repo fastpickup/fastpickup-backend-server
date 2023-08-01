@@ -359,6 +359,7 @@ li {
 .container_wrap .table thead tr th {text-align:center;color:#000;font-weight:500;}
 .container_wrap .table tbody tr td {vertical-align: middle;text-align: center;color:#000;}
 .container_wrap .table tbody tr td a {color:#000;}
+.container_wrap .table tbody tr td img {margin-right: 14px;}
 .container_wrap .table tbody tr.product_list_active td {background: #f6f6f6;}
 
 .container_wrap .search_wrap {padding:20px;border-radius: 5px;}

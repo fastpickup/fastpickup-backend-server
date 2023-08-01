@@ -40,7 +40,9 @@
 			<form onsubmit="return false;" action="/admin/member/delete" method="post">
 				<div class="button_wrap mt-4">
 					<a href="/admin/member/list" class="btn btn-outline-dark">목록으로</a>
+					<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 					<button type="submit" class="btn btn-primary btn-delete" onclick="confirmDelete(event)">회원 탈퇴</button>
+					</sec:authorize>
 					<a href="/admin/member/update/${listMember.email}" class="btn btn-dark">정보 수정</a>
 					<a href="/admin/member/logout" class="btn btn-dark">로그아웃</a>
 				</div>
@@ -86,12 +88,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
+  <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
   // '삭제' 버튼 클릭 시 모달 띄우기
   document.querySelector('.btn-delete').addEventListener('click', function (event) {
     event.preventDefault();
     // 모달 보이기
     $('.deleteModal').modal('show');
   });
+  </sec:authorize>
 
   // '확인' 버튼 클릭 시 폼 제출하기
   document.querySelector('.btnDeleteModal').addEventListener('click', function () {

@@ -70,7 +70,7 @@ public class MemberController {
 
     // GET : Update Member
     @GetMapping("update/{email}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateMember(@PathVariable("email") String email, Model model) {
         log.info("GET | Admin Member Update");
         MemberConvertDTO listMember = memberService.readMember(email);
@@ -96,7 +96,7 @@ public class MemberController {
 
     // POST : Update Member
     @PostMapping("update")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String postUpdateMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Update");
         int updateMember = memberService.updateMember(memberConvertDTO);

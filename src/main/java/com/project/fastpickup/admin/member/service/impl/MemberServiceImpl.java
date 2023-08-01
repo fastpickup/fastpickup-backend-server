@@ -56,7 +56,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public int joinStoreMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinStoreMember ServiceImpl");
-        String rolename = "USER";
+        String rolename = "STORE";
         String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
         memberConvertDTO.setMemberPw(encodedPassword);  
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);

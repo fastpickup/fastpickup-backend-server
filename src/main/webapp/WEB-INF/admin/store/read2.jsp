@@ -169,41 +169,20 @@
 <%--		<input type="hidden" name="page" value="${pageRequestDTO.page}">--%>
 <%--		<input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
 <%--	</form>--%>
-
-	<h4 class="my-3">상품 리뷰</h4>
-	<div class="bg-light rounded h-100">
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-				<tr>
-					<th scope="col">리뷰 번호</th>
-					<th scope="col">작성자</th>
-					<th scope="col">리뷰 제목</th>
-					<th scope="col">리뷰 일자</th>
-				</tr>
-				</thead>
-				<tbody>
-
-				</tbody>
-			</table>
-		</div>
-		<div class="button_wrap">
-			<a href="/admin/review/create/${listStore.sno}" class="btn btn-dark">리뷰 등록</a>
-		</div>
-	</div>
-
 </div>
 <%@ include file="../include/footer.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<%-- store product list javascript --%>
+<%--<script src="/js/storeproductlist.js"></script>--%>
 <script>
   const sno = ${listStore.sno}
   const storeProductPaging = document.querySelector(".storeProductPaging")
   const storeProductList = document.querySelector(".storeProductList")
-
-  //상품 리스트 가져오기
+  //const pagingForm = document.querySelector(".pagingForm")
+  //const pageInput = pagingForm.querySelector("input[name=page]")
   const getList = async(page = 1) => {
     const res = await axios.get("http://192.168.0.64:8080/admin/product/"+sno+"/list?page="+page)
     return res.data
@@ -212,12 +191,12 @@
   //상품 리스트 출력
   const productListDefault = (page) => {
     getList(page).then(arr => {
-      let productListStr = ""
-      let productPagingStr = ""
+			let productListStr = ""
+	    let productPagingStr = ""
       //Product List 출력
       for (let i = 0; i < arr.list.length; i++) {
-        const {pno, productName, productPrice, registDate, viewCount, likeCount, fileName, recStatus} = arr.list[i]
-        // console.log(pno)
+	      const {pno, productName, productPrice, registDate, viewCount, likeCount, fileName, recStatus} = arr.list[i]
+	      // console.log(pno)
         productListStr += '<tr';
         if (recStatus == 1) {
           productListStr += ' class="product_list_active"';
@@ -237,11 +216,11 @@
         productListStr += '</tr>';
         //console.log(productListStr)
       }//end for
-      // /Product List 출력
+	    // /Product List 출력
 
-      //Product List Paging 출력
+	    //Product List Paging 출력
       const {page, size, startNum, endNum, prevBtn, nextBtn, total} = arr
-      //console.log(arr)
+	    //console.log(arr)
 
       if (prevBtn) {
         productPagingStr += '<li><a href="' + (startNum - 1) + '" class="btn btn-group btn-prev">이전</a></li>';
@@ -256,7 +235,7 @@
       if (nextBtn) {
         productPagingStr += '<li><a href="' + (endNum + 1) + '" class="btn btn-group btn-next">다음</a></li>';
       }
-      //console.log(productPagingStr)
+			//console.log(productPagingStr)
       // /Product List Paging 출력
       storeProductList.innerHTML = productListStr
       storeProductPaging.innerHTML = productPagingStr
@@ -283,7 +262,7 @@
     const pageNum = target.getAttribute("href")
     //console.log(pageNum)
 
-    //paging 변경
+	  //paging 변경
     productListDefault(pageNum)
   })
   // '삭제' 버튼 클릭 시 모달 띄우기

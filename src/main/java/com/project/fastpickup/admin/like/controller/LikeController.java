@@ -40,7 +40,7 @@ public class LikeController {
 
     // Toggle Like
     @PostMapping("pno/toggle/{pno}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Integer>> toggleLikePno(@PathVariable("pno") Long pno,
             Authentication authentication) {
         log.info("RestController | Admin Toggle Like");
@@ -52,7 +52,7 @@ public class LikeController {
 
     // Count Like
     @GetMapping("pno/{pno}/count")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Long>> countLike(@PathVariable("pno") Long pno) {
         log.info("RestController | Admin Count Like");
         Long result = likeService.countLike(pno);
@@ -61,7 +61,7 @@ public class LikeController {
 
     // Check Like
     @GetMapping("pno/{pno}/check")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Boolean>> checkLike(@PathVariable("pno") Long pno,
             Authentication authentication) {
         log.info("RestController | Admin Check Like");
