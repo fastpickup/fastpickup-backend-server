@@ -1,6 +1,5 @@
 package com.project.fastpickup.qna.service;
 
-import com.project.fastpickup.admin.qna.dto.QnaDTO;
 import com.project.fastpickup.admin.qna.dto.QnaListDTO;
 import com.project.fastpickup.admin.qna.dto.QnaRegistDTO;
 import com.project.fastpickup.admin.qna.dto.QnaUpdateDTO;
@@ -15,8 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @SpringBootTest
 @Log4j2

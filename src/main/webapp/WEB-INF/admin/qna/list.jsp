@@ -54,7 +54,16 @@
             <td><a href="/admin/qna/read/${qna.qno}">${qna.qnaTitle}</a></td>
 						<td>${qna.registDate}</td>
 						<td>${qna.email}</td>
-						<td></td>
+						<td>
+							<c:choose>
+								<c:when test="${qna.replyStatus == 0}">
+									미답변
+								</c:when>
+								<c:otherwise>
+									답변완료
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

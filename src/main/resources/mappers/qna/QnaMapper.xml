@@ -8,8 +8,10 @@
 
     <!--  list  -->
     <select id="listQna" resultType="com.project.fastpickup.admin.qna.dto.QnaListDTO">
-        select * from tbl_qna
-        where qno > 0
+        select q.qno, q.qnaTitle, q.registDate, q.email, if(r.rno > 1, 1, 0) as replyStatus
+        from tbl_qna q
+        left outer join tbl_qna_reply r on q.qno = r.qno
+        where q.qno > 0
         <if test="keyword != null and type != null">
             <trim prefix="AND (" prefixOverrides="OR" suffix=")">
                 <foreach collection="types" item="type" separator=" OR ">
@@ -22,7 +24,7 @@
                 </foreach>
             </trim>
         </if>
-        order by qno desc
+        order by q.qno desc
         limit #{skip}, #{size}
     </select>
 

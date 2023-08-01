@@ -15,23 +15,23 @@
 <h3>문의글 수정</h3>
 <form action="/admin/qna/update" method="post">
     <div class="form_content">
-        <div class="bg-light rounded h-100 p-4">
+        <div class="bg-light rounded h-100 px-4 py-2">
             <label for="qno" class="form-label">문의 번호</label>
-            <input type="text" name="qno" class="form-control-plaintext" id="qno" value="${listQna.qno}" readonly>
+            <input type="text" name="qno" class="form-control" id="qno" value="${listQna.qno}" readonly>
         </div>
-        <div class="bg-light rounded h-100 p-4">
+        <div class="bg-light rounded h-100 px-4 py-2">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control-plaintext" id="email" value="${listQna.email}" readonly>
+            <input type="email" name="email" class="form-control" id="email" value="${listQna.email}" readonly>
         </div>
-        <div class="bg-light rounded h-100 p-4">
+        <div class="bg-light rounded h-100 px-4 py-2">
             <label for="modifyDate" class="form-label">문의 날짜</label>
-            <input type="text" name="modifyDate" class="form-control-plaintext" id="modifyDate" value="${listQna.registDate}" readonly>
+            <input type="text" name="modifyDate" class="form-control" id="modifyDate" value="${listQna.registDate}" readonly>
         </div>
-        <div class="bg-light rounded h-100 p-4">
+        <div class="bg-light rounded h-100 px-4 py-2">
             <label for="qnaTitle" class="form-label">문의 제목</label>
             <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" value="${listQna.qnaTitle}">
         </div>
-        <div class="bg-light rounded h-100 p-4">
+        <div class="bg-light rounded h-100 px-4 py-2">
             <label for="qnaContent" class="form-label">문의 내용</label>
             <input type="text" name="qnaContent" class="form-control" id="qnaContent" value="${listQna.qnaContent}">
         </div>

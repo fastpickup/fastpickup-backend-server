@@ -22,7 +22,7 @@ public class QnaReplyController {
     // create
     // GET
     @GetMapping("{qno}/create")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getCreate (@PathVariable("qno") Long qno) {
         log.info("GET | create");
 
@@ -31,7 +31,7 @@ public class QnaReplyController {
 
     // POST
     @PostMapping("{qno}/create")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postCreate (@PathVariable("qno") Long qno, QnaReplyRegistDTO qnaReplyRegistDTO) {
         log.info("POST | create");
 
@@ -42,7 +42,7 @@ public class QnaReplyController {
 
     // read
     @GetMapping("read/{rno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String GetRead (@PathVariable("rno") Long rno , Model model){
 
         log.info("GET | read");
@@ -57,7 +57,7 @@ public class QnaReplyController {
     // update
     // GET
     @GetMapping("update/{rno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdate(@PathVariable("rno") Long rno , Model model){
 
         log.info("GET | update");
@@ -72,7 +72,7 @@ public class QnaReplyController {
 
     // post
     @PostMapping("update")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postUpdate(QnaReplyUpdateDTO qnaReplyUpdateDTO){
 
         log.info("POST | update");
@@ -85,7 +85,7 @@ public class QnaReplyController {
 
     // delete
     @PostMapping("delete/{rno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDelete(@PathVariable("rno") Long rno) {
 
         log.info("POST | delete");
