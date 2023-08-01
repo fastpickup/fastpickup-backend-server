@@ -170,28 +170,35 @@
 <%--		<input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
 <%--	</form>--%>
 
-	<h4 class="my-3">상품 리뷰</h4>
-	<div class="bg-light rounded h-100">
-		<div class="table-responsive">
-			<table class="table">
-				<thead>
-				<tr>
-					<th scope="col">리뷰 번호</th>
-					<th scope="col">작성자</th>
-					<th scope="col">리뷰 제목</th>
-					<th scope="col">리뷰 일자</th>
-				</tr>
-				</thead>
-				<tbody>
 
-				</tbody>
-			</table>
-		</div>
-		<div class="button_wrap">
-			<a href="/admin/review/create/${listStore.sno}" class="btn btn-dark">리뷰 등록</a>
-		</div>
+<h4 class="my-3">리뷰 목록</h4>
+<div class="bg-light rounded h-100">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+			<tr>
+				<th scope="col">리뷰 번호</th>
+				<th scope="col">작성자</th>
+				<th scope="col">리뷰 제목</th>
+				<th scope="col">리뷰 일자</th>
+			</tr>
+			</thead>
+			<tbody class="storeReviewList">
+			</tbody>
+		</table>
 	</div>
-
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+	<div class="button_wrap">
+		<a href="/admin/review/create/${listStore.sno}" class="btn btn-dark">리뷰 등록</a>
+	</div>
+	</sec:authorize>
+</div>
+<!-- Paging Start -->
+<div class="btn-toolbar" role="toolbar" style="justify-content: center;">
+	<ul class="btn-group me-2 paging storeReviewPaging" role="group" aria-label="First group">
+	</ul>
+</div>
+<!-- Paging End -->
 </div>
 <%@ include file="../include/footer.jsp" %>
 
@@ -200,8 +207,14 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   const sno = ${listStore.sno}
+
+  // 상품 리스트
   const storeProductPaging = document.querySelector(".storeProductPaging")
   const storeProductList = document.querySelector(".storeProductList")
+
+  // 리뷰 리스트
+  const storeReviewList = document.querySelector(".storeReviewList")
+  const storeReviewPaging = document.querySelector(".storeReviewPaging")
 
   //상품 리스트 가져오기
   const getList = async(page = 1) => {
@@ -286,6 +299,84 @@
     //paging 변경
     productListDefault(pageNum)
   })
+
+
+
+  // 리뷰 리스트 가져오기
+  const getReviewList = async(page = 1) => {
+    const res = await axios.get("http://192.168.0.29:8080/admin/review/"+sno+"/list?page="+page)
+    return res.data
+  }
+
+  //리뷰 리스트 출력
+  const reviewListDefault = (page) => {
+    getReviewList(page).then(arr => {
+      let reviewListStr = ""
+      let reviewPagingStr = ""
+      //Product List 출력
+      for (let i = 0; i < arr.list.length; i++) {
+        const {rno, email, reviewTitle, reviewContent, reviewDate} = arr.list[i]
+        reviewListStr += '<tr';
+        reviewListStr += '>';
+        reviewListStr += '<td>' + rno + '</td>';
+        reviewListStr += '<td>' + email + '</td>';
+
+        reviewListStr += '<td><a href="/admin/review/read/' + rno + '">' + reviewTitle + '</a></td>';
+        reviewListStr += '<td>' + new Date(reviewDate).toLocaleDateString('ko-KR') + '</td>';
+        reviewListStr += '</tr>';
+      }//end for
+      // /Product List 출력
+
+      //Product List Paging 출력
+      const {page, size, startNum, endNum, prevBtn, nextBtn, total} = arr
+      //console.log(arr)
+
+      if (prevBtn) {
+        reviewPagingStr += '<li><a href="' + (startNum - 1) + '" class="btn btn-group btn-prev">이전</a></li>';
+      }
+
+      for (let i = startNum; i <= endNum; i++) {
+        reviewPagingStr += '<li class="' + (page === i ? 'active' : '') + '">';
+        reviewPagingStr += '<a href="' + i + '" class="btn btn-group">' + i + '</a>';
+        reviewPagingStr += '</li>';
+      }
+
+      if (nextBtn) {
+        reviewPagingStr += '<li><a href="' + (endNum + 1) + '" class="btn btn-group btn-next">다음</a></li>';
+      }
+      //console.log(productPagingStr)
+      // /Product List Paging 출력
+      storeReviewList.innerHTML = reviewListStr
+      storeReviewPaging.innerHTML = reviewPagingStr
+    })
+  }
+
+  reviewListDefault()
+
+  storeReviewPaging.addEventListener("click", (e) => {
+    //이벤트 막기
+    e.preventDefault()
+    e.stopPropagation()
+
+    //target 찾기
+    const target = e.target
+    //console.log(target.tagName)
+
+    //A태그가 아니면 return
+    if (target.tagName !== "A") {
+      return
+    }
+
+    //page번호 설정
+    const pageNum = target.getAttribute("href")
+    //console.log(pageNum)
+
+    //paging 변경
+    reviewListDefault(pageNum)
+  })
+	/* 리뷰 리스트 END */
+
+
   // '삭제' 버튼 클릭 시 모달 띄우기
   <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
   document.querySelector('.btn-delete').addEventListener('click', function (event) {

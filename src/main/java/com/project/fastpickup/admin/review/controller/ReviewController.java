@@ -3,26 +3,32 @@ package com.project.fastpickup.admin.review.controller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.fastpickup.admin.product.dto.ProductCategoryDTO;
+import com.project.fastpickup.admin.product.dto.ProductDTO;
+import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.dto.ProductRegistDTO;
 import com.project.fastpickup.admin.qna.dto.QnaListDTO;
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
 import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.service.ReviewService;
+import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+@CrossOrigin
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -85,6 +91,29 @@ public class ReviewController {
         rttr.addFlashAttribute("message", "상품 등록이 완료 되었습니다.");
 
         return "redirect:/admin/review/list";
+    }
+
+    @GetMapping("{sno}/list")
+    @PreAuthorize("permitAll")
+    @ResponseBody
+    public PageResponseDTO<ReviewListDTO> getStoreList(
+            @PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO) {
+
+        return reviewService.getStoreList(sno, pageRequestDTO);
+    }
+
+    // 리뷰 수정
+    @GetMapping("/update/{rno}")
+    @PreAuthorize("hasAnyRole('permitAll')")
+    public String getUpdate(
+            PageRequestDTO pageRequestDTO, @PathVariable("rno") Long rno, Model model) {
+        log.info("GET | Product Update =================");
+
+        ReviewReadDTO reviewReadDTO = reviewService.reviewSelectOne(rno);
+
+        model.addAttribute("reviewReadDTO", reviewReadDTO);
+
+        return "admin/product/update";
     }
 
 }

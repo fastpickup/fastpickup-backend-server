@@ -38,20 +38,20 @@
                 </div>
             </div>
 
-            <form action="/admin/qna/delete/${listQna.qno}" method="post">
+            <form action="/admin/review/delete/${reviewRead.rno}" method="post">
                 <div class="button_wrap mt-4">
-                    <a href="/admin/review/update/${listQna.qno}" class="btn btn-dark">리뷰 수정</a>
+                    <a href="/admin/review/update/${reviewRead.rno}" class="btn btn-dark">리뷰 수정</a>
                     <a href="/admin/review/list" class="btn btn-outline-dark">목록으로</a>
                     <button type="submit" class="btn btn-primary btn-delete">리뷰 삭제</button>
                 </div>
             </form>
 
-            <form action="/admin/qna/replies/${qno}/create" method="post">
+            <!-- <form action="/admin/qna/replies/${qno}/create" method="post">
                 <input type="hidden" id="rno" name="qno" class="form-control" readonly value="${listQna.qno}">
                 <input type="hidden" id="email" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
                 <input type="text" name="reviewContent">
                 <button type="submit" class="btn btn-dark">답글 달기</button>
-            </form>
+            </form> -->
 
             <div style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 10px">
             <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
