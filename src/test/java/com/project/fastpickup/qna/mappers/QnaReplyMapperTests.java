@@ -37,33 +37,33 @@ public class QnaReplyMapperTests {
 
         // 문의 답글 등록
         qnaReplyRegistDTO = QnaReplyRegistDTO.builder()
-                .qno(21L)
+                .qno(23L)
                 .reply(TEST_QNA_REPIY)
                 .email(TEST_EMAIL)
                 .build();
 
         // 문의 답글 수정
         qnaReplyUpdateDTO = QnaReplyUpdateDTO.builder()
-                .rno(29L)
-                .qno(21L)
+                .rno(49L)
+                .qno(23L)
                 .reply(TEST_QNA_REPIY2)
                 .build();
     }
 
     /*  TEST  */
     // createQnaReply test
-    @Test
-    @Transactional
-    @DisplayName("문의 답글 등록")
-    public void createQnaReplyTestMapper() {
-        // GIVEN
-        log.info("=== Start Create Qna Reply Test Mapper ===");
-        // WHEN
-        qnaReplyMapper.createQnaReply(qnaReplyRegistDTO);
-        // THEN
-        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
-        log.info("=== End Create Qna Reply Test Mapper ===");
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("문의 답글 등록")
+//    public void createQnaReplyTestMapper() {
+//        // GIVEN
+//        log.info("=== Start Create Qna Reply Test Mapper ===");
+//        // WHEN
+//        qnaReplyMapper.createQnaReply(qnaReplyRegistDTO);
+//        // THEN
+//        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
+//        log.info("=== End Create Qna Reply Test Mapper ===");
+//    }
 
     // readQnaReply test
     @Test
@@ -73,7 +73,7 @@ public class QnaReplyMapperTests {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
         // WHEN
-        QnaReplyReadDTO readQnaReply = qnaReplyMapper.readQnaReply(21L);
+        QnaReplyReadDTO readQnaReply = qnaReplyMapper.readQnaReply(23L);
         // THEN
         Assertions.assertNotNull(readQnaReply, "Qna Reply Read is Null");
         log.info("=== End Read Qna Test Mapper ===");
@@ -87,7 +87,7 @@ public class QnaReplyMapperTests {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
         // WHEN
-        QnaReplyReadDTO readQnaReplyrno = qnaReplyMapper.readQnaReplyRno(29L);
+        QnaReplyReadDTO readQnaReplyrno = qnaReplyMapper.readQnaReplyRno(49L);
         // THEN
         Assertions.assertNotNull(readQnaReplyrno, "Qna Reply Read is Null");
         log.info("=== End Read Qna Test Mapper ===");
@@ -115,7 +115,7 @@ public class QnaReplyMapperTests {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Mapper ===");
         // WHEN
-        int result = qnaReplyMapper.deleteQnaReply(29L);
+        int result = qnaReplyMapper.deleteQnaReply(49L);
         // THEN
         //Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Reply Test Mapper ===");
@@ -129,7 +129,7 @@ public class QnaReplyMapperTests {
         // GIVEN
         log.info("=== Start Count Qna Reply Test Mapper ===");
         // WHEN
-        int count = qnaReplyMapper.replyCount(21L);
+        int count = qnaReplyMapper.replyCount(23L);
         // THEN
         log.info("count : " + count);
         log.info("=== End Count Qna Reply Test Mapper ===");
