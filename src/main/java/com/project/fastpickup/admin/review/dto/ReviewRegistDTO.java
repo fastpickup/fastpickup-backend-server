@@ -32,6 +32,7 @@ public class ReviewRegistDTO {
     
     private String email;                                // 작성자 이메일
     private String reviewContent;                        // 리뷰 내용
+    private String reviewTitle;                          // 리뷰 제목
     
     @Builder.Default
     private List<String> fileNames = new ArrayList<>();  // 파일명

@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.fastpickup.admin.review.dto.ReviewDTO;
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.mappers.ReviewFileMapper;
 import com.project.fastpickup.admin.review.mappers.ReviewMapper;
@@ -38,11 +39,12 @@ public class ReviewMapperTests {
     private ReviewFileMapper reviewFileMapper;
 
     // Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-    private static final Long TEST_RNO = 2L;
+    private static final Long TEST_RNO = 19L;
     private static final Long TEST_SNO = 1L;
     private static final Long TEST_ONO = 4L;
     private static final Long TEST_PNO = 22L;
     private static final String TEST_EMAIL = "thistrik@naver.com";
+    private static final String TEST_REVIEW_TITLE = "맛있어요";
     private static final String TEST_REVIEW_CONTENT = "It's So disgust";
     private static final int TEST_GNO = 0;
     private static final boolean TEST_ISDELETED = false;
@@ -52,7 +54,6 @@ public class ReviewMapperTests {
     // DTO 정의
     private ReviewDTO reviewDTO;
     private ReviewRegistDTO reviewRegistDTO;
-    private ReviewListDTO reviewListDTO;
     private PageRequestDTO pageRequestDTO;
 
     @BeforeEach
@@ -62,9 +63,12 @@ public class ReviewMapperTests {
                 .sno(TEST_SNO)
                 .ono(TEST_ONO)
                 .email(TEST_EMAIL)
+                .reviewTitle(TEST_REVIEW_TITLE)
                 .reviewContent(TEST_REVIEW_CONTENT)
                 .fileNames(List.of(UUID.randomUUID() + "_" + TEST_FILE_NAME, UUID.randomUUID() + "_" + TEST_FILE_NAME))
                 .build();
+
+                
 
         // 리뷰 리스트 페이징
         pageRequestDTO = PageRequestDTO.builder().build();
@@ -72,7 +76,7 @@ public class ReviewMapperTests {
     }
 
     @Test
-    @Transactional
+    // @Transactional
     @DisplayName("리뷰 등록 매퍼 테스트")
     public void testRegistReview() {
 
@@ -139,9 +143,9 @@ public class ReviewMapperTests {
         log.info("=== Start List Review Test Mapper ===");
 
         // WHEN
-        List<ReviewListDTO> list = reviewMapper.getReviewList(TEST_SNO, pageRequestDTO);
+        List<ReviewListDTO> list = reviewMapper.getReviewList(pageRequestDTO);
 
-        //THEN
+        // THEN
         log.info(list);
         Assertions.assertNotNull(list, "Product List is Null");
         log.info("=== End List Product Test Mapper ===");
@@ -151,15 +155,29 @@ public class ReviewMapperTests {
     @Test
     @Transactional
     @DisplayName("리뷰 리스트 토탈 매퍼 테스트")
-    public void testListCountReviwe(){
-      //GIVEN
-      log.info("=== Start List Count Review Test Mapper ===");
-      //WHEN
-      long listTotal = reviewMapper.reviewListCount(pageRequestDTO);
-      //THEN
-      log.info(listTotal);
-      Assertions.assertNotNull(listTotal, "Review List is Null");
-      log.info("=== End List Count Review Test Mapper ===");
+    public void testListCountReviwe() {
+        // GIVEN
+        log.info("=== Start List Count Review Test Mapper ===");
+        // WHEN
+        long listTotal = reviewMapper.reviewListCount(pageRequestDTO);
+        // THEN
+        log.info(listTotal);
+        Assertions.assertNotNull(listTotal, "Review List is Null");
+        log.info("=== End List Count Review Test Mapper ===");
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("리뷰 상세조회 테스트")
+    public void testReadReview() {
+        // GIVEN
+        log.info("=== Start Read Review Test Mapper ===");
+        // WHEN
+        ReviewReadDTO read = reviewMapper.reviewSelectOne(TEST_RNO);
+        log.info(read);
+
+        // THEN
+
     }
 
 }

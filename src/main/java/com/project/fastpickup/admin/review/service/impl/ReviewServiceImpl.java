@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.mappers.ReviewFileMapper;
 import com.project.fastpickup.admin.review.mappers.ReviewMapper;
@@ -109,11 +110,11 @@ public class ReviewServiceImpl implements ReviewService {
 
     /* 리스트 */
     @Override
-    public PageResponseDTO<ReviewListDTO> getList(long sno,PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<ReviewListDTO> getList(PageRequestDTO pageRequestDTO) {
 
         log.info("============ Review List Service ============");
         // 리스트 선언
-        List<ReviewListDTO> list = reviewMapper.getReviewList(sno, pageRequestDTO);
+        List<ReviewListDTO> list = reviewMapper.getReviewList(pageRequestDTO);
         // Total 선언
         long total = reviewMapper.reviewListCount(pageRequestDTO);
 
@@ -128,5 +129,12 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
     /* 리스트 */
+    
+    @Override
+    public ReviewReadDTO reviewSelectOne(Long rno) {
+
+        return reviewMapper.reviewSelectOne(rno);
+
+    }
 
 }

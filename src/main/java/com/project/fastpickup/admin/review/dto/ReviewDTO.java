@@ -22,6 +22,7 @@ import lombok.ToString;
 public class ReviewDTO {
 
     private Long rno;                       // PK
+    private String reviewTitle;             // 리뷰 제목
     private String reviewContent;           // 리뷰 내용
     private LocalDateTime reviewDate;       // 리뷰 등록일
     private LocalDateTime reviewUpdateDate; // 리뷰 수정일
