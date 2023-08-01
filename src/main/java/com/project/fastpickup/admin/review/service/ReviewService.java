@@ -9,6 +9,7 @@ package com.project.fastpickup.admin.review.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
@@ -20,6 +21,9 @@ public interface ReviewService {
     Long registReview(ReviewRegistDTO reviewRegistDTO);
 
     // List Review
-    PageResponseDTO<ReviewListDTO> getList(long sno,PageRequestDTO pageRequestDTO);
+    PageResponseDTO<ReviewListDTO> getList(PageRequestDTO pageRequestDTO);
+
+    // Read Review
+    ReviewReadDTO reviewSelectOne(Long rno);
 
 }
