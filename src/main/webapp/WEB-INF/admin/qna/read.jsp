@@ -9,26 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastPickup</title>
 </head>
-
-<style>
-    /* 댓글 폼 스타일 */
-    #reply-form-wrapper textarea {
-        width: 100%;
-        resize: vertical;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        margin-top: 40px;
-        margin-bottom: 10px;
-    }
-
-    #reply-form-wrapper button {
-        padding: 8px 20px;
-        font-size: 16px;
-    }
-</style>
-
 <body>
 <%@ include file="../include/header.jsp" %>
 <div class="container-fluid">
@@ -63,7 +43,7 @@
             </form>
             <c:choose>
                 <c:when test="${count == 0}">
-                    <div id="reply-form-wrapper">
+                    <div id="reply-form-wrapper" class="mt-4">
                         <form action="/admin/qna/replies/${qno}/create" method="post">
                             <input type="hidden" name="qno" class="form-control" readonly value="${listQna.qno}">
                             <input type="hidden" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
