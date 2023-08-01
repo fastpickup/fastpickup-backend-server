@@ -188,6 +188,7 @@
     return res.data
   }
 
+  //상품 리스트 출력
   const productListDefault = (page) => {
     getList(page).then(arr => {
 			let productListStr = ""

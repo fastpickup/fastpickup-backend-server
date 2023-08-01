@@ -149,29 +149,7 @@
 					<th scope="col">추천상품</th>
 				</tr>
 				</thead>
-				<tbody>
-				<c:forEach items="${listProduct.list}" var="product" varStatus="status">
-					<tr<c:if test="${product.recStatus == 1}"> class="product_list_active"</c:if>>
-						<td><a href="/admin/product/read/${product.pno}">${product.pno}</a></td>
-						<td>
-							<a href="/admin/product/read/${product.pno}">
-								<img src="http://192.168.0.64/s_${product.fileName}">
-									${product.productName}
-							</a>
-						</td>
-						<td><fmt:formatNumber type="currency" value="${product.productPrice}" pattern="###,### 원" /></td>
-						<%--<td>${product.categoryName}</td>--%>
-						<td>
-							<fmt:parseDate value="${product.registDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>${product.viewCount}</td>
-						<td>${product.likeCount}</td>
-						<td>
-							<c:if test="${product.recStatus == 1}">추천</c:if>
-						</td>
-					</tr>
-				</c:forEach>
+				<tbody class="storeProductList">
 				</tbody>
 			</table>
 		</div>
@@ -183,27 +161,14 @@
 	</div>
 	<!-- Paging Start -->
 	<div class="btn-toolbar" role="toolbar" style="justify-content: center;">
-		<ul class="btn-group me-2 paging" role="group" aria-label="First group">
-			<c:if test="${listProduct.prevBtn}">
-				<li><a href="${listProduct.startNum - 1}" class="btn btn-group btn-prev">이전</a></li>
-			</c:if>
-
-			<c:forEach var="i" begin="${listProduct.startNum}" end="${listProduct.endNum}">
-				<li class="${listProduct.page == i ? 'active' : ''}">
-					<a href="${i}" class="btn btn-group">${i}</a>
-				</li>
-			</c:forEach>
-
-			<c:if test="${listProduct.nextBtn}">
-				<li><a href="${listProduct.endNum + 1}" class="btn btn-group btn-next">다음</a></li>
-			</c:if>
+		<ul class="btn-group me-2 paging storeProductPaging" role="group" aria-label="First group">
 		</ul>
 	</div>
 	<!-- Paging End -->
-	<form action="/admin/store/read/${listStore.sno}" method="get" class="pagingForm">
-		<input type="hidden" name="page" value="${pageRequestDTO.page}">
-		<input type="hidden" name="size" value="${pageRequestDTO.size}">
-	</form>
+<%--	<form action="/admin/store/read/${listStore.sno}" method="get" class="pagingForm">--%>
+<%--		<input type="hidden" name="page" value="${pageRequestDTO.page}">--%>
+<%--		<input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
+<%--	</form>--%>
 
 	<h4 class="my-3">상품 리뷰</h4>
 	<div class="bg-light rounded h-100">
@@ -232,12 +197,75 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  const paging = document.querySelector(".paging")
-  const pagingForm = document.querySelector(".pagingForm")
-  const pageInput = pagingForm.querySelector("input[name=page]")
+  const sno = ${listStore.sno}
+  const storeProductPaging = document.querySelector(".storeProductPaging")
+  const storeProductList = document.querySelector(".storeProductList")
 
-  paging.addEventListener("click", (e) => {
+  //상품 리스트 가져오기
+  const getList = async(page = 1) => {
+    const res = await axios.get("http://192.168.0.64:8080/admin/product/"+sno+"/list?page="+page)
+    return res.data
+  }
+
+  //상품 리스트 출력
+  const productListDefault = (page) => {
+    getList(page).then(arr => {
+      let productListStr = ""
+      let productPagingStr = ""
+      //Product List 출력
+      for (let i = 0; i < arr.list.length; i++) {
+        const {pno, productName, productPrice, registDate, viewCount, likeCount, fileName, recStatus} = arr.list[i]
+        // console.log(pno)
+        productListStr += '<tr';
+        if (recStatus == 1) {
+          productListStr += ' class="product_list_active"';
+        }
+        productListStr += '>';
+        productListStr += '<td><a href="/admin/product/read/' + pno + '">' + pno + '</a></td>';
+        productListStr += '<td><a href="/admin/product/read/' + pno + '"><img src="http://192.168.0.64/s_' + fileName + '">' + productName + '</a></td>';
+        productListStr += '<td>' + new Intl.NumberFormat('ko-KR').format(productPrice) + ' 원</td>';
+        productListStr += '<td>' + new Date(registDate).toLocaleDateString('ko-KR') + '</td>';
+        productListStr += '<td>' + viewCount + '</td>';
+        productListStr += '<td>' + likeCount + '</td>';
+        productListStr += '<td>';
+        if (recStatus == 1) {
+          productListStr += '추천';
+        }
+        productListStr += '</td>';
+        productListStr += '</tr>';
+        //console.log(productListStr)
+      }//end for
+      // /Product List 출력
+
+      //Product List Paging 출력
+      const {page, size, startNum, endNum, prevBtn, nextBtn, total} = arr
+      //console.log(arr)
+
+      if (prevBtn) {
+        productPagingStr += '<li><a href="' + (startNum - 1) + '" class="btn btn-group btn-prev">이전</a></li>';
+      }
+
+      for (let i = startNum; i <= endNum; i++) {
+        productPagingStr += '<li class="' + (page === i ? 'active' : '') + '">';
+        productPagingStr += '<a href="' + i + '" class="btn btn-group">' + i + '</a>';
+        productPagingStr += '</li>';
+      }
+
+      if (nextBtn) {
+        productPagingStr += '<li><a href="' + (endNum + 1) + '" class="btn btn-group btn-next">다음</a></li>';
+      }
+      //console.log(productPagingStr)
+      // /Product List Paging 출력
+      storeProductList.innerHTML = productListStr
+      storeProductPaging.innerHTML = productPagingStr
+    })
+  }
+
+  productListDefault()
+
+  storeProductPaging.addEventListener("click", (e) => {
     //이벤트 막기
     e.preventDefault()
     e.stopPropagation()
@@ -255,12 +283,8 @@
     const pageNum = target.getAttribute("href")
     //console.log(pageNum)
 
-    //input에 page변경 넘겨주기
-    pageInput.value = pageNum
-    //actionForm action 변경
-    pagingForm.setAttribute("action", `/admin/store/read/${listStore.sno}`)
-    //submit
-    pagingForm.submit()
+    //paging 변경
+    productListDefault(pageNum)
   })
   // '삭제' 버튼 클릭 시 모달 띄우기
   <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
