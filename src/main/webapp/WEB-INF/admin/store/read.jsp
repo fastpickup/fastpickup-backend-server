@@ -204,7 +204,7 @@
 	<h4 class="my-3">상품 리뷰</h4>
 	<div class="bg-light rounded h-100">
 		<div class="table-responsive">
-			<table class="reviewTable">
+			<table class="table">
 				<thead>
 				<tr>
 					<th scope="col">리뷰 번호</th>
@@ -214,7 +214,7 @@
 				</tr>
 				</thead>
 				<tbody>
-					
+
 				</tbody>
 			</table>
 		</div>
