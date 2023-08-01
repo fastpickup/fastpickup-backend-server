@@ -372,8 +372,10 @@ li {
 .container_wrap .search_wrap .search_box .input-date-group .btn {height:38px;}
 
 .container_wrap .detail_content {display: flex;flex-wrap: wrap;font-size: 1.3rem;}
-.container_wrap .detail_content dt {width: 150px;padding: 10px 0 15px;font-weight:500;border-bottom: 1px solid #ccc;}
-.container_wrap .detail_content dd {width: calc(100% - 150px);margin: 0;padding: 10px 0 15px;font-weight: 600;color: #000;border-bottom: 1px solid #ccc;}
+.container_wrap .detail_content dt {width: 150px;padding: 20px 0;font-weight:500;border-top: 1px solid #ccc;}
+.container_wrap .detail_content dd {width: calc(100% - 150px);margin: 0;padding: 20px 0;font-weight: 600;color: #000;border-top: 1px solid #ccc;}
+.container_wrap .detail_content dt:first-child,
+.container_wrap .detail_content dd:nth-child(2) {border-top: 0;}
 
 .container_wrap .form_content {font-size: 1.1rem;}
 .container_wrap .form_content .form-control {padding: 0.575em 1em; font-size: 1.1rem;}
