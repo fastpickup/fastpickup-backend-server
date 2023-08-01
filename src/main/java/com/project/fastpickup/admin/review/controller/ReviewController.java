@@ -37,7 +37,7 @@ public class ReviewController {
         return "review";
     }
 
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN','STORE')")
     @GetMapping("/list")
     public void reviewList(PageRequestDTO pageRequestDTO, Model model) {
 
@@ -49,7 +49,7 @@ public class ReviewController {
 
     }
 
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN','STORE')")
     @GetMapping("/read/{rno}")
     public String getReview(@PathVariable("rno") Long rno, Model model) {
 
@@ -61,17 +61,21 @@ public class ReviewController {
 
     }
 
-    @PreAuthorize("permitAll")
-    @GetMapping("/create")
-    public void createReview() {
+    @PreAuthorize("hasAnyRole('ADMIN','STORE')")
+    @GetMapping("/create/{sno}")
+    public String createReview(@PathVariable("sno") Long sno, Model model) {
+
+        model.addAttribute("sno", sno);
 
         log.info("GET | Admin Review Create");
+
+        return "admin/review/create";
 
     }
 
     // Post
-    @PostMapping("create")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','STORE')")
+    @PostMapping("/create")
     public String postCreate(
             ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
         log.info("POST | Product Create =================");
