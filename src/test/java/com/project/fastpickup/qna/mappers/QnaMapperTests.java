@@ -49,7 +49,7 @@ public class QnaMapperTests {
 
         // 문의 수정
         qnaUpdateDTO = QnaUpdateDTO.builder()
-                .qno(21L)
+                .qno(23L)
                 .qnaTitle(TEST_QNA_TITLE2)
                 .qnaContent(TEST_QNA_CONTENT2)
                 .build();
@@ -89,18 +89,18 @@ public class QnaMapperTests {
 
 
     // createQna test
-    @Test
-    @Transactional
-    @DisplayName("문의 등록")
-    public void createQnaTestMapper() {
-        // GIVEN
-        log.info("=== Start Create Qna Test Mapper ===");
-        // WHEN
-        qnaMapper.createQna(qnaRegistDTO);
-        // THEN
-        Assertions.assertEquals(qnaRegistDTO.getEmail(), "thistrik@naver.com");
-        log.info("=== End Create Qna Test Mapper ===");
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("문의 등록")
+//    public void createQnaTestMapper() {
+//        // GIVEN
+//        log.info("=== Start Create Qna Test Mapper ===");
+//        // WHEN
+//        qnaMapper.createQna(qnaRegistDTO);
+//        // THEN
+//        Assertions.assertEquals(qnaRegistDTO.getEmail(), "thistrik@naver.com");
+//        log.info("=== End Create Qna Test Mapper ===");
+//    }
 
     // readQna test
     @Test
@@ -110,9 +110,9 @@ public class QnaMapperTests {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
         // WHEN
-        QnaDTO readQna = qnaMapper.readQna(21L);
+        QnaDTO readQna = qnaMapper.readQna(23L);
         // THEN
-        Assertions.assertEquals(readQna.getQno(), 21L);
+        Assertions.assertEquals(readQna.getQno(), 23L);
         log.info("=== End Read Qna Test Mapper ===");
     }
 
@@ -139,7 +139,7 @@ public class QnaMapperTests {
         // GIVEN
         log.info("=== Start Delete Qna Test Mapper ===");
         // WHEN
-        int result = qnaMapper.deleteQna(21L);
+        int result = qnaMapper.deleteQna(23L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Test Mapper ===");

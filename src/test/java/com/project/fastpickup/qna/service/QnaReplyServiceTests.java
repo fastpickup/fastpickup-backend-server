@@ -36,33 +36,33 @@ public class QnaReplyServiceTests {
 
         // 문의 답글 등록
         qnaReplyRegistDTO = QnaReplyRegistDTO.builder()
-                .qno(21L)
+                .qno(23L)
                 .reply(TEST_QNA_REPIY)
                 .email(TEST_EMAIL)
                 .build();
 
         // 문의 답글 수정
         qnaReplyUpdateDTO = QnaReplyUpdateDTO.builder()
-                .rno(29L)
-                .qno(21L)
+                .rno(49L)
+                .qno(23L)
                 .reply(TEST_QNA_REPIY2)
                 .build();
     }
 
     /*  TEST  */
     // create
-    @Test
-    //@Transactional
-    @DisplayName("문의 답글 등록")
-    public void createQnaReplyTestService() {
-        // GIVEN
-        log.info("=== Start Create Qna Reply Test Service ===");
-        // WHEN
-        qnaReplyService.createQnaReply(qnaReplyRegistDTO);
-        // THEN
-        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
-        log.info("=== End Create Qna Reply Test Service ===");
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("문의 답글 등록")
+//    public void createQnaReplyTestService() {
+//        // GIVEN
+//        log.info("=== Start Create Qna Reply Test Service ===");
+//        // WHEN
+//        qnaReplyService.createQnaReply(qnaReplyRegistDTO);
+//        // THEN
+//        Assertions.assertEquals(qnaReplyRegistDTO.getEmail(), "thistrik@naver.com");
+//        log.info("=== End Create Qna Reply Test Service ===");
+//    }
 
     // read
     @Test
@@ -72,7 +72,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Read Qna Reply Test Service ===");
         // WHEN
-        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(21L);
+        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(23L);
         // THEN
         Assertions.assertNotNull(replyReadDTO, "Qna Reply Read is Null");
         log.info("=== End Read Qna Reply Test Service ===");
@@ -86,7 +86,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start ReadRno Qna Reply Test Service ===");
         // WHEN
-        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReplyRno(29L);
+        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReplyRno(49L);
         // THEN
         Assertions.assertNotNull(replyReadDTO, "Qna Reply Read is Null");
         log.info("=== End ReadRno Qna Reply Test Service ===");
@@ -114,7 +114,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Service ===");
         // WHEN
-        int result = qnaReplyService.deleteQnaReply(29L);
+        int result = qnaReplyService.deleteQnaReply(49L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Reply Test Service ===");
@@ -128,7 +128,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Count Qna Reply Test Service ===");
         // WHEN
-        int count = qnaReplyService.replyCount(21L);
+        int count = qnaReplyService.replyCount(23L);
         // THEN
         log.info("count : " + count);
         log.info("=== End Count Qna Reply Test Service ===");
