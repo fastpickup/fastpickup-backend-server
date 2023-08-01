@@ -68,17 +68,38 @@
 </div>
 <div class="button_wrap p-4">
 	<a href="/admin/product/read/${productRead.pno}" class="btn btn-outline-dark">상품 상세로</a>
+	<button type="button" class="btn btn-primary btnDelete">상품 삭제</button>
 	<button type="button" class="btn btn-dark btnAdd">상품 수정</button>
 </div>
+
+<!-- Delete Confrim Message Modal -->
+<div class="modal deleteModal" tabindex="-1" role="dialog">
+	<form method="post" action="/admin/product/delete/${productRead.pno}" class="actionForm">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">정말 삭제 하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary btnDeleteModal" data-bs-dismiss="modal">삭제</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- Delete Confrim Message Modal -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/file.js"></script>
 <%@ include file="../include/footer.jsp" %>
 <%-- Start Javascript --%>
 <script>
+	const pno = ${productRead.pno}
   const uploadInput = document.querySelector(".uploadInput")
   const uploadUL = document.querySelector(".uploadUL")
   const uploadHidden = document.querySelector(".uploadHidden")
   const btnAdd = document.querySelector(".btnAdd")
+  const deleteModal = new bootstrap.Modal(document.querySelector(".deleteModal"))
+  const btnDelete = document.querySelector(".btnDelete")
+  const btnDeleteModal = document.querySelector(".btnDeleteModal")
 
   //파일 업로드
   uploadInput.addEventListener("change", e => {
@@ -133,6 +154,12 @@
 
     frm.submit()
   }, false)
+
+  //삭제 modal show
+  btnDelete.addEventListener("click", e => {
+    deleteModal.show()
+  }, false)
+
 </script>
 </body>
 
