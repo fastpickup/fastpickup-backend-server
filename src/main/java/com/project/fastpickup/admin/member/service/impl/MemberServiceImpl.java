@@ -67,6 +67,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public int joinStoreMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinStoreMember ServiceImpl");
+<<<<<<< HEAD
         // Check email format
         String email = memberConvertDTO.getEmail();
         Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
@@ -75,6 +76,9 @@ public class MemberServiceImpl implements MemberService {
             throw new InvalidEmailException("이메일 형식이 올바르지 않습니다: " + email);
         }
         String rolename = "USER";
+=======
+        String rolename = "STORE";
+>>>>>>> 60fa561312e1455d06840b7d5008fd341b9c9d7c
         String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
         memberConvertDTO.setMemberPw(encodedPassword);
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);

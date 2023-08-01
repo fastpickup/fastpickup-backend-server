@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.fastpickup.admin.product.dto.ProductDTO;
 import com.project.fastpickup.admin.review.dto.ReviewDTO;
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewModifyDTO;
 import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.service.ReviewService;
@@ -48,6 +49,7 @@ public class ReviewServiceTests {
     private ReviewRegistDTO reviewRegistDTO;
     private ReviewListDTO reviewListDTO;
     private PageRequestDTO pageRequestDTO;
+    private ReviewModifyDTO reviewModifyDTO;
 
     @BeforeEach
     public void init() {
@@ -59,6 +61,16 @@ public class ReviewServiceTests {
                 .email(TEST_EMAIL)
                 .reviewTitle(TEST_REVIEW_TITLE)
                 .reviewContent(TEST_REVIEW_CONTENT)
+                .fileNames(List.of(UUID.randomUUID() + "_" + TEST_FILE_NAME, UUID.randomUUID() + "_" + TEST_FILE_NAME))
+                .build();
+
+        reviewModifyDTO = ReviewModifyDTO.builder()
+                .rno(TEST_RNO)
+                .sno(TEST_SNO)
+                .gno(TEST_GNO)
+                .email(TEST_EMAIL)
+                .reviewTitle(TEST_EMAIL)
+                .reviewContent(TEST_EMAIL)
                 .fileNames(List.of(UUID.randomUUID() + "_" + TEST_FILE_NAME, UUID.randomUUID() + "_" + TEST_FILE_NAME))
                 .build();
 
@@ -117,6 +129,27 @@ public class ReviewServiceTests {
         log.info(dto);
         Assertions.assertNotNull(dto, "Review Read is Null");
         log.info("=== End Read Review Test Service ===");
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("리뷰 가맹점 서비스 리스트")
+    public void testRestList() {
+
+        PageResponseDTO<ReviewListDTO> list = reviewService.getStoreList(TEST_SNO, pageRequestDTO);
+
+        log.info(list.getList());
+
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("리뷰 수정 서비스 테스트")
+    public void testUpdateReview(){
+
+        reviewService.updateReview(reviewModifyDTO);
+        
+
     }
 
 }

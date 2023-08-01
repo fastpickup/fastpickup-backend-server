@@ -58,7 +58,7 @@
           <img src="/imgs/logo.png" alt="factpickup">
         </a>
       </h1>
-      <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STORE')">
+      <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_STORE')">
       <div class="navbar-nav w-100">
         <a href="/admin/order/list" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-chart-bar me-2"></i>Order</a>
         <a href="/admin/store/list" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>

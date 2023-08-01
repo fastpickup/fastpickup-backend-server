@@ -70,9 +70,9 @@
         </tbody>
       </table>
     </div>
-    <div class="button_wrap">
+    <!-- <div class="button_wrap">
       <a href="/admin/review/create" class="btn btn-dark">리뷰작성</a>
-    </div>
+    </div> -->
   </div>
 
   <!-- Paging Start -->

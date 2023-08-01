@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewModifyDTO;
 import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -28,6 +29,15 @@ public interface ReviewMapper {
     List<ReviewListDTO> getReviewList(PageRequestDTO pageRequestDTO);
     long reviewListCount(PageRequestDTO pageRequestDTO);
 
+    // Rest
+    List<ReviewListDTO> getReviewListStore(@Param("sno")Long sno, @Param("pr")PageRequestDTO pageRequestDTO);
+    long reviewListStoreCount(PageRequestDTO pageRequestDTO);
+
+
     ReviewReadDTO reviewSelectOne(Long rno);
+
+    int deleteReview(Long rno);
+
+    int updateReview(ReviewModifyDTO modifyDTO);
 
 }
