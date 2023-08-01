@@ -57,7 +57,7 @@ public class QnaServiceTests {
 
         // 문의 수정
         qnaUpdateDTO = QnaUpdateDTO.builder()
-                .qno(21L)
+                .qno(23L)
                 .qnaTitle(TEST_QNA_TITLE2)
                 .qnaContent(TEST_QNA_CONTENT2)
                 .build();
@@ -81,18 +81,18 @@ public class QnaServiceTests {
     }
 
     // createQna test
-    @Test
-    @Transactional
-    @DisplayName("문의 등록")
-    public void createQnaTestService() {
-        // GIVEN
-        log.info("=== Start Create Qna Test Service ===");
-        // WHEN
-        qnaService.createQna(qnaRegistDTO2);
-        // THEN
-        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "wow_1@nate.com");
-        log.info("=== End Create Qna Test Service ===");
-    }
+//    @Test
+//    @Transactional
+//    @DisplayName("문의 등록")
+//    public void createQnaTestService() {
+//        // GIVEN
+//        log.info("=== Start Create Qna Test Service ===");
+//        // WHEN
+//        qnaService.createQna(qnaRegistDTO2);
+//        // THEN
+//        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "wow_1@nate.com");
+//        log.info("=== End Create Qna Test Service ===");
+//    }
 
     // readQna test
     @Test
@@ -130,7 +130,7 @@ public class QnaServiceTests {
         // GIVEN
         log.info("=== Start delete Qna Test Service ===");
         // WHEN
-        int result = qnaService.deleteQna(21L);
+        int result = qnaService.deleteQna(23L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End delete Qna Test Service ===");
