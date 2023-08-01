@@ -396,9 +396,9 @@ li {
 .container_wrap .order_wrap .order_store2 dl dd ul li span {width: 150px;}
 
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dt {width: 500px;margin-right: 30px;}
-.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .view_image {display: flex;align-items: center;height: 350px;overflow: hidden;margin-bottom: 20px;}
+.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .view_image {display: flex;align-items: center;justify-content: center;width: 500px;height: 350px;overflow: hidden;margin-bottom: 20px;}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .image_list {display: flex;flex-wrap: wrap;gap: 10px;padding: 0 30px;box-sizing: border-box;}
-.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .image_list li {display: flex;height: 80px;align-items: center;background: #eee;}
+.container_wrap .order_wrap.product_read_wrap .order_store2 dl dt .image_list li {overflow: hidden;display: flex;width: 80px;height: 80px;align-items: center;justify-content: center;background: #eee;}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dd {width: calc(100% - 560px);}
 .container_wrap .order_wrap.product_read_wrap .order_store2 dl dd ul li h4 {display: inline-block;}
 

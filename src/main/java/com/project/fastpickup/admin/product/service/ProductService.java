@@ -33,7 +33,7 @@ public interface ProductService {
   int deleteProduct(Long pno);
 
   //Update Product
-  int updateProduct(ProductDTO productDTO);
+  int updateProduct(ProductDTO productDTO, ProductCategoryDTO productCategoryDTO);
 
   //Update ViewCount
   int viewCount(Long pno);

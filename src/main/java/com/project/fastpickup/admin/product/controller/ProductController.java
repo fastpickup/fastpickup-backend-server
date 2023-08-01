@@ -119,23 +119,25 @@ public class ProductController {
     log.info("GET | Product Update =================");
 
     ProductDTO productDTO = productService.selectOne(pno);
+    StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
 
     model.addAttribute("productRead", productDTO);
+    model.addAttribute("productStore", storeDTO);
     return "admin/product/update";
   }
 
   @PostMapping("update/{pno}")
   @PreAuthorize("hasAnyRole('USER')")
   public String postUpdate(
-    ProductDTO productDTO, RedirectAttributes rttr
+    ProductDTO productDTO, ProductCategoryDTO productCategoryDTO, RedirectAttributes rttr
   ){
     log.info("POST | Product Update =================");
 
-    productService.updateProduct(productDTO);
+    productService.updateProduct(productDTO, productCategoryDTO);
 
     rttr.addFlashAttribute("message", productDTO.getPno() + "번 상품이 수정 되었습니다.");
 
-    return "admin/product/read/" + productDTO.getPno();
+    return "redirect:/admin/product/read/" + productDTO.getPno();
   }
   // /Update Page
 }

@@ -55,18 +55,18 @@ public class ProductServiceImpl implements ProductService {
       //등록된 파일 fileNames에서 추출
       List<Map<String, String>> list = fileNames.stream().map(str -> {
         //_ 기준으로 문자열 자르기
-        String[] splitStr = str.split("_");
+        //String[] splitStr = str.split("_");
         //uuid 가져오기
-        String uuid = splitStr[0];
+        String uuid = str.substring(0, 36);
         //실제 파일명 가져오기
-        String fileName = splitStr[1];
+        String fileName = str.substring(37);
         //return map에 담기
         return Map.of("uuid", uuid, "fileName", fileName, "pno", "" + pno, "ord", "" + index.getAndIncrement());
       }).collect(Collectors.toList());
       log.info(list);
       //파일 등록 실행
       fileMapper.createImage(list);
-    }
+    }//end if
     log.info("============ //Product Create Service ============");
     return registCount;
   }
@@ -127,9 +127,39 @@ public class ProductServiceImpl implements ProductService {
 
   //Update Product
   @Override
-  public int updateProduct(ProductDTO productDTO) {
+  public int updateProduct(ProductDTO productDTO, ProductCategoryDTO categoryDTO) {
     log.info("============ Product Update Service ============");
     int updateCount = productMapper.updateProduct(productDTO);
+    Long pno = productDTO.getPno();
+
+    //상품 등록후 카테고리 pno 업데이트
+    categoryDTO.setPno(pno);
+    categoryMapper.updateCategory(categoryDTO);
+
+    //기존 파일 삭제
+    fileMapper.deleteImage(pno);
+
+    //파일이름 List로 가져오기
+    List<String> fileNames = productDTO.getFileNames();
+
+    //상품 등록 성공과 파일이 등록되었다면 실행
+    if(updateCount > 0) {
+      AtomicInteger index = new AtomicInteger();
+      //등록된 파일 fileNames에서 추출
+      List<Map<String, String>> list = fileNames.stream().map(str -> {
+        //_ 기준으로 문자열 자르기
+        //String[] splitStr = str.split("_");
+        //uuid 가져오기
+        String uuid = str.substring(0, 36);
+        //실제 파일명 가져오기
+        String fileName = str.substring(37);
+        //return map에 담기
+        return Map.of("uuid", uuid, "fileName", fileName, "pno", "" + pno, "ord", "" + index.getAndIncrement());
+      }).collect(Collectors.toList());
+      log.info(list);
+      //파일 등록 실행
+      fileMapper.createImage(list);
+    }//end if
     log.info("============ //Product Update Service ============");
     return updateCount;
   }

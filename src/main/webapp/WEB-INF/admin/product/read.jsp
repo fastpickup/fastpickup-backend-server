@@ -39,11 +39,11 @@
 		<dl>
 			<dt>
 				<div class="view_image">
-					<img src="http://192.168.0.64/${productRead.fileNames[0]}" width="500"/>
+					<img src="http://192.168.0.64/${productRead.fileNames[0]}"/>
 				</div>
 				<ul class="image_list">
 					<c:forEach items="${productRead.fileNames}" var="productImage" varStatus="status">
-						<li><img src="http://192.168.0.64/s_${productImage}" width="80"/></li>
+						<li><img src="http://192.168.0.64/s_${productImage}"/></li>
 					</c:forEach>
 				</ul>
 			</dt>
@@ -64,14 +64,21 @@
 						<fmt:formatDate value="${productUpdateDate}" pattern="yyyy-MM-dd HH:mm" />
 					</li>
 					<li><span>좋아요</span> ${productRead.likeCount}</li>
-					<li><span>추천상품</span> ${productRead.isRecommend}</li>
+					<li>
+						<span>추천상품 여부</span>
+						<c:choose>
+							<c:when test="${productRead.isRecommend == 999999999}">추천 상품</c:when>
+							<c:otherwise>일반 상품</c:otherwise>
+						</c:choose>
+					</li>
 				</ul>
 			</dd>
 		</dl>
 	</div>
 </div>
 <div class="button_wrap">
-	<a href="/admin/store/read/${productRead.sno}" class="btn btn-outline-dark">목록으로</a>
+	<a href="/admin/store/read/${productRead.sno}" class="btn btn-outline-dark">가맹점으로</a>
+	<a href="/admin/product/update/${productRead.pno}" class="btn btn-dark">상품수정</a>
 </div>
 <!-- Modal Start -->
 <div class="modal alertModal" tabindex="-1" role="dialog">

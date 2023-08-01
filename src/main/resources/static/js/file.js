@@ -12,7 +12,7 @@ const showProducts = (arr) => {
             <img src="http://localhost/${link}"/>
           </a>
           <p>${fileName}</p>
-          <button class="btn btn-danger" onclick="javascript:removeFile(event, '${uuid}', '${fileName}')">X</button>
+          <button class="btn btn-danger" onclick="javascript:removeFile(event, '${uuid}_${fileName}')">X</button>
         </li>`
   }
   //여러번 업로드 할 수 있으니 +=로 계속 추가
@@ -20,19 +20,19 @@ const showProducts = (arr) => {
 }
 
 //파일 삭제
-const removeFile = (e, uuid, fileName) => {
+const removeFile = (e, fileName) => {
   e.preventDefault()
   e.stopPropagation()
 
   const liObj = e.target.closest("li")
   //console.log(liObj)
-  let originFile = ""
-  fileName !== undefined ? originFile = uuid + "_" + fileName : originFile = uuid
+  // let originFile = ""
+  // fileName !== undefined ? originFile = uuid + "_" + fileName : originFile = uuid
 
   //console.log(originFile)
 
   //nginx 파일 삭제
-  axios.delete(`http://localhost:8080/api/files/remove/${originFile}`)
+  axios.delete("http://192.168.0.64:8080/api/files/remove/" + fileName)
 
   //li 삭제
   liObj.remove()
