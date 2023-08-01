@@ -24,6 +24,7 @@ public class ReviewListDTO {
 
     private Long rno;                           // PK
     private Long sno;                           // 가맹점 번호
+    private Long ono;                           // 주문 번호
     private String email;                       // 리뷰 작성자
     private String reviewTitle;                 // 리뷰 제목
     private LocalDateTime reviewDate;           // 상품 등록일

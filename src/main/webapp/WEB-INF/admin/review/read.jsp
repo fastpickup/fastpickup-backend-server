@@ -15,7 +15,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3>문의 상세</h3>
+            <h3>리뷰 상세</h3>
             <div class="card">
                 <div class="bg-light rounded h-100 p-4">
                     <form onsubmit="onSubmitForm(event)" method="get">
