@@ -17,7 +17,7 @@
 	<div class="form_content">
 		<div class="bg-light rounded h-100 p-4">
 			<label for="sno" class="form-label">가맹점 번호</label>
-			<input type="text" id="sno" name="sno" class="form-control" required>
+			<input type="text" id="sno" name="sno" class="form-control" value = "${sno}" readonly required>
 		</div>
 
         <div class="bg-light rounded h-100 p-4">
@@ -34,7 +34,7 @@
 			<input type="text" id="productName" name="reviewContent" class="form-control" required>
 		</div>
 		<div class="bg-light rounded h-100 p-4">
-			<label for="productFile" class="form-label">리뷰 이미지</label>
+			<label for="productFile" class="form-label"> 이미지</label>
 			<input type="file" name="upload" multiple class="form-control uploadInput" id="productFile">
 		</div>
 		<div class="uploadHidden"></div>
@@ -44,7 +44,7 @@
 	<ul class="uploadUL"></ul>
 </div>
 <div class="button_wrap p-4">
-	<a href="/admin/review/list" class="btn btn-outline-dark">리뷰목록</a>
+	<a href="/admin/store/read/${sno}" class="btn btn-outline-dark">가맹점으로</a>
 	<button type="button" class="btn btn-dark btnAdd">리뷰 작성</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

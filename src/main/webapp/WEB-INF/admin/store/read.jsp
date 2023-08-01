@@ -204,6 +204,29 @@
 		<input type="hidden" name="page" value="${pageRequestDTO.page}">
 		<input type="hidden" name="size" value="${pageRequestDTO.size}">
 	</form>
+
+	<h4 class="my-3">상품 리뷰</h4>
+	<div class="bg-light rounded h-100">
+		<div class="table-responsive">
+			<table class="reviewTable">
+				<thead>
+				<tr>
+					<th scope="col">리뷰 번호</th>
+					<th scope="col">작성자</th>
+					<th scope="col">리뷰 제목</th>
+					<th scope="col">리뷰 일자</th>
+				</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+		<div class="button_wrap">
+			<a href="/admin/review/create/${listStore.sno}" class="btn btn-dark">리뷰 등록</a>
+		</div>
+	</div>
+
 </div>
 <%@ include file="../include/footer.jsp" %>
 

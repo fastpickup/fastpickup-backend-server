@@ -180,4 +180,14 @@ public class ReviewMapperTests {
 
     }
 
+    
+    @Test
+    @Transactional
+    @DisplayName("리뷰 삭제 테스트")
+    public void testDeleteReview(){
+
+        reviewMapper.deleteReview(TEST_RNO);
+
+    }
+
 }

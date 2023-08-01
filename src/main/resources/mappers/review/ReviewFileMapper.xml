@@ -13,4 +13,8 @@
         </foreach>
     </insert>
 
+    <delete id ="deleteReviewImg" parameterType ="long">
+        delete from tbl_review_img where rno = #{rno}
+    </delete>
+
 </mapper>

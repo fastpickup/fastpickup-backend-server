@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.review.dto.ReviewListDTO;
+import com.project.fastpickup.admin.review.dto.ReviewModifyDTO;
 import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.mappers.ReviewFileMapper;
@@ -129,11 +130,57 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
     /* 리스트 */
-    
+
     @Override
     public ReviewReadDTO reviewSelectOne(Long rno) {
 
         return reviewMapper.reviewSelectOne(rno);
+
+    }
+
+    @Override
+    public PageResponseDTO<ReviewListDTO> getStoreList(Long sno, PageRequestDTO pageRequestDTO) {
+
+        List<ReviewListDTO> list = reviewMapper.getReviewListStore(sno, pageRequestDTO);
+        long total = reviewMapper.reviewListStoreCount(pageRequestDTO);
+
+        return PageResponseDTO.<ReviewListDTO>withAll()
+                .list(list)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+    }
+
+    @Override
+    public Long updateReview(ReviewModifyDTO reviewModifyDTO) {
+
+        reviewMapper.updateReview(reviewModifyDTO);
+
+        Long rno = reviewModifyDTO.getRno();
+
+        reviewFileMapper.deleteReviewImg(rno);
+
+        List<String> fileNames = reviewModifyDTO.getFileNames();
+
+        if (fileNames != null) {
+
+            AtomicInteger index = new AtomicInteger();
+            // 등록된 파일 fileNames에서 추출
+            List<Map<String, String>> list = fileNames.stream().map(str -> {
+
+                String uuid = str.substring(0, 36);
+                String fileName = str.substring(37);
+
+                return Map.of("uuid", uuid, "fileName", fileName, "rno", "" + rno, "ord",
+                        "" + index.getAndIncrement());
+            }).collect(Collectors.toList());
+            log.info(list);
+
+            reviewFileMapper.registReviewImg(list);
+        }
+
+        return rno;
 
     }
 

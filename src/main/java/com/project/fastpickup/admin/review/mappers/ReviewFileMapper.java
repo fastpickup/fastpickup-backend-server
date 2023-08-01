@@ -13,4 +13,6 @@ public interface ReviewFileMapper {
 
     int registReviewImg(List<Map<String, String>> imageList);
 
+    int deleteReviewImg(Long rno);
+
 }
