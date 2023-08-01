@@ -77,14 +77,6 @@
 						<fmt:parseDate value="${productRead.registDate}" pattern="yyyy-MM-dd'T'HH:mm" var="productUpdateDate" type="both" />
 						<fmt:formatDate value="${productUpdateDate}" pattern="yyyy-MM-dd HH:mm" />
 					</li>
-					 <!-- Like Button Start -->
-					 <button class="actionLike"><i class="fas fa-heart"></i></button>
-					 <!-- Like Count Start -->
-					 <span class="likeCount" style="font-size: larger;"></span>
-					 <!-- Axios -->
-					 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-					 <!-- Like JavaScript Code -->
-					 <script src="/js/likecreatebykwon.js"></script>
 					<li>
 						<span>추천상품 여부</span>
 						<c:choose>
@@ -92,6 +84,10 @@
 							<c:otherwise>일반 상품</c:otherwise>
 						</c:choose>
 					</li>
+					<!-- Like Button Start -->
+					<button class="actionLike <c:if test="">liked</c:if>"><i class="fas fa-heart"></i></button>
+					<!-- Like Count Start -->
+					<span class="likeCount" style="font-size: larger;"></span>
 				</ul>
 			</dd>
 		</dl>
@@ -115,6 +111,10 @@
 <!-- Modal End -->
 <%@ include file="../include/footer.jsp" %>
 
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Like JavaScript Code -->
+<script src="/js/likecreatebykwon.js"></script>
 <!-- JavaScript Start -->
 <script>
   const alertModal = new bootstrap.Modal(document.querySelector(".alertModal"))

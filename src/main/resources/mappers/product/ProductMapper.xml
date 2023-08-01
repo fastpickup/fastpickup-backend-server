@@ -74,7 +74,7 @@
     left outer join tbl_product_image tpi
     on tpi.pno = prdt.pno
     and (tpi.ord = 0 or tpi.ord is null)
-    order by prdt.pno desc, prdt.isRecommend desc
+    order by prdt.isRecommend desc, prdt.pno desc
   </select>
 
   <!-- Store List Product ProductMapper id = "getStoreList" -->
@@ -95,7 +95,7 @@
      left outer join tbl_product_image tpi
      on tpi.pno = prdt.pno
      and (tpi.ord = 0 or tpi.ord is null)
-    order by prdt.pno desc, prdt.isRecommend desc
+    order by prdt.isRecommend desc, prdt.pno desc
   </select>
 
   <!-- List Total Count Product ProductMapper id = "listCount" -->
