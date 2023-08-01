@@ -6,8 +6,9 @@ package com.project.fastpickup.admin.member.service.impl;
  * E-mail : thistrik@naver.com
  */
 
-
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.fastpickup.admin.member.dto.MemberConvertDTO;
+import com.project.fastpickup.admin.member.exception.InvalidEmailException;
+import com.project.fastpickup.admin.member.exception.UserEmailAlreadyExistsException;
+import com.project.fastpickup.admin.member.exception.UserNotFoundException;
 import com.project.fastpickup.admin.member.mappers.MemberMapper;
 import com.project.fastpickup.admin.member.service.MemberService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -44,6 +48,13 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public int joinMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinMember ServiceImpl");
+        // Check email format
+        String email = memberConvertDTO.getEmail();
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            throw new InvalidEmailException("이메일 형식이 올바르지 않습니다: " + email);
+        }
         String rolename = "USER";
         String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
         memberConvertDTO.setMemberPw(encodedPassword);
@@ -56,9 +67,16 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public int joinStoreMember(MemberConvertDTO memberConvertDTO) {
         log.info("Is Running JoinStoreMember ServiceImpl");
+        // Check email format
+        String email = memberConvertDTO.getEmail();
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            throw new InvalidEmailException("이메일 형식이 올바르지 않습니다: " + email);
+        }
         String rolename = "USER";
         String encodedPassword = passwordEncoder.encode(memberConvertDTO.getMemberPw());
-        memberConvertDTO.setMemberPw(encodedPassword);  
+        memberConvertDTO.setMemberPw(encodedPassword);
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);
         return memberMapper.joinStoreMember(memberConvertDTO);
     }
@@ -100,5 +118,25 @@ public class MemberServiceImpl implements MemberService {
                 .total(total)
                 .pageRequestDTO(pageRequestDTO)
                 .build();
+    }
+
+    // Check Email Already Exists ServiceImpl
+    @Override
+    @Transactional
+    public void checkEmailAlreadyExists(String email) {
+        log.info("Is Running UserEmailAlreadyExistsException ServiceImpl");
+        if (memberMapper.checkEmailForException(email) == 1) {
+            throw new UserEmailAlreadyExistsException("이미 사용중인 이메일입니다.");
+        }
+    }
+
+    // Search User ServiceImpl
+    @Override
+    @Transactional
+    public void searchUser(String email) {
+        log.info("Is Running UserNotFoundException ServiceImpl");
+        if (memberMapper.checkEmailForException(email) == 0) {
+            throw new UserNotFoundException("해당 유저가 없습니다.");
+        }
     }
 }

@@ -38,4 +38,7 @@ public interface OrderService {
 
     // Read Order History
     OrderHistoryDTO readHistory(Long ono);
+    
+    // Check Order Number
+    void checkOrderNumber(Long ono);
 }

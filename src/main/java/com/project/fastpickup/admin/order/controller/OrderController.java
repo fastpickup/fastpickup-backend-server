@@ -38,9 +38,9 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    //페이지 체크
+    // 페이지 체크
     @ModelAttribute("pageName")
-    public String pageName(){
+    public String pageName() {
         return "order";
     }
 
@@ -67,6 +67,7 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadOrder(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Read Order");
+        orderService.checkOrderNumber(ono); // 주문 번호 Check
         OrderDTO listOrder = orderService.readOrder(ono);
         model.addAttribute("listOrder", listOrder);
         return "admin/order/read";
@@ -77,6 +78,7 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateOrder(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Update Order");
+        orderService.checkOrderNumber(ono); // 주문 번호 Check
         OrderDTO listOrder = orderService.readOrder(ono);
         model.addAttribute("listOrder", listOrder);
         return "admin/order/update";
@@ -87,6 +89,7 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadOrderHistory(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Read Order History");
+        orderService.checkOrderNumber(ono); // 주문 번호 Check
         OrderHistoryDTO listOrder = orderService.readHistory(ono);
         model.addAttribute("listOrder", listOrder);
         return "admin/order/readhistory";
@@ -97,6 +100,7 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateOrderHistory(@PathVariable("ono") Long ono, Model model) {
         log.info("GET | Admin Update Order History");
+        orderService.checkOrderNumber(ono); // 주문 번호 Check
         OrderHistoryDTO listOrder = orderService.readHistory(ono);
         model.addAttribute("listOrder", listOrder);
         return "admin/order/updatehistory";

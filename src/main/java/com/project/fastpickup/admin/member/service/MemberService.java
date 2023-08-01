@@ -13,6 +13,7 @@ import com.project.fastpickup.admin.util.PageResponseDTO;
 
 // Member Service Interface
 public interface MemberService {
+    
     // Create Member 
     int joinMember(MemberConvertDTO memberConvertDTO);
 
@@ -30,4 +31,10 @@ public interface MemberService {
 
     // List Member
     PageResponseDTO<MemberConvertDTO> listMember(PageRequestDTO pageRequestDTO);
+
+    // checkEmailAlreadyExists
+    void checkEmailAlreadyExists(String email);
+
+    // searchUser
+    void searchUser(String email);
 }

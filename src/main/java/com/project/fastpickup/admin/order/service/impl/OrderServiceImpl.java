@@ -19,6 +19,7 @@ import com.project.fastpickup.admin.order.dto.order.OrderUpdateDTO;
 import com.project.fastpickup.admin.order.dto.orderhistory.OrderHistoryCreateDTO;
 import com.project.fastpickup.admin.order.dto.orderhistory.OrderHistoryDTO;
 import com.project.fastpickup.admin.order.dto.orderhistory.OrderHistoryUpdateDTO;
+import com.project.fastpickup.admin.order.exception.OrderNotFoundException;
 import com.project.fastpickup.admin.order.mappers.OrderHistoryMapper;
 import com.project.fastpickup.admin.order.mappers.OrderMapper;
 import com.project.fastpickup.admin.order.service.OrderService;
@@ -54,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         OrderHistoryCreateDTO orderHistoryCreateDTO = OrderHistoryCreateDTO.builder().ono(ono).build();
         return orderHistoryMapper.createHistory(orderHistoryCreateDTO);
     }
-    
+
     // Read Order And OrderHistory And Product And ProductImage And Store
     // ServiceImpl
     @Override
@@ -103,10 +104,21 @@ public class OrderServiceImpl implements OrderService {
         return orderHistoryMapper.updateHistory(orderHistoryUpdateDTO);
     }
 
+    // Read History ServiceImpl
     @Override
     @Transactional(readOnly = true)
     public OrderHistoryDTO readHistory(Long ono) {
         log.info("Is Running Read History Serviceimpl");
         return orderHistoryMapper.readHistory(ono);
+    }
+
+    // Check Order Number ServiceImpl
+    @Override
+    @Transactional
+    public void checkOrderNumber(Long ono) {
+        log.info("Is Running Order Number ServiceImpl");
+        if (orderMapper.duplicateOno(ono) == 0) {
+            throw new OrderNotFoundException("해당하는 주문 번호가 없습니다.");
+        }
     }
 }

@@ -31,4 +31,10 @@ public interface LikeMapper {
 
     // Decrement Like For tbl_product
     int decrementLikeCount(Long pno);
+
+    // Check pno
+    int duplicatePno(Long pno);
+
+    // Check Email 
+    int duplicateEmail(String email);
 }

@@ -63,6 +63,7 @@ public class MemberController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN', 'STORE')")
     public String getReadMember(@PathVariable("email") String email, Model model) {
         log.info("GET | Admin Member Read");
+        memberService.searchUser(email); // 회원 존재 여부 Check
         MemberConvertDTO listMember = memberService.readMember(email);
         model.addAttribute("listMember", listMember);
         return "admin/member/read";
@@ -73,6 +74,7 @@ public class MemberController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdateMember(@PathVariable("email") String email, Model model) {
         log.info("GET | Admin Member Update");
+        memberService.searchUser(email); // 회원 존재 여부 Check
         MemberConvertDTO listMember = memberService.readMember(email);
         model.addAttribute("listMember", listMember);
         return "admin/member/update";
@@ -109,6 +111,7 @@ public class MemberController {
     @PreAuthorize("permitAll")
     public String postCreateMember(@Valid MemberConvertDTO memberConvertDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Join");
+        memberService.checkEmailAlreadyExists(memberConvertDTO.getEmail()); // 이메일 존재 여부 Check
         int joinMember = memberService.joinMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "회원 가입 완료");
         return "redirect:/admin/member/list";
@@ -120,6 +123,7 @@ public class MemberController {
     public String postCreateStoreMember(@Valid MemberConvertDTO memberConvertDTO,
             RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Member Join");
+        memberService.checkEmailAlreadyExists(memberConvertDTO.getEmail()); // 이메일 존재 여부 Check
         int joinStoreMember = memberService.joinStoreMember(memberConvertDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 회원 가입 완료");
         return "redirect:/admin/member/list";
@@ -130,6 +134,7 @@ public class MemberController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDeleteMember(@PathVariable("email") String email, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Member Delete");
+        memberService.searchUser(email); // 회원 존재 여부 Check
         int deletedMember = memberService.deleteMember(email);
         redirectAttributes.addFlashAttribute("message", "회원 탈퇴 완료");
         return "redirect:/admin/member/list";

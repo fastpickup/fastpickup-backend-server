@@ -39,4 +39,7 @@ public interface StoreService {
 
     // Sales Month
     List<StoreSalesDTO> salesMonth(Long sno);
+
+    // Check Store Number
+    void checkStoreNumber(Long sno);
 }

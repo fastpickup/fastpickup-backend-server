@@ -49,9 +49,9 @@ public class StoreController {
         this.productService = productService;
     }
 
-    //페이지 체크
+    // 페이지 체크
     @ModelAttribute("pageName")
-    public String pageName(){
+    public String pageName() {
         return "store";
     }
 
@@ -78,6 +78,7 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getReadStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Store Read");
+        storeService.checkStoreNumber(sno); // 가맹점 여부 Check
         StoreDTO listStore = storeService.readStore(sno);
         List<StoreSalesDTO> salesDay = storeService.salesDate(sno);
         List<StoreSalesDTO> salesMonth = storeService.salesMonth(sno);
@@ -94,6 +95,7 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdateStore(@PathVariable("sno") Long sno, Model model) {
         log.info("GET | Admin Store Update");
+        storeService.checkStoreNumber(sno); // 가맹점 여부 Check
         StoreDTO listStore = storeService.readStore(sno);
         model.addAttribute("listStore", listStore);
         return "admin/store/update";
@@ -112,7 +114,8 @@ public class StoreController {
     // POST : Create Store
     @PostMapping("create")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public String postCreateStore(@Valid StoreCreateDTO storeCreateDTO, Authentication authentication, RedirectAttributes redirectAttributes) {
+    public String postCreateStore(@Valid StoreCreateDTO storeCreateDTO, Authentication authentication,
+            RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Create");
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
@@ -127,6 +130,7 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDeleteStore(@PathVariable("sno") Long sno, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Delete");
+        storeService.checkStoreNumber(sno); // 가맹점 여부 Check
         int deleteStore = storeService.deleteStore(sno);
         redirectAttributes.addFlashAttribute("message", "가맹점 퇴출 완료");
         return "redirect:/admin/store/list";

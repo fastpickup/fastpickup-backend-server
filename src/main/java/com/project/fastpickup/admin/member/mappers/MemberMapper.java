@@ -49,4 +49,7 @@ public interface MemberMapper {
 
     // total 
     int total(PageRequestDTO pageRequestDTO);
+
+    // UserEmailAlreadyExistsException
+    int checkEmailForException(String email);
 }

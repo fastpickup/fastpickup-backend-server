@@ -90,6 +90,13 @@ WHERE s.sno = #{sno};
   ) as tbl_store
 </select>
 
+<!-- StoreMapper id = "duplicateSno" -->
+<select id="duplicateSno" parameterType="long">
+  SELECT * FROM 
+  tbl_store 
+  WHERE sno = #{sno}
+</select>
+
 <!-- 일별 과 월별 세일즈 통계를 위한 ResultMap 사용 -->
 <!-- StoreMapper id = "salesDate" -->
 <select id="salesDate" parameterType="long" resultMap="salesByDateResult">

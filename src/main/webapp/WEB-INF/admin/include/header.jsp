@@ -53,7 +53,7 @@
   <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
       <h1 class="header-logo">
-        <a href="/board/list" class="navbar-brand">
+        <a href="/admin/store/list" class="navbar-brand">
         <%--<h3 class="text-primary">Fast Pickup</h3>--%>
           <img src="/imgs/logo.png" alt="factpickup">
         </a>

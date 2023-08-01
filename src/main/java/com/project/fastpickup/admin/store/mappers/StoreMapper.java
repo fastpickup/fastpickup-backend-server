@@ -20,7 +20,7 @@ import com.project.fastpickup.admin.util.PageRequestDTO;
 // Store Mapper Interface
 @Mapper
 public interface StoreMapper {
-    
+
     // Create Store
     int createStore(StoreCreateDTO storeCreateDTO);
 
@@ -30,7 +30,7 @@ public interface StoreMapper {
     // Update Store
     int updateStore(StoreUpdateDTO storeUpdateDTO);
 
-    // Delete store 
+    // Delete store
     int deleteStore(Long sno);
 
     // List Store
@@ -42,6 +42,9 @@ public interface StoreMapper {
     // Sales Date
     List<StoreSalesDTO> salesDate(Long sno);
 
-    // Sales Month 
+    // Sales Month
     List<StoreSalesDTO> salesMonth(Long sno);
+
+    // duplicate Sno
+    int duplicateSno(Long sno);
 }

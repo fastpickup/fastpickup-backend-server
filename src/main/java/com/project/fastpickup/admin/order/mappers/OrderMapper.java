@@ -37,5 +37,7 @@ public interface OrderMapper {
 
     // total
     int total(PageRequestDTO pageRequestDTO);
-    
+
+    // Duplicate Ono
+    int duplicateOno(Long ono);
 }

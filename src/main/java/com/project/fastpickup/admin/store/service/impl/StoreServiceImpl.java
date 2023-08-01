@@ -16,6 +16,7 @@ import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
+import com.project.fastpickup.admin.store.exception.StoreNotFoundException;
 import com.project.fastpickup.admin.store.mappers.StoreMapper;
 import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -98,5 +99,15 @@ public class StoreServiceImpl implements StoreService {
     public List<StoreSalesDTO> salesMonth(Long sno) {
         log.info("Is Running Sales Month ServiceImpl");
         return storeMapper.salesMonth(sno);
+    }
+
+    // Check Store Number ServiceImpl
+    @Override
+    @Transactional
+    public void checkStoreNumber(Long sno) {
+        log.info("Is Runnint Check Store Number");
+        if (storeMapper.duplicateSno(sno) == 0) {
+            throw new StoreNotFoundException("찾으시는 가맹점이 없습니다.");
+        }
     }
 }

@@ -161,4 +161,11 @@
         ) as tbl_order
     </select>
 
+    <!-- OrderMapper id = "duplicateOno" -->
+    <select id="duplicateOno" parameterType="long">
+        SELECT * FROM 
+        tbl_order
+        WHERE ono = #{ono}
+    </select>
+
 </mapper>

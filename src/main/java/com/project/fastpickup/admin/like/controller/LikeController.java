@@ -40,33 +40,38 @@ public class LikeController {
 
     // Toggle Like
     @PostMapping("pno/toggle/{pno}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Integer>> toggleLikePno(@PathVariable("pno") Long pno,
             Authentication authentication) {
         log.info("RestController | Admin Toggle Like");
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
+        likeService.checkEmailNotLogin(email); // 회원 로그인 여부 Check
+        likeService.checkPnoNotFound(pno); // 상품 존재 여부 Check
         int result = likeService.toggleLike(pno, email);
         return new ResponseEntity<>(Map.of("result", result), HttpStatus.OK);
     }
 
     // Count Like
     @GetMapping("pno/{pno}/count")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Long>> countLike(@PathVariable("pno") Long pno) {
         log.info("RestController | Admin Count Like");
+        likeService.checkPnoNotFound(pno); // 상품 존재 여부 Check
         Long result = likeService.countLike(pno);
         return new ResponseEntity<>(Map.of("result", result), HttpStatus.OK);
     }
 
     // Check Like
     @GetMapping("pno/{pno}/check")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("permitAll")
     public ResponseEntity<Map<String, Boolean>> checkLike(@PathVariable("pno") Long pno,
             Authentication authentication) {
         log.info("RestController | Admin Check Like");
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
+        likeService.checkEmailNotLogin(email); // 회원 로그인 여부 Check
+        likeService.checkPnoNotFound(pno); // 상품 존재 여부 Check
         LikeDTO result = likeService.checkLikeByMemberAndPost(pno, email);
         return new ResponseEntity<>(Map.of("liked", result != null), HttpStatus.OK);
     }

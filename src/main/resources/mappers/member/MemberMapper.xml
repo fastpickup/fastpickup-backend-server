@@ -119,4 +119,12 @@
   ) as tbl_member_alias
 </select>
 
+<!-- MemberMapper id = "checkEmailForException" -->
+<select id="checkEmailForException" parameterType="java.lang.String" resultType="int">
+  SELECT COUNT(*) FROM 
+  tbl_member
+  WHERE email = #{email}
+</select>
+
+
 </mapper>

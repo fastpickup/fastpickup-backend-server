@@ -48,4 +48,18 @@
     WHERE pno = #{pno} AND email = #{email}
 </select>
 
+<!-- LikeMapper id = "duplicateEmail" -->
+<select id="duplicateEmail" parameterType="java.lang.String">
+    SELECT COUNT(*)
+    FROM tbl_member 
+    WHERE email = #{email}
+</select>
+
+<!-- LikeMapper id = "duplicatePno" -->
+<select id="duplicatePno" parameterType="long">
+    SELECT COUNT(*)
+    FROM tbl_like
+    WHERE pno = #{pno}
+</select>
+
 </mapper>

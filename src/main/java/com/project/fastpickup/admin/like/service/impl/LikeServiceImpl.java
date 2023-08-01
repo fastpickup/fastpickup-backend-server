@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.fastpickup.admin.like.dto.LikeCreateDTO;
 import com.project.fastpickup.admin.like.dto.LikeDTO;
+import com.project.fastpickup.admin.like.exception.NotLoggedInException;
+import com.project.fastpickup.admin.like.exception.PostNotFoundException;
 import com.project.fastpickup.admin.like.mappers.LikeMapper;
 import com.project.fastpickup.admin.like.service.LikeService;
 
@@ -57,11 +59,31 @@ public class LikeServiceImpl implements LikeService {
         return likeMapper.countLikes(pno);
     }
 
-    // Check Like
+    // Check Like ServiceImpl
     @Override
     @Transactional(readOnly = true)
     public LikeDTO checkLikeByMemberAndPost(Long pno, String email) {
         log.info("Is Running Check Like Member And Post");
         return likeMapper.checkLikeByMemberAndPost(pno, email);
+    }
+
+    // Check Pno Not Found ServiceImpl
+    @Override
+    @Transactional
+    public void checkPnoNotFound(Long pno) {
+        log.info("Is Running Check Pno Not Found ServiceImpl");
+        if (likeMapper.duplicatePno(pno) == 0) {
+            throw new PostNotFoundException("없는 상품 번호 입니다.");
+        }
+    }
+
+    // Check Email Not Login
+    @Override
+    @Transactional
+    public void checkEmailNotLogin(String email) {
+        log.info("Is Running Check Email Not Login ServiceImpl");
+        if (likeMapper.duplicateEmail(email) == 0) {
+            throw new NotLoggedInException("로그인 하지 않은 사용자 입니다.");
+        }
     }
 }
