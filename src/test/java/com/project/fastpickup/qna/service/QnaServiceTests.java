@@ -1,6 +1,5 @@
 package com.project.fastpickup.qna.service;
 
-import com.project.fastpickup.admin.qna.dto.QnaDTO;
 import com.project.fastpickup.admin.qna.dto.QnaListDTO;
 import com.project.fastpickup.admin.qna.dto.QnaRegistDTO;
 import com.project.fastpickup.admin.qna.dto.QnaUpdateDTO;
@@ -16,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @SpringBootTest
 @Log4j2
 public class QnaServiceTests {
@@ -28,7 +25,7 @@ public class QnaServiceTests {
 
     // Test 시작시 메모리에 priavte static final 로 먼저 올려놓는다.
     private static final String TEST_EMAIL = "thistrik@naver.com";
-    private static final String TEST_EMAIL1 = "twefiwefew@naver.com";
+    private static final String TEST_EMAIL1 = "wow_1@nate.com";
     private static final String TEST_QNA_TITLE = "문의합니다.";
     private static final String TEST_QNA_TITLE2 = "문의합니다.(수정본)";
     private static final String TEST_QNA_CONTENT = "문의내용은 ~~~~~~~입니다.";
@@ -60,7 +57,7 @@ public class QnaServiceTests {
 
         // 문의 수정
         qnaUpdateDTO = QnaUpdateDTO.builder()
-                .qno(4L)
+                .qno(21L)
                 .qnaTitle(TEST_QNA_TITLE2)
                 .qnaContent(TEST_QNA_CONTENT2)
                 .build();
@@ -93,7 +90,7 @@ public class QnaServiceTests {
         // WHEN
         qnaService.createQna(qnaRegistDTO2);
         // THEN
-        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "twefiwefew@naver.com");
+        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "wow_1@nate.com");
         log.info("=== End Create Qna Test Service ===");
     }
 
@@ -105,9 +102,9 @@ public class QnaServiceTests {
         // GIVEN
         log.info("=== Start Read Qna Test Service ===");
         // WHEN
-        qnaService.readQna(4L);
+        qnaService.readQna(23L);
         // THEN
-        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "twefiwefew@naver.com");
+        Assertions.assertEquals(qnaRegistDTO2.getEmail(), "wow_1@nate.com");
         log.info("=== End Read Qna Test Service ===");
     }
 
@@ -133,7 +130,7 @@ public class QnaServiceTests {
         // GIVEN
         log.info("=== Start delete Qna Test Service ===");
         // WHEN
-        int result = qnaService.deleteQna(4L);
+        int result = qnaService.deleteQna(21L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End delete Qna Test Service ===");

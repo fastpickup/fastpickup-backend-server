@@ -9,26 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastPickup</title>
 </head>
-
-<style>
-    /* 댓글 폼 스타일 */
-    #reply-form-wrapper textarea {
-        width: 100%;
-        resize: vertical;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        margin-top: 40px;
-        margin-bottom: 10px;
-    }
-
-    #reply-form-wrapper button {
-        padding: 8px 20px;
-        font-size: 16px;
-    }
-</style>
-
 <body>
 <%@ include file="../include/header.jsp" %>
 <div class="container-fluid">
@@ -63,12 +43,14 @@
             </form>
             <c:choose>
                 <c:when test="${count == 0}">
-                    <div id="reply-form-wrapper">
+                    <div id="reply-form-wrapper" class="mt-4">
                         <form action="/admin/qna/replies/${qno}/create" method="post">
                             <input type="hidden" name="qno" class="form-control" readonly value="${listQna.qno}">
                             <input type="hidden" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
-                            <textarea class="form-control" rows="4" placeholder="답글을 입력해주세요" name="reply"></textarea>
-                            <button type="submit" class="btn btn-dark">답글 달기</button>
+                            <textarea class="form-control p-3" rows="4" placeholder="답글을 입력해주세요." name="reply"></textarea>
+                            <div class="button_wrap mt-4">
+                                <button type="submit" class="btn btn-dark">답글 달기</button>
+                            </div>
                         </form>
                     </div>
 
@@ -77,12 +59,12 @@
                     <div style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 40px">
                         <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
                             <dl class="detail_content">
-                                <dt style="font-size: 16px;">Email</dt>
-                                <dd style="font-size: 14px;" class="email">${replyRead.email}</dd>
-                                <dt style="font-size: 16px;">답글 날짜</dt>
-                                <dd style="font-size: 14px;">${replyRead.replyDate}</dd>
-                                <dt style="font-size: 16px;">답글 내용</dt>
-                                <dd style="font-size: 14px;">${replyRead.reply}</dd>
+                                <dt>Email</dt>
+                                <dd class="email">${replyRead.email}</dd>
+                                <dt>답변 날짜</dt>
+                                <dd>${replyRead.replyDate}</dd>
+                                <dt>답변 내용</dt>
+                                <dd>${replyRead.reply}</dd>
                             </dl>
                             <a href="/admin/qna/replies/update/${replyRead.rno}">수정</a>
                             <button class="border-0" type="submit">삭제</button>

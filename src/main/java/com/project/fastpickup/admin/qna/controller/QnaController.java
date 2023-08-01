@@ -35,8 +35,7 @@ public class QnaController {
 
     // list
     @GetMapping("list")
-//    @PreAuthorize("hasAnyRole('USER')")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void getList(PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Qna List");
         PageResponseDTO<QnaListDTO> listQna = qnaService.listQna(pageRequestDTO);
@@ -47,7 +46,7 @@ public class QnaController {
     // create
     // get
     @GetMapping("create")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void getCreate(Model model) {
 
 
@@ -57,7 +56,7 @@ public class QnaController {
 
     // post
     @PostMapping("create")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postCreate(QnaRegistDTO qnaRegistDTO) {
 
         log.info("POST | Admin Qna Create");
@@ -68,7 +67,7 @@ public class QnaController {
 
     // read
     @GetMapping("read/{qno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getRead(@PathVariable("qno") Long qno, Model model) {
 
         log.info("GET | Admin Qna Read");
@@ -88,7 +87,7 @@ public class QnaController {
     // update
     // get
     @GetMapping("update/{qno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getUpdate(@PathVariable("qno") Long qno, Model model) {
 
         log.info("GET | Admin Qna Update");
@@ -101,7 +100,7 @@ public class QnaController {
 
     // post
     @PostMapping("update")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postUpdate(QnaUpdateDTO qnaUpdateDTO) {
 
         log.info("POST | Admin Qna Update");
@@ -113,7 +112,7 @@ public class QnaController {
 
     // delete
     @PostMapping("delete/{qno}")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String postDelete(@PathVariable("qno") Long qno) {
 
         log.info("POST | Admin Qna Delete");

@@ -36,15 +36,15 @@ public class QnaReplyServiceTests {
 
         // 문의 답글 등록
         qnaReplyRegistDTO = QnaReplyRegistDTO.builder()
-                .qno(4L)
+                .qno(21L)
                 .reply(TEST_QNA_REPIY)
                 .email(TEST_EMAIL)
                 .build();
 
         // 문의 답글 수정
         qnaReplyUpdateDTO = QnaReplyUpdateDTO.builder()
-                .rno(8L)
-                .qno(4L)
+                .rno(29L)
+                .qno(21L)
                 .reply(TEST_QNA_REPIY2)
                 .build();
     }
@@ -72,7 +72,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Read Qna Reply Test Service ===");
         // WHEN
-        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(4L);
+        QnaReplyReadDTO replyReadDTO = qnaReplyService.readQnaReply(21L);
         // THEN
         Assertions.assertNotNull(replyReadDTO, "Qna Reply Read is Null");
         log.info("=== End Read Qna Reply Test Service ===");
@@ -114,7 +114,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Service ===");
         // WHEN
-        int result = qnaReplyService.deleteQnaReply(8L);
+        int result = qnaReplyService.deleteQnaReply(29L);
         // THEN
         Assertions.assertEquals(result, 1);
         log.info("=== End Delete Qna Reply Test Service ===");
@@ -128,7 +128,7 @@ public class QnaReplyServiceTests {
         // GIVEN
         log.info("=== Start Count Qna Reply Test Service ===");
         // WHEN
-        int count = qnaReplyService.replyCount(24L);
+        int count = qnaReplyService.replyCount(21L);
         // THEN
         log.info("count : " + count);
         log.info("=== End Count Qna Reply Test Service ===");
