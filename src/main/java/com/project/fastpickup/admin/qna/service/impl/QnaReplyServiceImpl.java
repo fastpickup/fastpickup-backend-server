@@ -28,6 +28,12 @@ public class QnaReplyServiceImpl implements QnaReplyService {
         return qnaReplyMapper.readQnaReply(qno);
     }
 
+    // update read
+    @Override
+    public QnaReplyReadDTO readQnaReplyRno(Long rno) {
+        return qnaReplyMapper.readQnaReplyRno(rno);
+    }
+
     // update
     @Override
     public int updateQnaReply(QnaReplyUpdateDTO qnaReplyUpdateDTO) {
@@ -38,5 +44,11 @@ public class QnaReplyServiceImpl implements QnaReplyService {
     @Override
     public int deleteQnaReply(Long rno) {
         return qnaReplyMapper.deleteQnaReply(rno);
+    }
+
+    // reply count
+    @Override
+    public int replyCount(Long qno) {
+        return qnaReplyMapper.replyCount(qno);
     }
 }

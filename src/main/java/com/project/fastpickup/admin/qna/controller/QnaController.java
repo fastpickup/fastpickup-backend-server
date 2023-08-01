@@ -38,10 +38,10 @@ public class QnaController {
 //    @PreAuthorize("hasAnyRole('USER')")
     @PreAuthorize("permitAll")
     public void getList(PageRequestDTO pageRequestDTO, Model model) {
-
         log.info("GET | Admin Qna List");
         PageResponseDTO<QnaListDTO> listQna = qnaService.listQna(pageRequestDTO);
         model.addAttribute("listQna", listQna);
+
     }
 
     // create
@@ -78,6 +78,9 @@ public class QnaController {
 
         QnaReplyReadDTO replyRead = qnaReplyService.readQnaReply(qno);
         model.addAttribute("replyRead", replyRead);
+
+        int count = qnaReplyService.replyCount(qno);
+        model.addAttribute("count" , count);
 
         return "admin/qna/read";
     }

@@ -15,12 +15,18 @@ public interface QnaReplyService {
     // Create
     int createQnaReply(QnaReplyRegistDTO qnaReplyRegistDTO);
 
-    // read
+    // reply read
     QnaReplyReadDTO readQnaReply(Long qno);
+
+    // reply Update read
+    QnaReplyReadDTO readQnaReplyRno(Long rno);
 
     // Update
     int updateQnaReply(QnaReplyUpdateDTO qnaReplyUpdateDTO);
 
     // Delete
     int deleteQnaReply(Long rno);
+
+    // reply count
+    int replyCount(Long qno);
 }
