@@ -143,7 +143,7 @@ public class ProductServiceImpl implements ProductService {
     List<String> fileNames = productDTO.getFileNames();
 
     //상품 등록 성공과 파일이 등록되었다면 실행
-    if(updateCount > 0) {
+    if(updateCount > 0 && productDTO.getFileNames() != null && !productDTO.getFileNames().isEmpty()) {
       AtomicInteger index = new AtomicInteger();
       //등록된 파일 fileNames에서 추출
       List<Map<String, String>> list = fileNames.stream().map(str -> {
