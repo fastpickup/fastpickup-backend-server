@@ -88,7 +88,7 @@ public class ProductController {
 
     ProductDTO productDTO = productService.selectOne(pno);
     StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
-
+    
     model.addAttribute("productRead", productDTO);
     model.addAttribute("productStore", storeDTO);
     return "admin/product/read";
