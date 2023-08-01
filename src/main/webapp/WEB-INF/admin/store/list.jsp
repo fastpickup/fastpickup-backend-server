@@ -69,9 +69,11 @@
 				</tbody>
 			</table>
 		</div>
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 		<div class="button_wrap">
 			<a href="/admin/store/create" class="btn btn-dark">가맹점 추가</a>
 		</div>
+		</sec:authorize>
 	</div>
 
 	<!-- Paging Start -->

@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Log4j2
 @RequestMapping("admin/product/")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ProductController {
   //의존성 주입
   private final ProductService productService;
@@ -53,6 +54,18 @@ public class ProductController {
 
     model.addAttribute("productList", list);
   }
+
+  //List Store JSON DATA
+  @GetMapping("{sno}/list")
+  @PreAuthorize("permitAll")
+  @ResponseBody
+  public PageResponseDTO<ProductListDTO> getStoreList(
+    @PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO
+  ){
+
+    return productService.getStoreList(pageRequestDTO, sno);
+  }
+
 
   //Create Page
   //Get

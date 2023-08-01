@@ -89,9 +89,25 @@ public class StoreController {
         return "admin/store/read";
     }
 
+    // GET : Read Store
+    @GetMapping("read2/{sno}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    public String getReadStoree(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
+        log.info("GET | Admin Store Read");
+        StoreDTO listStore = storeService.readStore(sno);
+        List<StoreSalesDTO> salesDay = storeService.salesDate(sno);
+        List<StoreSalesDTO> salesMonth = storeService.salesMonth(sno);
+        PageResponseDTO<ProductListDTO> listProduct = productService.getStoreList(pageRequestDTO, sno);
+        model.addAttribute("listStore", listStore);
+        model.addAttribute("listProduct", listProduct);
+        model.addAttribute("salesDay", salesDay);
+        model.addAttribute("salesMonth", salesMonth);
+        return "admin/store/read2";
+    }
+
     // GET : Update Store
     @GetMapping("update/{sno}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getUpdateStore(@PathVariable("sno") Long sno, Model model) {
         log.info("GET | Admin Store Update");
         StoreDTO listStore = storeService.readStore(sno);
@@ -101,7 +117,7 @@ public class StoreController {
 
     // POST : Update Store
     @PostMapping("update")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String postUpdateStore(@Valid StoreUpdateDTO storeUpdateDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Update");
         int updateStore = storeService.updateStore(storeUpdateDTO);

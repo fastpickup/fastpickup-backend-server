@@ -84,10 +84,12 @@
 							<c:otherwise>일반 상품</c:otherwise>
 						</c:choose>
 					</li>
+					<sec:authorize access="permitAll()">
 					<!-- Like Button Start -->
 					<button class="actionLike"><i class="fas fa-heart"></i></button>
 					<!-- Like Count Start -->
 					<span class="likeCount" style="font-size: larger;"></span>
+					</sec:authorize>
 				</ul>
 			</dd>
 		</dl>
@@ -95,7 +97,9 @@
 </div>
 <div class="button_wrap">
 	<a href="/admin/store/read/${productRead.sno}" class="btn btn-outline-dark">가맹점으로</a>
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 	<a href="/admin/product/update/${productRead.pno}" class="btn btn-dark">상품수정</a>
+	</sec:authorize>
 </div>
 <!-- Modal Start -->
 <div class="modal alertModal" tabindex="-1" role="dialog">
@@ -111,10 +115,12 @@
 <!-- Modal End -->
 <%@ include file="../include/footer.jsp" %>
 
+<sec:authorize access="permitAll()">
 <!-- Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Like JavaScript Code -->
 <script src="/js/likecreatebykwon.js"></script>
+</sec:authorize>
 <!-- JavaScript Start -->
 <script>
   const alertModal = new bootstrap.Modal(document.querySelector(".alertModal"))

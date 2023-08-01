@@ -49,6 +49,7 @@ CREATE TABLE tbl_like (
     FOREIGN KEY (email) REFERENCES tbl_member(email) ON DELETE CASCADE
 )
 ;
+select * from tbl_like;
 
 ##상품 테이블 생성
 create table tbl_product (
@@ -186,6 +187,7 @@ create index idx_tbl_member_joindate on tbl_member (joinDate asc);
 select * from tbl_member;
 
 select * from tbl_member_role;
+update tbl_member_role set rolename = 'STORE' where email = 'thistrik@gmail.com';
 
 select * from persistent_logins;
 
@@ -203,6 +205,9 @@ delete from tbl_member where memberName = '이범수';
 select * from tbl_product;
 select * from tbl_product_image;
 select * from tbl_product_category;
+
+select * from tbl_product_image where pno = 45;
+delete from tbl_product_category where cno = 34;
 
 delete from tbl_product;
 delete from tbl_product_category;
@@ -286,7 +291,7 @@ where tp.pno = 6
 ##문의
 select * from tbl_qna;
 select * from tbl_qna_reply;
-delete from tbl_qna_reply;
+delete from tbl_qna_reply where qno = 22;
 ##/문의
 
 ##가맹점
