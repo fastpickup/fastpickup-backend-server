@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.fastpickup.admin.like.dto.LikeDTO;
 import com.project.fastpickup.admin.like.service.LikeService;
 
 import lombok.extern.log4j.Log4j2;
@@ -56,5 +57,17 @@ public class LikeController {
         log.info("RestController | Admin Count Like");
         Long result = likeService.countLike(pno);
         return new ResponseEntity<>(Map.of("result", result), HttpStatus.OK);
+    }
+
+    // Check Like
+    @GetMapping("pno/{pno}/check")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<Map<String, Boolean>> checkLike(@PathVariable("pno") Long pno,
+            Authentication authentication) {
+        log.info("RestController | Admin Check Like");
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String email = userDetails.getUsername();
+        LikeDTO result = likeService.checkLikeByMemberAndPost(pno, email);
+        return new ResponseEntity<>(Map.of("liked", result != null), HttpStatus.OK);
     }
 }

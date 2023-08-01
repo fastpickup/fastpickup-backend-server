@@ -1,5 +1,7 @@
 package com.project.fastpickup.admin.like.service;
 
+import com.project.fastpickup.admin.like.dto.LikeDTO;
+
 /*
  * Date   : 2023.07.31
  * Author : 권성준
@@ -14,4 +16,6 @@ public interface LikeService {
 
     // Count Like service 
     Long countLike(Long pno);
+
+    LikeDTO checkLikeByMemberAndPost(Long pno, String email);
 }

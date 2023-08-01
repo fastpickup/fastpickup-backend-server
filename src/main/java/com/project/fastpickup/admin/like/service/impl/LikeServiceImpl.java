@@ -57,4 +57,11 @@ public class LikeServiceImpl implements LikeService {
         return likeMapper.countLikes(pno);
     }
 
+    // Check Like
+    @Override
+    @Transactional(readOnly = true)
+    public LikeDTO checkLikeByMemberAndPost(Long pno, String email) {
+        log.info("Is Running Check Like Member And Post");
+        return likeMapper.checkLikeByMemberAndPost(pno, email);
+    }
 }

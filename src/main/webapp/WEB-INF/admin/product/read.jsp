@@ -85,7 +85,7 @@
 						</c:choose>
 					</li>
 					<!-- Like Button Start -->
-					<button class="actionLike <c:if test="">liked</c:if>"><i class="fas fa-heart"></i></button>
+					<button class="actionLike"><i class="fas fa-heart"></i></button>
 					<!-- Like Count Start -->
 					<span class="likeCount" style="font-size: larger;"></span>
 				</ul>

@@ -73,7 +73,7 @@
     <div class="button_wrap">
       <a href="/admin/member/read/${email}" class="btn btn-outline-dark">회원 상세</a>
       <a href="/admin/member/create" class="btn btn-dark">회원 추가</a>
-      <a href="/admin/member/createstore" class="btn btn-dark">가맹점 추가</a>
+      <a href="/admin/member/createstore" class="btn btn-dark">가맹점 회원 추가</a>
     </div>
   </div>
 
