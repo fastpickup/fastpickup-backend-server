@@ -19,19 +19,25 @@
 			<label for="sno" class="form-label">가맹점 번호</label>
 			<input type="text" id="sno" name="sno" class="form-control" value = "${sno}" readonly required>
 		</div>
-
+    <div class="bg-light rounded h-100 p-4">
+			<label for="ono" class="form-label">주문 번호</label>
+			<input type="text" id="ono" name="ono" class="form-control" required>
+		</div>
         <div class="bg-light rounded h-100 p-4">
             <label for="email" class="form-label">이메일</label>
             <input type="email" id="email" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
         </div>
 
 		<div class="bg-light rounded h-100 p-4">
-			<label for="categoryName" class="form-label">리뷰 제목</label>
-			<input type="text" id="categoryName" name="reviewTitle" class="form-control" required>
+			<label for="reviewTitle" class="form-label">리뷰 제목</label>
+			<input type="text" id="reviewTitle" name="reviewTitle" class="form-control" required>
 		</div>
 		<div class="bg-light rounded h-100 p-4">
-			<label for="productName" class="form-label">리뷰 내용</label>
-			<input type="text" id="productName" name="reviewContent" class="form-control" required>
+			<label for="reviewContent" class="form-label">리뷰 내용</label>
+			<!-- <input type="text" id="reviewContent" name="reviewContent" class="form-control" required> -->
+
+      <textarea class="form-control p-3" rows="4" placeholder="리뷰를 입력해주세요." name="reviewContent" required></textarea>
+
 		</div>
 		<div class="bg-light rounded h-100 p-4">
 			<label for="productFile" class="form-label"> 이미지</label>

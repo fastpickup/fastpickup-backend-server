@@ -35,7 +35,7 @@
     <!-- 답글 -->
 
 
-    <!-- 리스트 -->
+    <!-- 리뷰 전체 리스트 -->
     <select id="getReviewList" resultType="com.project.fastpickup.admin.review.dto.ReviewListDTO">
     
         select r.rno, r.ono, r.sno, r.gno, r.email, r.reviewTitle, r.reviewDate, 
@@ -56,6 +56,7 @@
         where rno > 0 and rno = gno limit #{countEnd}) review
     </select>
 
+    <!-- 가맹점 별 리뷰 리스트  -->
     <select id="getReviewListStore" resultType="com.project.fastpickup.admin.review.dto.ReviewListDTO">
                 select r.rno, r.ono, r.sno, r.gno, r.email, r.reviewTitle, r.reviewDate, 
             r.reviewUpdateDate,s.storeName, p.productName ,concat(i.uuid,'_',i.fileName) as fileName
@@ -83,6 +84,7 @@
     <resultMap id="reviewMap" type="com.project.fastpickup.admin.review.dto.ReviewReadDTO">
         <id property="rno" column="rno"/>
         <result property="gno" column="gno"/>
+        <result property="ono" column="ono"/>
         <result property="email" column="email"/>
         <result property="reviewTitle" column="reviewTitle"/>
         <result property="reviewContent" column="reviewContent"/>
@@ -99,21 +101,22 @@
 
     <select id="reviewSelectOne" resultMap="reviewMap">
     
-        select r.rno, r.gno, r.email, r.reviewTitle, r.reviewContent , r.reviewDate, 
+        select r.rno, r.ono ,r.gno, r.email, r.reviewTitle, r.reviewContent , r.reviewDate, 
             s.storeName, p.productName, r.isDeleted, concat(i.uuid,'_',i.fileName) as fileNames
         from tbl_review r left outer join tbl_review_img i on r.rno = i.rno
 		        left outer join tbl_store s on r.sno = s.sno
 		        left outer join tbl_order o on r.ono = o.ono
 		        left outer join tbl_product p on o.pno = p.pno
-        where r.rno = r.gno and r.isDeleted = false
+        where r.rno = #{rno} and r.isDeleted = false
         order by r.rno desc 
 
     </select>
     <!-- 상세보기 -->
 
-    <delete id ="deleteReview" parameterType ="long">
-        delete from tbl_review where rno = #{rno}
-    </delete>
+    <!-- 리뷰 삭제 -->
+    <update id ="deleteReview" parameterType ="long">
+        update tbl_review set isDeleted = true where rno = #{rno}
+    </update>
 
     <update id ="updateReview">
         

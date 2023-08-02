@@ -60,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 
             List<String> fileNames = reviewRegistDTO.getFileNames();
 
-            if (fileNames != null) {
+            if(reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
 
                 AtomicInteger index = new AtomicInteger();
                 // 등록된 파일 fileNames에서 추출
@@ -83,12 +83,12 @@ public class ReviewServiceImpl implements ReviewService {
         /* 리뷰 */
 
         /* 답글 */
-        reviewMapper.registChildReview(reviewRegistDTO);
+        long reviewCnt = reviewMapper.registChildReview(reviewRegistDTO);
         long rno = reviewRegistDTO.getRno();
 
         List<String> fileNames = reviewRegistDTO.getFileNames();
 
-        if (fileNames != null) {
+        if(reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
 
             AtomicInteger index = new AtomicInteger();
             // 등록된 파일 fileNames에서 추출
@@ -155,7 +155,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Long updateReview(ReviewModifyDTO reviewModifyDTO) {
 
-        reviewMapper.updateReview(reviewModifyDTO);
+        int updateCnt = reviewMapper.updateReview(reviewModifyDTO);
 
         Long rno = reviewModifyDTO.getRno();
 
@@ -163,7 +163,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<String> fileNames = reviewModifyDTO.getFileNames();
 
-        if (fileNames != null) {
+        if(updateCnt > 0 && reviewModifyDTO.getFileNames() != null && !reviewModifyDTO.getFileNames().isEmpty()) {
 
             AtomicInteger index = new AtomicInteger();
             // 등록된 파일 fileNames에서 추출
@@ -181,6 +181,13 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         return rno;
+
+    }
+
+    @Override
+    public int deleteReview(Long rno) {
+
+        return reviewMapper.deleteReview(rno);
 
     }
 
