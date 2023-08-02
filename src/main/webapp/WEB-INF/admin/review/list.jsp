@@ -44,7 +44,7 @@
           <tr>
             <th scope="col">리뷰 번호</th>
             <th scope="col">주문 번호</th>
-            <th scope="col">가맹점 번호</th>
+            <!-- <th scope="col">가맹점 번호</th> -->
             <th scope="col">가맹점</th>
             <th scope="col">주문음식</th>
             <th scope="col">작성자</th>
@@ -58,11 +58,11 @@
             <tr>
               <td>${review.rno}</td>
               <td>${review.ono}</td>
-              <td>${review.sno}</td>
+              <!-- <td>${review.sno}</td> -->
               <td><a href="/admin/store/read/${review.sno}">${review.storeName}</a></td>
               <td>${review.productName}</td>
               <td>${review.email}</td>
-              <td><a href="/admin/review/read/${review.rno}">${review.reviewTitle}</a></td>
+              <td>${review.reviewTitle}</td>
               <td>${review.reviewDate}</td>
               <!-- <td>${member.store}</td> -->
             </tr>

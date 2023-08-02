@@ -89,18 +89,21 @@
         o.ono, 
         o.email,
         o.registDate,
+        s.sno,
         s.storeName,
         s.storePhone,
         o.orderCount, 
         h.orderStatus, 
+        m.store,
         p.productName,
         p.productPrice,
         CONCAT(pi.uuid, '_', pi.fileName) as fileName
         FROM tbl_order o 
-        LEFT OUTER JOIN tbl_order_history   h ON o.ono = h.ono
-        LEFT OUTER JOIN tbl_product         p ON o.pno = p.pno
+        LEFT OUTER JOIN tbl_order_history   h  ON o.ono = h.ono
+        LEFT OUTER JOIN tbl_product         p  ON o.pno = p.pno
         LEFT OUTER JOIN tbl_product_image   pi ON pi.pno = p.pno AND pi.ord = 0
-        LEFT OUTER JOIN tbl_store           s ON o.sno = s.sno
+        LEFT OUTER JOIN tbl_store           s  ON o.sno = s.sno
+        LEFT OUTER JOIN tbl_member 			m  on m.email = o.email
         WHERE o.ono > 0 AND h.ono > 0
         <if test="keyword != null and types != null">
             <trim prefix="AND (" prefixOverrides="OR" suffix=")">
@@ -132,9 +135,11 @@
         SELECT COUNT(*)
         FROM(
             SELECT 
-            o.ono
-            FROM tbl_order o
-            LEFT OUTER JOIN tbl_store s ON o.sno = s.sno
+            o.ono,
+            s.sno
+            FROM tbl_order             o
+            LEFT OUTER JOIN tbl_store  s ON o.sno = s.sno
+            LEFT OUTER JOIN tbl_member m ON s.email = m.email
             WHERE o.ono > 0
             <if test="keyword != null and types != null">
             <trim prefix="AND (" prefixOverrides="OR" suffix=")">
@@ -167,5 +172,89 @@
         tbl_order
         WHERE ono = #{ono}
     </select>
+
+    <!-- OrderMapper id = "listOrder" -->
+    <select id="listOrderForStoreAndHistory" parameterType="com.project.fastpickup.admin.order.dto.OrderAndHistoryListDTO">
+        SELECT 
+        o.ono, 
+        o.email,
+        o.registDate,
+        s.sno,
+        s.storeName,
+        s.storePhone,
+        o.orderCount, 
+        h.orderStatus, 
+        m.store,
+        p.productName,
+        p.productPrice,
+        CONCAT(pi.uuid, '_', pi.fileName) as fileName
+        FROM tbl_order o 
+        LEFT OUTER JOIN tbl_order_history   h  ON o.ono = h.ono
+        LEFT OUTER JOIN tbl_product         p  ON o.pno = p.pno
+        LEFT OUTER JOIN tbl_product_image   pi ON pi.pno = p.pno AND pi.ord = 0
+        LEFT OUTER JOIN tbl_store           s  ON o.sno = s.sno
+        LEFT OUTER JOIN tbl_member 			m  on m.email = o.email
+        WHERE o.ono > 0 AND h.ono > 0 AND s.sno = #{sno}
+        <if test="pr.keyword != null and pr.types != null">
+            <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+                <foreach collection="pr.types" item="type" separator=" OR ">
+                    <if test='type == "e"'>
+                        o.email like concat('%', #{pr.keyword}, '%')
+                    </if>
+                    <if test='type == "o"'>
+                        o.ono like concat('%', #{pr.keyword}, '%')
+                    </if>
+                    <if test='type == "s"'>
+                        s.storeName like concat('%', #{pr.keyword}, '%')
+                    </if>
+                </foreach>
+            </trim>
+        </if>
+        <if test="pr.startDate != null">
+            AND o.registDate >= #{pr.startDate}
+        </if>
+        <if test="pr.endDate != null">
+            AND o.registDate &lt;= #{pr.endDate}
+        </if>
+        ORDER BY o.ono DESC, h.orderHistory DESC
+        LIMIT #{pr.skip}, #{pr.size}
+    </select>
+
+     <!-- OrderMapper id = "totalForStore" -->
+    <select id="totalForStore" resultType="int">
+        SELECT COUNT(*)
+        FROM(
+            SELECT 
+            o.ono,
+            s.sno
+            FROM tbl_order             o
+            LEFT OUTER JOIN tbl_store  s ON o.sno = s.sno
+            LEFT OUTER JOIN tbl_member m ON s.email = m.email
+            WHERE o.ono > 0 AND s.sno = #{sno}
+            <if test="pr.keyword != null and pr.types != null">
+            <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+                <foreach collection="pr.types" item="type" separator=" OR ">
+                <if test='type == "e"'>
+                    o.email like concat('%', #{pr.keyword}, '%')
+                </if>
+                <if test='type == "o"'>
+                    o.ono like concat('%', #{pr.keyword}, '%')
+                </if>
+                <if test='type == "s"'>
+                    s.storeName like concat('%', #{pr.keyword}, '%')
+                </if>
+                </foreach>
+            </trim>
+            </if>
+            <if test="pr.startDate != null">
+                AND o.registDate >= #{pr.startDate}
+            </if>
+            <if test="pr.endDate != null">
+                AND o.registDate &lt;= #{pr.endDate}
+            </if>
+        LIMIT #{pr.countEnd}
+        ) as tbl_order
+    </select>
+
 
 </mapper>

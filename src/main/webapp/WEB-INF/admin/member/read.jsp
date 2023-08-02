@@ -6,6 +6,7 @@
 */
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -32,6 +33,10 @@
 							<dd class="email">${listMember.email}</dd>
 							<dt>전화번호</dt>
 							<dd>${listMember.memberPhone}</dd>
+							<sec:authorize access="hasAnyRole('ROLE_STORE')">
+							<dt>가맹점 번호</dt>
+							<dd>${sno}</dd>
+							</sec:authorize>
 						</dl>
 					</form>
 				</div>

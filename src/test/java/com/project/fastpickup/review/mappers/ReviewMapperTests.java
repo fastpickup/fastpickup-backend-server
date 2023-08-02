@@ -76,7 +76,7 @@ public class ReviewMapperTests {
     }
 
     @Test
-    // @Transactional
+    @Transactional
     @DisplayName("리뷰 등록 매퍼 테스트")
     public void testRegistReview() {
 

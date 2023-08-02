@@ -18,6 +18,7 @@ public class ReviewReadDTO {
     
     private Long rno;                           // PK
     private Long sno;                           // 가맹점 번호
+    private Long ono;                           // 주문 번호
     private String email;                       // 리뷰 작성자
     private String reviewTitle;                 // 리뷰 제목
     private String reviewContent;               // 리뷰 내용

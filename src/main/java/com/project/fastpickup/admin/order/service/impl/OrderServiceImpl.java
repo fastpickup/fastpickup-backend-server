@@ -121,4 +121,18 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderNotFoundException("해당하는 주문 번호가 없습니다.");
         }
     }
+
+    // List For Store Order And History
+    @Override
+    @Transactional
+    public PageResponseDTO<OrderAndHistoryListDTO> listForStoreOrderAndHistory(PageRequestDTO pageRequestDTO, Long sno) {
+        log.info("Is Running List For Order And History ServiceImpl");
+        List<OrderAndHistoryListDTO> listEveryThing = orderMapper.listOrderForStoreAndHistory(pageRequestDTO, sno);
+        int total = orderMapper.totalForStore(pageRequestDTO, sno);
+        return PageResponseDTO.<OrderAndHistoryListDTO>withAll()
+                .list(listEveryThing)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+    }
 }

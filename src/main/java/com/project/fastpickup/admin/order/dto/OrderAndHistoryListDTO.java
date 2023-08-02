@@ -48,4 +48,5 @@ public class OrderAndHistoryListDTO {
     // tbl_member
     private String memberPhone;
     private String memberName;
+    private String store;
 }

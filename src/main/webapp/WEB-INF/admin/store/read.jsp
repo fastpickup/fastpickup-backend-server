@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -50,8 +51,11 @@
 		<!-- Member Delete & Member Signout & Member Update & Board List Page -->
 		<form onsubmit="return false;" action="/admin/store/delete" method="post">
 			<div class="button_wrap mt-4">
-				<a href="/admin/store/list" class="btn btn-outline-dark">목록으로</a>
+        <sec:authorize access="hasAnyRole('ROLE_STORE')">
+        <a href="/admin/store/list/${sno}" class="btn btn-outline-dark">목록으로</a>
+        </sec:authorize>
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+        <a href="/admin/store/list" class="btn btn-outline-dark">목록으로</a>
 				<button type="submit" class="btn btn-primary btn-delete" onclick="confirmDelete(event)">가맹점 퇴출</button>
 				</sec:authorize>
 				<a href="/admin/store/update/${listStore.sno}" class="btn btn-dark">가맹점 수정</a>

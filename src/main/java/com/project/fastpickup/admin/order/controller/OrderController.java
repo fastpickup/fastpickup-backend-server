@@ -54,11 +54,22 @@ public class OrderController {
 
     // GET : List Order
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getListOrder(PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin List Order");
         PageResponseDTO<OrderAndHistoryListDTO> listOrder = orderService.listOrderAndHistory(pageRequestDTO);
         model.addAttribute("listOrder", listOrder);
+        return "admin/order/list";
+    }
+
+    // GET : List For Store Order
+    @GetMapping("list/{sno}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    public String getListOrderForStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
+        log.info("GET | Admin List Order");
+        PageResponseDTO<OrderAndHistoryListDTO> listOrder = orderService.listForStoreOrderAndHistory(pageRequestDTO, sno);
+        model.addAttribute("listOrder", listOrder);
+        model.addAttribute("sno", sno);
         return "admin/order/list";
     }
 
@@ -69,7 +80,9 @@ public class OrderController {
         log.info("GET | Admin Read Order");
         orderService.checkOrderNumber(ono); // 주문 번호 Check
         OrderDTO listOrder = orderService.readOrder(ono);
+        Long sno = listOrder.getSno();
         model.addAttribute("listOrder", listOrder);
+        model.addAttribute("sno", sno);
         return "admin/order/read";
     }
 

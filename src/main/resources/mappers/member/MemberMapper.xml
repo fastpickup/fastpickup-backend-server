@@ -59,12 +59,30 @@
   WHERE email = #{email}
 </update>
 
+<resultMap id="MemberSnoResultMap" type="long">
+  <id property="sno" column="sno"/>
+</resultMap>
 <!-- MemberMapper id = "readMember" -->
-<select id="readMember" parameterType="java.lang.String">
-  SELECT * FROM 
-  tbl_member
-  WHERE email = #{email}
-</select>
+<select id="readMember" parameterType="java.lang.String" resultMap="MemberResultMap">
+  SELECT
+  m.email,
+  m.memberName,
+  m.memberPhone,
+  s.sno 
+  FROM
+  tbl_member m
+  LEFT OUTER JOIN tbl_store s ON s.email = m.email
+  WHERE m.email = #{email}
+</select> 
+ <resultMap id="MemberResultMap" type="com.project.fastpickup.admin.member.dto.MemberConvertDTO">
+  <id property="email" column="email"/>
+  <result property="memberPw" column="memberPw"/>
+  <result property="memberName" column="memberName"/>
+  <result property="memberPhone" column="memberPhone"/>
+  <result property="store" column="store"/>
+  <result property="joinDate" column="joinDate"/>
+  <collection property="sno" ofType="long" resultMap="MemberSnoResultMap"/>
+</resultMap>
 
 <!-- MemberMapper id = "listMember" -->
 <select id="listMember" parameterType="com.project.fastpickup.admin.member.dto.MemberConvertDTO">

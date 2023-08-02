@@ -30,9 +30,20 @@
                             <dd class="email">${reviewRead.email}</dd>
                             <dt>리뷰 제목</dt>
                             <dd>${reviewRead.reviewTitle}</dd>
+
+                            <dt>
+                                <!-- <div class="view_image">
+                                    <img src="http://192.168.0.64/${productRead.fileNames}"/>
+                                </div> -->
+                                <ul class="image_list">
+                                    <c:forEach items="${reviewRead.fileNames}" var="reviewImage" varStatus="status">
+                                        <li><img src="http://192.168.0.29/s_${reviewImage}"/></li>
+                                    </c:forEach>
+                                </ul>
+                            </dt>
+
                             <dt>리뷰 내용</dt>
                             <dd>${reviewRead.reviewContent}</dd>
-
                         </dl>
                     </form>
                 </div>
@@ -42,7 +53,6 @@
                 <div class="button_wrap mt-4">
                     <a href="/admin/review/update/${reviewRead.rno}" class="btn btn-dark">리뷰 수정</a>
                     <a href="/admin/review/list" class="btn btn-outline-dark">목록으로</a>
-                    <button type="submit" class="btn btn-primary btn-delete">리뷰 삭제</button>
                 </div>
             </form>
 

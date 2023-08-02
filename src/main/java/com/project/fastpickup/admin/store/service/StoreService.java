@@ -42,4 +42,7 @@ public interface StoreService {
 
     // Check Store Number
     void checkStoreNumber(Long sno);
+
+    // List For Store
+    PageResponseDTO<StoreListDTO> listForStore(PageRequestDTO pageRequestDTO, Long sno);
 }

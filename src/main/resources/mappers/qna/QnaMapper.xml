@@ -16,10 +16,10 @@
             <trim prefix="AND (" prefixOverrides="OR" suffix=")">
                 <foreach collection="types" item="type" separator=" OR ">
                     <if test='type == "e"'>
-                        email like concat('%', #{keyword}, '%')
+                        q.email like concat('%', #{keyword}, '%')
                     </if>
                     <if test='type == "t"'>
-                        qnaTitle like concat('%', #{keyword}, '%')
+                        q.qnaTitle like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </trim>

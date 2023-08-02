@@ -31,6 +31,7 @@ public class PageRequestDTO {
   private String link; // 검색조건, 페이지, 사이즈 통합
   private boolean replyLast; // 댓글 페이징 마지막 페이지 유무
 
+
   private LocalDate startDate;
   private LocalDate endDate;
 

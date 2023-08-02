@@ -33,6 +33,9 @@ public interface OrderService {
     // List Order
     PageResponseDTO<OrderAndHistoryListDTO> listOrderAndHistory(PageRequestDTO pageRequestDTO);
 
+    // List For Store Order 
+    PageResponseDTO<OrderAndHistoryListDTO> listForStoreOrderAndHistory(PageRequestDTO pageRequestDTO, Long sno);
+
     // Update Order History
     Long updateHistory(OrderHistoryUpdateDTO orderHistoryUpdateDTO);
 
