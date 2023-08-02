@@ -30,6 +30,10 @@ public interface ReviewService {
     // Read Review
     ReviewReadDTO reviewSelectOne(Long rno);
 
+    // Update Review
     Long updateReview(ReviewModifyDTO reviewModifyDTO);
+
+    // Delete Review
+    int deleteReview(Long rno);
 
 }
