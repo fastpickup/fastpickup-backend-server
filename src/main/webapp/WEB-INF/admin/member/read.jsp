@@ -32,6 +32,8 @@
 							<dd class="email">${listMember.email}</dd>
 							<dt>전화번호</dt>
 							<dd>${listMember.memberPhone}</dd>
+							<dt>가맹점 번호</dt>
+							<dd>${sno}</dd>
 						</dl>
 					</form>
 				</div>

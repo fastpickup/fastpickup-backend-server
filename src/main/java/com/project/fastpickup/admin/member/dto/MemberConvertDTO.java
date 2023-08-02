@@ -38,4 +38,5 @@ public class MemberConvertDTO {
     private String store;
     @NotNull
     private LocalDateTime joinDate;
+    private Long sno;
 }

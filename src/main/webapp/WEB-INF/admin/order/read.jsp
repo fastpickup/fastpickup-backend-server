@@ -68,9 +68,16 @@
 		</dl>
 	</div>
 </div>
+<sec:authorize access="hasAnyRole('ROLE_ADMIN')">       
 <div class="button_wrap">
 	<a href="/admin/order/list" class="btn btn-outline-dark">목록으로</a>
 </div>
+</sec:authorize>
+<sec:authorize access="hasAnyRole('ROLE_STORE')">       
+<div class="button_wrap">
+	<a href="/admin/order/list/${sno}" class="btn btn-outline-dark">목록으로</a>
+</div>
+</sec:authorize>
 <!-- Update Complete Message Start -->
 <div class="modal alertModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
