@@ -90,6 +90,49 @@ WHERE s.sno = #{sno};
   ) as tbl_store
 </select>
 
+<!-- StoreMapper id = "totalForStore" -->
+<select id="totalForStore" resultType="int">
+  SELECT COUNT(*)
+  FROM (
+    SELECT * FROM 
+    tbl_store
+    WHERE sno = #{sno}
+    <if test="pr.keyword != null and pr.types != null">
+      <trim prefix="AND (" prefixOverrides="or" suffix=")">
+      <foreach collection="pr.types" item="type" separator=" OR ">
+        <if test='type == "s"'>
+          storeName like concat('%', #{pr.keyword}, '%')
+        </if>
+        <if test='type == "e"'>
+          email like concat('%', #{pr.keyword}, '%')
+        </if>
+      </foreach>
+    </trim>
+  </if>
+  LIMIT #{pr.countEnd}
+  ) as tbl_store
+</select>
+
+<!-- StoreMapper id = "listForStore" -->
+<select id="listForStore" parameterType="com.project.fastpickup.admin.store.dto.StoreListDTO">
+  SELECT * FROM tbl_store
+  WHERE sno = #{sno}
+   <if test="pr.keyword != null and pr.types != null">
+      <trim prefix="AND (" prefixOverrides="or" suffix=")">
+      <foreach collection="pr.types" item="type" separator=" OR ">
+        <if test='type == "s"'>
+          storeName like concat('%', #{pr.keyword}, '%')
+        </if>
+        <if test='type == "e"'>
+          email like concat('%', #{pr.keyword}, '%')
+        </if>
+      </foreach>
+    </trim>
+  </if>
+  ORDER BY sno DESC 
+  LIMIT #{pr.skip}, #{pr.size}
+</select>
+
 <!-- StoreMapper id = "duplicateSno" -->
 <select id="duplicateSno" parameterType="long">
   SELECT * FROM 

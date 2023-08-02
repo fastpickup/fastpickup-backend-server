@@ -57,11 +57,22 @@ public class StoreController {
 
     // GET : List Store
     @GetMapping("list")
-    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getListStore(PageRequestDTO pageRequestDTO, Model model) {
         log.info("GET | Admin Store List");
         PageResponseDTO<StoreListDTO> listStore = storeService.listStore(pageRequestDTO);
         model.addAttribute("listStore", listStore);
+        return "admin/store/list";
+    }
+
+    // GET : List For Store
+    @GetMapping("list/{sno}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    public String getListForStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
+        log.info("GET | Admin Store List");
+        PageResponseDTO<StoreListDTO> listStore = storeService.listForStore(pageRequestDTO, sno);
+        model.addAttribute("listStore", listStore);
+        model.addAttribute("sno", sno);
         return "admin/store/list";
     }
 
@@ -82,27 +93,12 @@ public class StoreController {
         StoreDTO listStore = storeService.readStore(sno);
         List<StoreSalesDTO> salesDay = storeService.salesDate(sno);
         List<StoreSalesDTO> salesMonth = storeService.salesMonth(sno);
+        model.addAttribute("sno", sno);
         model.addAttribute("listStore", listStore);
         model.addAttribute("salesDay", salesDay);
         model.addAttribute("salesMonth", salesMonth);
         return "admin/store/read";
     }
-
-    // GET : Read Store
-//    @GetMapping("read2/{sno}")
-//    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
-//    public String getReadStoree(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
-//        log.info("GET | Admin Store Read");
-//        StoreDTO listStore = storeService.readStore(sno);
-//        List<StoreSalesDTO> salesDay = storeService.salesDate(sno);
-//        List<StoreSalesDTO> salesMonth = storeService.salesMonth(sno);
-//        PageResponseDTO<ProductListDTO> listProduct = productService.getStoreList(pageRequestDTO, sno);
-//        model.addAttribute("listStore", listStore);
-//        model.addAttribute("listProduct", listProduct);
-//        model.addAttribute("salesDay", salesDay);
-//        model.addAttribute("salesMonth", salesMonth);
-//        return "admin/store/read2";
-//    }
 
     // GET : Update Store
     @GetMapping("update/{sno}")

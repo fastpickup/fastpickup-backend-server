@@ -8,6 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -24,7 +25,12 @@
 	<h3>가맹점 목록</h3>
 	<!-- Search Start -->
 	<div class="my-4 search_wrap bg-body">
-		<form action="/admin/store/list" method="get" class="actionForm">
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+			<form action="/admin/store/list" method="get" class="actionForm">
+		</sec:authorize>
+		<sec:authorize access="hasAnyRole('ROLE_STORE')">
+			<form action="/admin/store/list/${sno}" method="get" class="actionForm">
+		</sec:authorize>
 			<div class="search_box">
 				<input type="hidden" name="page" value="${pageRequestDTO.page}">
 				<input type="hidden" name="size" value="${pageRequestDTO.size}">

@@ -103,7 +103,7 @@ public class ReviewMapperTests {
         // GIVEN
         log.info("=== Start Regist Review Img Test Mapper ===");
 
-        Long rno = 2L;
+        Long rno = 21L;
         List<String> fileNames = reviewRegistDTO.getFileNames();
 
         AtomicInteger index = new AtomicInteger();

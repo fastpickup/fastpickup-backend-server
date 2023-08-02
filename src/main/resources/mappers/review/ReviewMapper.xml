@@ -9,7 +9,7 @@
     <!-- 댓글 -->
     <insert id="registReview">
 
-        insert into tbl_review(sno, email, reviewTitle ,reviewContent) values(#{sno}, #{email}, #{reviewTitle}, #{reviewContent})
+        insert into tbl_review(sno, email, reviewTitle ,reviewContent, ono) values(#{sno}, #{email}, #{reviewTitle}, #{reviewContent}, #{ono})
 
         <selectKey resultType="long" keyProperty="rno" order="AFTER">
             SELECT LAST_INSERT_ID()
@@ -26,7 +26,7 @@
 
     <!-- 답글 -->
     <insert id ="registChildReview">
-        insert into tbl_review(sno, email, reviewTitle ,reviewContent, gno) values(#{sno}, #{email}, #{reviewTitle}, #{reviewContent}, #{gno})
+        insert into tbl_review(sno, email, reviewTitle ,reviewContent, gno, ono) values(#{sno}, #{email}, #{reviewTitle}, #{reviewContent}, #{gno}, #{ono})
         
         <selectKey resultType="long" keyProperty="rno" order="AFTER">
                 SELECT LAST_INSERT_ID()

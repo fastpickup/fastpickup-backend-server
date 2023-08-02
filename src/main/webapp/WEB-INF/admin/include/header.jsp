@@ -53,23 +53,33 @@
   <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
       <h1 class="header-logo">
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN')">       
         <a href="/admin/store/list" class="navbar-brand">
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_STORE')">       
+        <a href="/admin/order/list/${sno}" class="navbar-brand">
+        </sec:authorize>
         <%--<h3 class="text-primary">Fast Pickup</h3>--%>
           <img src="/imgs/logo.png" alt="factpickup">
         </a>
       </h1>
-      <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_STORE')">
+      <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
       <div class="navbar-nav w-100">
         <a href="/admin/order/list" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-chart-bar me-2"></i>Order</a>
         <a href="/admin/store/list" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>
         <a href="/admin/review/list" class="nav-item nav-link <c:if test="${pageName == 'review'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>Review</a>
-      </sec:authorize>
-      <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
         <a href="/admin/member/list" class="nav-item nav-link <c:if test="${pageName == 'member'}">active</c:if>"><i class="fa fa-file-alt me-2"></i>Member</a>
         <a href="/admin/product/list" class="nav-item nav-link <c:if test="${pageName == 'product'}">active</c:if>"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
         <a href="/admin/qna/list" class="nav-item nav-link <c:if test="${pageName == 'qna'}">active</c:if>"><i class="fa fa-laptop me-2"></i>Q&amp;A</a>
         <a href="/admin/stats/list" class="nav-item nav-link <c:if test="${pageName == 'stats'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>stats</a>
       </div>
+    </sec:authorize>
+    <sec:authorize access="hasAnyRole('ROLE_STORE')">       
+    <div class="navbar-nav w-100">
+    <a href="/admin/order/list/${sno}" class="nav-item nav-link <c:if test="${pageName == 'order'}">active</c:if>"><i class="fa fa-chart-bar me-2"></i>Order</a>
+    <a href="/admin/store/list/${sno}" class="nav-item nav-link <c:if test="${pageName == 'store'}">active</c:if>"><i class="fa fa-table me-2"></i>Store</a>
+    <a href="/admin/review/list/${sno}" class="nav-item nav-link <c:if test="${pageName == 'review'}">active</c:if>"><i class="fa fa-keyboard me-2"></i>Review</a>
+    </div> 
     </sec:authorize>
     </nav>
   </div>

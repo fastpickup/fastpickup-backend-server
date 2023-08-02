@@ -65,7 +65,9 @@ public class MemberController {
         log.info("GET | Admin Member Read");
         memberService.searchUser(email); // 회원 존재 여부 Check
         MemberConvertDTO listMember = memberService.readMember(email);
+        Long sno = listMember.getSno();
         model.addAttribute("listMember", listMember);
+        model.addAttribute("sno", sno);
         return "admin/member/read";
     }
 

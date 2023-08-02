@@ -9,6 +9,7 @@ package com.project.fastpickup.admin.store.mappers;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.project.fastpickup.admin.store.dto.StoreCreateDTO;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
@@ -47,4 +48,10 @@ public interface StoreMapper {
 
     // duplicate Sno
     int duplicateSno(Long sno);
+
+    // List For Store
+    List<StoreListDTO> listForStore(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
+
+    // List For Store 
+    int totalForStore(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
 }

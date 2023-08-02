@@ -110,4 +110,18 @@ public class StoreServiceImpl implements StoreService {
             throw new StoreNotFoundException("찾으시는 가맹점이 없습니다.");
         }
     }
+
+    // List For Store ServiceImpl
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponseDTO<StoreListDTO> listForStore(PageRequestDTO pageRequestDTO, Long sno) {
+        log.info("Is Running List For Store ServiceImpl");
+        List<StoreListDTO> list = storeMapper.listForStore(pageRequestDTO, sno);
+        int total = storeMapper.totalForStore(pageRequestDTO, sno);
+        return PageResponseDTO.<StoreListDTO>withAll()
+                .list(list)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+    }
 }
