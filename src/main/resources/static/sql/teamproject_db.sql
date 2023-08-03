@@ -297,6 +297,11 @@ delete from tbl_qna_reply where qno = 22;
 ##가맹점
 select * from tbl_store;
 
+insert into tbl_store
+(storeName, storeNumber, storeAddress, storePhone, email)
+values ('김밥천국', '123-55-88778', '서울시 종로2가', '02-7878-8787', 'thistrik@gmail.com')
+;
+
 update tbl_store
 set
 	storeNumber = '332-11-88752'
@@ -311,6 +316,16 @@ select * from tbl_order;
 select * from tbl_order_history;
 
 select * from tbl_order where registDate <= '2023-07-28';
+
+insert into tbl_order
+(orderCount, email, sno, pno)
+values (6, 'thistrik@gmail.com', 31, 22)
+;
+
+insert into tbl_order_history
+(orderStatus, ono)
+values ('반려', 50)
+;
 
 ##/주문
 
