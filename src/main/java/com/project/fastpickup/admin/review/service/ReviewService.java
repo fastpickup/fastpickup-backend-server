@@ -45,4 +45,7 @@ public interface ReviewService {
     // GNO를 가져오는 코드
     long getReviewGno(Long rno);
 
+    // 가맹점 별 리뷰 리스트
+    PageResponseDTO<ReviewListDTO> getListForStore(Long sno, PageRequestDTO pageRequestDTO); 
+
 }

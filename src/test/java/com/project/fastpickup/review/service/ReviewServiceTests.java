@@ -32,7 +32,7 @@ public class ReviewServiceTests {
     private ReviewService reviewService;
 
     // Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-    private static final Long TEST_RNO = 19L;
+    private static final Long TEST_RNO = 43L;
     private static final Long TEST_SNO = 1L;
     private static final Long TEST_ONO = 4L;
     private static final Long TEST_PNO = 22L;

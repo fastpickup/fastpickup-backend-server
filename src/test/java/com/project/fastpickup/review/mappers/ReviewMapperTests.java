@@ -39,7 +39,7 @@ public class ReviewMapperTests {
     private ReviewFileMapper reviewFileMapper;
 
     // Test 시작시 메모리에 private static final 로 먼저 올려놓는다
-    private static final Long TEST_RNO = 19L;
+    private static final Long TEST_RNO = 88L;
     private static final Long TEST_SNO = 1L;
     private static final Long TEST_ONO = 4L;
     private static final Long TEST_PNO = 22L;
@@ -103,7 +103,7 @@ public class ReviewMapperTests {
         // GIVEN
         log.info("=== Start Regist Review Img Test Mapper ===");
 
-        Long rno = 21L;
+        Long rno =43L;
         List<String> fileNames = reviewRegistDTO.getFileNames();
 
         AtomicInteger index = new AtomicInteger();
