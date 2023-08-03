@@ -1,10 +1,4 @@
-<!--
-/*
-* Date : 2023.08.01
-* Author : 조상희
-* E-mail : jo_sh_1028@naver.com
-*/
--->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -19,7 +13,7 @@
 
 <body>
 <%@ include file="../include/header.jsp" %>
-<h3>상품 수정</h3>
+<h3>리뷰 수정</h3>
 <form name="frm" method="post" >
 	<div class="form_content">
 		<div class="bg-light rounded h-100 p-4">
@@ -44,7 +38,7 @@
 		</div>
 		<div class="bg-light rounded h-100 p-4">
 			<label for="reviewContent" class="form-label">리뷰 내용</label>
-			<input type="text" id="reviewContent" name="reviewContent" class="form-control" value="${reviewRead.reviewContent}" required>
+      <textarea class="form-control p-3" rows="4" placeholder="리뷰를 입력해주세요." name="reviewContent" required>${reviewRead.reviewContent}</textarea>
 		</div>
 		<div class="bg-light rounded h-100 p-4">
 			<label for="productFile" class="form-label">상품 이미지</label>
@@ -121,7 +115,7 @@
     const header = {headers: {"Content-Type": "multipart/form-data"}}
 
     //파일 업로드 axios 호출
-    axios.post("http://192.168.0.64:8080/api/files/upload", formData, header).then(res => {
+    axios.post("http://localhost:8080/api/files/upload", formData, header).then(res => {
       const result = res.data
       console.log(result)
       showProducts(result)

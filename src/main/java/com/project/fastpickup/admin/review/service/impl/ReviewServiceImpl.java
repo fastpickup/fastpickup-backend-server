@@ -191,4 +191,26 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
+    // 가맹점 리뷰 답글
+    @Override
+    public ReviewReadDTO storeReview(Long rno) {
+
+        return reviewMapper.storeReview(rno);
+
+    }
+
+    @Override
+    public int countStoreReivew(int gno) {
+
+        return reviewMapper.countStoreReivew(gno);
+
+    }
+
+    @Override
+    public long getReviewGno(Long rno) {
+
+        return reviewMapper.getReviewGno(rno);
+
+    }
+
 }

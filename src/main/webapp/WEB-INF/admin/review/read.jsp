@@ -22,6 +22,8 @@
                         <dl class="detail_content">
                             <dt>리뷰 번호</dt>
                             <dd>${reviewRead.rno}</dd>
+                            <dt>가맹점 번호</dt>
+                            <dd>${reviewRead.sno}</dd>
                             <dt>가맹점</dt>
                             <dd>${reviewRead.storeName}</dd>
                             <dt>작성일</dt>
@@ -37,7 +39,7 @@
                                 </div> -->
                                 <ul class="image_list">
                                     <c:forEach items="${reviewRead.fileNames}" var="reviewImage" varStatus="status">
-                                        <li><img src="http://192.168.0.29/s_${reviewImage}"/></li>
+                                        <li><img src="http://localhost/s_${reviewImage}"/></li>
                                     </c:forEach>
                                 </ul>
                             </dt>
@@ -62,25 +64,57 @@
                 <input type="text" name="reviewContent">
                 <button type="submit" class="btn btn-dark">답글 달기</button>
             </form> -->
-
-            <div style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 10px">
-            <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
-                    <dl class="detail_content">
-                        <dt style="font-size: 16px;">Email</dt>
-                        <dd  style="font-size: 14px;" class="email">${replyRead.email}</dd>
-                        <dt style="font-size: 16px;">답글 날짜</dt>
-                        <dd style="font-size: 14px;">${replyRead.replyDate}</dd>
-                        <dt style="font-size: 16px;">답글 내용</dt>
-                        <dd style="font-size: 14px;">${replyRead.reply}</dd>
-                    </dl>
-                <a href="/admin/qna/replies/update/${replyRead.rno}">수정</a>
-                <button type="submit">삭제</button>
-            </form>
+            <c:choose>
+                <c:when test="${count == 1}">
+                    <div id="reply-form-wrapper" class="mt-4">
+                        <form action="/admin/review/create/${reviewRead.rno}" method="post">
+                            <input type="hidden" name="sno" class="form-control" readonly value="${reviewRead.sno}">
+                    <input type="hidden" name="gno" class="form-control" readonly value="${reviewRead.gno}">
+                    <input type="hidden" name="ono" class="form-control" readonly value="${reviewRead.ono}">
+                    <input type="hidden" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
+                    <input type="text" name="reviewTitle" class="form-control" placeholder="제목을 입력해주세요.">
+                    <textarea class="form-control p-3" rows="4" placeholder="답글을 입력해주세요." name="reviewContent"></textarea>
+                    <div class="button_wrap mt-4">
+                        <button type="submit" class="btn btn-dark">답글 달기</button>
+                    </div>
+                </form>
             </div>
-
+        </c:when>
+        <c:otherwise>
+            <div id="reply-form-wrapper" style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 40px">
+                <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
+                    <dl class="detail_content">
+                        <dt>사장님</dt>
+                        <dd class="email">${storeReview.email}</dd>
+                        <dt>답변 날짜</dt>
+                        <dd>${storeReview.reviewDate}</dd>
+                        <dt>답변 내용</dt>
+                        <dd>${storeReview.reviewContent}</dd>
+                    </dl>
+                    <!-- <a href="/admin/qna/replies/update/${replyRead.rno}">수정</a> -->
+                    <!-- <button class="border-0" type="submit">삭제</button> -->
+                    <div class="button_wrap mt-4">
+                        <a href="/admin/review/store/update/${storeReview.rno}" class="btn btn-dark">답글 수정</a>
+                    </div>
+                </form>
+            </div>
+        </c:otherwise>
+    </c:choose>
 
         </div>
     </div>
+
+    <div class="modal alertModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">${message}</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 </div>
 
 
@@ -89,6 +123,15 @@
 <!-- JavaScript Start -->
 <script>
 
+
+const alertModal = new bootstrap.Modal(document.querySelector(".alertModal"))
+  let message = "${message}";
+  if (message !== "") {
+    alertModal.show();
+  }
+  setTimeout(function () {
+    alertModal.hide();
+  }, 1500);
 
 </script>
 </body>

@@ -32,7 +32,7 @@ const removeFile = (e, fileName) => {
   //console.log(originFile)
 
   //nginx 파일 삭제
-  axios.delete("http://192.168.0.64:8080/api/files/remove/" + fileName)
+  axios.delete("http://localhost:8080/api/files/remove/" + fileName)
 
   //li 삭제
   liObj.remove()

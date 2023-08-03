@@ -21,10 +21,10 @@ public interface ReviewService {
     // Regist Review
     Long registReview(ReviewRegistDTO reviewRegistDTO);
 
-    // List Review
+    // 전체 리뷰 리스트
     PageResponseDTO<ReviewListDTO> getList( PageRequestDTO pageRequestDTO);
 
-    // Rest 방식
+    // 가맹점 별 리뷰 리스트 => Rest 방식
     PageResponseDTO<ReviewListDTO> getStoreList(Long sno, PageRequestDTO pageRequestDTO);
 
     // Read Review
@@ -35,5 +35,14 @@ public interface ReviewService {
 
     // Delete Review
     int deleteReview(Long rno);
+
+    // 가맹점 리뷰 답글
+    ReviewReadDTO storeReview(Long rno);
+
+    // 리뷰 답글 카운트
+    int countStoreReivew(int gno);
+
+    // GNO를 가져오는 코드
+    long getReviewGno(Long rno);
 
 }

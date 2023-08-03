@@ -65,6 +65,14 @@ public class ReviewController {
 
         model.addAttribute("reviewRead", reviewRead);
 
+        ReviewReadDTO storeReview = reviewService.storeReview(rno);
+
+        model.addAttribute("storeReview", storeReview);
+
+        int count = reviewService.countStoreReivew(reviewRead.getGno());
+
+        model.addAttribute("count", count);
+
         return "admin/review/read";
 
     }
@@ -81,21 +89,33 @@ public class ReviewController {
 
     }
 
-    // Post
+    // 리뷰 답글 작성 시 리뷰 페이지로 redirect
     @PreAuthorize("permitAll")
-    @PostMapping("/create")
+    @PostMapping("/create/{rno}")
     public String postCreate(
-            ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
+            @PathVariable("rno")Long rno,ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
         log.info("POST | Product Create =================");
         reviewService.registReview(reviewRegistDTO);
 
         // 상품 등록 후 1회성 메세지 전달
-        rttr.addFlashAttribute("message", "상품 등록이 완료 되었습니다.");
+        rttr.addFlashAttribute("message", " 답변 등록이 완료 되었습니다.");
+
+        return "redirect:/admin/review/read/"+rno;
+    }
+
+    // POST FOR REVIEW 
+    @PostMapping("/create")
+    public String postCreateForReview(ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
+        reviewService.registReview(reviewRegistDTO);
+
+         // 상품 등록 후 1회성 메세지 전달
+        rttr.addFlashAttribute("message", " 리뷰 등록이 완료 되었습니다.");
 
         return "redirect:/admin/review/list";
     }
 
-    @GetMapping("{sno}/list")
+    // 가맹점 별 리뷰 리스트 => Rest방식
+    @GetMapping("/{sno}/list")
     @PreAuthorize("permitAll")
     @ResponseBody
     public PageResponseDTO<ReviewListDTO> getStoreList(
@@ -104,7 +124,7 @@ public class ReviewController {
         return reviewService.getStoreList(sno, pageRequestDTO);
     }
 
-    // 리뷰 수정
+    // 리뷰 수정 페이지 GET
     @PreAuthorize("permitAll")
     @GetMapping("/update/{rno}")
     public String getUpdate(
@@ -122,21 +142,21 @@ public class ReviewController {
         return "admin/review/update";
     }
 
-    @PostMapping("update/{pno}")
+    // 리뷰 수정 POST
+    @PostMapping("update/{rno}")
     @PreAuthorize("permitAll")
     public String postUpdate(
-      ReviewModifyDTO reviewModifyDTO, RedirectAttributes rttr
-    ){
-      log.info("POST | Product Update =================");
-  
-      reviewService.updateReview(reviewModifyDTO);
-  
-      rttr.addFlashAttribute("message", reviewModifyDTO.getPno() + "번 리뷰가 수정 되었습니다.");
-  
-      return "redirect:/admin/review/read/" + reviewModifyDTO.getRno();
+            ReviewModifyDTO reviewModifyDTO, RedirectAttributes rttr) {
+        log.info("POST | Product Update =================");
+
+        reviewService.updateReview(reviewModifyDTO);
+
+        rttr.addFlashAttribute("message", reviewModifyDTO.getRno() + "번 리뷰가 수정 되었습니다.");
+
+        return "redirect:/admin/review/read/" + reviewModifyDTO.getRno();
     }
 
-    // Delete Page
+    // 리뷰 삭제
     @PostMapping("delete/{rno}")
     @PreAuthorize("permitAll")
     public String postDelete(
@@ -150,5 +170,61 @@ public class ReviewController {
 
         return "redirect:/admin/review/list";
     }
+
+    // 리뷰에 대한 답변 수정 페이지
+    @PreAuthorize("permitAll")
+    @GetMapping("/store/update/{rno}")
+    public String getStoreReivewUpdate(
+            PageRequestDTO pageRequestDTO, @PathVariable("rno") Long rno, Model model) {
+        log.info("GET | Product Update =================");
+
+        ReviewReadDTO reviewRead = reviewService.reviewSelectOne(rno);
+
+        log.info("==================");
+        log.info(reviewRead);
+        log.info("==================");
+
+        model.addAttribute("reviewRead", reviewRead);
+
+        return "admin/review/store/update";
+    }
+
+
+    // 리뷰에대한 답변 수정 
+    @PostMapping("/store/update/{rno}")
+    @PreAuthorize("permitAll")
+    public String PostStoreReivewUpdate(
+            ReviewModifyDTO reviewModifyDTO, RedirectAttributes rttr) {
+        log.info("POST | Product Update =================");
+
+        reviewService.updateReview(reviewModifyDTO);
+
+        rttr.addFlashAttribute("message", reviewModifyDTO.getRno() + "번 답변이 수정 되었습니다.");
+
+        return "redirect:/admin/review/read/" + reviewModifyDTO.getGno();
+    }
+
+    // // // 리뷰에 대한 답변 삭제
+    @PostMapping("/store/delete/{rno}")
+    @PreAuthorize("permitAll")
+    public String postStoreReviewDelete(
+            @PathVariable("rno") Long rno, RedirectAttributes rttr) {
+        log.info("POST | Product Delete =================");
+
+        reviewService.deleteReview(rno);
+        
+        long gno = reviewService.getReviewGno(rno);
+
+        log.info("===============================");
+        log.info(gno);
+        log.info("===============================");
+
+
+        // 상품 삭제 후 1회성 메세지 전달
+        rttr.addFlashAttribute("message", rno + "번 답변이 삭제 되었습니다.");
+
+        return "redirect:/admin/review/read/" + gno;
+    }
+
 
 }

@@ -21,8 +21,7 @@ public class ReviewModifyDTO {
     private long ono;                                    // 주분 번호
     private long pno;                                    // 상품 번호
     
-    @Builder.Default
-    private long gno = 0L;                               // 답글 여부   
+    private long gno;                               // 답글 여부   
     
     private String email;                                // 작성자 이메일
     private String reviewContent;                        // 리뷰 내용

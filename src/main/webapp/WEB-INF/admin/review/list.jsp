@@ -16,7 +16,7 @@
   <h3>리뷰</h3>
   <!-- Search Start -->
   <div class="my-4 search_wrap bg-body">
-    <form action="/admin/member/list" method="get" class="actionForm">
+    <form action="/admin/review/list" method="get" class="actionForm">
       <div class="search_box">
         <input type="hidden" name="page" value="${pageRequestDTO.page}">
         <input type="hidden" name="size" value="${pageRequestDTO.size}">
@@ -24,10 +24,8 @@
           <select name="type" class="form-select search-condition">
             <option value="">선택해주세요</option>
             <option value="e" ${pageRequestDTO.type=='e' ? 'selected="selected"' : '' }>Email</option>
-            <option value="n" ${pageRequestDTO.type=='n' ? 'selected="selected"' : '' }>회원 이름</option>
-            <option value="p" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>회원 전화번호</option>
-            <option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점 유무</option>
-            <option value="enp" ${pageRequestDTO.type=='enps' ? 'selected="selected"' : '' }>통합 검색</option>
+            <option value="s" ${pageRequestDTO.type=='n' ? 'selected="selected"' : '' }>가맹점</option>
+            <option value="t" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>리뷰제목</option>
           </select>
           <input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요."
             value="${pageRequestDTO.keyword}">

@@ -35,9 +35,7 @@
 		<div class="bg-light rounded h-100 p-4">
 			<label for="reviewContent" class="form-label">리뷰 내용</label>
 			<!-- <input type="text" id="reviewContent" name="reviewContent" class="form-control" required> -->
-
       <textarea class="form-control p-3" rows="4" placeholder="리뷰를 입력해주세요." name="reviewContent" required></textarea>
-
 		</div>
 		<div class="bg-light rounded h-100 p-4">
 			<label for="productFile" class="form-label"> 이미지</label>
@@ -84,7 +82,7 @@
     const header = {headers: {"Content-Type": "multipart/form-data"}}
 
     //파일 업로드 axios 호출
-    axios.post("http://192.168.0.64:8080/api/files/upload", formData, header).then(res => {
+    axios.post("http://localhost:8080/api/files/upload", formData, header).then(res => {
       const result = res.data
       console.log(result)
       showProducts(result)

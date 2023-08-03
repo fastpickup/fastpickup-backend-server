@@ -222,7 +222,7 @@
 
   //상품 리스트 가져오기
   const getList = async(page = 1) => {
-    const res = await axios.get("http://192.168.0.64:8080/admin/product/"+sno+"/list?page="+page)
+    const res = await axios.get("http://localhost:8080/admin/product/"+sno+"/list?page="+page)
     return res.data
   }
 
@@ -308,7 +308,7 @@
 
   // 리뷰 리스트 가져오기
   const getReviewList = async(page = 1) => {
-    const res = await axios.get("http://192.168.0.29:8080/admin/review/"+sno+"/list?page="+page)
+    const res = await axios.get("http://localhost:8080/admin/review/"+sno+"/list?page="+page)
     return res.data
   }
 

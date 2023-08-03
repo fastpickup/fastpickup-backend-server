@@ -90,7 +90,7 @@
     const header = {headers: {"Content-Type": "multipart/form-data"}}
 
     //파일 업로드 axios 호출
-    axios.post("http://192.168.0.64:8080/api/files/upload", formData, header).then(res => {
+    axios.post("http://localhost:8080/api/files/upload", formData, header).then(res => {
       const result = res.data
       console.log(result)
       showProducts(result)

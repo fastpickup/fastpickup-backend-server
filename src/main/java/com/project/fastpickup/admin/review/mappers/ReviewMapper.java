@@ -34,10 +34,22 @@ public interface ReviewMapper {
     long reviewListStoreCount(PageRequestDTO pageRequestDTO);
 
 
+    // 리뷰 상세 페이지
     ReviewReadDTO reviewSelectOne(Long rno);
 
+    // 리뷰 삭제
     int deleteReview(Long rno);
 
+    // 리뷰 수정
     int updateReview(ReviewModifyDTO modifyDTO);
+
+    // 리뷰 답글
+    ReviewReadDTO storeReview(Long rno);
+
+    // 답글 카운트
+    int countStoreReivew(int gno);
+
+    // gno 값을 추출
+    long getReviewGno(Long rno);
 
 }
