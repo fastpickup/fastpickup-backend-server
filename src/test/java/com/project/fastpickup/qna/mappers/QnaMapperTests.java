@@ -34,6 +34,7 @@ public class QnaMapperTests {
 
     // DTO 정의
     private QnaRegistDTO qnaRegistDTO;
+    
     private QnaUpdateDTO qnaUpdateDTO;
 
     // BeforeEach 사용을 위한 setUp
