@@ -8,7 +8,6 @@ package com.project.fastpickup.admin.store.controller;
 
 import java.util.List;
 
-import com.project.fastpickup.admin.product.dto.ProductListDTO;
 import com.project.fastpickup.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -42,4 +42,6 @@ public interface ProductMapper {
   //Update ViewCount
   int viewCount(Long pno);
 
+  // CheckPno
+  int checkPno(Long pno);
 }

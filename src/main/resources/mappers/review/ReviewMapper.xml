@@ -171,4 +171,6 @@
         select gno from tbl_review where rno=#{rno}
     </select>
 
+    <!-- ReviewMapper id = "checkRno" -->
+
 </mapper>

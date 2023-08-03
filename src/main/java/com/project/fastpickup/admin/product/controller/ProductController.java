@@ -102,7 +102,7 @@ public class ProductController {
     PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, HttpServletRequest request, HttpServletResponse response, Model model
   ){
     log.info("GET | Product Read =================");
-
+    productService.checkPno(pno); // Check Pno 
     ProductDTO productDTO = productService.selectOne(pno);
     StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
 
@@ -125,7 +125,7 @@ public class ProductController {
     @PathVariable("pno") Long pno, RedirectAttributes rttr
   ){
     log.info("POST | Product Delete =================");
-
+    productService.checkPno(pno); // Check Pno
     productService.deleteProduct(pno);
 
     //상품 삭제 후 1회성 메세지 전달
@@ -141,7 +141,7 @@ public class ProductController {
     PageRequestDTO pageRequestDTO, @PathVariable("pno") Long pno, Model model
   ){
     log.info("GET | Product Update =================");
-
+    productService.checkPno(pno); // Check Pno
     ProductDTO productDTO = productService.selectOne(pno);
     StoreDTO storeDTO = storeService.readStore(productDTO.getSno());
 
@@ -156,7 +156,7 @@ public class ProductController {
     ProductDTO productDTO, ProductCategoryDTO productCategoryDTO, RedirectAttributes rttr
   ){
     log.info("POST | Product Update =================");
-
+    productService.checkPno(productDTO.getPno()); // Check Pno
     productService.updateProduct(productDTO, productCategoryDTO);
 
     rttr.addFlashAttribute("message", productDTO.getPno() + "번 상품이 수정 되었습니다.");

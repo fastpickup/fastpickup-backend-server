@@ -14,28 +14,29 @@ import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 public interface ProductService {
-  //Create Product
+  // Create Product
   int createProduct(ProductRegistDTO productRegistDTO, ProductCategoryDTO productCategoryDTO);
 
-  //List Product
+  // List Product
   PageResponseDTO<ProductListDTO> getList(PageRequestDTO pageRequestDTO);
 
-  //List Store Product
+  // List Store Product
   PageResponseDTO<ProductListDTO> getStoreList(PageRequestDTO pageRequestDTO, Long sno);
 
-  //Read Product
+  // Read Product
   ProductDTO selectOne(Long pno);
 
-  //Delete Product
+  // Delete Product
   int deleteProduct(Long pno);
 
-  //Update Product
+  // Update Product
   int updateProduct(ProductDTO productDTO, ProductCategoryDTO productCategoryDTO);
 
-  //Update ViewCount
+  // Update ViewCount
   int viewCount(Long pno);
 
+  // Check Pno Exception
+  void checkPno(Long pno);
 }
