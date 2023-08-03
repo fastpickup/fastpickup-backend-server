@@ -60,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 
             List<String> fileNames = reviewRegistDTO.getFileNames();
 
-            if(reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
+            if (reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
 
                 AtomicInteger index = new AtomicInteger();
                 // 등록된 파일 fileNames에서 추출
@@ -88,7 +88,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<String> fileNames = reviewRegistDTO.getFileNames();
 
-        if(reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
+        if (reviewCnt > 0 && reviewRegistDTO.getFileNames() != null && !reviewRegistDTO.getFileNames().isEmpty()) {
 
             AtomicInteger index = new AtomicInteger();
             // 등록된 파일 fileNames에서 추출
@@ -163,7 +163,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<String> fileNames = reviewModifyDTO.getFileNames();
 
-        if(updateCnt > 0 && reviewModifyDTO.getFileNames() != null && !reviewModifyDTO.getFileNames().isEmpty()) {
+        if (updateCnt > 0 && reviewModifyDTO.getFileNames() != null && !reviewModifyDTO.getFileNames().isEmpty()) {
 
             AtomicInteger index = new AtomicInteger();
             // 등록된 파일 fileNames에서 추출
@@ -210,6 +210,20 @@ public class ReviewServiceImpl implements ReviewService {
     public long getReviewGno(Long rno) {
 
         return reviewMapper.getReviewGno(rno);
+
+    }
+
+    @Override
+    public PageResponseDTO<ReviewListDTO> getListForStore(Long sno, PageRequestDTO pageRequestDTO) {
+
+        List<ReviewListDTO> list = reviewMapper.reviewForStore(pageRequestDTO, sno);
+        long total = reviewMapper.reviewForStoreCount(pageRequestDTO, sno);
+
+        return PageResponseDTO.<ReviewListDTO>withAll()
+                .list(list)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
 
     }
 

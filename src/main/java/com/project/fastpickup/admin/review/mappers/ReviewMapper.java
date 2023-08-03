@@ -14,6 +14,7 @@ import com.project.fastpickup.admin.review.dto.ReviewListDTO;
 import com.project.fastpickup.admin.review.dto.ReviewModifyDTO;
 import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
+import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 
 public interface ReviewMapper {
@@ -51,5 +52,11 @@ public interface ReviewMapper {
 
     // gno 값을 추출
     long getReviewGno(Long rno);
+
+    // List For Store
+    List<ReviewListDTO> reviewForStore(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
+
+    // List For Store 
+    int reviewForStoreCount(@Param("pr") PageRequestDTO pageRequestDTO, @Param("sno") Long sno);
 
 }

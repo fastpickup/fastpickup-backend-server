@@ -1,5 +1,11 @@
 package com.project.fastpickup.admin.review.restcontroller;
 
+/*
+ * Date   : 2023.07.31
+ * Author : 이주용
+ * E-mail : wndyd0110@gmail.com
+ */
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +28,5 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/review")
 public class ReviewRestController {
 
-    // private final ReviewService reviewService;
-
-    // // 페이지 체크
-    // @ModelAttribute("pageName")
-    // public String pageName() {
-    //     return "review";
-    // }
-
-    // // @PreAuthorize("hasAnyRole('ADMIN','STORE')")
-    // @GetMapping("/list/{sno}")
-    // public PageResponseDTO getReviewList(
-    //         @PathVariable("sno") Long sno,
-    //         PageRequestDTO pageRequestDTO) {
-
-    //     return reviewService.getStoreList(sno, pageRequestDTO);
-    // }
 
 }

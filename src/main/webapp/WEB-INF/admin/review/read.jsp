@@ -33,16 +33,18 @@
                             <dt>리뷰 제목</dt>
                             <dd>${reviewRead.reviewTitle}</dd>
 
-                            <dt>
-                                <!-- <div class="view_image">
-                                    <img src="http://192.168.0.64/${productRead.fileNames}"/>
-                                </div> -->
-                                <ul class="image_list">
-                                    <c:forEach items="${reviewRead.fileNames}" var="reviewImage" varStatus="status">
-                                        <li><img src="http://localhost/s_${reviewImage}"/></li>
+                            <dt>사진</dt>
+                            <c:if test="${not empty reviewRead.fileNames and not empty reviewRead.fileNames[0]}">
+                                <dd class="view_image">
+                                    <c:forEach items="${reviewRead.fileNames}" var="fileName">
+                                        <img src="http://localhost/${fileName}" />
                                     </c:forEach>
-                                </ul>
-                            </dt>
+                                </dd>
+                            </c:if>
+                            <c:if test="${empty reviewRead.fileNames or empty reviewRead.fileNames[0]}">
+                                <dd  style="color: #888;" class="no_image">이미지 없음</dd>
+                            </c:if>
+                           
 
                             <dt>리뷰 내용</dt>
                             <dd>${reviewRead.reviewContent}</dd>
@@ -53,8 +55,16 @@
 
             <form action="/admin/review/delete/${reviewRead.rno}" method="post">
                 <div class="button_wrap mt-4">
-                    <a href="/admin/review/update/${reviewRead.rno}" class="btn btn-dark">리뷰 수정</a>
-                    <a href="/admin/review/list" class="btn btn-outline-dark">목록으로</a>
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+                        <a href="/admin/review/update/${reviewRead.rno}" class="btn btn-dark">리뷰 수정</a>
+                    </sec:authorize>
+                    
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+                        <a href="/admin/review/list" class="btn btn-outline-dark">목록으로</a>
+                    </sec:authorize>
+                    <sec:authorize access="hasAnyRole('ROLE_STORE')">
+                        <a href="/admin/review/list/${reviewRead.sno}" class="btn btn-outline-dark">목록으로</a>
+                    </sec:authorize>
                 </div>
             </form>
 

@@ -23,6 +23,7 @@ import com.project.fastpickup.admin.review.dto.ReviewReadDTO;
 import com.project.fastpickup.admin.review.dto.ReviewRegistDTO;
 import com.project.fastpickup.admin.review.service.ReviewService;
 import com.project.fastpickup.admin.store.dto.StoreDTO;
+import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 
@@ -44,8 +45,7 @@ public class ReviewController {
         return "review";
     }
 
-    // @PreAuthorize("hasAnyRole('ADMIN','STORE')")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/list")
     public void reviewList(PageRequestDTO pageRequestDTO, Model model) {
 
@@ -57,7 +57,7 @@ public class ReviewController {
 
     }
 
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @GetMapping("/read/{rno}")
     public String getReview(@PathVariable("rno") Long rno, Model model) {
 
@@ -73,11 +73,15 @@ public class ReviewController {
 
         model.addAttribute("count", count);
 
+        long sno = reviewRead.getSno();
+
+        model.addAttribute("sno", sno);
+
         return "admin/review/read";
 
     }
 
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @GetMapping("/create/{sno}")
     public String createReview(@PathVariable("sno") Long sno, Model model) {
 
@@ -90,7 +94,7 @@ public class ReviewController {
     }
 
     // 리뷰 답글 작성 시 리뷰 페이지로 redirect
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @PostMapping("/create/{rno}")
     public String postCreate(
             @PathVariable("rno")Long rno,ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
@@ -104,6 +108,7 @@ public class ReviewController {
     }
 
     // POST FOR REVIEW 
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @PostMapping("/create")
     public String postCreateForReview(ReviewRegistDTO reviewRegistDTO, RedirectAttributes rttr) {
         reviewService.registReview(reviewRegistDTO);
@@ -115,8 +120,8 @@ public class ReviewController {
     }
 
     // 가맹점 별 리뷰 리스트 => Rest방식
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @GetMapping("/{sno}/list")
-    @PreAuthorize("permitAll")
     @ResponseBody
     public PageResponseDTO<ReviewListDTO> getStoreList(
             @PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO) {
@@ -125,7 +130,7 @@ public class ReviewController {
     }
 
     // 리뷰 수정 페이지 GET
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @GetMapping("/update/{rno}")
     public String getUpdate(
             PageRequestDTO pageRequestDTO, @PathVariable("rno") Long rno, Model model) {
@@ -143,8 +148,8 @@ public class ReviewController {
     }
 
     // 리뷰 수정 POST
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @PostMapping("update/{rno}")
-    @PreAuthorize("permitAll")
     public String postUpdate(
             ReviewModifyDTO reviewModifyDTO, RedirectAttributes rttr) {
         log.info("POST | Product Update =================");
@@ -157,8 +162,8 @@ public class ReviewController {
     }
 
     // 리뷰 삭제
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @PostMapping("delete/{rno}")
-    @PreAuthorize("permitAll")
     public String postDelete(
             @PathVariable("rno") Long rno, RedirectAttributes rttr) {
         log.info("POST | Product Delete =================");
@@ -172,7 +177,7 @@ public class ReviewController {
     }
 
     // 리뷰에 대한 답변 수정 페이지
-    @PreAuthorize("permitAll")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @GetMapping("/store/update/{rno}")
     public String getStoreReivewUpdate(
             PageRequestDTO pageRequestDTO, @PathVariable("rno") Long rno, Model model) {
@@ -190,9 +195,9 @@ public class ReviewController {
     }
 
 
-    // 리뷰에대한 답변 수정 
+    // 리뷰에대한 답변 수정
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')") 
     @PostMapping("/store/update/{rno}")
-    @PreAuthorize("permitAll")
     public String PostStoreReivewUpdate(
             ReviewModifyDTO reviewModifyDTO, RedirectAttributes rttr) {
         log.info("POST | Product Update =================");
@@ -204,9 +209,9 @@ public class ReviewController {
         return "redirect:/admin/review/read/" + reviewModifyDTO.getGno();
     }
 
-    // // // 리뷰에 대한 답변 삭제
+    //리뷰에 대한 답변 삭제
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     @PostMapping("/store/delete/{rno}")
-    @PreAuthorize("permitAll")
     public String postStoreReviewDelete(
             @PathVariable("rno") Long rno, RedirectAttributes rttr) {
         log.info("POST | Product Delete =================");
@@ -224,6 +229,17 @@ public class ReviewController {
         rttr.addFlashAttribute("message", rno + "번 답변이 삭제 되었습니다.");
 
         return "redirect:/admin/review/read/" + gno;
+    }
+
+    @GetMapping("/list/{sno}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
+    public String getListForStore(@PathVariable("sno") Long sno, PageRequestDTO pageRequestDTO, Model model) {
+
+        PageResponseDTO<ReviewListDTO> list = reviewService.getListForStore(sno, pageRequestDTO);
+
+        model.addAttribute("listReview", list);
+        model.addAttribute("sno", sno);
+        return "admin/review/list";
     }
 
 

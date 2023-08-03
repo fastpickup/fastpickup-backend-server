@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -41,7 +40,7 @@
       <textarea class="form-control p-3" rows="4" placeholder="리뷰를 입력해주세요." name="reviewContent" required>${reviewRead.reviewContent}</textarea>
 		</div>
 		<div class="bg-light rounded h-100 p-4">
-			<label for="productFile" class="form-label">상품 이미지</label>
+			<label for="productFile" class="form-label">리뷰 이미지</label>
 			<input type="file" name="upload" multiple class="form-control uploadInput" id="productFile">
 		</div>
 		<div class="uploadHidden"></div>
@@ -54,8 +53,8 @@
 				<a href="http://localhost/${reviewImg}" target="_blank">
 					<img src="http://localhost/s_${reviewImg}"/>
 				</a>
-				<p>${fn:substring(product,37,fn:length(product))}</p>
-				<button class="btn btn-danger" onclick="javascript:removeFile(event, '${product}')">X</button>
+				<p>${fn:substring(reviewImg,37,fn:length(reviewImg))}</p>
+				<button class="btn btn-danger" onclick="javascript:removeFile(event, '${reviewImg}')">X</button>
 			</li>
 		</c:forEach>
 	</ul>

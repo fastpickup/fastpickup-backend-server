@@ -1,5 +1,11 @@
 package com.project.fastpickup.admin.review.dto;
 
+/*
+ * Date   : 2023.07.31
+ * Author : 이주용
+ * E-mail : wndyd0110@gmail.com
+ */
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,12 +14,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-/*
- * Date   : 2023.07.31
- * Author : 이주용
- * E-mail : wndyd0110@gmail.com
- */
 
  @Data
  @AllArgsConstructor

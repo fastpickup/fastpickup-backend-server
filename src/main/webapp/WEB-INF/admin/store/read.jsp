@@ -319,15 +319,28 @@
       let reviewPagingStr = ""
       //Product List 출력
       for (let i = 0; i < arr.list.length; i++) {
-        const {rno, email, reviewTitle, reviewContent, reviewDate} = arr.list[i]
-        reviewListStr += '<tr';
-        reviewListStr += '>';
-        reviewListStr += '<td>' + rno + '</td>';
-        reviewListStr += '<td>' + email + '</td>';
+        const { rno, email, reviewTitle, reviewContent, reviewDate, fileName } = arr.list[i];
+    reviewListStr += '<tr';
 
-        reviewListStr += '<td><a href="/admin/review/read/' + rno + '">' + reviewTitle + '</a></td>';
-        reviewListStr += '<td>' + new Date(reviewDate).toLocaleDateString('ko-KR') + '</td>';
-        reviewListStr += '</tr>';
+    // Add a class 'hidden' to the row if fileName is empty
+    if (!fileName) {
+        reviewListStr += ' class="hidden"';
+    }
+
+    reviewListStr += '>';
+    reviewListStr += '<td>' + rno + '</td>';
+    reviewListStr += '<td>' + email + '</td>';
+
+    // Add image column if fileName is available
+    if (fileName) {
+        const imagePath = 'http://localhost/s_' + fileName;
+        reviewListStr += '<td><a href="/admin/review/read/' + rno + '"><img src="' + imagePath + '">' + reviewTitle + '</a></td>';
+    } else {
+      reviewListStr += '<td><a href="/admin/review/read/' + rno + '">' + reviewTitle + '</a></td>'; 
+    }
+
+    reviewListStr += '<td>' + new Date(reviewDate).toLocaleDateString('ko-KR') + '</td>';
+    reviewListStr += '</tr>';
       }//end for
       // /Product List 출력
 

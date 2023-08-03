@@ -13,10 +13,18 @@
 <body>
 <%@ include file="../include/header.jsp" %>
 <div class="col-12">
-  <h3>리뷰</h3>
+  <h3>리뷰 목록</h3>
   <!-- Search Start -->
   <div class="my-4 search_wrap bg-body">
-    <form action="/admin/review/list" method="get" class="actionForm">
+
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+			<form action="/admin/review/list" method="get" class="actionForm">
+		</sec:authorize>
+		<sec:authorize access="hasAnyRole('ROLE_STORE')">
+			<form action="/admin/review/list/${sno}" method="get" class="actionForm">
+		</sec:authorize>
+
+    <!-- <form action="/admin/review/list" method="get" class="actionForm"> -->
       <div class="search_box">
         <input type="hidden" name="page" value="${pageRequestDTO.page}">
         <input type="hidden" name="size" value="${pageRequestDTO.size}">
@@ -24,8 +32,8 @@
           <select name="type" class="form-select search-condition">
             <option value="">선택해주세요</option>
             <option value="e" ${pageRequestDTO.type=='e' ? 'selected="selected"' : '' }>Email</option>
-            <option value="s" ${pageRequestDTO.type=='n' ? 'selected="selected"' : '' }>가맹점</option>
-            <option value="t" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>리뷰제목</option>
+            <option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점</option>
+            <option value="t" ${pageRequestDTO.type=='t' ? 'selected="selected"' : '' }>리뷰제목</option>
           </select>
           <input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요."
             value="${pageRequestDTO.keyword}">
@@ -44,7 +52,7 @@
             <th scope="col">주문 번호</th>
             <!-- <th scope="col">가맹점 번호</th> -->
             <th scope="col">가맹점</th>
-            <th scope="col">주문음식</th>
+            <!-- <th scope="col">주문음식</th> -->
             <th scope="col">작성자</th>
             <th scope="col">리뷰 제목</th>
             <th scope="col">작성일</th>
@@ -58,9 +66,17 @@
               <td>${review.ono}</td>
               <!-- <td>${review.sno}</td> -->
               <td><a href="/admin/store/read/${review.sno}">${review.storeName}</a></td>
-              <td>${review.productName}</td>
+              <!-- <td>${review.productName}</td> -->
               <td>${review.email}</td>
-              <td>${review.reviewTitle}</td>
+              <td>
+                <c:if test="${not empty review.fileName}">
+                  <img src="http://localhost/s_${review.fileName}">
+                </c:if>
+                <c:if test="${empty review.fileName}">
+                  <p></p>
+                </c:if>
+                ${review.reviewTitle}
+              </td>
               <td>${review.reviewDate}</td>
               <!-- <td>${member.store}</td> -->
             </tr>
