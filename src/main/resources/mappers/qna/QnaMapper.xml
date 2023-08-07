@@ -24,13 +24,9 @@
                 </foreach>
             </trim>
         </if>
-
         order by q.qno desc
         limit #{skip}, #{size}
     </select>
-
-
-
 
     <!--  listCount  -->
     <select id="listCount">
