@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Date   : 2023.08.08, Author : 권성준,이주용, E-mail : thistrik@naver.com, wndyd0110@gmail.com -->
+<!-- FCMMapper Xml -->
+<mapper namespace="com.project.fastpickup.admin.firebase.mappers.FCMMapper">
+
+<!-- FCMMapper id = "createFcmToken" -->
+<update id="createFcmToken" parameterType="com.project.fastpickup.admin.firebase.dto.FCMDTO">
+  UPDATE 
+  tbl_member
+  SET fcmToken = #{fcmToken}
+  WHERE email = #{email}
+</update>
+
+<!-- FcmMapper id = "readFcmInfo" -->
+<select id="readFcmInfo" parameterType="java.lang.String">
+  SELECT * FROM tbl_member 
+  WHERE email = #{email}
+</select>
+
+</mapper>

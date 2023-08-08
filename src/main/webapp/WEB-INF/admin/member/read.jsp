@@ -15,6 +15,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>FastPickup</title>
+	<script type="text/javascript">
+      var ws = new WebSocket("ws:localhost:8080/notifications");
+        ws.onmessage = function(event) {
+            var notification = JSON.parse(event.data);
+            alert(notification.title + ": " + notification.body);
+        };
+    </script>
 </head>
 
 <body>
@@ -120,6 +127,38 @@
   }, 1500);
 </script>
 
+ <!-- FireBase 클라이언트 정보 -->
+ <script type="module">
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+	import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging.js";
+
+	const firebaseConfig = {
+		apiKey: "AIzaSyAHOtZVYBB8hnUq_SYKsEDQwifF0vuFKSM",
+		authDomain: "fastpickup-12231.firebaseapp.com",
+		projectId: "fastpickup-12231",
+		storageBucket: "fastpickup-12231.appspot.com",
+		messagingSenderId: "287215754000",
+		appId: "1:287215754000:web:18c00a656f4c6443272395",
+		measurementId: "G-TWRBB24Q37"
+	};
+
+	const app = initializeApp(firebaseConfig);
+	const messaging = getMessaging(app);
+
+	getToken(messaging, {
+		vapidKey: `BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg`,
+	})
+		.then((currentToken) => {
+			if (currentToken) {
+				console.log("Client Token: ", currentToken);
+			} else {
+				console.log("Failed to generate the app registration token.");
+			}
+		})
+		.catch((err) => {
+			console.log("An error occurred when requesting to receive the token.", err);
+		});
+</script>
 
 </body>
 

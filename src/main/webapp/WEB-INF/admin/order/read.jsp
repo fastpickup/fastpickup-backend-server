@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -35,10 +36,10 @@
 					<input type="hidden" name="ono" class="form-control" id="ono" value="${listOrder.ono}">
 					<input type="hidden" name="orderHistory" class="form-control" id="orderHistory" value="${listOrder.orderHistory}">
 					<input type="hidden" id="status" name="orderStatus">
-					<div class="button_wrap">
-						<button type="button" class="btn btn-outline-dark" onclick="submitForm('주문접수')">상품 접수 확인</button>
-						<button type="button" class="btn btn-dark" onclick="submitForm('주문준비완료')">상품 준비 완료</button>
-						<button type="button" class="btn btn-primary" onclick="submitForm('반려')">상품 반려</button>
+					<div class="button_wrap orderDiv">
+						<button type="button" class="btn btn-outline-dark receiptBtn" onclick="submitForm('주문접수')">상품 접수 확인</button>
+						<button type="button" class="btn btn-dark completeBtn" onclick="submitForm('주문준비완료')">상품 준비 완료</button>
+						<button type="button" class="btn btn-primary rejectBtn" onclick="submitForm('반려')">상품 반려</button>
 					</div>
 				</form>
 			</div>
@@ -60,6 +61,7 @@
 					<li><span>주문자 전화번호</span> ${listOrder.memberPhone}</li>
 					<li><span>상품 번호</span> ${listOrder.pno}</li>
 					<li><span>상품명</span> <strong>${listOrder.productName}</strong></li>
+					<li><span>주문자 이메일 </span> <strong>${listOrder.email}</strong></li>
 					<li><span>주문 수량</span> ${listOrder.orderCount}</li>
 					<li><span>상품 가격</span> <fmt:formatNumber type="currency" value="${listOrder.productPrice}" pattern="###,### 원" /></li>
 					<li><span>총 금액</span> <strong><fmt:formatNumber type="currency" value="${listOrder.productPrice * listOrder.orderCount}" pattern="###,### 원" /></strong></li>
@@ -91,9 +93,10 @@
 		</div>
 	</div>
 </div>
+<script src="/js/FCMTokenToFCMServer.js"></script>	
 <!-- Update Complete Message End -->
 <%@ include file="../include/footer.jsp" %>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
@@ -111,7 +114,57 @@
   setTimeout(function () {
     alertModal.hide();
   }, 1500);
+
+  const orderDiv = document.querySelector(".orderDiv")
+
+console.log(orderDiv)
+const userEmail = "${listOrder.email}";
+
+orderDiv.addEventListener("click", (e) => {
+
+	e.preventDefault()
+	e.stopPropagation()
+
+	const target = e.target
+	console.log(target)
+
+	// 접수 버튼 눌렀을 시
+	if (target.classList.contains("receiptBtn")) {
+		
+		console.log(target)
+		const message = {
+			email: userEmail,
+			title: "주문 접수 알람",
+			body: "주문 접수"
+		}
+		console.log("About to call postOrder",message);
+		postOrder(message)
+	}
+	if (target.classList.contains("rejectBtn")) {
+
+		const message = {
+			email: userEmail,
+			title: "주문 접수 알람",
+			body: "주문 취소"
+		}
+		postOrder(message)
+	}
+
+	if (target.classList.contains("completeBtn")) {
+
+		const message = {
+			email: userEmail,
+			title: "주문 접수 알람",
+			body: "주문 완료 ."
+		}
+		postOrder(message)
+		console.log(message)
+	}
+}, false)
+
 </script>
+
+
 </body>
 
 </html>
