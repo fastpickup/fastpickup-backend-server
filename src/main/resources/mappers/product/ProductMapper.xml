@@ -174,4 +174,11 @@
     where tp.pno = #{pno}
   </update>
 
+  <!-- ProductMapper id = "checkPno" -->
+  <select id="checkPno" parmeterType="long" resultType="int">
+    SELECT COUNT(*)
+    FROM tbl_product
+    WHERE pno = #{pno}
+  </select>
+
 </mapper>
