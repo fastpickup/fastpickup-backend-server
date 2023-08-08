@@ -22,7 +22,7 @@ public interface ReviewService {
     Long registReview(ReviewRegistDTO reviewRegistDTO);
 
     // 전체 리뷰 리스트
-    PageResponseDTO<ReviewListDTO> getList( PageRequestDTO pageRequestDTO);
+    PageResponseDTO<ReviewListDTO> getList(PageRequestDTO pageRequestDTO);
 
     // 가맹점 별 리뷰 리스트 => Rest 방식
     PageResponseDTO<ReviewListDTO> getStoreList(Long sno, PageRequestDTO pageRequestDTO);
