@@ -206,6 +206,14 @@ select * from tbl_product;
 select * from tbl_product_image;
 select * from tbl_product_category;
 
+
+select distinct tpc.categoryName
+from tbl_product_category tpc
+order by tpc.categoryName asc
+limit 10
+;
+
+
 select * from tbl_product_image where pno = 45;
 delete from tbl_product_category where cno = 34;
 
@@ -258,7 +266,7 @@ select prdt.pno, prdt.productName, prdt.productPrice, prdt.registDate, prdt.view
               left outer join tbl_product_category tpc on tpc.pno = tp.pno
             where tp.pno > 0 and tp.isDeletedProduct = true
             order by tp.pno desc
-            limit 0, 10
+            limit 50
         ) as prdt
     left outer join tbl_product_image tpi
     on tpi.pno = prdt.pno
