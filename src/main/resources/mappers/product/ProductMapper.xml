@@ -175,7 +175,7 @@
   </update>
 
   <!-- ProductMapper id = "checkPno" -->
-  <select id="checkPno" parmeterType="long" resultType="int">
+  <select id="checkPno" parameterType="long" resultType="int">
     SELECT COUNT(*)
     FROM tbl_product
     WHERE pno = #{pno}
