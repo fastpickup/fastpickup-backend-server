@@ -357,7 +357,24 @@ select * from tbl_like;
 
 ###################################
 select * from tbl_product;
-delete from tbl_product where pno = 27;
+delete from tbl_product where productName = 'test';
 select * from tbl_product_category;
+select * from tbl_product_image;
+
+select * from tbl_order;
+select * from tbl_order_history;
+select * from tbl_member;
+select * from tbl_member_role;
+
+delete from tbl_member where email = 'jo_sh_1028@naver.com';
+
+update tbl_member_role set rolename = 'ADMIN' where email = 'admin@naver.com';
+
+delete from tbl_member_role;
+
+select * from tbl_review;
+select * from tbl_review_img;
+
+
 
 

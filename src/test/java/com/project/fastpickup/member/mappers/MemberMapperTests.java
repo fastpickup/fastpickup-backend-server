@@ -37,14 +37,14 @@ public class MemberMapperTests {
     private PasswordEncoder passwordEncoder;
 
     // Test 시작시 메모리에 priavte static final 로 먼저 올려놓는다
-    private static final String TEST_EMAIL = "thistrik@naver.com";
+    private static final String TEST_EMAIL = "admin";
     private static final String TEST_EMAIL_VERSION_2 = "twefiwefew@naver.com";
     private static final String TEST_EMAIL_VERSION_3 = "wfewfewfew@naver.com";
     private static final String TEST_EMAIL_VERSION_4 = "wfewfiewfewe@naver.com";
     private static final String TEST_MEMBER_PW = "1111";
-    private static final String TEST_MEMBER_NAME = "권성준";
-    private static final String TEST_MEMBER_PHONE = "010-3099-0648";
-    private static final String TEST_STORE = "s";
+    private static final String TEST_MEMBER_NAME = "관리자";
+    private static final String TEST_MEMBER_PHONE = "010-0000-0000";
+    private static final String TEST_STORE = "m";
 
     // DTO 정의
     private MemberConvertDTO memberConvertDTO;
@@ -57,7 +57,7 @@ public class MemberMapperTests {
     public void setUp() {
         // 회원가입
         memberConvertDTO = MemberConvertDTO.builder()
-                .email(TEST_EMAIL_VERSION_2)
+                .email(TEST_EMAIL)
                 .memberPw(passwordEncoder.encode(TEST_MEMBER_PW))
                 .memberName(TEST_MEMBER_NAME)
                 .memberPhone(TEST_MEMBER_PHONE)
@@ -125,17 +125,17 @@ public class MemberMapperTests {
 
     // Join Member Mapper Test
     @Test
-    @Transactional
+    //@Transactional
     @DisplayName("멤버 회원가입 테스트")
     public void joinMemberTestMapper() {
         // GIVEN
         log.info("=== Start Join Member Test Mapper ===");
         // WHEN
-        String rolename = "USER";
+        String rolename = "ADMIN";
         memberMapper.joinMember(memberConvertDTO);
         memberMapper.createJoinMemberRole(memberConvertDTO.getEmail(), rolename);
         // THEN
-        Assertions.assertEquals(memberConvertDTO.getEmail(), "twefiwefew@naver.com");
+        Assertions.assertEquals(memberConvertDTO.getEmail(), "admin");
         log.info("=== End Join Member Test Mapper ===");
     }
 
