@@ -101,6 +101,7 @@
 	<a href="/admin/product/update/${productRead.pno}" class="btn btn-dark">상품수정</a>
 	</sec:authorize>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Modal Start -->
 <div class="modal alertModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
