@@ -37,8 +37,8 @@
 					<input type="hidden" name="orderHistory" class="form-control" id="orderHistory" value="${listOrder.orderHistory}">
 					<input type="hidden" id="status" name="orderStatus">
 					<div class="button_wrap orderDiv">
-						<button type="button" class="btn btn-outline-dark receiptBtn" onclick="submitForm('주문접수')">상품 접수 확인</button>
-						<button type="button" class="btn btn-dark completeBtn" onclick="submitForm('주문준비완료')">상품 준비 완료</button>
+						<button type="button" class="btn btn-outline-dark receiptBtn" onclick="submitForm('주문 접수')">상품 접수 확인</button>
+						<button type="button" class="btn btn-dark completeBtn" onclick="submitForm('주문 준비 완료')">상품 준비 완료</button>
 						<button type="button" class="btn btn-primary rejectBtn" onclick="submitForm('반려')">상품 반려</button>
 					</div>
 				</form>
