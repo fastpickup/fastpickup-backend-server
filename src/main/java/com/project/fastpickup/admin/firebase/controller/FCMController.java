@@ -38,19 +38,16 @@ public class FCMController {
     @PostMapping("fcm/token")
     public ResponseEntity<Integer> createFcmToken(@RequestBody FCMDTO orderDTO) {
         log.info("RestController | Admin Create Fcm Token");
-        log.info(orderDTO+"ORDERDTO");
-        log.info("토큰: " + orderDTO.getFcmToken());
-        log.info("토큰");
+        log.info("orderDTO: "+orderDTO);
         int result = fireBaseService.createFcmToken(orderDTO);
-        log.info(result);
+        log.info("result: "+result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping("v1/notification")
-    public ResponseEntity<String> sendingMessageToClient(
-            @RequestBody FCMNotificationRequestDTO fcmNotificationRequestDTO) {
-        log.info("RestController | Admin Sending Message Token");
-        String result = fireBaseService.sendingMessageByToken(fcmNotificationRequestDTO);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @PostMapping("/v1/notification")
+    public String sendNotification(@RequestBody FCMNotificationRequestDTO dto) {
+        log.info("dto"+dto);
+        return fireBaseService.sendingMessageByToken(dto);
     }
+
 }

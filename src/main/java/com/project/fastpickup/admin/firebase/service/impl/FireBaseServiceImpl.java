@@ -54,6 +54,7 @@ public class FireBaseServiceImpl implements FireBaseService {
    public String sendingMessageByToken(FCMNotificationRequestDTO fcmNotificationRequestDTO) {
       log.info("Is Running Sending Message By Token ServiceImpl");
       FCMDTO fcmdto = fcmMapper.readFcmInfo(fcmNotificationRequestDTO.getEmail());
+      log.info("fcmdto: ",fcmdto);
       if (fcmdto != null) {
          if (fcmdto.getFcmToken() != null) {
             Notification notification = Notification.builder()
@@ -75,7 +76,6 @@ public class FireBaseServiceImpl implements FireBaseService {
          } else {
             return "서버에 저장된 FCMToken이 없습니다.";
          }
-
       } else {
          return "해당 유저가 존재하지않습니다.";
       }
