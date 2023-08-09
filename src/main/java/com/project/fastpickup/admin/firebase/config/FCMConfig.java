@@ -26,18 +26,12 @@ public class FCMConfig {
 
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
-
-        ClassPathResource resource = new ClassPathResource(
-                "firebase/fastpasstest-c42c7-firebase-adminsdk-ckwex-5e007d2c8a.json");
-
+        ClassPathResource resource = new ClassPathResource("firebase/fastpasstest-c42c7-firebase-adminsdk-ckwex-5e007d2c8a.json");
         // Firebase Admin SDK(FCM 서버에 인증하려면 필요 함)json 파일을 읽는 작업
         InputStream refreshToken = resource.getInputStream();
-
         // Firebase 초기화 작업
         FirebaseApp firebaseApp = null;
-
         List<FirebaseApp> firebaseAppList = FirebaseApp.getApps();
-
         if (firebaseAppList != null && !firebaseAppList.isEmpty()) {
             for (FirebaseApp app : firebaseAppList) {
                 if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
@@ -53,9 +47,6 @@ public class FCMConfig {
 
             firebaseApp = FirebaseApp.initializeApp(options);
         }
-
         return FirebaseMessaging.getInstance(firebaseApp);
-
     }
-
 }

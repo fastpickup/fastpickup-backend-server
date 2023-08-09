@@ -118,6 +118,7 @@
   const orderDiv = document.querySelector(".orderDiv")
 
 console.log(orderDiv)
+// 주문자 이메일 
 const userEmail = "${listOrder.email}";
 
 orderDiv.addEventListener("click", (e) => {
@@ -133,9 +134,9 @@ orderDiv.addEventListener("click", (e) => {
 		
 		console.log(target)
 		const message = {
-			email: 'wndyd0110@naver.com',
+			email: userEmail,
 			title: "주문 접수 알람",
-			body: "주문 접수"
+			body: "주문이 접수되었습니다."
 		}
 		console.log("About to call postOrder",message);
 		postOrder(message)
@@ -143,9 +144,9 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("rejectBtn")) {
 
 		const message = {
-			email: 'wndyd0110@naver.com',
+			email: userEmail,
 			title: "주문 접수 알람",
-			body: "주문 취소"
+			body: "주문이 취소되었습니다."
 		}
 		postOrder(message)
 	}
@@ -153,9 +154,9 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("completeBtn")) {
 
 		const message = {
-			email: 'wndyd0110@naver.com',	// useEmail 로 변경 차후 필수 
+			email: userEmail,	// useEmail 로 변경 차후 필수 
 			title: "주문 접수 알람",
-			body: "주문 완료 ."
+			body: "상품이 준비되었어요! 찾아가주세요."
 		}
 		postOrder(message)
 		console.log(message)

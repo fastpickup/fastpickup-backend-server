@@ -168,12 +168,9 @@
 	$('.alertModal').modal('show');
 	setTimeout(function () {
 	$('.alertModal').modal('hide');
-  	}, 1500);
-	
+  	}, 6000);
+
 	});
-	
-	
-	
 </script>
 
 </body>
