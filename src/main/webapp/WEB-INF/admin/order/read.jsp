@@ -133,7 +133,7 @@ orderDiv.addEventListener("click", (e) => {
 		
 		console.log(target)
 		const message = {
-			email: userEmail,
+			email: 'wndyd0110@naver.com',
 			title: "주문 접수 알람",
 			body: "주문 접수"
 		}
@@ -143,7 +143,7 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("rejectBtn")) {
 
 		const message = {
-			email: userEmail,
+			email: 'wndyd0110@naver.com',
 			title: "주문 접수 알람",
 			body: "주문 취소"
 		}
@@ -153,7 +153,7 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("completeBtn")) {
 
 		const message = {
-			email: userEmail,
+			email: 'wndyd0110@naver.com',	// useEmail 로 변경 차후 필수 
 			title: "주문 접수 알람",
 			body: "주문 완료 ."
 		}
