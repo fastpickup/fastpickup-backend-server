@@ -28,26 +28,27 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/")
 public class FCMController {
 
+    // 의존성 주입 
     private final FireBaseService fireBaseService;
 
+    // Autowired 명시적 표시 
     @Autowired
     public FCMController(FireBaseService firebaseService) {
+        log.info("Constructor Called, Like Service Injected.");
         this.fireBaseService = firebaseService;
     }
 
+    // POST : Create Fcm Token 
     @PostMapping("fcm/token")
     public ResponseEntity<Integer> createFcmToken(@RequestBody FCMDTO orderDTO) {
         log.info("RestController | Admin Create Fcm Token");
-        log.info("orderDTO: "+orderDTO);
         int result = fireBaseService.createFcmToken(orderDTO);
-        log.info("result: "+result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    // POST : Create Sending Message 
     @PostMapping("/v1/notification")
     public String sendNotification(@RequestBody FCMNotificationRequestDTO dto) {
-        log.info("dto"+dto);
         return fireBaseService.sendingMessageByToken(dto);
     }
-
 }

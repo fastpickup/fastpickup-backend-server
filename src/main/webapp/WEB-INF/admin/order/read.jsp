@@ -37,8 +37,8 @@
 					<input type="hidden" name="orderHistory" class="form-control" id="orderHistory" value="${listOrder.orderHistory}">
 					<input type="hidden" id="status" name="orderStatus">
 					<div class="button_wrap orderDiv">
-						<button type="button" class="btn btn-outline-dark receiptBtn" onclick="submitForm('주문접수')">상품 접수 확인</button>
-						<button type="button" class="btn btn-dark completeBtn" onclick="submitForm('주문준비완료')">상품 준비 완료</button>
+						<button type="button" class="btn btn-outline-dark receiptBtn" onclick="submitForm('주문 접수')">상품 접수 확인</button>
+						<button type="button" class="btn btn-dark completeBtn" onclick="submitForm('주문 준비 완료')">상품 준비 완료</button>
 						<button type="button" class="btn btn-primary rejectBtn" onclick="submitForm('반려')">상품 반려</button>
 					</div>
 				</form>
@@ -118,6 +118,7 @@
   const orderDiv = document.querySelector(".orderDiv")
 
 console.log(orderDiv)
+// 주문자 이메일 
 const userEmail = "${listOrder.email}";
 
 orderDiv.addEventListener("click", (e) => {
@@ -133,9 +134,9 @@ orderDiv.addEventListener("click", (e) => {
 		
 		console.log(target)
 		const message = {
-			email: 'wndyd0110@naver.com',
+			email: userEmail,
 			title: "주문 접수 알람",
-			body: "주문 접수"
+			body: "주문이 접수되었습니다."
 		}
 		console.log("About to call postOrder",message);
 		postOrder(message)
@@ -143,9 +144,9 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("rejectBtn")) {
 
 		const message = {
-			email: 'wndyd0110@naver.com',
+			email: userEmail,
 			title: "주문 접수 알람",
-			body: "주문 취소"
+			body: "주문이 취소되었습니다."
 		}
 		postOrder(message)
 	}
@@ -153,9 +154,9 @@ orderDiv.addEventListener("click", (e) => {
 	if (target.classList.contains("completeBtn")) {
 
 		const message = {
-			email: 'wndyd0110@naver.com',	// useEmail 로 변경 차후 필수 
+			email: userEmail,	// useEmail 로 변경 차후 필수 
 			title: "주문 접수 알람",
-			body: "주문 완료 ."
+			body: "상품이 준비되었어요! 찾아가주세요."
 		}
 		postOrder(message)
 		console.log(message)

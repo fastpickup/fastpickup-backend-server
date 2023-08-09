@@ -1,5 +1,7 @@
 package com.project.fastpickup.admin.like.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /*
  * Date   : 2023.07.31
  * Author : 권성준
@@ -26,6 +28,8 @@ public class LikeServiceImpl implements LikeService {
     // 의존성 주입
     private final LikeMapper likeMapper;
 
+    // Autowired 명시적 표시 
+    @Autowired
     public LikeServiceImpl(LikeMapper likeMapper) {
         log.info("Constructor Called, Like Mapper Injected.");
         this.likeMapper = likeMapper;
