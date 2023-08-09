@@ -354,3 +354,10 @@ AND o.registDate >= '2023-07-19' AND o.registDate <= '2023-07-31' )
 select * from tbl_like;
 ##/좋아요
 
+
+###################################
+select * from tbl_product;
+delete from tbl_product where pno = 27;
+select * from tbl_product_category;
+
+
