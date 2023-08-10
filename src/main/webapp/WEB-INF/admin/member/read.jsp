@@ -45,6 +45,11 @@
 			<form onsubmit="return false;" action="/admin/member/delete" method="post">
 				<div class="button_wrap mt-4">
 					<a href="/admin/member/list" class="btn btn-outline-dark">목록으로</a>
+					<sec:authorize access="hasAnyRole('ROLE_STORE')">
+						<div class="button_wrap">
+							<a href="/admin/store/create" class="btn btn-dark">가맹점 추가</a>
+						</div>
+					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 					<button type="submit" class="btn btn-primary btn-delete" onclick="confirmDelete(event)">회원 탈퇴</button>
 					</sec:authorize>

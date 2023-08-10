@@ -77,7 +77,7 @@ public class StoreController {
 
     // GET : Create Store
     @GetMapping("create")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String getCreateStore() {
         log.info("GET | Admin Store Create");
         return "admin/store/create";
@@ -122,7 +122,7 @@ public class StoreController {
 
     // POST : Create Store
     @PostMapping("create")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String postCreateStore(@Valid StoreCreateDTO storeCreateDTO, Authentication authentication,
             RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Create");
@@ -131,7 +131,7 @@ public class StoreController {
         storeCreateDTO.setEmail(email);
         int createStore = storeService.createStore(storeCreateDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 등록 완료");
-        return "redirect:/admin/store/list";
+        return "redirect:/admin/store/read/" +storeCreateDTO.getSno();
     }
 
     // POST : Delete Store
