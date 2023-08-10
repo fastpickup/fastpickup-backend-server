@@ -357,7 +357,7 @@ select * from tbl_like;
 
 ###################################
 select * from tbl_product;
-delete from tbl_product where productName = 'test';
+delete from tbl_product where pno = 152;
 select * from tbl_product_category;
 select * from tbl_product_image;
 
@@ -366,7 +366,11 @@ select * from tbl_order_history;
 select * from tbl_member;
 select * from tbl_member_role;
 
-delete from tbl_member where email = 'jo_sh_1028@naver.com';
+delete from tbl_member_role where email = 'jo_sh_1028@naver.com';
+
+update tbl_member set fcmToken = 'eWGs5b22UZuio_KGear505:APA91bEwjWC3sx1ZyHswUmHyVnAb-QUfEVAhzhinclqETqtYl2_K_tEueg56F8QVbsrRuVydGjMpnnUYSWDZcHShBbc5pJnqZQEdbrS_-EoUc3mU8lPOeNHicVgCTzkmvgb1_uwDpe8a'
+where email = 'jo_sh_1028@naver.com'
+;
 
 update tbl_member_role set rolename = 'ADMIN' where email = 'admin@naver.com';
 
@@ -375,6 +379,37 @@ delete from tbl_member_role;
 select * from tbl_review;
 select * from tbl_review_img;
 
+SELECT count(*)
+FROM (
+  SELECT 
+    c.cno,
+    c.pno,
+    p.sno,
+    c.categoryName,
+    s.storeName,
+    concat(pi.uuid, '_', pi.fileName) AS fileName,
+    ROW_NUMBER() OVER (PARTITION BY s.sno ORDER BY p.sno DESC, c.cno DESC) AS rn
+  FROM tbl_product_category c
+  LEFT OUTER JOIN tbl_product p on c.pno = p.pno 
+  LEFT OUTER JOIN tbl_product_image pi on pi.pno = p.pno AND pi.ord = 0
+  LEFT OUTER JOIN tbl_store s on p.sno = s.sno
+  WHERE c.categoryName = '햄버거'
+) t
+WHERE rn = 1
+;
+
+select count(*) from tbl_product_category where categoryName = '음료' group by categoryName;
+select * from tbl_product_category where categoryName = '음료';
+
+SELECT COUNT(*)
+  FROM (
+    SELECT * FROM 
+    tbl_product_category c 
+    WHERE categoryName = '음료'
+  group by c.categoryName
+  LIMIT 101
+  ) as tbl_store
+;
 
 
 
