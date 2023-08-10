@@ -68,7 +68,7 @@
                 </foreach>
               </trim>
             </if>
-            order by tp.pno desc
+            order by tp.isRecommend desc,  tp.pno desc
             limit #{skip}, #{size}
         ) as prdt
     left outer join tbl_product_image tpi

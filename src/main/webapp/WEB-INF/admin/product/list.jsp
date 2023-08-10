@@ -32,9 +32,9 @@
 				<div class="input-group mb-3">
 					<select name="type" class="form-select search-condition">
 						<option value="">선택해주세요</option>
-						<option value="e" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>상품명</option>
+						<option value="p" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>상품명</option>
 						<option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점 이름</option>
-						<option value="sw" ${pageRequestDTO.type=='c' ? 'selected="selected"' : '' }>카테고리명</option>
+						<option value="c" ${pageRequestDTO.type=='c' ? 'selected="selected"' : '' }>카테고리명</option>
 					</select>
 					<input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요." value="${pageRequestDTO.keyword}">
 					<button type="button" class="btn btn-primary btnSearch">검색</button>
