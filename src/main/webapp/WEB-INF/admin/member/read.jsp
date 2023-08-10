@@ -138,8 +138,12 @@
 		measurementId: "G-TWRBB24Q37"
 	};
 	var email = document.querySelector(".email").textContent;
+
 	const app = initializeApp(firebaseConfig);
 	const messaging = getMessaging(app);
+
+	console.log("app", app)
+	console.log("메시지: ", messaging)
 
 	// 토큰 삭제
 	deleteToken(messaging).then(() => {
