@@ -47,7 +47,7 @@
 			<input type="file" name="upload" multiple class="form-control uploadInput" id="productFile">
 		</div>
 		<div class="bg-light rounded h-100 p-4">
-			<input type="checkbox" name="isRecommend" id="isRecommend" value="${productRead.isRecommend}" <c:if test="${productRead.isRecommend == 999999999}">checked</c:if>/>
+			<input type="checkbox" name="isRecommend" id="isRecommend" value="999999999" <c:if test="${productRead.isRecommend == 999999999}">checked</c:if>/>
 			<label for="isRecommend" class="form-label">추천상품 여부</label>
 		</div>
 		<div class="uploadHidden"></div>
@@ -57,8 +57,8 @@
 	<ul class="uploadUL">
 		<c:forEach items="${productRead.fileNames}" var="product" varStatus="status">
 			<li data-originName="${product}">
-				<a href="http://localhost/${product}" target="_blank">
-					<img src="http://localhost/s_${product}"/>
+				<a href="http://192.168.0.64/${product}" target="_blank">
+					<img src="http://192.168.0.64/s_${product}"/>
 				</a>
 				<p>${fn:substring(product,37,fn:length(product))}</p>
 				<button class="btn btn-danger" onclick="javascript:removeFile(event, '${product}')">X</button>
@@ -122,7 +122,7 @@
     const header = {headers: {"Content-Type": "multipart/form-data"}}
 
     //파일 업로드 axios 호출
-    axios.post("http://192.168.0.64:8080/api/files/upload", formData, header).then(res => {
+    axios.post("http://localhost:8080/api/files/upload", formData, header).then(res => {
       const result = res.data
       console.log(result)
       showProducts(result)
