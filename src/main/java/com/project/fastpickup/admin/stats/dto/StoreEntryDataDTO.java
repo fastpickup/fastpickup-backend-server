@@ -25,4 +25,5 @@ public class StoreEntryDataDTO {
     private String registMonth;
     private Long storeCount;
     private String registDate;
+    private String formattedRegistDate;
 }

@@ -25,4 +25,5 @@ public class FCMNotificationRequestDTO {
     private String email;
     private String title;
     private String body;
+    private String fcmToken;
 }

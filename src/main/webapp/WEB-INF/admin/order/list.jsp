@@ -70,7 +70,7 @@
 											<th scope="col">주문 번호</th>
 											<th scope="col">상품 이름</th>
 											<th scope="col">상품 주문 날짜</th>
-											<th scope="col">가맹점 이메일</th>
+											<th scope="col">주문자 이메일</th>
 											<th scope="col">가맹점 이름</th>
 											<th scope="col">가맹점 전화번호</th>
 											<th scope="col">주문 개수</th>

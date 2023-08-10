@@ -26,20 +26,21 @@
 
 <!-- StatsMapper id = "storeDayEntryData" -->
 <select id="storeDayEntryData" resultMap="storeDayEntryDataResult">
-  SELECT
-  DATE_FORMAT(registDate, '%Y-%m-%d') AS registDate,
+SELECT
+  DATE_FORMAT(DATE(registDate), '%Y-%m-%d') AS formattedRegistDate,
   COUNT(s.sno) AS storeCount
-  FROM
+FROM
   tbl_store s
-  GROUP BY
-  registDate
-  ORDER BY
-  registDate;
+GROUP BY
+  DATE_FORMAT(DATE(registDate), '%Y-%m-%d')
+ORDER BY
+  DATE_FORMAT(DATE(registDate), '%Y-%m-%d')
 </select>
 <resultMap id="storeDayEntryDataResult" type="com.project.fastpickup.admin.stats.dto.StoreEntryDataDTO">
     <result column="registDate" property="registDate"/>
     <result column="storeName" property="storeName"/>
     <result column="storeCount" property="storeCount"/>
+    <result column="formattedRegistDate" property="formattedRegistDate"/>
 </resultMap>
 
 <!-- StatsMapper id = "memberMonthEntryData" -->

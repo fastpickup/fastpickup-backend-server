@@ -44,14 +44,9 @@
 			<!-- Member Delete & Member Signout & Member Update & Board List Page -->
 			<form onsubmit="return false;" action="/admin/member/delete" method="post">
 				<div class="button_wrap mt-4">
-					<a href="/admin/member/list" class="btn btn-outline-dark">목록으로</a>
-					<sec:authorize access="hasAnyRole('ROLE_STORE')">
-						<div class="button_wrap">
-							<a href="/admin/store/create" class="btn btn-dark">가맹점 추가</a>
-						</div>
-					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 					<button type="submit" class="btn btn-primary btn-delete" onclick="confirmDelete(event)">회원 탈퇴</button>
+					<a href="/admin/member/list" class="btn btn-outline-dark">목록으로</a>
 					</sec:authorize>
 					<a href="/admin/member/update/${listMember.email}" class="btn btn-dark">정보 수정</a>
 					<a href="/admin/member/logout" class="btn btn-dark">로그아웃</a>
@@ -142,27 +137,41 @@
 		appId: "1:287215754000:web:18c00a656f4c6443272395",
 		measurementId: "G-TWRBB24Q37"
 	};
-	var email = document.querySelector(".email").textContent;
 
+	// FireBase 초가화 
 	const app = initializeApp(firebaseConfig);
 	const messaging = getMessaging(app);
-
-	console.log("app", app)
-	console.log("메시지: ", messaging)
-
-	// 토큰 삭제
-	deleteToken(messaging).then(() => {
-	// 토큰 다시 가져오기
-	getToken(messaging, { vapidKey:  `BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg` })
+	// 토큰 발급 및 서버로 전송
+	const getTokenAndSend = (messaging, email) => {
+		getToken(messaging, { vapidKey: 'BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg' })
 		.then((newToken) => {
-		console.log('New token:', newToken);
-		console.log('EMAIL', email)
-		postUpdateTokenValue(newToken, email)
+			console.log('New token:', newToken);
+			console.log('EMAIL', email);
+			postUpdateTokenValue(newToken, email);
 		})
 		.catch((err) => {
-		console.error('Error getting new token', err);
+			console.error('Error getting new token', err);
 		});
-	});
+	};
+
+	var email = document.querySelector(".email").textContent;
+
+	console.log("app", app)
+	console.log("메시지", messaging)
+	// 로컬 스토리지에서 토큰 존재 여부 확인
+    const existingToken = localStorage.getItem('fcmToken');
+	console.log("existingToken", existingToken)
+	if (existingToken) {
+      deleteToken(messaging, existingToken).then(() => {
+        console.log(messaging, "삭제요청")
+        getTokenAndSend(messaging, email);
+      });
+    } else {
+      // 최초 로그인 시 토큰 발급
+      console.log("최초발급")
+      getTokenAndSend(messaging, email);
+    }
+
 
 	onMessage(messaging, (payload) => {
 	console.log("Received foreground message", payload);
