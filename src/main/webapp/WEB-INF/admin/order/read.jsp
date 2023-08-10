@@ -120,6 +120,7 @@
 console.log(orderDiv)
 // 주문자 이메일 
 const userEmail = "${listOrder.email}";
+console.log('주문자이메일', userEmail)
 
 orderDiv.addEventListener("click", (e) => {
 
@@ -152,7 +153,7 @@ orderDiv.addEventListener("click", (e) => {
 	}
 
 	if (target.classList.contains("completeBtn")) {
-
+		
 		const message = {
 			email: userEmail,	// useEmail 로 변경 차후 필수 
 			title: "주문 접수 알람",
@@ -164,6 +165,22 @@ orderDiv.addEventListener("click", (e) => {
 }, false)
 
 </script>
+<script type="module">
+
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+	import { getMessaging, getToken, onMessage, deleteToken } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js";
+
+	const firebaseConfig = {
+		apiKey: "AIzaSyAHOtZVYBB8hnUq_SYKsEDQwifF0vuFKSM",
+		authDomain: "fastpickup-12231.firebaseapp.com",
+		projectId: "fastpickup-12231",
+		storageBucket: "fastpickup-12231.appspot.com",
+		messagingSenderId: "287215754000",
+		appId: "1:287215754000:web:18c00a656f4c6443272395",
+		measurementId: "G-TWRBB24Q37"
+	};
+	// var email = document.querySelector(".email").textContent;
+	</script>
 
 
 </body>

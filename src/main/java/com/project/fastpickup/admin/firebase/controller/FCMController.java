@@ -49,6 +49,7 @@ public class FCMController {
     // POST : Create Sending Message 
     @PostMapping("/v1/notification")
     public String sendNotification(@RequestBody FCMNotificationRequestDTO dto) {
+        log.info("RestController | Admin Crate Message");
         return fireBaseService.sendingMessageByToken(dto);
     }
 }

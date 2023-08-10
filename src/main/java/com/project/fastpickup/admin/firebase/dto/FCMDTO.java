@@ -24,4 +24,6 @@ import lombok.ToString;
 public class FCMDTO {
     private String email;
     private String fcmToken;
+    private String title;
+    private String body;
 }

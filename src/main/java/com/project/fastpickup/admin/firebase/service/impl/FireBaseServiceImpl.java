@@ -45,6 +45,7 @@ public class FireBaseServiceImpl implements FireBaseService {
    @Transactional
    public int createFcmToken(FCMDTO fcmdto) {
       log.info("Is Running Crate Fcm Token ServiceImpl");
+      log.info(fcmdto);
       return fcmMapper.createFcmToken(fcmdto);
    }
 
@@ -53,8 +54,10 @@ public class FireBaseServiceImpl implements FireBaseService {
    @Transactional
    public String sendingMessageByToken(FCMNotificationRequestDTO fcmNotificationRequestDTO) {
       log.info("Is Running Sending Message By Token ServiceImpl");
+      log.info("fcmNotificationRequestDTO: "+fcmNotificationRequestDTO);
       FCMDTO fcmdto = fcmMapper.readFcmInfo(fcmNotificationRequestDTO.getEmail());
-      log.info("fcmdto: ",fcmdto);
+      log.info("fcmdto: "+ fcmdto);
+      log.info(fcmdto.getFcmToken());
       if (fcmdto != null) {
          if (fcmdto.getFcmToken() != null) {
             Notification notification = Notification.builder()
@@ -68,10 +71,9 @@ public class FireBaseServiceImpl implements FireBaseService {
             try {
                firebaseMessaging.send(message);
                return "알림을 성공적으로 전송하였습니다.";
-
             } catch (FirebaseMessagingException e) {
-               e.printStackTrace();
-               return "실패";
+               log.error("Firebase 메시지 전송 실패: " + e.getMessage(), e);
+               return "실패: " + e.getMessage();
             }
          } else {
             return "서버에 저장된 FCMToken이 없습니다.";
