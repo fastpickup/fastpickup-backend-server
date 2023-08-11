@@ -20,13 +20,13 @@ import com.project.fastpickup.admin.util.PageResponseDTO;
 public interface StoreService {
 
     // Create Store
-    int createStore(StoreCreateDTO storeCreateDTO);
+    Long createStore(StoreCreateDTO storeCreateDTO);
 
     // Read Store
     StoreDTO readStore(Long sno);
 
     // Update Store
-    int updateStore(StoreUpdateDTO storeUpdateDTO);
+    Long updateStore(StoreUpdateDTO storeUpdateDTO);
 
     // Delete Store
     int deleteStore(Long sno);

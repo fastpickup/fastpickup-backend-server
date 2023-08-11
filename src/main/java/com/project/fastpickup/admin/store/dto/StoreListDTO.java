@@ -36,4 +36,6 @@ public class StoreListDTO {
     private String email;
     @NotBlank  
     private String storePhone;
+    @NotBlank
+    private String fileName;
 }

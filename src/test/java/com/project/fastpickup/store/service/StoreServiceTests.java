@@ -1,6 +1,8 @@
 package com.project.fastpickup.store.service;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * Date   : 2023.07.27
@@ -21,6 +23,7 @@ import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
+import com.project.fastpickup.admin.store.mappers.StoreFileMapper;
 import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
@@ -34,14 +37,18 @@ public class StoreServiceTests {
     // 의존성 주입
     @Autowired
     private StoreService storeService;
+    // 의존성 주입
+    @Autowired
+    private StoreFileMapper storeFileMapper;
 
     // Test 시작시 메모리에 private static final 로 먼저 올려놓는다
     private static final String TEST_STORE_NAME = "교촌치킨";
     private static final String TEST_STORE_NUMBER = "12342-23423-2342";
     private static final String TEST_STORE_ADDRESS = "경기도 성남시";
     private static final String TEST_EMAIL = "thistrik@naver.com";
-    private static final Long TEST_SNO = 1L;
+    private static final Long TEST_SNO = 122L;
     private static final String TEST_STORE_PHONE = "2342-323-423";
+    private static final String TEST_FILE_NAME = "_JunitFileName.jpg";
 
     // DTO 정의
     private StoreDTO storeDTO;
@@ -57,6 +64,7 @@ public class StoreServiceTests {
                 .storeAddress(TEST_STORE_ADDRESS)
                 .storePhone(TEST_STORE_PHONE)
                 .email(TEST_EMAIL)
+                .fileName(List.of(UUID.randomUUID() + TEST_FILE_NAME))
                 .build();
 
         storeUpdateDTO = StoreUpdateDTO.builder()
@@ -66,6 +74,7 @@ public class StoreServiceTests {
                 .storeAddress(TEST_STORE_ADDRESS)
                 .storePhone(TEST_STORE_PHONE)
                 .email(TEST_EMAIL)
+                .fileName(List.of(UUID.randomUUID() + TEST_FILE_NAME))
                 .build();
     }
 
@@ -77,12 +86,28 @@ public class StoreServiceTests {
         // GIVEN
         log.info("=== Start Create Store Service Test ===");
         // WHEN
-        storeService.createStore(storeCreateDTO);
+        Long insertCount = storeService.createStore(storeCreateDTO);
         // THEN
         Assertions.assertEquals(TEST_EMAIL, "thistrik@naver.com");
         Assertions.assertEquals(TEST_STORE_NAME, "교촌치킨");
         Assertions.assertEquals(TEST_STORE_ADDRESS, "경기도 성남시");
         log.info("=== End Create Store Service Test ===");
+    }
+
+    // Update Store Service
+    @Test
+    @Transactional
+    @DisplayName("가맹점 정보 업데이트 테스트 서비스")
+    public void updateStoreServiceTest() {
+        // GIVEN
+        log.info("=== Start Update Store Service ===");
+        // WHEN
+        Long insertCount = storeService.updateStore(storeUpdateDTO);
+        // THEN
+        Assertions.assertEquals(TEST_EMAIL, "thistrik@naver.com");
+        Assertions.assertEquals(TEST_STORE_NAME, "교촌치킨");
+        Assertions.assertEquals(TEST_STORE_ADDRESS, "경기도 성남시");
+        log.info("=== End Update Store Service Test ===");
     }
 
     // Read Store Service

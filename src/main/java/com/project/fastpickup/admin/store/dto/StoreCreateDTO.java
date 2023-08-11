@@ -1,5 +1,8 @@
 package com.project.fastpickup.admin.store.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -34,6 +37,8 @@ public class StoreCreateDTO {
     private String storeAddress;
     @NotBlank
     private String email;
-    @NotBlank  
+    @NotBlank
     private String storePhone;
+    @Builder.Default
+    private List<String> fileName = new ArrayList<>();
 }

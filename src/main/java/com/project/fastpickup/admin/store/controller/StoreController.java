@@ -115,7 +115,7 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
     public String postUpdateStore(@Valid StoreUpdateDTO storeUpdateDTO, RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Store Update");
-        int updateStore = storeService.updateStore(storeUpdateDTO);
+        Long updateStore = storeService.updateStore(storeUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 업데이트 완료");
         return "redirect:/admin/store/read/" + storeUpdateDTO.getSno();
     }
@@ -129,7 +129,7 @@ public class StoreController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
         storeCreateDTO.setEmail(email);
-        int createStore = storeService.createStore(storeCreateDTO);
+        Long createStore = storeService.createStore(storeCreateDTO);
         redirectAttributes.addFlashAttribute("message", "가맹점 등록 완료");
         return "redirect:/admin/store/read/" +storeCreateDTO.getSno();
     }

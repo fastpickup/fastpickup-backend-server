@@ -7,6 +7,10 @@ package com.project.fastpickup.store.mappers;
  */
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +25,7 @@ import com.project.fastpickup.admin.store.dto.StoreDTO;
 import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
+import com.project.fastpickup.admin.store.mappers.StoreFileMapper;
 import com.project.fastpickup.admin.store.mappers.StoreMapper;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 
@@ -35,13 +40,18 @@ public class StoreMapperTests {
     @Autowired(required = false)
     private StoreMapper storeMapper;
 
+    // 의존성 주입
+    @Autowired(required = false)
+    private StoreFileMapper storeFileMapper;
+
     // Test 시작시 메모리에 private static final 로 먼저 올려놓는다
     private static final String TEST_STORE_NAME = "교촌치킨";
     private static final String TEST_STORE_NUMBER = "12342-23423-2342";
     private static final String TEST_STORE_ADDRESS = "경기도 성남시";
     private static final String TEST_EMAIL = "thistrik@naver.com";
     private static final String TEST_STORE_PHONE = "12321-23423-523532";
-    private static final Long TEST_SNO = 1L;
+    private static final Long TEST_SNO = 122L;
+    private static final String TEST_FILE_NAME = "_JunitFileName.jpg";
 
     // DTO 정의
     private StoreDTO storeDTO;
@@ -57,6 +67,7 @@ public class StoreMapperTests {
                 .storeAddress(TEST_STORE_ADDRESS)
                 .email(TEST_EMAIL)
                 .storePhone(TEST_STORE_PHONE)
+                .fileName(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
                 .build();
 
         storeUpdateDTO = StoreUpdateDTO.builder()
@@ -66,6 +77,7 @@ public class StoreMapperTests {
                 .storeAddress(TEST_STORE_ADDRESS)
                 .email(TEST_EMAIL)
                 .storePhone(TEST_STORE_PHONE)
+                .fileName(List.of(UUID.randomUUID() + TEST_FILE_NAME, UUID.randomUUID() + TEST_FILE_NAME))
                 .build();
     }
 
@@ -77,7 +89,18 @@ public class StoreMapperTests {
         // GIVEN
         log.info("=== Start Create Store Mapper Test ===");
         // WHEN
-        storeMapper.createStore(storeCreateDTO);
+        Long insertCount = storeMapper.createStore(storeCreateDTO);
+        AtomicInteger index = new AtomicInteger(0);
+        List<String> fileNames = storeCreateDTO.getFileName();
+        Long sno = storeCreateDTO.getSno();
+        if (storeCreateDTO.getFileName() != null && !storeCreateDTO.getFileName().isEmpty()) {
+            List<Map<String, String>> list = fileNames.stream().map(str -> {
+                String uuid = str.substring(0, 36);
+                String fileName = str.substring(37);
+                return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
+            }).collect(Collectors.toList());
+            storeFileMapper.createStoreFile(list);
+        }
         // THEN
         Assertions.assertEquals(TEST_EMAIL, "thistrik@naver.com");
         Assertions.assertEquals(TEST_STORE_NAME, "교촌치킨");
@@ -122,7 +145,20 @@ public class StoreMapperTests {
         // GIVEN
         log.info("=== Start Update Store Mapper Test ===");
         // WHEN
-        storeMapper.updateStore(storeUpdateDTO);
+        Long insertCount = storeMapper.updateStore(storeUpdateDTO);
+        storeFileMapper.deleteStoreFile(storeUpdateDTO.getSno());
+        AtomicInteger index = new AtomicInteger(0);
+        if (storeUpdateDTO.getFileName() != null && !storeUpdateDTO.getFileName().isEmpty()) {
+            List<String> fileNames = storeUpdateDTO.getFileName();
+            Long sno = storeUpdateDTO.getSno();
+            List<Map<String, String>> list = fileNames.stream().map(str -> {
+                String[] splitData = str.split("_"); // "_" 문자열 기준으로 Cut
+                String uuid = splitData[0];
+                String fileName = splitData[1];
+                return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
+            }).collect(Collectors.toList());
+            storeFileMapper.createStoreFile(list);
+        }
         // THEN
         StoreDTO updatedStore = storeMapper.readStore(TEST_SNO);
         Assertions.assertNotNull(updatedStore, "updatedStore Should Be Not Null");

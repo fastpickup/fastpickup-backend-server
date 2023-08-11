@@ -23,13 +23,13 @@ import com.project.fastpickup.admin.util.PageRequestDTO;
 public interface StoreMapper {
 
     // Create Store
-    int createStore(StoreCreateDTO storeCreateDTO);
+    Long createStore(StoreCreateDTO storeCreateDTO);
 
     // Read Store
     StoreDTO readStore(Long sno);
 
     // Update Store
-    int updateStore(StoreUpdateDTO storeUpdateDTO);
+    Long updateStore(StoreUpdateDTO storeUpdateDTO);
 
     // Delete store
     int deleteStore(Long sno);

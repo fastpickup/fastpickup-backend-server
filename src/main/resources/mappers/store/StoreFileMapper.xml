@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Date   : 2023.08.11, Author : 권성준, E-mail : thistrik@naver.com -->
+<!-- StoreMapper Xml -->
+<mapper namespace="com.project.fastpickup.admin.store.mappers.StoreFileMapper">
+
+<!-- SotreFileMapper id = "createStoreFile" -->
+<insert id="createStoreFile">
+    INSERT INTO tbl_store_image (uuid, fileName, sno, ord)
+    VALUES 
+    <foreach collection="list" item="item" separator=",">
+      ( #{item.uuid}, #{item.fileName}, #{item.sno}, #{item.ord} )
+    </foreach>
+</insert>
+
+<!-- StoreFileMapper id = "deleteStoreFile" -->
+<delete id="deleteStoreFile" parameterType="long">
+    DELETE FROM tbl_store_image
+    WHERE sno = #{sno}
+</delete>
+
+</mapper>

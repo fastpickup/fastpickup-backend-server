@@ -7,6 +7,9 @@ package com.project.fastpickup.admin.store.service.impl;
  */
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import com.project.fastpickup.admin.store.dto.StoreListDTO;
 import com.project.fastpickup.admin.store.dto.StoreSalesDTO;
 import com.project.fastpickup.admin.store.dto.StoreUpdateDTO;
 import com.project.fastpickup.admin.store.exception.StoreNotFoundException;
+import com.project.fastpickup.admin.store.mappers.StoreFileMapper;
 import com.project.fastpickup.admin.store.mappers.StoreMapper;
 import com.project.fastpickup.admin.store.service.StoreService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
@@ -31,20 +35,36 @@ public class StoreServiceImpl implements StoreService {
 
     // 의존성 주입
     private final StoreMapper storeMapper;
+    private final StoreFileMapper storeFileMapper;
 
     // Autowired 명시적 표시
     @Autowired
-    public StoreServiceImpl(StoreMapper storeMapper) {
+    public StoreServiceImpl(StoreMapper storeMapper, StoreFileMapper storeFileMapper) {
         log.info("Constructor Called, Mapper Injected.");
         this.storeMapper = storeMapper;
+        this.storeFileMapper = storeFileMapper;
     }
 
     // Create Store ServiceImpl
     @Override
     @Transactional
-    public int createStore(StoreCreateDTO storeCreateDTO) {
+    public Long createStore(StoreCreateDTO storeCreateDTO) {
         log.info("Is Running Create Store ServiceImpl");
-        return storeMapper.createStore(storeCreateDTO);
+        Long count = storeMapper.createStore(storeCreateDTO);
+        AtomicInteger index = new AtomicInteger(0);
+        List<String> fileNames = storeCreateDTO.getFileName();
+        Long sno = storeCreateDTO.getSno();
+
+        if (storeCreateDTO.getFileName() != null && !storeCreateDTO.getFileName().isEmpty()) {
+            List<Map<String, String>> list = fileNames.stream().map(str -> {
+                String[] splitData = str.split("_"); // "_"를 기준으로 문자열을 분리
+                String uuid = splitData[0];
+                String fileName = splitData[1];
+                return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
+            }).collect(Collectors.toList());
+            storeFileMapper.createStoreFile(list);
+        }
+        return storeCreateDTO.getSno();
     }
 
     // Read Store ServiceImpl
@@ -58,9 +78,24 @@ public class StoreServiceImpl implements StoreService {
     // Update Store ServiceImpl
     @Override
     @Transactional
-    public int updateStore(StoreUpdateDTO storeUpdateDTO) {
+    public Long updateStore(StoreUpdateDTO storeUpdateDTO) {
         log.info("Is Running Update Store ServieImpl");
-        return storeMapper.updateStore(storeUpdateDTO);
+        Long count = storeMapper.updateStore(storeUpdateDTO);
+        storeFileMapper.deleteStoreFile(storeUpdateDTO.getSno());
+        AtomicInteger index = new AtomicInteger(0);
+
+        if(storeUpdateDTO.getFileName() != null & !storeUpdateDTO.getFileName().isEmpty()) {
+            List<String> fileNames = storeUpdateDTO.getFileName();
+            Long sno = storeUpdateDTO.getSno();
+            List<Map<String,String>> list = fileNames.stream().map(str -> {
+                String[] splitData = str.split("_"); // "_"를 기준으로 문자열을 분리
+            String uuid = splitData[0];
+            String fileName = splitData[1];
+            return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
+         }).collect(Collectors.toList());
+         storeFileMapper.createStoreFile(list);
+        }
+        return storeUpdateDTO.getSno();
     }
 
     // Delete Store ServiceImpl
@@ -68,6 +103,7 @@ public class StoreServiceImpl implements StoreService {
     @Transactional
     public int deleteStore(Long sno) {
         log.info("Is Running Delete Store ServiceImpl");
+        storeFileMapper.deleteStoreFile(sno);
         return storeMapper.deleteStore(sno);
     }
 
