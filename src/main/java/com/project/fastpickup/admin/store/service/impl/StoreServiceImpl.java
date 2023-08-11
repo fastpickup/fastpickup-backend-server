@@ -51,15 +51,15 @@ public class StoreServiceImpl implements StoreService {
     public Long createStore(StoreCreateDTO storeCreateDTO) {
         log.info("Is Running Create Store ServiceImpl");
         Long count = storeMapper.createStore(storeCreateDTO);
-        AtomicInteger index = new AtomicInteger(0);
         List<String> fileNames = storeCreateDTO.getFileName();
         Long sno = storeCreateDTO.getSno();
 
         if (storeCreateDTO.getFileName() != null && !storeCreateDTO.getFileName().isEmpty()) {
             List<Map<String, String>> list = fileNames.stream().map(str -> {
-                String[] splitData = str.split("_"); // "_"를 기준으로 문자열을 분리
-                String uuid = splitData[0];
-                String fileName = splitData[1];
+                AtomicInteger index = new AtomicInteger(0);
+                String uuid = str.substring(0, 36);
+                String fileName = str.substring(37);
+                
                 return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
             }).collect(Collectors.toList());
             storeFileMapper.createStoreFile(list);
@@ -82,18 +82,18 @@ public class StoreServiceImpl implements StoreService {
         log.info("Is Running Update Store ServieImpl");
         Long count = storeMapper.updateStore(storeUpdateDTO);
         storeFileMapper.deleteStoreFile(storeUpdateDTO.getSno());
-        AtomicInteger index = new AtomicInteger(0);
 
-        if(storeUpdateDTO.getFileName() != null & !storeUpdateDTO.getFileName().isEmpty()) {
+        if (storeUpdateDTO.getFileName() != null & !storeUpdateDTO.getFileName().isEmpty()) {
+            AtomicInteger index = new AtomicInteger(0);
             List<String> fileNames = storeUpdateDTO.getFileName();
             Long sno = storeUpdateDTO.getSno();
-            List<Map<String,String>> list = fileNames.stream().map(str -> {
-                String[] splitData = str.split("_"); // "_"를 기준으로 문자열을 분리
-            String uuid = splitData[0];
-            String fileName = splitData[1];
-            return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
-         }).collect(Collectors.toList());
-         storeFileMapper.createStoreFile(list);
+            List<Map<String, String>> list = fileNames.stream().map(str -> {
+                String uuid = str.substring(0, 36);
+                String fileName = str.substring(37);
+
+                return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
+            }).collect(Collectors.toList());
+            storeFileMapper.createStoreFile(list);
         }
         return storeUpdateDTO.getSno();
     }
