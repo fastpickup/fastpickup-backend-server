@@ -48,7 +48,8 @@
     data.addColumn('string', '날짜');
     data.addColumn('number', '가맹점');
     <c:forEach var="entry" items="${listStoreEntryDay}">
-    data.addRow(['${entry.registDate}', ${entry.storeCount}]);
+      console.log('날짜: ${entry.formattedRegistDate}, 가맹점 수: ${entry.storeCount}'); 
+    data.addRow(['${entry.formattedRegistDate}', ${entry.storeCount}]);
     </c:forEach>
 
     var options = {
