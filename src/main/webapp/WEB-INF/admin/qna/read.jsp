@@ -47,9 +47,9 @@
                         <form action="/admin/qna/replies/${qno}/create" method="post">
                             <input type="hidden" name="qno" class="form-control" readonly value="${listQna.qno}">
                             <input type="hidden" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
-                            <textarea class="form-control p-3" rows="4" placeholder="답글을 입력해주세요." name="reply"></textarea>
+                            <textarea class="form-control p-3" rows="4" placeholder="답변을 입력해주세요." name="reply"></textarea>
                             <div class="button_wrap mt-4">
-                                <button type="submit" class="btn btn-dark">답글 달기</button>
+                                <button type="submit" class="btn btn-dark">답변 달기</button>
                             </div>
                         </form>
                     </div>
