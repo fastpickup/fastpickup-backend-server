@@ -74,7 +74,7 @@
 				<script src="/js/file.js"></script>
 				<div class="button_wrap p-4">
 					<a href="/admin/store/read/${listStore.sno}" class="btn btn-outline-dark">조회 페이지</a>
-					<button type="submit" class="btn btn-dark">정보 수정</button>
+					<button type="submit" class="btn btn-dark btnAdd">정보 수정</button>
 				</div>
 			</form>
 			<%@ include file="../include/footer.jsp" %>
