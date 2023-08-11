@@ -21,7 +21,7 @@
                         <dl class="detail_content">
                             <dt>문의 번호</dt>
                             <dd>${listQna.qno}</dd>
-                            <dt>Email</dt>
+                            <dt>문의자</dt>
                             <dd class="email">${listQna.email}</dd>
                             <dt>문의 날짜</dt>
                             <dd>${listQna.registDate}</dd>
@@ -47,9 +47,9 @@
                         <form action="/admin/qna/replies/${qno}/create" method="post">
                             <input type="hidden" name="qno" class="form-control" readonly value="${listQna.qno}">
                             <input type="hidden" name="email" class="form-control" readonly value="${pageContext.request.userPrincipal.name}">
-                            <textarea class="form-control p-3" rows="4" placeholder="답글을 입력해주세요." name="reply"></textarea>
+                            <textarea class="form-control p-3" rows="4" placeholder="답변을 입력해주세요." name="reply"></textarea>
                             <div class="button_wrap mt-4">
-                                <button type="submit" class="btn btn-dark">답글 달기</button>
+                                <button type="submit" class="btn btn-dark">답변 달기</button>
                             </div>
                         </form>
                     </div>
@@ -59,8 +59,8 @@
                     <div style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 40px">
                         <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
                             <dl class="detail_content">
-                                <dt>Email</dt>
-                                <dd class="email">${replyRead.email}</dd>
+                                <dt>답변자</dt>
+                                <dd>FastPickup</dd>
                                 <dt>답변 날짜</dt>
                                 <dd>${replyRead.replyDate}</dd>
                                 <dt>답변 내용</dt>
