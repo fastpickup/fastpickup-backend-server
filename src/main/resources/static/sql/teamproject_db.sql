@@ -125,6 +125,17 @@ create table tbl_store (
 ;
 drop table tbl_store;
 
+
+##상품 이미지 테이블 생성
+CREATE TABLE tbl_store_image (
+	uuid varchar(50) PRIMARY KEY,
+	fileName varchar(200) not null,
+	sno bigint not null,
+	ord int default 0 not null,
+	FOREIGN KEY (sno) REFERENCES tbl_store(sno) ON DELETE CASCADE
+)
+;
+
 ##주문 테이블 생성
 create table tbl_order (
 	ono bigint auto_increment primary key,
@@ -411,5 +422,7 @@ SELECT COUNT(*)
   ) as tbl_store
 ;
 
+select * from tbl_store where sno = 122;
+select * from tbl_store_image where sno = 122;
 
 
