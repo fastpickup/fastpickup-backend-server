@@ -344,9 +344,9 @@
     reviewListStr += '<td>' + new Date(reviewDate).toLocaleDateString('ko-KR') + '</td>';
     reviewListStr += '</tr>';
       }//end for
-      // /Product List 출력
+      // /review List 출력
 
-      //Product List Paging 출력
+      //review List Paging 출력
       const {page, size, startNum, endNum, prevBtn, nextBtn, total} = arr
       //console.log(arr)
 
