@@ -66,9 +66,9 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">가맹점 번호</th>
-											<th scope="col">주문 번호</th>
+											<th scope="col">상품주문 번호</th>
 											<th scope="col">상품 이름</th>
+											<th scope="col">가맹점 번호</th>
 											<th scope="col">상품 주문 날짜</th>
 											<th scope="col">주문자 이메일</th>
 											<th scope="col">가맹점 이름</th>
