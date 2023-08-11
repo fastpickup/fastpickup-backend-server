@@ -59,8 +59,8 @@
                     <div style="background-color: #f0f0f0; border-radius: 8px; padding: 16px; margin-top: 40px">
                         <form action="/admin/qna/replies/delete/${replyRead.rno}" method="post">
                             <dl class="detail_content">
-                                <dt>Email</dt>
-                                <dd class="email">${replyRead.email}</dd>
+                                <dt>답변자</dt>
+                                <dd>FastPickup</dd>
                                 <dt>답변 날짜</dt>
                                 <dd>${replyRead.replyDate}</dd>
                                 <dt>답변 내용</dt>
