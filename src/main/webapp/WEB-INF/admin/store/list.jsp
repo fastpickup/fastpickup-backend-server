@@ -59,6 +59,7 @@
 					<th scope="col">가맹점 주소</th>
 					<th scope="col">가맹점 이메일</th>
 					<th scope="col">가맹점 전화번호</th>
+					<th scope="col">가맹점 대표이미지</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -70,6 +71,11 @@
 						<td>${store.storeAddress}</td>
 						<td>${store.email}</td>
 						<td>${store.storePhone}</td>
+						<td>
+							<c:if test="${store.fileName}">
+							</c:if>
+							<img src="http://192.168.0.64/s_${store.fileName}" />
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

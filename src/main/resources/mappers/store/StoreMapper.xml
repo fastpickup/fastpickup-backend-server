@@ -49,21 +49,30 @@ WHERE s.sno = #{sno};
 
 <!-- StoreMapper id = "listStore" -->
 <select id="listStore" parameterType="com.project.fastpickup.admin.store.dto.StoreListDTO">
-  SELECT * FROM tbl_store
-  WHERE sno > 0
+  SELECT 
+  s.sno, 
+  s.storeName,
+  s.storeNumber,
+  s.storeAddress,
+  s.email,
+  s.storePhone,
+  CONCAT(si.uuid, '_', si.fileName) as fileName 
+  FROM tbl_store s
+  LEFT OUTER JOIN tbl_store_image si on si.sno = s.sno 
+  WHERE s.sno > 0 and si.ord = 0 
    <if test="keyword != null and types != null">
       <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
-          storeName like concat('%', #{keyword}, '%')
+          s.storeName like concat('%', #{keyword}, '%')
         </if>
         <if test='type == "e"'>
-          email like concat('%', #{keyword}, '%')
+          s.email like concat('%', #{keyword}, '%')
         </if>
       </foreach>
     </trim>
   </if>
-  ORDER BY sno DESC 
+  ORDER BY s.sno DESC , si.sno DESC
   LIMIT #{skip}, #{size}
 </select>
 
@@ -71,17 +80,20 @@ WHERE s.sno = #{sno};
 <select id="total" resultType="int">
   SELECT COUNT(*)
   FROM (
-    SELECT * FROM 
-    tbl_store
-    WHERE sno > 0
+    SELECT 
+    s.sno 
+    FROM 
+    tbl_store s
+    LEFT OUTER JOIN tbl_store_image si ON si.sno = s.sno 
+    WHERE s.sno > 0
     <if test="keyword != null and types != null">
       <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
         <if test='type == "s"'>
-          storeName like concat('%', #{keyword}, '%')
+          s.storeName like concat('%', #{keyword}, '%')
         </if>
         <if test='type == "e"'>
-          email like concat('%', #{keyword}, '%')
+          s.email like concat('%', #{keyword}, '%')
         </if>
       </foreach>
     </trim>
