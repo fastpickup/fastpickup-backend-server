@@ -18,7 +18,7 @@
 
 	<body>
 		<%@ include file="../include/header.jsp" %>
-			<h3>가맹정 생성</h3>
+			<h3>가맹점 생성</h3>
 			<form action="/admin/store/create" method="post">
 				<div class="form_content">
 					<div class="bg-light rounded h-100 p-4">
