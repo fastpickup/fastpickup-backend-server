@@ -44,6 +44,8 @@
 						<dd>${listStore.storeAddress}</dd>
 						<dt>가맹점 전화번호</dt>
 						<dd>${listStore.storePhone}</dd>
+            <dt>가맹점 이미지</dt>
+            <dt><img src="http://192.168.0.64/${listStore.fileName[0]}" width="250"/></dt>
 					</dl>
 				</form>
 			</div>

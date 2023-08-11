@@ -7,6 +7,21 @@
 <!-- StoreMapper Xml -->
 <mapper namespace="com.project.fastpickup.admin.store.mappers.StoreMapper">
 
+
+<resultMap id="FileNameResultMap" type="java.lang.String">
+  <result property="fileName" column="fileName"/>
+</resultMap>
+
+<resultMap id="storeResultMap" type="com.project.fastpickup.admin.store.dto.StoreDTO">
+    <id property="sno" column="sno"/>
+    <result property="email" column="email"/>
+    <result property="storeName" column="storeName"/>
+    <result property="storeAddress" column="storeAddress"/>
+    <result property="storeNumber" column="storeNumber"/>
+    <result property="storePhone" column="storePhone"/>
+    <collection property="fileName" ofType="java.lang.String" resultMap="FileNameResultMap"/>
+  </resultMap>
+
 <!-- StoreMapper id = "createStore" -->
 <insert id="createStore" parameterType="com.project.fastpickup.admin.store.dto.StoreCreateDTO">
   INSERT INTO tbl_store 
@@ -19,17 +34,19 @@
 </insert>
 
 <!-- StoreMapper id = "readStore" -->
-<select id="readStore" parameterType="long">
+<select id="readStore" parameterType="long" resultMap="storeResultMap">
  SELECT 
   s.sno,
   s.storeNumber,
   s.storeAddress,
   s.email,
   s.storePhone,
-  s.storeName
+  s.storeName,
+  CONCAT(si.uuid, '_' , si.fileName) as fileName
 FROM 
   tbl_store AS s
-WHERE s.sno = #{sno};
+  LEFT OUTER JOIN tbl_store_image si ON si.sno = s.sno
+WHERE s.sno = #{sno} 
 </select>
 
 <!-- StoreMapper id = "updateStore" -->
@@ -58,8 +75,8 @@ WHERE s.sno = #{sno};
   s.storePhone,
   CONCAT(si.uuid, '_', si.fileName) as fileName 
   FROM tbl_store s
-  LEFT OUTER JOIN tbl_store_image si on si.sno = s.sno 
-  WHERE s.sno > 0 and si.ord = 0 
+  LEFT OUTER JOIN tbl_store_image si on si.sno = s.sno AND si.ord = 0
+  WHERE s.sno > 0
    <if test="keyword != null and types != null">
       <trim prefix="AND (" prefixOverrides="or" suffix=")">
       <foreach collection="types" item="type" separator=" OR ">
