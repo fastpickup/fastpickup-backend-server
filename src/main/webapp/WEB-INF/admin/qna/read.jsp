@@ -21,7 +21,7 @@
                         <dl class="detail_content">
                             <dt>문의 번호</dt>
                             <dd>${listQna.qno}</dd>
-                            <dt>Email</dt>
+                            <dt>문의자</dt>
                             <dd class="email">${listQna.email}</dd>
                             <dt>문의 날짜</dt>
                             <dd>${listQna.registDate}</dd>
