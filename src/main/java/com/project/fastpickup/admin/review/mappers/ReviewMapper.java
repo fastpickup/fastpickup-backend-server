@@ -32,7 +32,7 @@ public interface ReviewMapper {
 
     // Rest
     List<ReviewListDTO> getReviewListStore(@Param("sno")Long sno, @Param("pr")PageRequestDTO pageRequestDTO);
-    long reviewListStoreCount(PageRequestDTO pageRequestDTO);
+    long reviewListStoreCount(@Param("sno")Long sno, @Param("pr") PageRequestDTO pageRequestDTO);
 
 
     // 리뷰 상세 페이지

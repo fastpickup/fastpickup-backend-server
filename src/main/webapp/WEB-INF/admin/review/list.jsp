@@ -75,7 +75,7 @@
                 <c:if test="${empty review.fileName}">
                   <p></p>
                 </c:if>
-                ${review.reviewTitle}
+                <a href="/admin/review/read/${review.rno}">${review.reviewTitle}</a>
               </td>
               <td>${review.reviewDate}</td>
               <!-- <td>${member.store}</td> -->

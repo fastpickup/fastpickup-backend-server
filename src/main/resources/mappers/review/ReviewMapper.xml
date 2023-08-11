@@ -113,7 +113,7 @@
     <select id="reviewListStoreCount" resultType="long">
         select count(*) from 
         (select rno from tbl_review
-        where rno > 0 and rno = gno limit #{countEnd}) review
+        where rno > 0 and rno = gno and sno = #{sno} limit #{pr.countEnd}) review
     </select>
 
     <!-- Admin 가맹점 별 리뷰 리스트  -->

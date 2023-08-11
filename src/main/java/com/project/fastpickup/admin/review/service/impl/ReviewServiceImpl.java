@@ -142,7 +142,7 @@ public class ReviewServiceImpl implements ReviewService {
     public PageResponseDTO<ReviewListDTO> getStoreList(Long sno, PageRequestDTO pageRequestDTO) {
 
         List<ReviewListDTO> list = reviewMapper.getReviewListStore(sno, pageRequestDTO);
-        long total = reviewMapper.reviewListStoreCount(pageRequestDTO);
+        long total = reviewMapper.reviewListStoreCount(sno,pageRequestDTO);
 
         return PageResponseDTO.<ReviewListDTO>withAll()
                 .list(list)
