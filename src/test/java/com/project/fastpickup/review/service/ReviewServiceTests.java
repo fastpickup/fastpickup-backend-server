@@ -81,7 +81,7 @@ public class ReviewServiceTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 등록 서비스 테스트")
+    @DisplayName("Service: 리뷰 등록 서비스 테스트")
     public void testRegistReview() {
 
         // GIVEN
@@ -101,7 +101,7 @@ public class ReviewServiceTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 리스트 서비스 테스트")
+    @DisplayName("Service: 리뷰 리스트 서비스 테스트")
     public void testListReview() {
 
         // GIVEN
@@ -119,7 +119,7 @@ public class ReviewServiceTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 조회 서비스 테스트")
+    @DisplayName("Service: 리뷰 조회 서비스 테스트")
     public void testReadReview() {
         // GIVEN
         log.info("=== Start Read Review Test Service ===");
@@ -133,7 +133,7 @@ public class ReviewServiceTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 가맹점 서비스 리스트")
+    @DisplayName("Service: 리뷰 가맹점 서비스 리스트")
     public void testRestList() {
 
         PageResponseDTO<ReviewListDTO> list = reviewService.getStoreList(TEST_SNO, pageRequestDTO);
@@ -144,7 +144,7 @@ public class ReviewServiceTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 수정 서비스 테스트")
+    @DisplayName("Service: 리뷰 수정 서비스 테스트")
     public void testUpdateReview(){
 
         reviewService.updateReview(reviewModifyDTO);

@@ -84,7 +84,7 @@ public class StoreMapperTests {
     // Create Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹정 정보 생성 테스트")
+    @DisplayName("Mapper: 가맹정 정보 생성 테스트")
     public void createStoreMapperTest() {
         // GIVEN
         log.info("=== Start Create Store Mapper Test ===");
@@ -111,7 +111,7 @@ public class StoreMapperTests {
     // Read Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 상세 조회 테스트")
+    @DisplayName("Mapper: 가맹점 상세 조회 테스트")
     public void readStoreMapperTest() {
         // GIVEN
         log.info("=== Start Read Store Mapper Test ===");
@@ -125,7 +125,7 @@ public class StoreMapperTests {
     // Delete Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 삭제 테스트")
+    @DisplayName("Mapper: 가맹점 삭제 테스트")
     public void deleteStoreMapperTest() {
         // GIVEN
         log.info("=== Start Delete Store Mapper Test ===");
@@ -140,7 +140,7 @@ public class StoreMapperTests {
     // Update Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 업데이트 테스트")
+    @DisplayName("Mapper: 가맹점 업데이트 테스트")
     public void updateStoreMapperTest() {
         // GIVEN
         log.info("=== Start Update Store Mapper Test ===");
@@ -171,7 +171,7 @@ public class StoreMapperTests {
     // List Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 리스트 테스트")
+    @DisplayName("Mapper: 가맹점 리스트 테스트")
     public void listStoreMapperTest() {
         // GIVEN
         log.info("=== Start List Store Mapper Test ===");
@@ -186,7 +186,7 @@ public class StoreMapperTests {
     // Total Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 토탈 테스트")
+    @DisplayName("Mapper: 가맹점 토탈 테스트")
     public void totalStoreMapperTest() {
         // GIVEN
         log.info("=== Start Total Store Mapper Test ===");
@@ -202,7 +202,7 @@ public class StoreMapperTests {
     // Sales Month
     @Test
     @Transactional
-    @DisplayName("가맹점 월별 매출")
+    @DisplayName("Mapper: 가맹점 월별 매출")
     public void salesMonthStoreMapperTest() {
         log.info("=== Start Sales Month Mapper Test ===");
         List<StoreSalesDTO> storeSalesDTO = storeMapper.salesMonth(TEST_SNO);
@@ -215,7 +215,7 @@ public class StoreMapperTests {
     // Sales Day
     @Test
     @Transactional
-    @DisplayName("가맹점 일별 매출")
+    @DisplayName("Mapper: 가맹점 일별 매출")
     public void salesDayStoreMapperTest() {
         log.info("=== Start Sales Day Mapper Test ===");
         List<StoreSalesDTO> storeSalesDTO = storeMapper.salesDate(TEST_SNO);

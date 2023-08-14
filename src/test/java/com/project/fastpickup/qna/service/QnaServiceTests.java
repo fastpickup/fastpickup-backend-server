@@ -67,7 +67,7 @@ public class QnaServiceTests {
     // listQna test
     @Test
     @Transactional
-    @DisplayName("문의 리스트")
+    @DisplayName("Service: 문의 리스트")
     public void listQnaTestService() {
         // GIVEN
         log.info("=== Start List Qna Test Service ===");
@@ -97,7 +97,7 @@ public class QnaServiceTests {
     // readQna test
     @Test
     @Transactional
-    @DisplayName("문의글 상세페이지")
+    @DisplayName("Service: 문의글 상세페이지")
     public void readQnaTestService() {
         // GIVEN
         log.info("=== Start Read Qna Test Service ===");
@@ -111,7 +111,7 @@ public class QnaServiceTests {
     // updateQna test
     @Test
     @Transactional
-    @DisplayName("문의글 수정")
+    @DisplayName("Service: 문의글 수정")
     public void updateQnaTestService() {
         // GIVEN
         log.info("=== Start update Qna Test Service ===");
@@ -125,7 +125,7 @@ public class QnaServiceTests {
     // deleteQna test
     @Test
     @Transactional
-    @DisplayName("문의글 삭제")
+    @DisplayName("Service: 문의글 삭제")
     public void deleteQnaTestService() {
         // GIVEN
         log.info("=== Start delete Qna Test Service ===");
@@ -135,5 +135,4 @@ public class QnaServiceTests {
         Assertions.assertEquals(result, 1);
         log.info("=== End delete Qna Test Service ===");
     }
-
 }

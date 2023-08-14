@@ -107,7 +107,7 @@ public class OrderMapperTests {
     // Update Order Count
     @Test
     @Transactional
-    @DisplayName("주문의 주문개수 업데이트")
+    @DisplayName("Mapper: 주문의 주문개수 업데이트")
     public void updateOrderCount() {
         // GIVEN
         log.info("=== Start Update Order OrderCount Mapper ===");
@@ -123,7 +123,7 @@ public class OrderMapperTests {
     // Update OrderHistory Status
     @Test
     @Transactional
-    @DisplayName("주문 이력의 상태 업데이트")
+    @DisplayName("Mapper: 주문 이력의 상태 업데이트")
     public void updateHistoryStatus() {
         // GVIEN
         log.info("=== Start Update History Status Mapper===");
@@ -139,7 +139,7 @@ public class OrderMapperTests {
     // Read Order And OrderHistory And Product And Product Image And Store
     @Test
     @Transactional
-    @DisplayName("주문, 주문이력, 상품, 상품이미지, 가맹점 정보 상세조회")
+    @DisplayName("Mapper: 주문, 주문이력, 상품, 상품이미지, 가맹점 정보 상세조회")
     public void readOrderProductOrderHistoryProductImageStore() {
         log.info("=== Start Read Order & Order History & Product & Product Image & Store Mapper ===");
         OrderDTO readEveryThing = orderMapper.readOrder(TEST_ONO);
@@ -151,7 +151,7 @@ public class OrderMapperTests {
     // Create Order And OrderHistory
     @Test
     @Transactional
-    @DisplayName("주문과 주문이력 생성 매퍼 테스트")
+    @DisplayName("Mapper: 주문과 주문이력 생성 매퍼 테스트")
     public void createOrderAndOrderHistoryMapper() {
         log.info("=== Start Create Order & History Mapper ===");
         Long createOrder = orderMapper.createOrder(orderCreateDTO);
@@ -171,7 +171,7 @@ public class OrderMapperTests {
     // Create Order And Order History
     @Test
     @Transactional
-    @DisplayName("주문과 주문이력 다른 멤버 생성 테스트")
+    @DisplayName("Mapper: 주문과 주문이력 다른 멤버 생성 테스트")
     public void createOrderAndOrderHistoryOtherMember() {
         log.info("=== Start Create Order & History Other Mapper ===");
         Long createOrder = orderMapper.createOrder(orderMemberCreateOrderDTO);
@@ -186,7 +186,7 @@ public class OrderMapperTests {
     // List Order And Order History And Product And Product Image
     @Test
     @Transactional
-    @DisplayName("주문, 주문이력, 상품, 상품이미지 리스트")
+    @DisplayName("Mapper: 주문, 주문이력, 상품, 상품이미지 리스트")
     public void listOrderAndOrderHistoryProductProductImage() {
         // GIVEN
         log.info("=== Start List Order & Order History & Product & Product Image Mapper ===");

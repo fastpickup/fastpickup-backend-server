@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+// FireBase Notification RequestDTO Class
 @Getter
 @Setter
 @Builder

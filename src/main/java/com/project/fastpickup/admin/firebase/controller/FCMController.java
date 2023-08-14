@@ -22,6 +22,7 @@ import com.project.fastpickup.admin.firebase.dto.FCMNotificationRequestDTO;
 import com.project.fastpickup.admin.firebase.service.FireBaseService;
 import lombok.extern.log4j.Log4j2;
 
+// FireBase Controller Class
 @Log4j2
 @CrossOrigin
 @RestController

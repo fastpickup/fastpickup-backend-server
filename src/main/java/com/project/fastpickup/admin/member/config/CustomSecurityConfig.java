@@ -6,7 +6,6 @@ package com.project.fastpickup.admin.member.config;
  * E-mail : thistrik@naver.com
  */
 
-
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,12 +23,14 @@ import com.project.fastpickup.admin.member.security.handler.CustomOAuthSuccessHa
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+// Spring Security Config Class
 @Log4j2
 @Configuration
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class CustomSecurityConfig {
 
+    // 의존성 주입 
     private final DataSource dataSource;
 
     // TokenRepository에 토큰 값 저장 함수
@@ -93,5 +94,4 @@ public class CustomSecurityConfig {
 
         return http.build();
     }
-
 }

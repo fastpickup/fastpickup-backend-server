@@ -6,7 +6,6 @@ package com.project.fastpickup.admin.member.mappers;
  * E-mail : thistrik@naver.com
  */
 
-
 import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,6 +15,7 @@ import com.project.fastpickup.admin.member.dto.MemberConvertDTO;
 import com.project.fastpickup.admin.member.dto.MemberReadDTO;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 
+// Member Mapper Interface 
 @Mapper
 public interface MemberMapper {
 

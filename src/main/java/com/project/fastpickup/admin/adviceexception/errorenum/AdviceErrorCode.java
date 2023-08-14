@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.function.Function;
 
+// Enum 타입으로 Error Code Advice Controller 에서 사용하게 정의 
 public enum AdviceErrorCode {
 
     METHOD_ARUGMNET_TYPE_MISMATCH(HttpStatus.BAD_REQUEST, ex -> "Method Argument Type Mismatch: " + ex.getMessage()),

@@ -19,12 +19,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberReadDTO {
-    @NotBlank
+    // tbl_member 
+    @NotBlank(message = "Email Can Not Be Blank")
     private String email;
-    @NotBlank
+
+    @NotBlank(message = "Member Password Can Not Be Blank")
     private String memberPw;
-    @NotBlank
+
+    @NotBlank(message = "Member Name Can Not Be Blank")
     private String memberName;
-    @NotBlank
+
+    @NotBlank(message = "Role Names Can Not Be Blank")
     private List<String> rolenames;
 }

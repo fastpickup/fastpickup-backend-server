@@ -77,7 +77,7 @@ public class ReviewMapperTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 등록 매퍼 테스트")
+    @DisplayName("Mapper: 리뷰 등록 매퍼 테스트")
     public void testRegistReview() {
 
         // GIVEN
@@ -97,7 +97,7 @@ public class ReviewMapperTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 이미지 등록 매퍼 테스트")
+    @DisplayName("Mapper: 리뷰 이미지 등록 매퍼 테스트")
     public void testRegistReviewImg() {
 
         // GIVEN
@@ -136,7 +136,7 @@ public class ReviewMapperTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 리스트 매퍼 테스트")
+    @DisplayName("Mapper: 리뷰 리스트 매퍼 테스트")
     public void testReviewList() {
 
         // GIVEN
@@ -154,7 +154,7 @@ public class ReviewMapperTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 리스트 토탈 매퍼 테스트")
+    @DisplayName("Mapper: 리뷰 리스트 토탈 매퍼 테스트")
     public void testListCountReviwe() {
         // GIVEN
         log.info("=== Start List Count Review Test Mapper ===");
@@ -168,7 +168,7 @@ public class ReviewMapperTests {
 
     @Test
     @Transactional
-    @DisplayName("리뷰 상세조회 테스트")
+    @DisplayName("Mapper: 리뷰 상세조회 테스트")
     public void testReadReview() {
         // GIVEN
         log.info("=== Start Read Review Test Mapper ===");
@@ -183,7 +183,7 @@ public class ReviewMapperTests {
     
     @Test
     @Transactional
-    @DisplayName("리뷰 삭제 테스트")
+    @DisplayName("Mapper: 리뷰 삭제 테스트")
     public void testDeleteReview(){
 
         reviewMapper.deleteReview(TEST_RNO);

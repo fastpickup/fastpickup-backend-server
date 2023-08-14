@@ -84,7 +84,7 @@ public class ProductServiceTests {
   //Create Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 등록 서비스 테스트")
+  @DisplayName("Service: 상품 등록 서비스 테스트")
   public void testCreateProduct(){
     //GIVEN
     log.info("=== Start Create Product Test Service ===");
@@ -98,7 +98,7 @@ public class ProductServiceTests {
   //List Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 리스트 서비스 테스트")
+  @DisplayName("Service: 상품 리스트 서비스 테스트")
   public void testListProduct(){
     //GIVEN
     log.info("=== Start List Product Test Service ===");
@@ -113,7 +113,7 @@ public class ProductServiceTests {
   //List Store Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 가맹점 리스트 서비스 테스트")
+  @DisplayName("Service: 상품 가맹점 리스트 서비스 테스트")
   public void testListStoreProduct(){
     //GIVEN
     log.info("=== Start List Store Product Test Service ===");
@@ -128,7 +128,7 @@ public class ProductServiceTests {
   //Read Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 조회 서비스 테스트")
+  @DisplayName("Service: 상품 조회 서비스 테스트")
   public void testReadProduct(){
     //GIVEN
     log.info("=== Start Read Product Test Service ===");
@@ -143,7 +143,7 @@ public class ProductServiceTests {
   //Delete Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 삭제 서비스 테스트")
+  @DisplayName("Service: 상품 삭제 서비스 테스트")
   public void testDeleteProduct(){
     //GIVEN
     log.info("=== Start Delete Product Test Service ===");
@@ -160,7 +160,7 @@ public class ProductServiceTests {
   //Update Product Service Test
   @Test
   @Transactional
-  @DisplayName("상품 수정 서비스 테스트")
+  @DisplayName("Service: 상품 수정 서비스 테스트")
   public void testUpdateProduct(){
     //GIVEN
     log.info("=== Start Update Product Test Service ===");
@@ -173,5 +173,4 @@ public class ProductServiceTests {
     //Assertions.assertEquals(TEST_PRODUCT_NAME, "Junit Product Name Mapper Test2");
     log.info("=== End Update Product Test Service ===");
   }
-
 }

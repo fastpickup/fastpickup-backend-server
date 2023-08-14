@@ -60,7 +60,7 @@ public class QnaMapperTests {
     // listQna test
     @Test
     @Transactional
-    @DisplayName("문의 리스트")
+    @DisplayName("Mapper: 문의 리스트")
     public void listQnaTestMapper() {
         // GIVEN
         log.info("=== Start List Qna Test Mapper ===");
@@ -75,7 +75,7 @@ public class QnaMapperTests {
     // listCount test
     @Test
     @Transactional
-    @DisplayName("리스트 총 개수")
+    @DisplayName("Mapper: 리스트 총 개수")
     public void listCountTestMapper() {
         // GIVEN
         log.info("=== Start List Count Test Mapper ===");
@@ -106,7 +106,7 @@ public class QnaMapperTests {
     // readQna test
     @Test
     @Transactional
-    @DisplayName("문의글 상세페이지")
+    @DisplayName("Mapper: 문의글 상세페이지")
     public void readQnaTestMapper() {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
@@ -120,7 +120,7 @@ public class QnaMapperTests {
     // updateQna test
     @Test
     @Transactional
-    @DisplayName("문의글 수정")
+    @DisplayName("Mapper: 문의글 수정")
     public void updateQnaTestMapper() {
         // GIVEN
         log.info("=== Start Update Qna Test Mapper ===");
@@ -135,7 +135,7 @@ public class QnaMapperTests {
     // deleteQna test
     @Test
     @Transactional
-    @DisplayName("문의글 삭제")
+    @DisplayName("Mapper: 문의글 삭제")
     public void deleteQnaTestMapper() {
         // GIVEN
         log.info("=== Start Delete Qna Test Mapper ===");

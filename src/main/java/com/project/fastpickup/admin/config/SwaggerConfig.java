@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 // Swagger Documnet Class
-//http://localhost:8080/swagger-ui/index.html#/
+// http://localhost:8080/swagger-ui/index.html#/
 @Configuration
 @RequiredArgsConstructor
 @OpenAPIDefinition(info = @Info(title = "Joonny Swagger",version = "v1"))
