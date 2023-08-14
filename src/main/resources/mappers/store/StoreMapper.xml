@@ -194,6 +194,7 @@ ORDER BY
     <result column="productName" property="productName"/>
 </resultMap>
 
+<!-- StoreMapper id = "salesMonth" -->
 <select id="salesMonth" parameterType="long" resultMap="salesByMonthResult">
 SELECT 
   DATE_FORMAT(o.registDate, '%Y-%m') AS registMonth,

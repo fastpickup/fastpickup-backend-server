@@ -21,6 +21,7 @@ import com.project.fastpickup.admin.order.service.OrderService;
 import com.project.fastpickup.admin.util.PageRequestDTO;
 import com.project.fastpickup.admin.util.PageResponseDTO;
 
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -122,7 +123,7 @@ public class OrderController {
     // POST : Update Order History
     @PostMapping("updatehistory")
     @PreAuthorize("hasAnyRole('ADMIN', 'STORE')")
-    public String postUpdateOrderHistory(OrderHistoryUpdateDTO orderHistoryUpdateDTO,
+    public String postUpdateOrderHistory(@Valid OrderHistoryUpdateDTO orderHistoryUpdateDTO,
             RedirectAttributes redirectAttributes) {
         log.info("POST | Admin Update Order History");
         Long updateOrderHistory = orderService.updateHistory(orderHistoryUpdateDTO);

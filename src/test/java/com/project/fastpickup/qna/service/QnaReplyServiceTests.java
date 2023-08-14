@@ -67,7 +67,7 @@ public class QnaReplyServiceTests {
     // read
     @Test
     @Transactional
-    @DisplayName("문의 답글 조회")
+    @DisplayName("Service: 문의 답글 조회")
     public void readQnaReplyTestService() {
         // GIVEN
         log.info("=== Start Read Qna Reply Test Service ===");
@@ -81,7 +81,7 @@ public class QnaReplyServiceTests {
     // update read
     @Test
     @Transactional
-    @DisplayName("문의 답글 수정시 조회")
+    @DisplayName("Service: 문의 답글 수정시 조회")
     public void readQnaReplyRnoTestService() {
         // GIVEN
         log.info("=== Start ReadRno Qna Reply Test Service ===");
@@ -95,7 +95,7 @@ public class QnaReplyServiceTests {
     // update
     @Test
     @Transactional
-    @DisplayName("문의 답글 수정")
+    @DisplayName("Service: 문의 답글 수정")
     public void updateQnaReplyTestService() {
         // GIVEN
         log.info("=== Start Update Qna Reply Test Service ===");
@@ -109,7 +109,7 @@ public class QnaReplyServiceTests {
     // delete
     @Test
     @Transactional
-    @DisplayName("문의 답글 삭제")
+    @DisplayName("Service: 문의 답글 삭제")
     public void deleteQnaReplyTestService() {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Service ===");
@@ -123,7 +123,7 @@ public class QnaReplyServiceTests {
     // replyCount
     @Test
     @Transactional
-    @DisplayName("댓글 개수 파악")
+    @DisplayName("Service: 댓글 개수 파악")
     public void replyCountTestService(){
         // GIVEN
         log.info("=== Start Count Qna Reply Test Service ===");

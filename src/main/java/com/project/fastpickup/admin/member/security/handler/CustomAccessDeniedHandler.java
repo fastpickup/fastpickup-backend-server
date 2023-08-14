@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
-// DeniedHandler 를 구현하고 메소드 구현
+// Spring Security Access Denied Handler
 @Log4j2 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
@@ -24,6 +24,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
             AccessDeniedException accessDeniedException) throws IOException, ServletException {
-            log.info(accessDeniedException + "accessDeniedException");
+            log.info("Is Running AccessDenied Handler");
+            log.info(accessDeniedException);
     }  
 }

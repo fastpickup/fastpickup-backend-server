@@ -68,7 +68,7 @@ public class QnaReplyMapperTests {
     // readQnaReply test
     @Test
     @Transactional
-    @DisplayName("문의 답글 조회")
+    @DisplayName("Mapper: 문의 답글 조회")
     public void readQnaReplyTestMapper() {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
@@ -82,7 +82,7 @@ public class QnaReplyMapperTests {
     // readQnaReplyRno test
     @Test
     @Transactional
-    @DisplayName("문의 답글 수정시 조회")
+    @DisplayName("Mapper: 문의 답글 수정시 조회")
     public void readQnaReplyRnoTestMapper() {
         // GIVEN
         log.info("=== Start Read Qna Test Mapper ===");
@@ -96,7 +96,7 @@ public class QnaReplyMapperTests {
     // updateQnaReply test
     @Test
     @Transactional
-    @DisplayName("문의 답글 수정")
+    @DisplayName("Mapper: 문의 답글 수정")
     public void updateQnaTestMapper() {
         // GIVEN
         log.info("=== Start Update Qna Reply Test Mapper ===");
@@ -110,7 +110,7 @@ public class QnaReplyMapperTests {
     // deleteQnaReply test
     @Test
     @Transactional
-    @DisplayName("문의 답글 삭제")
+    @DisplayName("Mapper: 문의 답글 삭제")
     public void deleteQnaReplyTestMapper() {
         // GIVEN
         log.info("=== Start Delete Qna Reply Test Mapper ===");
@@ -124,7 +124,7 @@ public class QnaReplyMapperTests {
     // reply count
     @Test
     @Transactional
-    @DisplayName("댓글 개수 파악")
+    @DisplayName("Mapper: 댓글 개수 파악")
     public void replyCountMapperTest(){
         // GIVEN
         log.info("=== Start Count Qna Reply Test Mapper ===");
@@ -134,5 +134,4 @@ public class QnaReplyMapperTests {
         log.info("count : " + count);
         log.info("=== End Count Qna Reply Test Mapper ===");
     }
-
 }

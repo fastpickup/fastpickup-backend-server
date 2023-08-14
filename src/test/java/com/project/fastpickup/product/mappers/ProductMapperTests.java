@@ -88,7 +88,7 @@ public class ProductMapperTests {
   //Create Product Mapper Test
   @Test
   //@Transactional
-  @DisplayName("상품 등록 매퍼 테스트")
+  @DisplayName("Mapper: 상품 등록 매퍼 테스트")
   public void testCreateProduct(){
     //GIVEN
     log.info("=== Start Create Product Test Mapper ===");
@@ -141,7 +141,7 @@ public class ProductMapperTests {
   //List Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 리스트 매퍼 테스트")
+  @DisplayName("Mapper: 상품 리스트 매퍼 테스트")
   public void testListProduct(){
     //GIVEN
     log.info("=== Start List Product Test Mapper ===");
@@ -156,7 +156,7 @@ public class ProductMapperTests {
   //List Store Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 가맹점 리스트 매퍼 테스트")
+  @DisplayName("Mapper: 상품 가맹점 리스트 매퍼 테스트")
   public void testListStoreProduct(){
     //GIVEN
     log.info("=== Start List Store Product Test Mapper ===");
@@ -171,7 +171,7 @@ public class ProductMapperTests {
   //Read Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 조회 매퍼 테스트")
+  @DisplayName("Mapper: 상품 조회 매퍼 테스트")
   public void testReadProduct(){
     //GIVEN
     log.info("=== Start Read Product Test Mapper ===");
@@ -186,7 +186,7 @@ public class ProductMapperTests {
   //Delete Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 삭제 매퍼 테스트")
+  @DisplayName("Mapper: 상품 삭제 매퍼 테스트")
   public void testDeleteProduct(){
     //GIVEN
     log.info("=== Start Delete Product Test Mapper ===");
@@ -203,7 +203,7 @@ public class ProductMapperTests {
   //Update Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 수정 매퍼 테스트")
+  @DisplayName("Mapper: 상품 수정 매퍼 테스트")
   public void testUpdateProduct(){
     //GIVEN
     log.info("=== Start Update Product Test Mapper ===");
@@ -220,7 +220,7 @@ public class ProductMapperTests {
   //List Count Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 리스트 토탈 매퍼 테스트")
+  @DisplayName("Mapper: 상품 리스트 토탈 매퍼 테스트")
   public void testListCountProduct(){
     //GIVEN
     log.info("=== Start List Count Product Test Mapper ===");
@@ -235,7 +235,7 @@ public class ProductMapperTests {
   //List Count Store Product Mapper Test
   @Test
   @Transactional
-  @DisplayName("상품 가맹점 리스트 토탈 매퍼 테스트")
+  @DisplayName("Mapper: 상품 가맹점 리스트 토탈 매퍼 테스트")
   public void testListStoreCountProduct(){
     //GIVEN
     log.info("=== Start List Count Store Product Test Mapper ===");

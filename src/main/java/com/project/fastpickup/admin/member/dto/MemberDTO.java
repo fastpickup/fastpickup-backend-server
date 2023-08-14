@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import lombok.Getter;
 import lombok.Setter;
 
+// MemberDTO Class 
 @Getter
 @Setter
 public class MemberDTO extends User implements OAuth2User {
@@ -25,8 +26,6 @@ public class MemberDTO extends User implements OAuth2User {
     private String memberPw;
 
     public MemberDTO(String email, String memberPw, String memberName, List<String> roleNames) {
-
-        // super(email,mpw, List.of(new SimpleGrantedAuthority("ROLE_USER")));
         super(email, memberPw,
                 roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_" + str)).collect(Collectors.toList()));
         this.memberName = memberName;

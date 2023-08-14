@@ -45,11 +45,11 @@ public class FireBaseServiceImpl implements FireBaseService {
    @Transactional
    public int createFcmToken(FCMDTO fcmdto) {
       log.info("Is Running Crate Fcm Token ServiceImpl");
-      log.info(fcmdto);
       return fcmMapper.createFcmToken(fcmdto);
    }
 
-   // Sending Message By Token
+   // Sending Message By Token 
+   // FCM Server 에 Spring Sever가 만든 메시지 요청을 React로 보냅니다 
    @Override
    @Transactional
    public String sendingMessageByToken(FCMNotificationRequestDTO fcmNotificationRequestDTO) {

@@ -51,15 +51,15 @@ public class StoreServiceImpl implements StoreService {
     public Long createStore(StoreCreateDTO storeCreateDTO) {
         log.info("Is Running Create Store ServiceImpl");
         Long count = storeMapper.createStore(storeCreateDTO);
-        List<String> fileNames = storeCreateDTO.getFileName();
         Long sno = storeCreateDTO.getSno();
 
         if (storeCreateDTO.getFileName() != null && !storeCreateDTO.getFileName().isEmpty()) {
+            List<String> fileNames = storeCreateDTO.getFileName();
             List<Map<String, String>> list = fileNames.stream().map(str -> {
                 AtomicInteger index = new AtomicInteger(0);
                 String uuid = str.substring(0, 36);
                 String fileName = str.substring(37);
-                
+
                 return Map.of("uuid", uuid, "fileName", fileName, "sno", "" + sno, "ord", "" + index.getAndIncrement());
             }).collect(Collectors.toList());
             storeFileMapper.createStoreFile(list);

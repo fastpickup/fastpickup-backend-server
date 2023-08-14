@@ -94,7 +94,7 @@ public class MemberMapperTests {
     // join Member Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 회원가입 테스트")
+    @DisplayName("Mapper: 가맹점 회원가입 테스트")
     public void joinStoreMeberTestMapper() {
         // GIVEN
         log.info("=== Start Join Store Test Mapper ===");
@@ -110,7 +110,7 @@ public class MemberMapperTests {
     // update Member Store Mapper Test
     @Test
     @Transactional
-    @DisplayName("가맹점 업데이트 테스트")
+    @DisplayName("Mapper: 가맹점 업데이트 테스트")
     public void updateStoreMemberTestMapper() {
         // GIVEN
         log.info("=== Start Update Store Test Mapper ===");
@@ -126,7 +126,7 @@ public class MemberMapperTests {
     // Join Member Mapper Test
     @Test
     //@Transactional
-    @DisplayName("멤버 회원가입 테스트")
+    @DisplayName("Mapper: 멤버 회원가입 테스트")
     public void joinMemberTestMapper() {
         // GIVEN
         log.info("=== Start Join Member Test Mapper ===");
@@ -142,7 +142,7 @@ public class MemberMapperTests {
     // Read Member Mapper Test
     @Test
     @Transactional
-    @DisplayName("멤버 상세조회 테스트")
+    @DisplayName("Mapper: 멤버 상세조회 테스트")
     public void readMemberTestMapper() {
         // GIVEN
         log.info("=== Start Read Member Test Mapper ===");
@@ -155,7 +155,7 @@ public class MemberMapperTests {
     // Delete Member Mapper Test
     @Test
     @Transactional
-    @DisplayName("멤버 회원탈퇴 테스트")
+    @DisplayName("Mapper: 멤버 회원탈퇴 테스트")
     public void deleteMemberTestMapper() {
         // GIVEN
         log.info("=== Start Delete Member Test Mapper ===");
@@ -171,7 +171,7 @@ public class MemberMapperTests {
     // Update Member Mapper Test
     @Test
     @Transactional
-    @DisplayName("멤버 업데이트 테스트")
+    @DisplayName("Mapper: 멤버 업데이트 테스트")
     public void updateMemberTestMapper() {
         // GIVEN
         log.info("=== Start Update Member Test Mapper ===");
@@ -188,7 +188,7 @@ public class MemberMapperTests {
     // List Member Mapper Test 
     @Test
     @Transactional
-    @DisplayName("멤버 리스트 테스트")
+    @DisplayName("Mapper: 멤버 리스트 테스트")
     public void listMemberTestMapper() {
         // GIVEN 
         log.info("=== Start List Member Test Mapper ===");
@@ -203,7 +203,7 @@ public class MemberMapperTests {
     // Total Member Mapper Test
     @Test
     @Transactional
-    @DisplayName("토탈 테스트")
+    @DisplayName("Mapper: 토탈 테스트")
     public void totalMemberTestMapper() {
         // GIVEN 
         log.info("=== Start Total Member Test Mapper ===");

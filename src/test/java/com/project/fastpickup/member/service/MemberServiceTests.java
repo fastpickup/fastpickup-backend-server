@@ -90,7 +90,7 @@ public class MemberServiceTests {
     // List Member Test Service 
     @Test
     @Transactional
-    @DisplayName("멤버 리스트 테스트")
+    @DisplayName("Service: 멤버 리스트 테스트")
     public void listMemberTestService() {
         // GIVEN 
         log.info("=== Start List Member Test Service ===");
@@ -106,7 +106,7 @@ public class MemberServiceTests {
     // Join Member Test Service     
     @Test
     @Transactional
-    @DisplayName("멤버 생성 테스트")
+    @DisplayName("Service: 멤버 생성 테스트")
     public void joinMemberTestService() {
         // GIVEN 
         log.info("=== Start Join Member Test Service ===");
@@ -120,7 +120,7 @@ public class MemberServiceTests {
     // Update Member Test Service
     @Test
     @Transactional
-    @DisplayName("멤버 업데이트 테스트")
+    @DisplayName("Service: 멤버 업데이트 테스트")
     public void updateMemberTestService() {
         // GIVEN 
         log.info("=== Start Update Member Test Service ===");
@@ -138,7 +138,7 @@ public class MemberServiceTests {
     // Join Store Member Test Service
     @Test
     @Transactional
-    @DisplayName("가맹정 회원가입 테스트")
+    @DisplayName("Service: 가맹정 회원가입 테스트")
     public void joinStoreMemberTestService() {
         // GIVEN 
         log.info("=== Start Join Store Member Test Service ===");
@@ -152,7 +152,7 @@ public class MemberServiceTests {
     // Update Store Member Test Service
     @Test
     @Transactional
-    @DisplayName("가맹점 업데이트 테스트")
+    @DisplayName("Service: 가맹점 업데이트 테스트")
     public void updateStoreMemberTestSerivce() {
         // GIVEN 
         log.info("=== Start Update Store Member Test Service ===");
@@ -169,7 +169,7 @@ public class MemberServiceTests {
     // Read Store & Member Test Service
     @Test
     @Transactional
-    @DisplayName("회원 상세조회 테스트")
+    @DisplayName("Service: 회원 상세조회 테스트")
     public void readMemberTestService() {
         // GIVEN 
         log.info("=== Start Read Member Test Service ===");
@@ -186,7 +186,7 @@ public class MemberServiceTests {
     // Delete Store & Member Test Service
     @Test
     @Transactional
-    @DisplayName("회원 탈퇴 테스트")
+    @DisplayName("Service: 회원 탈퇴 테스트")
     public void deleteMemberTestService() {
         // GIVEN 
         log.info("=== Start Delete Member Test Service ===");

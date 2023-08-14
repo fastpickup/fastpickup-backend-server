@@ -2,7 +2,6 @@ package com.project.fastpickup.store.service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * Date   : 2023.07.27
@@ -81,7 +80,7 @@ public class StoreServiceTests {
     // Create Store Service
     @Test
     @Transactional
-    @DisplayName("가맹점 정보 생성 테스트 서비스")
+    @DisplayName("Service: 가맹점 정보 생성 테스트 서비스")
     public void createStoreServiceTest() {
         // GIVEN
         log.info("=== Start Create Store Service Test ===");
@@ -97,7 +96,7 @@ public class StoreServiceTests {
     // Update Store Service
     @Test
     @Transactional
-    @DisplayName("가맹점 정보 업데이트 테스트 서비스")
+    @DisplayName("Service: 가맹점 정보 업데이트 테스트 서비스")
     public void updateStoreServiceTest() {
         // GIVEN
         log.info("=== Start Update Store Service ===");
@@ -113,7 +112,7 @@ public class StoreServiceTests {
     // Read Store Service
     @Test
     @Transactional
-    @DisplayName("가맹점 상세 정보 테스트 서비스")
+    @DisplayName("Service: 가맹점 상세 정보 테스트 서비스")
     public void readStoreServiceTest() {
         // GIVEN
         log.info("=== Start Read Store Service Test ===");
@@ -127,7 +126,7 @@ public class StoreServiceTests {
     // Delete Store Service
     @Test
     @Transactional
-    @DisplayName("가맹점 삭제 테스트 서비스")
+    @DisplayName("Service: 가맹점 삭제 테스트 서비스")
     public void deleteStoreServiceTest() {
         // GIVEN
         log.info("=== Start Delete Store Service Test ===");
@@ -142,7 +141,7 @@ public class StoreServiceTests {
     // List Store Service
     @Test
     @Transactional
-    @DisplayName("가맹점 리스트 테스트 서비스")
+    @DisplayName("Service: 가맹점 리스트 테스트 서비스")
     public void listStoreServiceTest() {
         // GIVEN
         log.info("=== Start List Store Service Test ===");

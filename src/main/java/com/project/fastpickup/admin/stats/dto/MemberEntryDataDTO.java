@@ -1,6 +1,7 @@
 package com.project.fastpickup.admin.stats.dto;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /*
  * Date   : 2023.07.31
@@ -20,7 +21,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberEntryDataDTO {
+    @NotBlank(message = "RegistMonth Can Not Be Blank")
     private String registMonth;
+
+    @NotNull(message = "SingUpCount Can Not Be Null")
     private Long signUpCount;
+
+    @NotBlank(message = "ReigstDate Cant Not Be Blank")
     private String registDate;
 }
