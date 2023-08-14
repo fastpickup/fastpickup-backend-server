@@ -35,7 +35,7 @@
             <option value="n" ${pageRequestDTO.type=='n' ? 'selected="selected"' : '' }>회원 이름</option>
             <option value="p" ${pageRequestDTO.type=='p' ? 'selected="selected"' : '' }>회원 전화번호</option>
             <option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점 유무</option>
-            <option value="enp" ${pageRequestDTO.type=='enps' ? 'selected="selected"' : '' }>통합 검색</option>
+            <option value="enps" ${pageRequestDTO.type=='enps' ? 'selected="selected"' : '' }>통합 검색</option>
           </select>
           <input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요."
             value="${pageRequestDTO.keyword}">

@@ -37,7 +37,7 @@
                             <c:if test="${not empty reviewRead.fileNames and not empty reviewRead.fileNames[0]}">
                                 <dd class="view_image">
                                     <c:forEach items="${reviewRead.fileNames}" var="fileName">
-                                        <img src="http://localhost/${fileName}" />
+                                        <img src="http://192.168.0.64/${fileName}" />
                                     </c:forEach>
                                 </dd>
                             </c:if>

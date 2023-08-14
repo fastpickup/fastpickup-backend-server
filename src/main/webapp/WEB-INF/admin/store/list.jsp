@@ -39,7 +39,7 @@
 						<option value="">선택해주세요</option>
 						<option value="e" ${pageRequestDTO.type=='e' ? 'selected="selected"' : '' }>Email</option>
 						<option value="s" ${pageRequestDTO.type=='s' ? 'selected="selected"' : '' }>가맹점 이름</option>
-						<option value="sw" ${pageRequestDTO.type=='es' ? 'selected="selected"' : '' }>통합 검색</option>
+						<option value="es" ${pageRequestDTO.type=='es' ? 'selected="selected"' : '' }>통합 검색</option>
 					</select>
 					<input type="text" name="keyword" class="form-control search-input" placeholder="검색어를 입력 해주세요." value="${pageRequestDTO.keyword}">
 					<button type="button" class="btn btn-primary btnSearch">검색</button>

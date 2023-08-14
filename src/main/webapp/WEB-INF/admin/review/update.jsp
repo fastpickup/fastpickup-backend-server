@@ -50,8 +50,8 @@
 	<ul class="uploadUL">
 		<c:forEach items="${reviewRead.fileNames}" var="reviewImg" varStatus="status">
 			<li data-originName="${reviewImg}">
-				<a href="http://localhost/${reviewImg}" target="_blank">
-					<img src="http://localhost/s_${reviewImg}"/>
+				<a href="http://192.168.0.64/${reviewImg}" target="_blank">
+					<img src="http://192.168.0.64/s_${reviewImg}"/>
 				</a>
 				<p>${fn:substring(reviewImg,37,fn:length(reviewImg))}</p>
 				<button class="btn btn-danger" onclick="javascript:removeFile(event, '${reviewImg}')">X</button>

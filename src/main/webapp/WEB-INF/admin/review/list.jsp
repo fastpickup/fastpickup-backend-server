@@ -70,7 +70,7 @@
               <td>${review.email}</td>
               <td>
                 <c:if test="${not empty review.fileName}">
-                  <img src="http://localhost/s_${review.fileName}">
+                  <img src="http://192.168.0.64/s_${review.fileName}">
                 </c:if>
                 <c:if test="${empty review.fileName}">
                   <p></p>
