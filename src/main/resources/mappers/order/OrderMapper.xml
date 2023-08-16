@@ -124,7 +124,7 @@
         AND o.registDate >= #{startDate}
     </if>
     <if test="endDate != null">
-        OR o.registDate &lt;= #{endDate}
+        AND o.registDate &lt;= #{endDate}
     </if>
     ORDER BY o.ono DESC, h.orderHistory DESC
     LIMIT #{skip}, #{size}
