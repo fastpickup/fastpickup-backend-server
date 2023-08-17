@@ -1,3 +1,12 @@
+<!--
+/*
+* Date : 2023.07.31
+* Author : 송수정
+* Author : 이범수
+* E-mail : sujung033131@gmail.com
+* E-mail : beomsu_1221@naver.com
+*/
+-->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
