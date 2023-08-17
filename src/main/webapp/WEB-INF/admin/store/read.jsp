@@ -335,7 +335,7 @@
 
     // Add image column if fileName is available
     if (fileName) {
-        const imagePath = 'http://localhost/s_' + fileName;
+        const imagePath = 'http://192.168.0.64/s_' + fileName;
         reviewListStr += '<td><a href="/admin/review/read/' + rno + '"><img src="' + imagePath + '">' + reviewTitle + '</a></td>';
     } else {
       reviewListStr += '<td><a href="/admin/review/read/' + rno + '">' + reviewTitle + '</a></td>'; 

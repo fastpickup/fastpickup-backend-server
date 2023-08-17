@@ -3,7 +3,7 @@ package com.project.fastpickup.admin.review.dto;
 import java.time.LocalDateTime;
 
 /*
- * Date   : 2023.07.31
+ * Date   : 2023.07.27
  * Author : 이주용
  * E-mail : wndyd0110@gmail.com
  */
