@@ -436,7 +436,8 @@
     var options = {
       title: '일별 매출 통계',
       curveType: 'function',
-      legend: { position: 'bottom' }
+      legend: { position: 'bottom' },
+      colors: ["#ae2d33"]
     };
 
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -459,7 +460,8 @@
     var options = {
       title: '월별 매출 통계',
       bars: 'vertical', // 막대 방향 (가로: 'horizontal', 세로: 'vertical')
-      legend: { position: 'bottom' }
+      legend: { position: 'bottom' },
+      colors: ["#ae2d33"]
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('column_chart_month'));
